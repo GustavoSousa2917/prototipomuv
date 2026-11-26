@@ -195,8 +195,8 @@ local e três arquivos não versionados foram excluídos.
 - [x] ESLint executado sem erros.
 - [ ] Nova validação funcional no navegador.
 - [ ] Nova cópia de segurança.
-- [ ] Restabelecimento do Git.
-- [ ] Configuração de repositório remoto.
+- [x] Restabelecimento do Git.
+- [x] Configuração de repositório remoto.
 
 ### Histórico anterior conhecido
 
@@ -213,3 +213,41 @@ O projeto permanece na Etapa 05.3.
 
 Próxima etapa: implementação dos componentes
 Alert, Modal e ConfirmDialog.
+
+### Restabelecimento do versionamento
+
+- Novo commit de referência: 49c8208.
+- Branch principal: main.
+- Repositório remoto: GustavoSousa2917/prototipomuv.
+- Sincronização com origin/main concluída.
+- Integridade do Git verificada com git fsck --full.
+- Histórico original preservado apenas como referência documental.
+
+O desenvolvimento será retomado a partir da Etapa 05.4.
+
+## Etapa 05.4 — Componentes de feedback
+
+Status: implementada, em validação final.
+
+- [x] Implementação do Alert.
+- [x] Implementação do Modal.
+- [x] Implementação do ConfirmDialog.
+- [x] Criação do FeedbackComponentsDemo.
+- [x] Validação visual.
+- [x] Validação das mensagens.
+- [x] Teste de abertura do modal.
+- [x] Teste de confirmação de contratação.
+- [x] Teste de confirmação de cancelamento.
+- [x] Teste de processamento.
+- [x] Validação do build.
+- [x] Validação do ESLint.
+- [ ] Teste de fechamento e desistência da operação.
+- [ ] Validação da navegação por teclado.
+- [ ] Validação da responsividade.
+- [ ] Registro no Git.
+- [ ] Sincronização com GitHub.
+
+### Próximo incremento
+
+Implementação dos componentes Avatar,
+PageHeader, EmptyState e Loading.

@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import CoreComponentsDemo from './CoreComponentsDemo'
 import FormComponentsDemo from './FormComponentsDemo'
 import SelectionComponentsDemo from './SelectionComponentsDemo'
+import FeedbackComponentsDemo from './FeedbackComponentsDemo'
 
 const brandColors = [
   {
@@ -398,6 +399,8 @@ export default function DesignSystemPage() {
         <FormComponentsDemo />
 
         <SelectionComponentsDemo />
+
+        <FeedbackComponentsDemo />
 
         <footer className="border-t border-border py-6 text-center text-muv-small text-muted">
           MUV Design System — Versão 0.1.0

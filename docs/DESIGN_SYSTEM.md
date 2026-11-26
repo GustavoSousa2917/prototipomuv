@@ -250,3 +250,63 @@ modalidade e um tipo de direcionamento.
 
 SelectionComponentsDemo, disponível na rota
 /dev/design-system.
+
+## 21. Componentes de feedback
+
+| Componente | Responsabilidade |
+|---|---|
+| Alert | Comunicação de informações e resultados |
+| Modal | Janelas de interação |
+| ConfirmDialog | Confirmação de operações |
+
+### Alert
+
+- Variante success.
+- Variante warning.
+- Variante danger.
+- Variante info.
+- Ícones semânticos.
+- Título opcional.
+- Conteúdo personalizável.
+
+### Modal
+
+- Implementação com o elemento nativo dialog.
+- Controle de abertura pelo estado da aplicação.
+- Fundo escurecido.
+- Fechamento por botão ou tecla Esc.
+- Restrição do foco ao conteúdo modal.
+- Retorno do foco ao elemento anterior.
+- Conteúdo e rodapé personalizáveis.
+- Tamanhos pequeno, médio e grande.
+- Bloqueio de fechamento durante processamento.
+
+### ConfirmDialog
+
+- Reutilização do componente Modal.
+- Variante principal.
+- Variante de perigo.
+- Confirmação explícita.
+- Cancelamento da ação.
+- Estado de processamento.
+- Foco inicial na opção de voltar.
+
+### Regras de utilização
+
+Os componentes de feedback não executam
+diretamente regras de negócio.
+
+As operações deverão ser coordenadas pelos
+serviços dos módulos responsáveis.
+
+O fechamento por clique externo não será
+habilitado inicialmente, evitando o descarte
+acidental de informações.
+
+### Demonstração
+
+FeedbackComponentsDemo, disponível na rota
+/dev/design-system.
+
+Os dados e operações da demonstração são
+exclusivamente fictícios.
