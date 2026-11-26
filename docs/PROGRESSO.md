@@ -251,3 +251,37 @@ Status: implementada, em validação final.
 
 Implementação dos componentes Avatar,
 PageHeader, EmptyState e Loading.
+
+## Etapas 05.5 e 05.6 — Componentes compartilhados
+
+Status: implementadas e validadas em desktop.
+
+- [x] Implementação do Avatar.
+- [x] Implementação do PageHeader.
+- [x] Implementação do EmptyState.
+- [x] Implementação do Loading.
+- [x] Criação do SharedComponentsDemo.
+- [x] Integração ao Design System.
+- [x] Validação visual.
+- [x] Validação dos quatro estados da listagem.
+- [x] Validação das ações dos cabeçalhos.
+- [x] Validação do build.
+- [x] Validação do ESLint.
+- [ ] Teste de falha de carregamento da imagem do Avatar.
+- [ ] Validação da responsividade.
+- [ ] Registro no Git.
+- [ ] Sincronização com GitHub.
+
+### Resultado
+
+Biblioteca inicial composta por 17 componentes
+reutilizáveis, organizados em quatro categorias:
+
+- Common.
+- UI.
+- Forms.
+- Feedback.
+
+### Próximo incremento
+
+Etapa 06.1 — Layout público e navegação institucional.

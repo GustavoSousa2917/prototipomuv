@@ -4,6 +4,7 @@ import CoreComponentsDemo from './CoreComponentsDemo'
 import FormComponentsDemo from './FormComponentsDemo'
 import SelectionComponentsDemo from './SelectionComponentsDemo'
 import FeedbackComponentsDemo from './FeedbackComponentsDemo'
+import SharedComponentsDemo from './SharedComponentsDemo'
 
 const brandColors = [
   {
@@ -401,6 +402,8 @@ export default function DesignSystemPage() {
         <SelectionComponentsDemo />
 
         <FeedbackComponentsDemo />
+
+        <SharedComponentsDemo />
 
         <footer className="border-t border-border py-6 text-center text-muv-small text-muted">
           MUV Design System — Versão 0.1.0
