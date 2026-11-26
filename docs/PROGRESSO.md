@@ -285,3 +285,43 @@ reutilizáveis, organizados em quatro categorias:
 ### Próximo incremento
 
 Etapa 06.1 — Layout público e navegação institucional.
+
+## Etapa 06.1 — Layout público
+
+Status: implementada e validada em desktop.
+
+- [x] Criação do MobileMenu.
+- [x] Criação do PublicHeader.
+- [x] Criação do PublicFooter.
+- [x] Criação do PublicLayout.
+- [x] Criação da HomePage provisória.
+- [x] Criação da PublicPlaceholderPage.
+- [x] Configuração das rotas aninhadas.
+- [x] Validação visual em desktop.
+- [x] Validação da página de login provisória.
+- [x] Validação da página de cadastro provisória.
+- [x] Validação do cabeçalho e rodapé.
+- [x] Validação do build.
+- [x] Validação do ESLint.
+- [ ] Validação das rotas de desenvolvimento.
+- [ ] Validação da navegação por âncoras.
+- [ ] Validação das demais rotas públicas.
+- [ ] Validação do menu mobile.
+- [ ] Validação da responsividade.
+- [ ] Validação da navegação por teclado.
+- [ ] Registro no Git.
+- [ ] Sincronização com GitHub.
+
+### Resultado
+
+Estrutura pública implementada com componentes
+compartilhados e navegação institucional.
+
+A página inicial permanece provisória.
+
+A autenticação e o cadastro serão implementados
+posteriormente.
+
+### Próximo incremento
+
+Etapa 06.2 — Layout do cliente.

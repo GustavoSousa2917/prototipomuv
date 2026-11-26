@@ -310,3 +310,59 @@ FeedbackComponentsDemo, disponível na rota
 
 Os dados e operações da demonstração são
 exclusivamente fictícios.
+
+## 22. Componentes compartilhados
+
+| Componente | Responsabilidade |
+|---|---|
+| Avatar | Identificação visual de usuários |
+| PageHeader | Padronização dos cabeçalhos |
+| EmptyState | Apresentação da ausência de registros |
+| Loading | Indicação de carregamento |
+
+### Avatar
+
+- Quatro tamanhos disponíveis.
+- Geração automática de iniciais.
+- Suporte a fotografias.
+- Alternativa para imagens indisponíveis.
+- Identificação acessível.
+
+### PageHeader
+
+- Título e descrição.
+- Identificação contextual.
+- Área de ações.
+- Hierarquia semântica configurável.
+- Organização responsiva.
+
+### EmptyState
+
+- Ícone personalizável.
+- Título e descrição.
+- Ação opcional.
+
+### Loading
+
+- Três tamanhos.
+- Indicador animado.
+- Apresentação vertical ou compacta.
+- Mensagem personalizável.
+
+## 23. Estados de interface
+
+As interfaces de consulta devem distinguir:
+
+- Carregamento.
+- Ausência de registros.
+- Erro.
+- Dados disponíveis.
+
+A responsabilidade pela consulta e persistência
+dos dados pertence às camadas funcionais,
+não aos componentes visuais.
+
+### Demonstração
+
+SharedComponentsDemo, disponível na rota
+/dev/design-system.

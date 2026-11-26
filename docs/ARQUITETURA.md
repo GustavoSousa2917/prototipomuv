@@ -183,3 +183,93 @@ A configuração inicial do ambiente foi concluída.
 As páginas temporárias foram separadas do componente principal e as rotas foram centralizadas.
 
 A arquitetura será implementada incrementalmente, sem criar camadas vazias ou antecipar funcionalidades desnecessárias.
+
+## Layouts compartilhados
+
+Os layouts são responsáveis pela estrutura
+visual compartilhada entre páginas.
+
+Utilizam rotas aninhadas do React Router
+e o componente Outlet para renderização
+do conteúdo correspondente.
+
+### PublicLayout
+
+Responsável pelas interfaces públicas
+e institucionais do MUV.
+
+Componentes associados:
+
+- PublicHeader.
+- PublicFooter.
+- MobileMenu.
+
+Características:
+
+- Navegação responsiva.
+- Reutilização do Design System.
+- Navegação por links e âncoras.
+- Separação entre estrutura e conteúdo.
+- Suporte à navegação por teclado.
+
+### Rotas de desenvolvimento
+
+- /dev/environment
+- /dev/design-system
+- /teste
+
+As rotas de desenvolvimento não utilizam
+o layout público.
+
+### Layouts planejados
+
+- AuthLayout.
+- ClientLayout.
+- OperationalLayout.
+
+As permissões de acesso serão tratadas
+posteriormente pelo módulo de autenticação
+e pelos mecanismos de proteção de rotas.
+
+## Layout público
+
+O PublicLayout é responsável pela estrutura
+compartilhada das páginas públicas do MUV.
+
+### Componentes
+
+- PublicHeader.
+- PublicFooter.
+- MobileMenu.
+
+### Características
+
+- Rotas aninhadas do React Router.
+- Renderização de conteúdo com Outlet.
+- Cabeçalho persistente durante a rolagem.
+- Navegação responsiva.
+- Navegação institucional por âncoras.
+- Reutilização dos componentes do Design System.
+
+### Rotas públicas
+
+- /
+- /login
+- /cadastro
+- /termos-de-uso
+- /privacidade
+
+### Rotas de desenvolvimento
+
+- /dev/environment
+- /dev/design-system
+- /teste
+
+As rotas de desenvolvimento permanecem
+independentes do layout público.
+
+### Layouts planejados
+
+- AuthLayout.
+- ClientLayout.
+- OperationalLayout.
