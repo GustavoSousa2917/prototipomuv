@@ -1,0 +1,96 @@
+@theme static {
+  /* Identidade visual */
+  --color-primary: #1D695B;
+  --color-primary-dark: #174F45;
+  --color-primary-light: #E4F2ED;
+  --color-primary-soft: #CAE1D8;
+
+  /* Superfícies e textos */
+  --color-background: #F5F7F8;
+  --color-surface: #FFFFFF;
+  --color-foreground: #233135;
+  --color-muted: #637378;
+  --color-border: #DEE6E7;
+  --color-input: #F5F7F8;
+  --color-disabled: #B0B8BB;
+
+  /* Sucesso */
+  --color-success: #1D695B;
+  --color-success-light: #E4F2ED;
+
+  /* Atenção */
+  --color-warning: #93601E;
+  --color-warning-light: #FFF3DE;
+
+  /* Erro */
+  --color-danger: #AF4646;
+  --color-danger-light: #FCEDED;
+
+  /* Informação */
+  --color-info: #315F94;
+  --color-info-light: #E9F1FA;
+
+  /* Estado neutro */
+  --color-neutral: #606F74;
+  --color-neutral-light: #EEF3F4;
+
+  /* Tipografia */
+  --font-sans: "Inter Variable", Arial, sans-serif;
+
+  --text-muv-display: 3rem;
+  --text-muv-display--line-height: 1.2;
+
+  --text-muv-h1: 2rem;
+  --text-muv-h1--line-height: 1.25;
+
+  --text-muv-h2: 1.5rem;
+  --text-muv-h2--line-height: 1.35;
+
+  --text-muv-h3: 1.25rem;
+  --text-muv-h3--line-height: 1.4;
+
+  --text-muv-h4: 1rem;
+  --text-muv-h4--line-height: 1.5;
+
+  --text-muv-body: 0.875rem;
+  --text-muv-body--line-height: 1.6;
+
+  --text-muv-label: 0.8125rem;
+  --text-muv-label--line-height: 1.5;
+
+  --text-muv-small: 0.75rem;
+  --text-muv-small--line-height: 1.5;
+
+  --text-muv-caption: 0.6875rem;
+  --text-muv-caption--line-height: 1.5;
+
+  /* Unidade de espaçamento */
+  --spacing: 0.25rem;
+
+  /* Arredondamentos */
+  --radius-muv-input: 0.5rem;
+  --radius-muv-button: 0.5rem;
+  --radius-muv-card: 0.75rem;
+  --radius-muv-panel: 1rem;
+  --radius-muv-modal: 1rem;
+
+  /* Sombras */
+  --shadow-muv-sm: 0 1px 3px rgb(0 0 0 / 0.06);
+
+  --shadow-muv-md: 0 4px 12px rgb(0 0 0 / 0.08);
+
+  --shadow-muv-lg: 0 12px 32px rgb(0 0 0 / 0.12);
+}
+
+/* Dimensões estruturais */
+:root {
+  --muv-header-height: 80px;
+  --muv-sidebar-width: 232px;
+  --muv-container-width: 1440px;
+
+  --muv-button-height: 44px;
+  --muv-input-height: 46px;
+
+  --muv-icon-size: 20px;
+  --muv-logo-size: 32px;
+}
