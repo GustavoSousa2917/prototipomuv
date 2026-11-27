@@ -223,6 +223,28 @@ o layout público.
 
 As rotas públicas ficam fora das guardas dos ambientes autenticados.
 
+### Navegação pública por sessão
+
+O cabeçalho mantém os links institucionais e suas âncoras em desktop
+e mobile. Enquanto a sessão é restaurada, as ações de conta ficam
+indisponíveis. Visitantes veem **Entrar** e **Criar conta**. Pessoas
+autenticadas veem **Minha conta**, **Sair da conta** e **Acessar meu
+ambiente** quando há contexto ativo. O rodapé usa os mesmos destinos
+de conta. O destino ativo segue a matriz da seção **Alternância e
+política de acesso**, sem trocar o contexto durante a navegação.
+
+As chamadas comerciais da Home levam visitantes a `/cadastro`.
+Contas comuns seguem a `/cliente` para solicitar ou a `/prestador`
+para oferecer serviços. A guarda solicita escolha explícita quando
+o destino exige outro contexto. A administração exclusiva acessa
+`/admin` e sua própria `/conta`, sem chamadas comerciais.
+
+A página inicial, as páginas legais, as rotas de autenticação e os
+demonstradores visuais permanecem públicos. `/dev/contas` existe
+somente no modo de desenvolvimento. Os seis ambientes, a entrada
+`/prestador` e a conta canônica usam guardas distintas conforme suas
+exigências de contexto ou de identidade.
+
 ## Layout público
 
 O PublicLayout é responsável pela estrutura

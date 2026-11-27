@@ -1,7 +1,11 @@
+import { useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router'
 
 import Logo from '../common/Logo'
+import Alert from '../feedback/Alert'
+import Button from '../ui/Button'
 import MobileMenu from './MobileMenu'
+import { usePublicNavigation } from './usePublicNavigation'
 
 const navigationItems = [
   {
@@ -20,6 +24,42 @@ const navigationItems = [
 
 export default function PublicHeader() {
   const location = useLocation()
+  const { links, logout } = usePublicNavigation()
+  const [loggingOut, setLoggingOut] = useState(false)
+  const [logoutError, setLogoutError] = useState(false)
+  const pending = useRef(false)
+
+  async function handleLogout() {
+    if (!logout || pending.current) return
+    pending.current = true
+    setLoggingOut(true)
+    setLogoutError(false)
+    const result = await logout()
+    pending.current = false
+    setLoggingOut(false)
+    setLogoutError(result === 'storageError')
+  }
+
+  function accountActions(closeMenu?: () => void) {
+    return (
+      <>
+        {links.map(({ to, label }) => (
+          <Link key={to} to={to} onClick={closeMenu} className={
+            to === '/cadastro'
+              ? 'block rounded-muv-button bg-primary px-3 py-2.5 text-center font-semibold text-white hover:bg-primary-dark'
+              : 'block rounded-muv-button px-3 py-2.5 text-center font-semibold text-primary hover:bg-primary-light'
+          }>
+            {label}
+          </Link>
+        ))}
+        {logout && (
+          <Button variant="outline" loading={loggingOut} onClick={handleLogout} className="w-full lg:w-auto">
+            Sair da conta
+          </Button>
+        )}
+      </>
+    )
+  }
 
   return (
     <header
@@ -34,7 +74,7 @@ export default function PublicHeader() {
           relative mx-auto
           flex min-h-18 max-w-7xl
           items-center justify-between
-          gap-6 px-4 py-3
+          gap-3 px-4 py-3
           sm:px-6 lg:px-8
         "
       >
@@ -54,7 +94,7 @@ export default function PublicHeader() {
           aria-label="Navegação principal"
           className="
             hidden flex-1 items-center
-            justify-center gap-8 lg:flex
+            justify-center gap-4 lg:flex xl:gap-8
           "
         >
           {navigationItems.map((item) => (
@@ -74,33 +114,8 @@ export default function PublicHeader() {
 
         {/* Ações de autenticação */}
 
-        <div className="hidden shrink-0 items-center gap-4 lg:flex">
-
-          <Link
-            to="/login"
-            className="
-              rounded-muv-button
-              px-4 py-3 font-semibold
-              text-primary
-              hover:bg-primary-light
-            "
-          >
-            Entrar
-          </Link>
-
-          <Link
-            to="/cadastro"
-            className="
-              rounded-muv-button
-              bg-primary px-5 py-3
-              font-semibold text-white
-              transition-colors
-              hover:bg-primary-dark
-            "
-          >
-            Criar conta
-          </Link>
-
+        <div className="hidden shrink-0 items-center gap-1 lg:flex">
+          {accountActions()}
         </div>
 
         {/* Navegação mobile */}
@@ -108,9 +123,11 @@ export default function PublicHeader() {
         <MobileMenu
           key={location.key}
           items={navigationItems}
+          accountActions={accountActions}
         />
 
       </div>
+      {logoutError && logout && <Alert variant="danger" role="alert">Não foi possível encerrar a sessão. Tente novamente.</Alert>}
     </header>
   )
 }

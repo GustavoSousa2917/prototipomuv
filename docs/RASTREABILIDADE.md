@@ -25,6 +25,7 @@ As rotas abaixo são referências de planejamento. A linha de RF001, RU001 e US-
 | US-015,RU012 (RF a formalizar) | Cliente/prestador/admin | Contestação | A17–A19 | /admin/contestacoes, detalhes do frete | Uma por concluído, sem mudar estado |
 | DEC-035.1–4 (RF a formalizar) | Cliente | Avaliação | Nova | /cliente/fretes/:id | Uma por concluído, média correta |
 | DEC-040.10 (P09-10), RN002 | Conta comum/admin | Consulta e edição de nome e telefone da própria conta | T06,A23 | /conta | Retorno após login, preservação de dados e atualização da identidade entre abas. |
+| DEC-040.1–10, RN002 | Conta comum/admin | Conta única, cadastro compartilhado, cliente automático, alternância sem novo login, administração exclusiva e navegação por sessão no protótipo | T03,T06,A23,A24 | /, /conta e ambientes protegidos | Contexto ativo por aba, retorno interno, restrição comercial da administração e edição da própria conta. |
 | DEC-040.4–11 | Todos | Alternância, guardas e controle demonstrativo | T06,A24 | /cliente, /prestador, /motorista, /admin | Contexto ativo, retorno interno, 403/404 e política de escopo isolada. |
 | RNF001–004 | Todos | Transversal | Todas,A24 | Todas | Responsividade, desempenho, limites de segurança e disponibilidade |
 

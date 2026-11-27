@@ -14,8 +14,8 @@
 | 08.1–08.4 | Concluídas e sincronizadas | Cadastro, login, sessão, logout e recuperação |
 | 09.1–09.2 | Implementadas, validadas e sincronizadas | Contextos de atuação, cliente automático e sessão entre abas |
 | 09.3–09.4 | Implementadas, validadas e sincronizadas | Alternância, guardas e controle de acesso demonstrativo |
-| 09.5 | Implementada, versionamento pendente | Gerenciamento básico da conta |
-| 09.6 em diante | Pendente | Integração de layouts e validação integrada |
+| 09.5 | Implementada, validada e sincronizada | Gerenciamento básico da conta |
+| 09.6–09.7 | Implementadas, versionamento pendente | Integração de layouts e validação integrada |
 
 ## Planejamento inicial (registro histórico)
 
@@ -885,6 +885,9 @@ permanece pendente. A próxima etapa prevista é 09.5.
 
 ## Etapa 09.5 — Gerenciamento básico da conta
 
+Versionada em `dda58d0b5e8a529d2994c78fa314d2fcf0798e7a`.
+Integração à `main` e sincronização remota confirmadas pelo responsável.
+
 A rota autenticada `/conta` atende contas comuns e administrativas
 e implementa A23 conforme DEC-040.10. As capturas 70–71 de T06
 orientaram a apresentação separada dos dados e contextos de uma conta
@@ -920,4 +923,47 @@ concorrência e segurança documentadas em PENDENCIAS.md.
   de rolagem horizontal indevida.
 - Build, lint e verificações de whitespace passaram. `git fsck --full`
   terminou com código 0 e reportou três árvores sem referência já
-  identificadas. O versionamento da Etapa 09.5 aguarda autorização.
+  identificadas.
+
+## Etapas 09.6 e 09.7 — Integração e validação da Etapa 09
+
+O cabeçalho público, o menu mobile, o rodapé e as chamadas da Home
+passaram a considerar a sessão. O acesso ao ambiente usa o contexto
+ativo da aba. A chamada de cliente passa pela guarda e a de prestador
+leva à seleção em `/prestador`. A administração exclusiva vê apenas
+os destinos de conta e administração. O cabeçalho cliente usa a
+mesma entrada para prestadores. As demais guardas, os ambientes, a
+conta canônica e os demonstradores públicos foram preservados.
+
+### Jornadas verificadas
+
+| Jornada | Evidência |
+|---|---|
+| A — Conta nova | No Chromium, cadastro pelo site, entrada no cliente, edição, recarga, logout e novo login. Finalidade profissional sem atribuição adicional. |
+| B — Múltiplos contextos | No Chromium, seleção explícita, abertura da conta, retorno ao ambiente, recarga, troca para motorista e cliente com a mesma sessão. |
+| C — Organizações | No Chromium, seleção de empresas distintas por ID e persistência após recarga. Em testes isolados, a política rejeitou escopos incompatíveis de organização e vínculo. |
+| D — Administração | No Chromium, entrada em `/admin`, edição da própria conta, ausência de chamadas comerciais, 403 com retorno à administração e logout. |
+| E — Controle de acesso | No Chromium, rotas públicas e demonstradores, retorno interno, rejeição de destino externo, troca explícita, 403, 404 e ausência de conteúdo protegido enquanto a restauração estava suspensa. |
+| F — Abas | No Chromium, login, atualização de identidade, seleção independente, recuperação e logout entre abas. Em testes isolados, edição e logout desatualizados preservaram a outra conta e sua sessão. |
+| G — Recuperação | No Chromium, redefinição, invalidação da sessão, recusa da senha anterior, login com a nova senha e preservação dos demais dados e atribuições. |
+
+Foram percorridos os seis ambientes e conferidos os menus operacionais
+móveis e os atalhos de conta. As capturas de cabeçalho público, menu
+mobile, cabeçalho operacional, Minha conta, seletor e 403 foram
+inspecionadas em 1440 × 900, 1280 × 720, 1024 × 768, 768 × 1024,
+390 × 844 e 320 × 568. Foram verificados Escape, retorno de foco,
+âncoras institucionais e ausência de rolagem horizontal indevida.
+O console apresentou apenas o 404 de favicon já conhecido.
+
+O provisionamento criou os oito cenários, preservou cadastros,
+credenciais e sessão na reexecução e recusou colisões. O bundle de
+produção foi examinado após o build e não contém a rota, os dados de
+provisionamento ou a senha fictícia. As instruções de uso ficam em
+ARQUITETURA.md.
+
+A Etapa 09 encerra o escopo técnico de conta e contextos do protótipo.
+Permanecem as limitações da persistência simulada, da concorrência
+e da distinção entre sessões sucessivas da mesma conta. RNF003,
+autorização por modalidade, prontidão e proteção de registros de
+negócio seguem pendentes. O versionamento de 09.6 e 09.7 aguarda
+autorização.

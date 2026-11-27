@@ -1,4 +1,5 @@
 import { useId, useRef, useState } from 'react'
+import type { ReactNode } from 'react'
 import { Link } from 'react-router'
 import { Menu, X } from 'lucide-react'
 
@@ -9,10 +10,12 @@ type NavigationItem = {
 
 type MobileMenuProps = {
   items: readonly NavigationItem[]
+  accountActions: (closeMenu: () => void) => ReactNode
 }
 
 export default function MobileMenu({
   items,
+  accountActions,
 }: MobileMenuProps) {
   const [open, setOpen] = useState(false)
 
@@ -84,31 +87,7 @@ export default function MobileMenu({
 
           <div className="my-3 border-t border-border" />
 
-          <Link
-            to="/login"
-            onClick={closeMenu}
-            className="
-              block rounded-muv-button
-              px-4 py-3 text-center
-              font-semibold text-primary
-              hover:bg-primary-light
-            "
-          >
-            Entrar
-          </Link>
-
-          <Link
-            to="/cadastro"
-            onClick={closeMenu}
-            className="
-              block rounded-muv-button
-              bg-primary px-4 py-3
-              text-center font-semibold text-white
-              hover:bg-primary-dark
-            "
-          >
-            Criar conta
-          </Link>
+          {accountActions(closeMenu)}
 
         </div>
       </nav>

@@ -2,6 +2,7 @@ import { Link } from 'react-router'
 import { Globe } from 'lucide-react'
 
 import Logo from '../common/Logo'
+import { usePublicNavigation } from './usePublicNavigation'
 
 const footerGroups = [
   {
@@ -34,22 +35,12 @@ const footerGroups = [
       },
     ],
   },
-  {
-    title: 'Sua conta',
-    links: [
-      {
-        label: 'Entrar',
-        to: '/login',
-      },
-      {
-        label: 'Criar conta',
-        to: '/cadastro',
-      },
-    ],
-  },
+
 ]
 
 export default function PublicFooter() {
+  const { links } = usePublicNavigation()
+  const groups = links.length ? [...footerGroups, { title: 'Sua conta', links }] : footerGroups
   const currentYear = new Date().getFullYear()
 
   return (
@@ -84,7 +75,7 @@ export default function PublicFooter() {
 
           {/* Grupos de navegação */}
 
-          {footerGroups.map((group) => (
+          {groups.map((group) => (
             <nav
               key={group.title}
               aria-label={group.title}

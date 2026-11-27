@@ -149,7 +149,7 @@ export default function ClientHeader() {
         <div className="flex shrink-0 items-center gap-2">
 
           <Link
-            to="/cliente/seja-prestador"
+            to="/prestador"
             onClick={closePanels}
             className="
               hidden whitespace-nowrap rounded-muv-button
@@ -159,7 +159,7 @@ export default function ClientHeader() {
               xl:inline-flex
             "
           >
-            Seja prestador
+            Área do prestador
           </Link>
 
           {/* Notificações */}
@@ -220,7 +220,7 @@ export default function ClientHeader() {
             >
               <div className="border-b border-border px-3 py-3">
                 <p className="break-words font-semibold text-foreground">
-                  {user?.fullName ?? (initializing ? 'Carregando sessão…' : 'Cliente demonstrativo')}
+                  {user?.fullName ?? (initializing ? 'Carregando sessão…' : 'Conta indisponível')}
                 </p>
 
                 <p className="mt-1 text-muv-small text-muted">
@@ -248,7 +248,7 @@ export default function ClientHeader() {
               </Link>
 
               <Link
-                to="/cliente/seja-prestador"
+                to="/prestador"
                 onClick={closePanels}
                 className="
                   flex items-center gap-3
@@ -257,7 +257,7 @@ export default function ClientHeader() {
                 "
               >
                 <Truck size={18} aria-hidden="true" />
-                Seja prestador
+                Área do prestador
               </Link>
 
               <div className="my-2 border-t border-border" />
@@ -367,7 +367,7 @@ export default function ClientHeader() {
             <div className="my-3 border-t border-border" />
 
             <Link
-              to="/cliente/seja-prestador"
+              to="/prestador"
               onClick={closePanels}
               className="
                 flex items-center gap-3
@@ -377,7 +377,7 @@ export default function ClientHeader() {
               "
             >
               <Truck size={18} aria-hidden="true" />
-              Seja prestador
+              Área do prestador
             </Link>
           </div>
         </nav>

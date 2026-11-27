@@ -1,3 +1,4 @@
+import { usePublicNavigation } from '../../components/navigation/usePublicNavigation'
 import { Link } from 'react-router'
 import {
   Building2,
@@ -77,25 +78,31 @@ const action = 'inline-flex min-h-[var(--muv-button-height)] items-center justif
 const primaryAction = `${action} border-transparent bg-primary text-white hover:bg-primary-dark`
 const secondaryAction = `${action} border-primary-soft bg-surface text-primary-dark hover:bg-primary-light`
 
-function HomeActions({ onDark = false }: { onDark?: boolean }) {
+function HomeActions({ requestTo, offerTo, onDark = false }: {
+  requestTo: string | null
+  offerTo: string | null
+  onDark?: boolean
+}) {
+  if (!requestTo && !offerTo) return null
   return (
     <div className="flex flex-wrap gap-3">
-      <Link to="/cadastro" className={onDark ? `${secondaryAction} focus-visible:outline-white` : primaryAction}>
+      {requestTo && <Link to={requestTo} className={onDark ? `${secondaryAction} focus-visible:outline-white` : primaryAction}>
         Solicitar frete
-      </Link>
-      <Link
-        to="/cadastro"
+      </Link>}
+      {offerTo && <Link
+        to={offerTo}
         className={onDark
           ? `${action} border-white text-white hover:bg-white/15 focus-visible:outline-white`
           : secondaryAction}
       >
         Oferecer serviços
-      </Link>
+      </Link>}
     </div>
   )
 }
 
 export default function HomePage() {
+  const { requestTo, offerTo } = usePublicNavigation()
   return (
     <>
       <div className={`${container} py-5 sm:py-8`}>
@@ -112,7 +119,7 @@ export default function HomePage() {
             <p className="mb-6 mt-5 max-w-lg text-base leading-relaxed text-muted">
               O MUV conecta clientes a prestadores de serviços de frete de pessoas e encomendas, facilitando solicitações, propostas e contratações em uma única plataforma.
             </p>
-            <HomeActions />
+            <HomeActions requestTo={requestTo} offerTo={offerTo} />
           </div>
           <div
             aria-hidden="true"
@@ -229,7 +236,7 @@ export default function HomePage() {
             <p className="my-5 text-base leading-relaxed text-muted">
               A prestação de serviços depende de autorização por modalidade e do atendimento às condições operacionais exigidas.
             </p>
-            <Link to="/cadastro" className={primaryAction}>Quero oferecer serviços</Link>
+            {offerTo && <Link to={offerTo} className={primaryAction}>Quero oferecer serviços</Link>}
           </div>
           <div className="rounded-muv-panel bg-primary-light p-5 sm:p-8 lg:col-start-1 lg:row-start-1">
             <ul className="space-y-3">
@@ -269,7 +276,7 @@ export default function HomePage() {
               Conheça uma nova forma de solicitar e oferecer serviços de frete.
             </p>
           </div>
-          <HomeActions onDark />
+          <HomeActions requestTo={requestTo} offerTo={offerTo} onDark />
         </section>
       </div>
     </>

@@ -36,9 +36,9 @@
   locais não incluem fotografias adequadas. A inclusão de fotografias
   depende de recursos com origem e uso autorizados.
 
-## Pendências após as Etapas 09.3 e 09.4
+## Pendências após a Etapa 09
 
-- A integração mais ampla dos layouts permanece prevista para 09.6. Cadastros profissionais e organizacionais,
+- Cadastros profissionais e organizacionais,
   autorizações, prontidão e proteção efetiva dos registros ficam nos
   módulos próprios e na futura API.
 - As páginas de termos e privacidade continuam provisórias. O registro
@@ -57,7 +57,7 @@
 - Edições simultâneas dos mesmos campos seguem a última gravação.
   Sem Web Locks, a fila protege apenas operações da mesma aba.
   Sessões sucessivas de uma mesma conta continuam indistinguíveis.
-- Versionamento da Etapa 09.5 aguarda autorização.
+- Versionamento das Etapas 09.6 e 09.7 aguarda autorização.
 
 ## Futuro
 Ver exclusões em ESCOPO.md. Não implementar sem aprovação de escopo.

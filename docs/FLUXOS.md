@@ -35,6 +35,14 @@ gravação bem-sucedida volta à consulta com confirmação e atualiza o
 nome e as iniciais sem novo login. A alternância usa a seleção explícita
 já existente. CPF e e-mail são somente leitura.
 
+**Navegação entre site e ambientes (09.6).** O cabeçalho público
+apresenta os destinos de conta após resolver a sessão. **Acessar meu
+ambiente** leva ao contexto ativo da aba. **Solicitar frete** envia
+a conta comum à guarda de `/cliente`. **Oferecer serviços** leva a
+`/prestador`, também acessível pelo cabeçalho cliente, onde a conta
+escolhe uma atuação disponível ou recebe orientação. Uma conta
+administrativa exclusiva vê atalhos para seu ambiente e sua conta.
+
 **Fluxo posterior.** A intenção de oferecer serviços ou atuar como
 motorista vinculado abre caminho para processos próprios. Autônomos e
 organizações informam regiões e modalidade para análise administrativa.
