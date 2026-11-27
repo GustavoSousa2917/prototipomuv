@@ -19,5 +19,14 @@
 - Validar navegação exata, tokens de cor, tipografia, logotipo e componentes a partir das capturas; não assumir que estilos aproximados são oficiais.
 - Verificar requisitos não funcionais: responsividade, acessibilidade, desempenho e limites do LocalStorage. Dados fictícios apenas; sem garantias reais de segurança.
 
+## Pendências técnicas da Etapa 06.5
+
+- O navegador requisita `/favicon.ico` e recebe HTTP 404. Definir o
+  favicon em tarefa própria.
+- A tentativa de consultar a `main` remota com `git ls-remote` falhou
+  na resolução de `github.com`. O histórico local e a referência local
+  `origin/main` foram conferidos separadamente.
+- O commit e a sincronização da Etapa 06.5 aguardam autorização.
+
 ## Futuro
 Ver exclusões em ESCOPO.md. Não implementar sem aprovação de escopo.

@@ -221,12 +221,6 @@ Características:
 As rotas de desenvolvimento não utilizam
 o layout público.
 
-### Layouts planejados
-
-- AuthLayout.
-- ClientLayout.
-- OperationalLayout.
-
 As permissões de acesso serão tratadas
 posteriormente pelo módulo de autenticação
 e pelos mecanismos de proteção de rotas.
@@ -254,8 +248,6 @@ compartilhada das páginas públicas do MUV.
 ### Rotas públicas
 
 - /
-- /login
-- /cadastro
 - /termos-de-uso
 - /privacidade
 
@@ -268,11 +260,21 @@ compartilhada das páginas públicas do MUV.
 As rotas de desenvolvimento permanecem
 independentes do layout público.
 
-### Layouts planejados
+## Layout de autenticação
 
-- AuthLayout.
-- ClientLayout.
-- OperationalLayout.
+O `AuthLayout` é implementado como um grupo de rotas independente do
+`PublicLayout`. Usa `Outlet` para renderizar `LoginPage` em `/login` e
+`RegisterPage` em `/cadastro`. Ambas reutilizam `AuthPlaceholderPage`,
+`Card` e `EmptyState` para apresentar o estado provisório.
+
+O layout reutiliza o logotipo e os tokens do Design System. O cabeçalho
+oferece retorno ao site, o rodapé aponta para termos e privacidade, e o
+painel institucional aparece na composição de duas colunas. O atalho
+para o conteúdo, o foco no elemento principal e o retorno da rolagem ao
+topo apoiam a navegação entre as duas rotas.
+
+As páginas oferecem navegação visual provisória. Formulários funcionais,
+autenticação, sessão e proteção de rotas permanecem pendentes.
 
 ## Layout do cliente
 

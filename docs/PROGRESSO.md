@@ -388,8 +388,8 @@ Status: implementada e validada.
 - [x] Preservação das rotas anteriores.
 - [x] Build.
 - [x] ESLint.
-- [ ] Commit.
-- [ ] Sincronização com GitHub.
+- [x] Commit `7c287e9` confirmado no histórico local.
+- [x] Incluída na `main` remota anteriormente confirmada em `3cd6f14`. A referência local `origin/main` aponta para esse commit. A nova consulta direta falhou na resolução de `github.com`.
 
 ### Resultado
 
@@ -458,8 +458,8 @@ Status: implementada, em validação final.
 - [ ] Validação em 1024 x 768.
 - [ ] Navegação por teclado.
 - [ ] Testes de regressão.
-- [ ] Commit.
-- [ ] Sincronização com GitHub.
+- [x] Commit `3cd6f14` confirmado no histórico local.
+- [x] Incluída na `main` remota anteriormente confirmada em `3cd6f14`. A referência local `origin/main` aponta para esse commit. A nova consulta direta falhou na resolução de `github.com`.
 
 ### Resultado
 
@@ -472,3 +472,43 @@ A autenticação e as permissões permanecem pendentes.
 ### Próximo incremento
 
 Etapa 06.5 — Layout de autenticação.
+
+## Etapa 06.5 — Layout de autenticação
+
+Status: validada para revisão e posterior versionamento.
+
+- `src/layouts/AuthLayout.tsx` fornece o layout responsivo compartilhado.
+- `src/pages/auth/LoginPage.tsx` e `src/pages/auth/RegisterPage.tsx`
+  reutilizam `src/pages/auth/AuthPlaceholderPage.tsx`.
+- `src/routes/AppRoutes.tsx` associa `/login` e `/cadastro` ao layout de
+  autenticação. As páginas são provisórias. Autenticação, formulário
+  funcional, sessão e controle de acesso permanecem pendentes.
+- `src/styles/base.css` deixa o corpo ocupar a largura útil da janela. A
+  largura mínima fixa de 320 px causava rolagem horizontal quando a
+  barra vertical reduzia a largura útil.
+
+### Validação
+
+- Chromium headless com capturas e medições em ambas as rotas. Duas
+  colunas em 1440 × 900, 1280 × 720 e 1024 × 768. Coluna única em
+  768 × 1024, 390 × 844 e 320 × 568. Sem rolagem horizontal nos 12
+  cenários após a correção.
+- Layouts público, cliente e operacional do autônomo inspecionados em
+  320 e 390 px, sem cortes visíveis ou rolagem horizontal.
+- Acesso direto, links entre login e cadastro, retorno ao site, links
+  legais, acesso pelo site, histórico, rolagem, foco, Tab, Shift+Tab,
+  Enter e atalho para o conteúdo passaram na sessão anterior e na
+  revalidação automatizada.
+- Renderização inicial dos ambientes público, cliente, autônomo,
+  empresa, cooperativa, motorista, administrador e quatro rotas de
+  desenvolvimento confirmada. Os redirecionamentos de `/cliente` e
+  `/prestador` também passaram.
+- Build com TypeScript, ESLint e verificação de whitespace passaram.
+  `git fsck --full` terminou com código 0 e reportou uma árvore sem
+  referência.
+- O console registrou apenas o HTTP 404 de `/favicon.ico`, pendência
+  técnica separada. A verificação remota direta continua indisponível
+  por falha de resolução de `github.com`.
+
+- [ ] Commit da Etapa 06.5.
+- [ ] Sincronização da Etapa 06.5 com o GitHub.

@@ -1,6 +1,10 @@
 import { Routes, Route, Navigate } from 'react-router'
 
 import PublicLayout from '../layouts/PublicLayout'
+import AuthLayout from '../layouts/AuthLayout'
+
+import LoginPage from '../pages/auth/LoginPage'
+import RegisterPage from '../pages/auth/RegisterPage'
 
 import HomePage from '../pages/public/HomePage'
 import PublicPlaceholderPage from '../pages/public/PublicPlaceholderPage'
@@ -37,26 +41,6 @@ export default function AppRoutes() {
         />
 
         <Route
-          path="/login"
-          element={
-            <PublicPlaceholderPage
-              title="Entrar"
-              description="Acesse sua conta no MUV."
-            />
-          }
-        />
-
-        <Route
-          path="/cadastro"
-          element={
-            <PublicPlaceholderPage
-              title="Criar conta"
-              description="Comece sua experiência no MUV."
-            />
-          }
-        />
-
-        <Route
           path="/termos-de-uso"
           element={
             <PublicPlaceholderPage
@@ -74,6 +58,22 @@ export default function AppRoutes() {
               description="Informações sobre privacidade e tratamento de dados."
             />
           }
+        />
+
+      </Route>
+
+      {/* Ambiente de autenticação */}
+
+      <Route element={<AuthLayout />}>
+
+        <Route
+          path="/login"
+          element={<LoginPage />}
+        />
+
+        <Route
+          path="/cadastro"
+          element={<RegisterPage />}
         />
 
       </Route>
