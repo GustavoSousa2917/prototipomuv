@@ -10,6 +10,9 @@ import NavigationTestPage from '../pages/dev/NavigationTestPage'
 import DesignSystemPage from '../pages/dev/DesignSystemPage'
 import ClientLayout from '../layouts/ClientLayout'
 import ClientPlaceholderPage from '../pages/client/ClientPlaceholderPage'
+import OperationalLayoutDemo, {
+  OperationalPreviewPage,
+} from '../pages/dev/OperationalLayoutDemo'
 
 export default function AppRoutes() {
   return (
@@ -177,6 +180,53 @@ export default function AppRoutes() {
           }
         />
 
+      </Route>
+
+      {/* Demonstração do layout operacional */}
+
+      <Route
+        path="/dev/operational-layout"
+        element={<OperationalLayoutDemo />}
+      >
+        <Route
+          index
+          element={
+            <OperationalPreviewPage
+              title="Visão geral"
+              description="Acompanhe as informações do ambiente operacional."
+            />
+          }
+        />
+
+        <Route
+          path="fretes"
+          element={
+            <OperationalPreviewPage
+              title="Fretes"
+              description="Acompanhe os serviços de frete."
+            />
+          }
+        />
+
+        <Route
+          path="conta"
+          element={
+            <OperationalPreviewPage
+              title="Minha conta"
+              description="Gerencie suas informações pessoais."
+            />
+          }
+        />
+
+        <Route
+          path="notificacoes"
+          element={
+            <OperationalPreviewPage
+              title="Notificações"
+              description="Acompanhe os acontecimentos do ambiente operacional."
+            />
+          }
+        />
       </Route>
 
     </Routes>    

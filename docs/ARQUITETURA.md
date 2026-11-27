@@ -316,3 +316,57 @@ A identificação do cliente utiliza dados fictícios.
 
 A autenticação, a sessão, a persistência e as
 permissões de acesso serão integradas posteriormente.
+
+## Layout operacional compartilhado
+
+O OperationalLayout é responsável pela estrutura
+visual compartilhada dos ambientes operacionais
+do MUV.
+
+### Componentes
+
+- OperationalHeader.
+- Sidebar.
+- SidebarItem.
+- OperationalLayout.
+
+### Características
+
+- Cabeçalho superior persistente.
+- Navegação lateral configurável.
+- Identificação do perfil ativo.
+- Identificação visual da rota ativa.
+- Renderização de conteúdo através de Outlet.
+- Navegação responsiva.
+- Barra lateral sobreposta em dispositivos móveis.
+- Utilização de diálogo nativo para navegação mobile.
+- Reutilização dos tokens do Design System.
+
+### Ambientes previstos
+
+- Prestador autônomo.
+- Empresa.
+- Cooperativa.
+- Motorista vinculado.
+- Administrador.
+
+A estrutura visual é compartilhada, mas os itens
+de navegação e as permissões serão definidos
+conforme o perfil ativo.
+
+### Rotas de desenvolvimento
+
+- /dev/operational-layout
+- /dev/operational-layout/fretes
+- /dev/operational-layout/conta
+- /dev/operational-layout/notificacoes
+
+### Limitações temporárias
+
+Os dados de identificação são fictícios.
+
+Os menus definitivos de cada perfil serão
+configurados posteriormente.
+
+A autenticação e as permissões de acesso
+ainda não estão implementadas.

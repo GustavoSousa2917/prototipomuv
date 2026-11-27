@@ -332,29 +332,90 @@ Status: em implementação.
 
 ### Implementação
 
-- [ ] Criação do ClientHeader.
-- [ ] Criação do ClientLayout.
-- [ ] Criação do ClientPlaceholderPage.
-- [ ] Configuração das rotas do cliente.
-- [ ] Redirecionamento da rota inicial.
-- [ ] Indicador de navegação ativa.
-- [ ] Menu da conta.
-- [ ] Acesso às notificações.
-- [ ] Navegação mobile.
-- [ ] Acesso ao módulo Seja prestador.
+- [x] Criação do ClientHeader.
+- [x] Criação do ClientLayout.
+- [x] Criação do ClientPlaceholderPage.
+- [x] Configuração das rotas do cliente.
+- [x] Redirecionamento da rota inicial.
+- [x] Indicador de navegação ativa.
+- [x] Menu da conta.
+- [x] Acesso às notificações.
+- [x] Navegação mobile.
+- [x] Acesso ao módulo Seja prestador.
 
 ### Validação
 
-- [ ] Navegação desktop.
-- [ ] Navegação mobile.
-- [ ] Responsividade.
-- [ ] Navegação por teclado.
-- [ ] Preservação das rotas anteriores.
-- [ ] Build.
-- [ ] ESLint.
-- [ ] Commit.
-- [ ] Sincronização com GitHub.
+- [x] Navegação desktop.
+- [x] Navegação mobile.
+- [x] Responsividade.
+- [x] Navegação por teclado.
+- [x] Preservação das rotas anteriores.
+- [x] Build.
+- [x] ESLint.
+- [x] Commit.
+- [x] Sincronização com GitHub.
 
 ### Próximo incremento
 
 Etapa 06.3 — Layout operacional compartilhado.
+
+## Etapa 06.3 — Layout operacional compartilhado
+
+Status: implementada e validada.
+
+### Implementação
+
+- [x] Criação do SidebarItem.
+- [x] Criação do Sidebar.
+- [x] Criação do OperationalHeader.
+- [x] Criação do OperationalLayout.
+- [x] Criação do OperationalLayoutDemo.
+- [x] Configuração das rotas demonstrativas.
+- [x] Navegação lateral configurável.
+- [x] Identificação da rota ativa.
+- [x] Navegação mobile.
+- [x] Fechamento por Escape.
+- [x] Reutilização do Design System.
+
+### Validação
+
+- [x] Navegação desktop.
+- [x] Navegação mobile.
+- [x] Responsividade em 320 px.
+- [x] Responsividade em 390 px.
+- [x] Responsividade em tablet.
+- [x] Navegação por teclado.
+- [x] Preservação das rotas anteriores.
+- [x] Build.
+- [x] ESLint.
+- [ ] Commit.
+- [ ] Sincronização com GitHub.
+
+### Resultado
+
+Estrutura operacional compartilhada implementada,
+permitindo a configuração de diferentes ambientes
+sem duplicação dos componentes de navegação.
+
+O layout contempla cabeçalho persistente,
+barra lateral configurável, identificação do
+perfil ativo, navegação responsiva e recursos
+de acessibilidade.
+
+A navegação mobile utiliza o elemento dialog
+nativo do HTML.
+
+As rotas demonstrativas permanecem disponíveis
+para testes independentes.
+
+### Limitações temporárias
+
+- Identificação fictícia do usuário.
+- Conteúdo provisório das páginas.
+- Ausência de autenticação.
+- Ausência de controle de permissões.
+- Ausência de alternância entre perfis.
+
+### Próximo incremento
+
+Etapa 06.4 — Navegação específica por perfil.
