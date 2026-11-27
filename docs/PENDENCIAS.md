@@ -34,8 +34,18 @@
 - A T01 usa painéis gráficos com tokens e ícones porque os recursos
   locais não incluem fotografias adequadas. A inclusão de fotografias
   depende de recursos com origem e uso autorizados.
-- As chamadas da T01 apontam para a página provisória de cadastro.
-- O versionamento da Etapa 07 aguarda autorização.
+
+## Pendências após as Etapas 08.1 e 08.2
+
+- 08.3: login por e-mail e senha, verificação da credencial derivada,
+  sessão básica persistente e saída.
+- 08.4: recuperação simulada com token de uso único e validade de
+  15 minutos.
+- Etapa 09: integração do perfil cliente. Cadastros profissionais e
+  organizacionais permanecem previstos em seus próprios incrementos.
+- As páginas de termos e privacidade continuam provisórias. O registro
+  de aceite é demonstrativo e não comprova conformidade com a LGPD.
+- Versionamento das Etapas 08.1 e 08.2 aguarda autorização.
 
 ## Futuro
 Ver exclusões em ESCOPO.md. Não implementar sem aprovação de escopo.

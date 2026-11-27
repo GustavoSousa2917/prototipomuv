@@ -139,3 +139,26 @@ negociação fica restrita ao prestador selecionado.
 As demais decisões permanecem vigentes. A matriz de rastreabilidade
 registra as divergências com o PDF original, incluindo os diagramas e
 o modelo de classes.
+
+## DEC-039 — Fundação de autenticação e cadastro
+
+Aprovada em 27/11/2026. Consolida P08-01 a P08-10 para o cadastro
+único e orienta os incrementos de login, sessão e recuperação.
+Mantém DEC-001 e DEC-002, incluindo o direito ao perfil cliente,
+cuja integração está prevista para a Etapa 09.
+
+| ID | Proposta | Decisão aprovada | Entrega |
+|---|---|---|---|
+| DEC-039.1 | P08-01 | Login exclusivamente por e-mail e senha. | 08.3 |
+| DEC-039.2 | P08-02 | Cadastro único em duas etapas. | 08.2 |
+| DEC-039.3 | P08-03 | Uma finalidade inicial entre solicitar fretes, oferecer serviços de frete e atuar como motorista vinculado. | 08.2 |
+| DEC-039.4 | P08-04 | Validar CPF e e-mail e exigir unicidade após normalização. | 08.1–08.2 |
+| DEC-039.5 | P08-05 | Senha com no mínimo oito caracteres, incluindo letra e número. | 08.1–08.2 |
+| DEC-039.6 | P08-06 | Exigir aceite dos termos de uso e da política de privacidade. | 08.2 |
+| DEC-039.7 | P08-07 | Sessão básica persistente, inicialmente sem opção Manter conectado. | 08.3 |
+| DEC-039.8 | P08-08 | Recuperação simulada com token de uso único e validade de 15 minutos. | 08.4 |
+| DEC-039.9 | P08-09 | Separar dados pessoais, profissionais e organizacionais. | Base em 08.1. Dados profissionais e organizacionais em etapas posteriores. |
+| DEC-039.10 | P08-10 | Usar exclusivamente dados fictícios. | Transversal |
+
+A finalidade inicial registra a intenção declarada. Perfis profissionais,
+autorizações e vínculos seguem seus próprios fluxos.

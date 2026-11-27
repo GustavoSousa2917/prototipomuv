@@ -6,7 +6,7 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 |---|---|---|---|
 | T01 | Página institucional | 09–11 | IMPLEMENTADA na Etapa 07, com conteúdo adaptado à DEC-038. |
 | T02 | Login | 62 | MANTER |
-| T03 | Cadastro por perfil | 56–61 | ALTERAR |
+| T03 | Cadastro único em duas etapas | 56–61 | IMPLEMENTADA nas Etapas 08.1–08.2, adaptada à DEC-039. |
 | T04 | Recuperação | 12 | MANTER |
 | T05 | Redefinição | 13 | MANTER |
 | T06 | Conta e perfis | 70–71 | MANTER |

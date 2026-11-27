@@ -275,8 +275,7 @@ da DEC-038. A FAQ usa `details` e `summary` nativos.
 
 O `AuthLayout` é implementado como um grupo de rotas independente do
 `PublicLayout`. Usa `Outlet` para renderizar `LoginPage` em `/login` e
-`RegisterPage` em `/cadastro`. Ambas reutilizam `AuthPlaceholderPage`,
-`Card` e `EmptyState` para apresentar o estado provisório.
+`RegisterPage` em `/cadastro`.
 
 O layout reutiliza o logotipo e os tokens do Design System. O cabeçalho
 oferece retorno ao site, o rodapé aponta para termos e privacidade, e o
@@ -284,8 +283,37 @@ painel institucional aparece na composição de duas colunas. O atalho
 para o conteúdo, o foco no elemento principal e o retorno da rolagem ao
 topo apoiam a navegação entre as duas rotas.
 
-As páginas oferecem navegação visual provisória. Formulários funcionais,
-autenticação, sessão e proteção de rotas permanecem pendentes.
+A página de login permanece provisória e reutiliza
+`AuthPlaceholderPage`, `Card` e `EmptyState`. A página de cadastro usa
+`Input`, `RadioGroup`, `Checkbox`, `Button` e `Alert`. Login, sessão,
+recuperação e proteção de rotas permanecem pendentes.
+
+### Fundação do cadastro
+
+- `src/domain/userRegistration.ts` define a entidade básica e valida
+  os dados pessoais e as escolhas do cadastro. CPF e telefone são
+  armazenados como dígitos e o e-mail é normalizado para minúsculas.
+- `src/services/registerUser.ts` valida novamente os dados, verifica
+  unicidade, gera UUID, deriva a credencial, registra as datas e
+  persiste. A interface recebe apenas o identificador em caso de
+  sucesso ou um resultado de erro.
+- `src/repositories/userRepository.ts` isola a criação e as consultas
+  por identificador, CPF e e-mail. A chave `muv.users.v1` contém uma
+  lista JSON de usuários. Cada registro guarda os dados normalizados,
+  credencial derivada, finalidade inicial e datas de aceite, criação e
+  atualização. Falhas de acesso ou dados inválidos impedem a gravação
+  e preservam o conteúdo anterior. A gravação relê a lista e verifica
+  a unicidade. Web Locks serializa gravações entre abas quando
+  disponível. Sem Web Locks, a gravação é síncrona e a concorrência
+  entre abas depende do navegador.
+
+A derivação usa Web Crypto com PBKDF2, SHA-256, 600 mil iterações,
+salt individual de 16 bytes e saída de 32 bytes. Salt e chave derivada
+são codificados em hexadecimal. O registro inclui os parâmetros
+necessários à futura verificação. Senha em texto puro e confirmação
+ficam fora da persistência. O cadastro requer contexto seguro, como
+HTTPS ou localhost. LocalStorage é demonstrativo, manipulável e
+inadequado para credenciais reais ou segurança de produção.
 
 ## Layout do cliente
 

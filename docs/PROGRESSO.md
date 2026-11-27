@@ -585,13 +585,14 @@ Integração à `main` e sincronização remota confirmadas pelo responsável.
 
 ## Etapa 07 — Página institucional definitiva
 
-Status: T01 implementada e validada no Chromium headless. Versionamento
-pendente.
+Status: T01 implementada, validada e versionada em
+`e3391be01fd6ab659c5b463316a2ebc7316cde15`. Integração à `main` e
+sincronização remota confirmadas pelo responsável.
 
 A página inicial reúne hero, públicos, benefícios, cinco passos,
 exemplo de solicitação direcionada, seção de prestadores, seis perguntas
 frequentes, banner final e rodapé. As cinco chamadas da página apontam
-para o cadastro provisório. O rodapé identifica o caráter acadêmico e
+para a rota de cadastro, que ainda era provisória na Etapa 07. O rodapé identifica o caráter acadêmico e
 demonstrativo do protótipo.
 
 As capturas T01 09, 10 e 11 do `prototipo.zip` orientaram a composição.
@@ -619,3 +620,48 @@ O arquivo `src/assets/hero.png` é uma ilustração do projeto inicial.
 - Build com TypeScript, ESLint e `git diff --check` passaram.
   `git fsck --full` terminou com código 0 e reportou duas árvores sem
   referência.
+
+## Etapas 08.1 e 08.2 — Fundação funcional e cadastro
+
+A DEC-039 registra P08-01 a P08-10. O cadastro único da T03 adapta as
+capturas 56 a 61 ao fluxo em duas etapas, reutilizando componentes do
+Design System e o AuthLayout. O formulário valida os dados pessoais,
+registra uma finalidade inicial e exige aceite dos termos e da
+privacidade. O sucesso oferece acesso ao login provisório.
+
+O domínio valida e normaliza os dados. O serviço coordena a unicidade,
+o UUID, as datas e a derivação PBKDF2 com SHA-256 e salt individual. O
+repositório persiste o registro em `muv.users.v1`. A persistência é
+demonstrativa. As páginas legais permanecem provisórias.
+
+### Validação
+
+- Domínio: foram verificados dados válidos, campos vazios, nome só com
+  espaços, CPF inválido e repetido, telefone e e-mail inválidos, senha
+  curta ou sem letra ou número, confirmação divergente, finalidade
+  ausente ou inválida e falta de aceite.
+- Serviço e repositório: em armazenamento simulado com Node.js e Web
+  Crypto, passaram consultas por ID, CPF e e-mail, normalização,
+  duplicidade com diferenças de formato, concorrência no mesmo
+  contexto, verificação da derivação, salt individual e preservação de
+  registros em falhas de leitura, gravação e dados inválidos.
+- Chromium headless em perfil isolado: foram inspecionadas capturas
+  das duas etapas em 1440 × 900, 1280 × 720, 1024 × 768, 768 × 1024,
+  390 × 844 e 320 × 568, sem cortes horizontais ou rolagem indevida.
+- Passaram os testes de formatação, erros associados aos campos,
+  visibilidade de senha, foco, seleção por teclado, volta com dados
+  preservados e consulta aos dois links legais em outra aba.
+- Cadastro, processamento, tentativa dupla, duplicidade por CPF e
+  e-mail, persistência após recarga e falha simulada de gravação
+  passaram. A inspeção do registro confirmou ausência de senha em
+  claro, confirmação, perfil ou sessão. A finalidade de administrador
+  foi rejeitada no domínio e está ausente no formulário.
+- Regressão de 12 rotas na página institucional, login provisório,
+  páginas legais, 404 e ambientes existentes. O console apresentou
+  apenas o HTTP 404 de favicon já conhecido.
+- Build com TypeScript, ESLint e verificações de whitespace passaram.
+  `git fsck --full` retornou código 0 e listou duas árvores sem referência.
+
+RF001 está parcialmente implementado. Próximos incrementos previstos:
+login e sessão (08.3), recuperação simulada (08.4) e integração do
+perfil cliente (09). Versionamento desta entrega aguarda autorização.

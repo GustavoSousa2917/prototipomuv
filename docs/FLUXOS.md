@@ -1,7 +1,21 @@
 # Fluxos e regras centrais
 
 ## Conta e autorização
-Cadastro único (nome, CPF, telefone, e-mail, senha; confirmação como validação) → cliente por padrão → opção de oferecer serviços → perfil autônomo ou organização → regiões e modalidade → análise administrativa independente por modalidade. Pendentes/rejeitados podem preparar recursos e tarifas, mas não oferecer serviços na modalidade. Rejeição justificada permite nova análise, mantendo histórico. Campos adicionais de cadastro ficam sujeitos a detalhamento.
+**Cadastro básico (08.1–08.2).** Informar nome, CPF, telefone,
+e-mail, senha e confirmação → validar → selecionar uma finalidade
+inicial → aceitar termos de uso e privacidade → criar a conta →
+confirmar cadastro e oferecer acesso à página de login. Os links legais
+do formulário abrem em outra aba. CPF é verificado estrutural e
+matematicamente. O aceite indica a manifestação no protótipo.
+
+**Fluxo posterior.** Todo usuário comum terá acesso ao perfil cliente
+(integração na Etapa 09). A intenção de oferecer serviços ou atuar como
+motorista vinculado abre caminho para processos próprios. Autônomos e
+organizações informam regiões e modalidade para análise administrativa.
+Pendentes ou rejeitados podem preparar recursos e tarifas, e a oferta
+depende de autorização. Rejeição justificada permite nova análise com
+histórico preservado. Login, sessão e recuperação seguem a DEC-039
+nos incrementos 08.3 e 08.4.
 
 ## Recursos
 Veículos ativos, capacidades reais, categoria, modalidade e disponibilidade; preservar histórico por inativação. Motorista compartilhado → convite simulado → aceite → vínculo ativo → verificação independente da organização. Designação requer recursos compatíveis e disponíveis, motorista apto e veículo pertencente ao prestador. Verificar conflitos básicos; duração e critério de sobreposição ainda precisam de definição.
