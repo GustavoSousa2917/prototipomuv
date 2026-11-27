@@ -113,6 +113,9 @@ export default function LoginPage() {
           >
             {showPassword ? 'Ocultar senha' : 'Mostrar senha'}
           </Button>
+          <Link to="/recuperar-senha" className="block font-semibold text-primary underline underline-offset-2">
+            Esqueci minha senha
+          </Link>
           {processing && <p role="status" className="text-muv-small text-muted">Entrando…</p>}
           <Button type="submit" fullWidth loading={processing} disabled={initializing}>Entrar</Button>
         </form>

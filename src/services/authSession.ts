@@ -2,6 +2,7 @@ import { isValidEmail, normalizeEmail } from '../domain/userRegistration'
 import type { User } from '../domain/userRegistration'
 import { sessionRepository } from '../repositories/sessionRepository'
 import { userRepository } from '../repositories/userRepository'
+import { withAuthMutation } from './authMutation'
 import { verifyCredential } from './passwordCredential'
 
 export type AuthenticatedUser = Pick<User, 'id' | 'fullName'>
@@ -41,8 +42,15 @@ export async function loginUser(input: LoginFields): Promise<LoginResult> {
   }
 
   try {
-    sessionRepository.save(user.id)
-    return { kind: 'authenticated', user: toAuthenticatedUser(user) }
+    const verifiedUser = user
+    return await withAuthMutation(async (): Promise<LoginResult> => {
+      const currentUser = userRepository.findById(verifiedUser.id)
+      if (!currentUser || currentUser.credential.derivedKey !== verifiedUser.credential.derivedKey) {
+        return { kind: 'invalidCredentials' }
+      }
+      sessionRepository.save(currentUser.id)
+      return { kind: 'authenticated', user: toAuthenticatedUser(currentUser) }
+    })
   } catch {
     return { kind: 'storageError' }
   }

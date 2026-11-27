@@ -35,16 +35,20 @@
   locais não incluem fotografias adequadas. A inclusão de fotografias
   depende de recursos com origem e uso autorizados.
 
-## Pendências após a Etapa 08.3
-- 08.4: recuperação simulada com token de uso único e validade de
-  15 minutos.
+## Pendências após a Etapa 08.4
+
 - Etapa 09: integração do perfil cliente. Cadastros profissionais e
   organizacionais permanecem previstos em seus próprios incrementos.
 - As páginas de termos e privacidade continuam provisórias. O registro
   de aceite é demonstrativo e não comprova conformidade com a LGPD.
 - O estado de sessão em memória não se sincroniza entre abas. A recarga
   restaura a última sessão gravada, se válida.
-- Versionamento da Etapa 08.3 aguarda autorização.
+- LocalStorage não oferece atomicidade entre chaves. Sem Web Locks,
+  a serialização das mutações de recuperação e login é restrita à aba.
+- A caixa demonstrativa permite distinguir contas existentes. Um
+  canal de recuperação real e segurança de produção ficam para a
+  futura integração com backend.
+- Versionamento da Etapa 08.4 aguarda autorização.
 
 ## Futuro
 Ver exclusões em ESCOPO.md. Não implementar sem aprovação de escopo.

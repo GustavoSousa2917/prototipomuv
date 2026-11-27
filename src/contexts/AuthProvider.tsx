@@ -25,6 +25,10 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     return result
   }
 
+  function refreshSession() {
+    setUser(restoreSession())
+  }
+
   function logout() {
     if (!logoutUser()) return false
     setUser(null)
@@ -32,7 +36,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, initializing, login, logout }}>
+    <AuthContext.Provider value={{ user, initializing, login, refreshSession, logout }}>
       {children}
     </AuthContext.Provider>
   )

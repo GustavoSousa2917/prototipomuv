@@ -7,8 +7,8 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 | T01 | Página institucional | 09–11 | IMPLEMENTADA na Etapa 07, com conteúdo adaptado à DEC-038. |
 | T02 | Login por e-mail e senha | 62 | IMPLEMENTADA na Etapa 08.3, adaptada à DEC-039. |
 | T03 | Cadastro único em duas etapas | 56–61 | IMPLEMENTADA nas Etapas 08.1–08.2, adaptada à DEC-039. |
-| T04 | Recuperação | 12 | MANTER |
-| T05 | Redefinição | 13 | MANTER |
+| T04 | Recuperação simulada | 12 | IMPLEMENTADA na Etapa 08.4, adaptada à DEC-039. |
+| T05 | Redefinição com token temporário | 13 | IMPLEMENTADA na Etapa 08.4, adaptada à DEC-039. |
 | T06 | Conta e perfis | 70–71 | MANTER |
 | T07 | Planejamento e solicitação | 15–16,27–28 | ALTERAR |
 | T08 | Pesquisa e estimativas | 17–18,29–30 | ALTERAR |

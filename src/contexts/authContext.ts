@@ -6,6 +6,7 @@ type AuthContextValue = {
   user: AuthenticatedUser | null
   initializing: boolean
   login: (input: { email: string; password: string }) => Promise<LoginResult>
+  refreshSession: () => void
   logout: () => boolean
 }
 

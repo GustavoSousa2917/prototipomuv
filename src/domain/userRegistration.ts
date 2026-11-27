@@ -87,10 +87,15 @@ export function validateRegistrationDetails(details: RegistrationDetails): Regis
   if (!isValidEmail(normalizeEmail(details.email))) {
     errors.email = 'Informe um e-mail válido.'
   }
-  if (Array.from(details.password).length < 8 || !/\p{L}/u.test(details.password) || !/[0-9]/.test(details.password)) {
+  return { ...errors, ...validatePasswordFields(details.password, details.passwordConfirmation) }
+}
+
+export function validatePasswordFields(password: string, passwordConfirmation: string) {
+  const errors: Pick<RegistrationErrors, 'password' | 'passwordConfirmation'> = {}
+  if (Array.from(password).length < 8 || !/\p{L}/u.test(password) || !/[0-9]/.test(password)) {
     errors.password = 'Use pelo menos oito caracteres, incluindo uma letra e um número.'
   }
-  if (!details.passwordConfirmation || details.passwordConfirmation !== details.password) {
+  if (!passwordConfirmation || passwordConfirmation !== password) {
     errors.passwordConfirmation = 'Repita a senha informada.'
   }
   return errors

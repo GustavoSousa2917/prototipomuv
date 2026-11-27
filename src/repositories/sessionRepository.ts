@@ -22,6 +22,9 @@ export const sessionRepository = {
   save(userId: string) {
     localStorage.setItem(storageKey, JSON.stringify({ userId }))
   },
+  removeForUser(userId: string) {
+    if (this.read()?.userId === userId) this.remove()
+  },
   remove() {
     localStorage.removeItem(storageKey)
   },

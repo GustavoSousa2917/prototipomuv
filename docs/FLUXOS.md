@@ -21,8 +21,16 @@ motorista vinculado abre caminho para processos próprios. Autônomos e
 organizações informam regiões e modalidade para análise administrativa.
 Pendentes ou rejeitados podem preparar recursos e tarifas, e a oferta
 depende de autorização. Rejeição justificada permite nova análise com
-histórico preservado. A recuperação simulada segue a DEC-039 no
-incremento 08.4.
+histórico preservado.
+
+**Recuperação (08.4).** Em `/recuperar-senha`, informar o e-mail
+cadastrado. A mensagem principal é genérica. Quando há conta, a caixa
+demonstrativa exibe um link para `/redefinir-senha`, sem envio real.
+O link dura 15 minutos e um novo pedido invalida os anteriores daquela
+conta. A redefinição valida o link e as duas senhas, consome o token,
+encerra a sessão da conta se houver e grava a nova credencial. O
+sucesso oferece retorno ao login. Um link inválido ou consumido exige
+nova solicitação.
 
 ## Recursos
 Veículos ativos, capacidades reais, categoria, modalidade e disponibilidade; preservar histórico por inativação. Motorista compartilhado → convite simulado → aceite → vínculo ativo → verificação independente da organização. Designação requer recursos compatíveis e disponíveis, motorista apto e veículo pertencente ao prestador. Verificar conflitos básicos; duração e critério de sobreposição ainda precisam de definição.

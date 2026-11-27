@@ -3,7 +3,7 @@ import type { User } from '../domain/userRegistration'
 type Credential = User['credential']
 const keyLength = 32
 
-function toHex(buffer: Uint8Array) {
+export function toHex(buffer: Uint8Array) {
   return Array.from(buffer, (byte) => byte.toString(16).padStart(2, '0')).join('')
 }
 

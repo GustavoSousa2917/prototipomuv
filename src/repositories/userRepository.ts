@@ -8,6 +8,7 @@ type CreateResult = { kind: 'created' } | { kind: 'duplicate'; fields: Duplicate
 
 export interface UserRepository {
   create(user: User): Promise<CreateResult>
+  updateCredential(id: string, credential: User['credential'], updatedAt: string): Promise<boolean>
   findById(id: string): User | undefined
   findByCpf(cpf: string): User | undefined
   findByEmail(email: string): User | undefined
@@ -63,6 +64,18 @@ export const userRepository: UserRepository = {
 
       localStorage.setItem(storageKey, JSON.stringify([...users, user]))
       return { kind: 'created' }
+    }
+
+    return navigator.locks ? navigator.locks.request(storageKey, save) : save()
+  },
+  async updateCredential(id, credential, updatedAt) {
+    function save() {
+      const users = readUsers()
+      const index = users.findIndex((user) => user.id === id)
+      if (index < 0) return false
+      users[index] = { ...users[index], credential, updatedAt }
+      localStorage.setItem(storageKey, JSON.stringify(users))
+      return true
     }
 
     return navigator.locks ? navigator.locks.request(storageKey, save) : save()

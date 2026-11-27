@@ -5,6 +5,8 @@ import AuthLayout from '../layouts/AuthLayout'
 
 import LoginPage from '../pages/auth/LoginPage'
 import RegisterPage from '../pages/auth/RegisterPage'
+import ForgotPasswordPage from '../pages/auth/ForgotPasswordPage'
+import ResetPasswordPage from '../pages/auth/ResetPasswordPage'
 
 import NotFoundPage from '../pages/errors/NotFoundPage'
 
@@ -77,6 +79,10 @@ export default function AppRoutes() {
           path="/cadastro"
           element={<RegisterPage />}
         />
+
+        <Route path="/recuperar-senha" element={<ForgotPasswordPage />} />
+
+        <Route path="/redefinir-senha" element={<ResetPasswordPage />} />
 
       </Route>
 

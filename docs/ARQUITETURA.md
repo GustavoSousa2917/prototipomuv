@@ -275,7 +275,8 @@ da DEC-038. A FAQ usa `details` e `summary` nativos.
 
 O `AuthLayout` é implementado como um grupo de rotas independente do
 `PublicLayout`. Usa `Outlet` para renderizar `LoginPage` em `/login` e
-`RegisterPage` em `/cadastro`.
+`RegisterPage` em `/cadastro`, `ForgotPasswordPage` em
+`/recuperar-senha` e `ResetPasswordPage` em `/redefinir-senha`.
 
 O layout reutiliza o logotipo e os tokens do Design System. O cabeçalho
 oferece retorno ao site, o rodapé aponta para termos e privacidade, e o
@@ -285,7 +286,7 @@ topo apoiam a navegação entre as duas rotas.
 
 A página de login reutiliza `Card`, `Input`, `Button` e `Alert`.
 A página de cadastro também usa `RadioGroup` e `Checkbox`. A
-recuperação de senha e a proteção de rotas permanecem pendentes.
+proteção de rotas permanece pendente.
 
 ### Fundação do cadastro
 
@@ -343,6 +344,40 @@ As abas compartilham a chave persistida, mas o contexto de cada
 aba é atualizado pelas suas próprias ações ou pela recarga. A
 última gravação prevalece. A sessão não controla acesso às rotas
 nem concede permissões operacionais.
+
+### Recuperação e redefinição demonstrativas
+
+O domínio define a validade de 15 minutos e os estados ativo,
+utilizado e invalidado. O serviço normaliza o e-mail, consulta a
+conta, gera 32 bytes aleatórios com Web Crypto e persiste somente o
+resumo SHA-256 do token em `muv.passwordRecovery.v1`. Cada registro
+contém ID, ID da conta, resumo, criação, expiração e estado. Um novo
+pedido invalida os registros ativos apenas da conta correspondente.
+
+A mensagem principal é genérica. Para uma conta existente, a área
+**Simulação de recebimento de e-mail** exibe um link com o token no
+fragmento da URL. O fragmento pode ficar no histórico local e a
+simulação revela a existência da conta. O protótipo não envia e-mails.
+
+A redefinição reutiliza a validação de senha e a derivação PBKDF2. Sob
+o mesmo bloqueio, o serviço revalida e consome o token, encerra a
+sessão persistida somente se ela pertencer à conta e grava a credencial
+e a data de atualização. O contexto da aba ativa volta a consultar
+a sessão. O login verifica novamente a credencial sob o bloqueio
+antes de gravar sua sessão, para evitar aceitar uma verificação feita
+antes da redefinição.
+
+LocalStorage não oferece transações entre as três chaves. Se a
+gravação inicial do token falhar, a sessão e a credencial ficam
+intactas. Se a remoção de sessão ou a gravação da credencial falhar
+depois, o token permanece consumido, a senha anterior fica válida e
+a sessão pode ter sido encerrada. A interface informa falha e pede
+um novo link. Web Locks coordena operações entre abas quando
+disponível. Sem Web Locks, a fila local serializa apenas a aba
+corrente. As demais abas atualizam o contexto na próxima recarga.
+
+Os dados são manipuláveis pelo navegador e servem exclusivamente à
+demonstração. É necessário um contexto seguro para Web Crypto.
 
 ## Layout do cliente
 

@@ -670,7 +670,9 @@ sincronizadas conforme confirmação do responsável.
 
 ## Etapa 08.3 — Login, sessão e logout
 
-Status: implementada e validada. Versionamento pendente.
+Status: implementada, validada e versionada em
+`14655e518f76dbc1b1e79fca8950ccb46f7174ae`. Integração à `main` e
+sincronização remota confirmadas pelo responsável.
 
 A T02 segue a captura 62 e a DEC-039. A conta é acessada por e-mail e
 senha. A derivação PBKDF2 foi compartilhada com o cadastro e verifica
@@ -707,3 +709,50 @@ A sessão é demonstrativa e manipulável. O contexto é local à aba e
 reflete a sessão persistida na próxima recarga. RF001 segue parcialmente
 implementado. A recuperação fica para a Etapa 08.4 e a integração de
 conta e perfis para a Etapa 09.
+
+## Etapa 08.4 — Recuperação e redefinição de senha
+
+Status: implementada e validada. Versionamento pendente.
+
+As telas T04 e T05 seguem as capturas 12 e 13 e a DEC-039. As rotas
+`/recuperar-senha` e `/redefinir-senha` reutilizam o AuthLayout. O
+link de redefinição é apresentado na caixa de entrada demonstrativa
+apenas quando existe conta. Nenhum e-mail é enviado.
+
+O serviço gera um token aleatório de uso único, com validade de 15
+minutos. O repositório guarda o resumo SHA-256 em
+`muv.passwordRecovery.v1`. A redefinição consome o token, remove a
+sessão persistida da conta recuperada e atualiza a credencial PBKDF2
+e a data de alteração. Se uma operação posterior ao consumo falhar,
+é necessário solicitar um novo link. A senha anterior permanece
+válida e a sessão pode ter sido encerrada.
+
+### Validação
+
+- Serviços e repositórios: passou a normalização de e-mail, conta
+  inexistente, validade no limite de expiração com relógio simulado,
+  invalidação de pedidos anteriores, rejeição de token ausente,
+  inválido, expirado ou usado e validação de nova senha e confirmação.
+- Duas tentativas concorrentes no mesmo contexto produziram uma única
+  alteração. Foram verificados dados cadastrais preservados,
+  isolamento de tokens e sessões de outras contas, ausência de senha
+  em claro e falhas simuladas de leitura, gravação e remoção.
+- Chromium headless em perfil isolado: ambas as interfaces foram
+  inspecionadas em 1440 × 900, 1280 × 720, 1024 × 768, 768 × 1024,
+  390 × 844 e 320 × 568, sem rolagem horizontal indevida.
+- Passaram mensagens, foco, teclado, visibilidade da senha, link
+  demonstrativo, processamento da redefinição, prevenção de envio
+  duplicado, retorno ao login, rejeição da senha antiga, login com a
+  nova, encerramento da sessão anterior e logout.
+- Regressões passaram no cadastro, login, sessão, logout, página
+  institucional, 404 e ambientes existentes. O texto do console
+  não continha senhas ou tokens completos. O erro observado foi o
+  404 de favicon já conhecido.
+- Build com TypeScript, ESLint e verificações de whitespace passaram.
+  `git fsck --full` terminou com código 0 e listou as duas árvores
+  sem referência já registradas.
+
+RF001, RU001 e US-001 estão funcionalmente atendidos no escopo
+demonstrativo da Etapa 08. A segurança de produção e o atendimento
+integral ao RNF003 permanecem fora desta entrega. Integração de conta
+e perfis, permissões e controle de acesso continuam para a Etapa 09.
