@@ -325,3 +325,36 @@ posteriormente.
 ### Próximo incremento
 
 Etapa 06.2 — Layout do cliente.
+
+## Etapa 06.2 — Layout do cliente
+
+Status: em implementação.
+
+### Implementação
+
+- [ ] Criação do ClientHeader.
+- [ ] Criação do ClientLayout.
+- [ ] Criação do ClientPlaceholderPage.
+- [ ] Configuração das rotas do cliente.
+- [ ] Redirecionamento da rota inicial.
+- [ ] Indicador de navegação ativa.
+- [ ] Menu da conta.
+- [ ] Acesso às notificações.
+- [ ] Navegação mobile.
+- [ ] Acesso ao módulo Seja prestador.
+
+### Validação
+
+- [ ] Navegação desktop.
+- [ ] Navegação mobile.
+- [ ] Responsividade.
+- [ ] Navegação por teclado.
+- [ ] Preservação das rotas anteriores.
+- [ ] Build.
+- [ ] ESLint.
+- [ ] Commit.
+- [ ] Sincronização com GitHub.
+
+### Próximo incremento
+
+Etapa 06.3 — Layout operacional compartilhado.

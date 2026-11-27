@@ -273,3 +273,46 @@ independentes do layout público.
 - AuthLayout.
 - ClientLayout.
 - OperationalLayout.
+
+## Layout do cliente
+
+O ClientLayout é responsável pela estrutura
+compartilhada das interfaces do cliente.
+
+### Componentes
+
+- ClientHeader.
+- ClientLayout.
+- ClientPlaceholderPage.
+
+### Características
+
+- Navegação horizontal em desktop.
+- Navegação recolhível em telas menores.
+- Identificação visual da rota ativa.
+- Menu da conta.
+- Acesso às notificações.
+- Acesso ao processo de autorização como prestador.
+- Renderização de páginas através de Outlet.
+- Reutilização do Design System.
+
+### Rotas
+
+- /cliente
+- /cliente/solicitar-frete
+- /cliente/prestadores
+- /cliente/solicitacoes
+- /cliente/fretes
+- /cliente/historico
+- /cliente/notificacoes
+- /cliente/conta
+- /cliente/seja-prestador
+
+### Limitações temporárias
+
+As páginas possuem conteúdos provisórios.
+
+A identificação do cliente utiliza dados fictícios.
+
+A autenticação, a sessão, a persistência e as
+permissões de acesso serão integradas posteriormente.
