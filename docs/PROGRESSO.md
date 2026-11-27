@@ -475,7 +475,7 @@ Etapa 06.5 — Layout de autenticação.
 
 ## Etapa 06.5 — Layout de autenticação
 
-Status: validada para revisão e posterior versionamento.
+Status: validada, versionada e sincronizada com o GitHub.
 
 - `src/layouts/AuthLayout.tsx` fornece o layout responsivo compartilhado.
 - `src/pages/auth/LoginPage.tsx` e `src/pages/auth/RegisterPage.tsx`
@@ -507,8 +507,43 @@ Status: validada para revisão e posterior versionamento.
   `git fsck --full` terminou com código 0 e reportou uma árvore sem
   referência.
 - O console registrou apenas o HTTP 404 de `/favicon.ico`, pendência
-  técnica separada. A verificação remota direta continua indisponível
-  por falha de resolução de `github.com`.
+  técnica separada. A consulta remota anterior falhou e foi sucedida
+  pela confirmação do responsável.
 
-- [ ] Commit da Etapa 06.5.
-- [ ] Sincronização da Etapa 06.5 com o GitHub.
+### Versionamento
+
+- [x] `6e9c2d1` — docs: adiciona instrucoes de desenvolvimento para o Codex.
+- [x] `ab4f2bb` — feat: implementa layout de autenticacao.
+- [x] Integração à `main` por fast-forward.
+- [x] Push confirmado pelo responsável. `HEAD`, `origin/main` e a
+  referência remota `refs/heads/main` foram confirmados em
+  `ab4f2bb9ef4f12096eca276e47b6142be22ab93d`. As referências locais
+  coincidiram na preparação da Etapa 06.6.
+
+## Etapa 06.6 — Página de erro 404
+
+Status: implementada e validada no Chromium headless. Versionamento pendente.
+
+- `src/pages/errors/NotFoundPage.tsx` apresenta logotipo, código 404,
+  mensagem e link para a página inicial.
+- `src/routes/AppRoutes.tsx` usa a rota global `*` para endereços
+  desconhecidos, inclusive subrotas. O preview da SPA retorna HTTP 200
+  para o documento que renderiza a página 404. Acesso negado (403)
+  permanece pendente.
+
+### Validação
+
+- Capturas e medições em 1440 × 900, 1280 × 720, 1024 × 768,
+  768 × 1024, 390 × 844 e 320 × 568, sem cortes nem rolagem horizontal.
+- Acesso direto e 12 subrotas inexistentes passaram. Tab exibiu o
+  indicador de foco no link. Enter levou à página inicial, e o histórico
+  restaurou as páginas esperadas ao voltar e avançar.
+- As 17 verificações de regressão abrangeram rotas públicas, de
+  autenticação, cliente, prestadores, motorista, administrador e
+  desenvolvimento, incluindo os redirecionamentos de `/cliente` e
+  `/prestador`.
+- Console sem erros novos. O HTTP 404 de `/favicon.ico` permanece
+  registrado em `PENDENCIAS.md`.
+- Build com TypeScript, ESLint e verificações de whitespace passaram.
+  `git fsck --full` terminou com código 0 e reportou a árvore sem
+  referência já conhecida.

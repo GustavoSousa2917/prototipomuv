@@ -1,6 +1,6 @@
 # Inventário de telas
 
-Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ordem cronológica de nomes. Classificações são propostas de implementação atualizadas conforme decisões; confirmar detalhes visuais ao desenvolver. Não são 39 rotas obrigatórias. Nenhuma tela implementada.
+Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ordem cronológica de nomes. Classificações são propostas de implementação atualizadas conforme decisões; confirmar detalhes visuais ao desenvolver. Os 39 conjuntos descrevem as capturas de referência.
 
 | ID | Interface | Capturas | Classificação |
 |---|---|---|---|
@@ -71,7 +71,7 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 | A21 | Verificação de vínculo | ADICIONAR |
 | A22 | Devolução de objeto | ADICIONAR |
 | A23 | Edição da conta | ADICIONAR |
-| A24 | Acesso negado e página não encontrada | ADICIONAR |
+| A24 | Página não encontrada (404) e acesso negado (403) | 404 implementada e validada na Etapa 06.6. 403 pendente. |
 | A25 | Tarifas | ADICIONAR |
 | A26 | Edição de veículo | ADICIONAR |
 | A27 | Avaliação do prestador | ADICIONAR |

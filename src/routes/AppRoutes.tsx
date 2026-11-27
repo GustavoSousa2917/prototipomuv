@@ -6,6 +6,8 @@ import AuthLayout from '../layouts/AuthLayout'
 import LoginPage from '../pages/auth/LoginPage'
 import RegisterPage from '../pages/auth/RegisterPage'
 
+import NotFoundPage from '../pages/errors/NotFoundPage'
+
 import HomePage from '../pages/public/HomePage'
 import PublicPlaceholderPage from '../pages/public/PublicPlaceholderPage'
 
@@ -314,6 +316,8 @@ export default function AppRoutes() {
         />
       </Route>
 
-    </Routes>    
+      <Route path="*" element={<NotFoundPage />} />
+
+    </Routes>
   )
 }

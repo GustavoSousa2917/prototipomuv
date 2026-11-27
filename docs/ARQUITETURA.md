@@ -423,3 +423,15 @@ mecanismo de autorização ou proteção de rotas.
 
 A autenticação, a sessão e as permissões serão
 integradas em incrementos posteriores.
+
+## Rota inexistente
+
+O `AppRoutes` usa uma rota curinga global (`*`) para renderizar a
+`NotFoundPage` quando nenhuma rota válida corresponde ao endereço.
+O fallback também cobre subrotas desconhecidas, preserva a URL
+solicitada e oferece um link para `/`.
+
+A página tem estrutura própria, independente dos layouts de perfil e de
+sessão. O tratamento acontece no React Router. No preview da SPA, o
+servidor entrega o documento inicial com HTTP 200. O tratamento de
+acesso negado (403) permanece previsto separadamente.

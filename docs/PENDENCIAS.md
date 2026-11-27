@@ -23,10 +23,11 @@
 
 - O navegador requisita `/favicon.ico` e recebe HTTP 404. Definir o
   favicon em tarefa própria.
-- A tentativa de consultar a `main` remota com `git ls-remote` falhou
-  na resolução de `github.com`. O histórico local e a referência local
-  `origin/main` foram conferidos separadamente.
-- O commit e a sincronização da Etapa 06.5 aguardam autorização.
+
+## Pendências técnicas da Etapa 06.6
+
+- O tratamento de acesso negado (403) permanece previsto no item A24.
+- O versionamento da Etapa 06.6 aguarda autorização.
 
 ## Futuro
 Ver exclusões em ESCOPO.md. Não implementar sem aprovação de escopo.
