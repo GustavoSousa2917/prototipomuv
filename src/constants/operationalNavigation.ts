@@ -53,7 +53,7 @@ const providerPages: OperationalPageDefinition[] = [
     path: 'solicitacoes',
     label: 'Solicitações',
     description:
-      'Acompanhe solicitações direcionadas e abertas e gerencie suas propostas.',
+      'Acompanhe as solicitações direcionadas a você e gerencie suas respostas.',
     icon: ClipboardList,
   },
   {

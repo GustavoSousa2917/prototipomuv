@@ -522,7 +522,12 @@ Status: validada, versionada e sincronizada com o GitHub.
 
 ## Etapa 06.6 — Página de erro 404
 
-Status: implementada e validada no Chromium headless. Versionamento pendente.
+Status: implementada, validada no Chromium headless e versionada.
+
+Commit `94470a77aa6d536faa65ff8414545f950968b7b0` —
+feat: implementa pagina de erro 404. Integração à `main` e sincronização
+remota confirmadas pelo responsável. As referências locais `main` e
+`origin/main` coincidiram na preparação da revisão do modelo.
 
 - `src/pages/errors/NotFoundPage.tsx` apresenta logotipo, código 404,
   mensagem e link para a página inicial.
@@ -547,3 +552,31 @@ Status: implementada e validada no Chromium headless. Versionamento pendente.
 - Build com TypeScript, ESLint e verificações de whitespace passaram.
   `git fsck --full` terminou com código 0 e reportou a árvore sem
   referência já conhecida.
+
+## Alinhamento anterior à Etapa 07 — Solicitações direcionadas
+
+A DEC-038 consolida a revisão aprovada pelo responsável. A documentação
+passa a prever um prestador escolhido por solicitação, valor base pelas
+tarifas desse prestador, encerramento por recusa e reaproveitamento dos
+dados em nova solicitação com histórico preservado. A matriz de
+rastreabilidade registra as divergências com o PDF original por página.
+
+A interface provisória foi alinhada no texto de Solicitações para
+autônomos, empresas e cooperativas, no texto institucional e na
+demonstração de seleção do Design System. Os menus e as rotas foram
+preservados. Solicitação e contratação funcionais permanecem pendentes.
+
+- Chromium headless confirmou os links dos menus e a descrição
+  atualizada nas três rotas de solicitações. Também confirmou navegação
+  nos ambientes de cliente, motorista e administrador e o texto
+  institucional atualizado.
+- No demonstrador, passaram a ausência da escolha de tipo, a validação
+  sem seleções, a validação com checkbox e modalidade selecionados e a
+  limpeza. O console registrou somente o 404 conhecido de `/favicon.ico`.
+- Build com TypeScript, ESLint e `git diff --check` passaram.
+  `git fsck --full` terminou com código 0 e reportou a árvore sem
+  referência já conhecida.
+
+Permanece pendente a definição dos critérios técnicos para identificar
+a mesma necessidade de frete. A revisão antecede a Etapa 07 e aguarda
+autorização para versionamento.

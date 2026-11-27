@@ -12,21 +12,14 @@ const modalities = [
   { value: 'ENCOMENDA', label: 'Frete de encomendas', description: 'Coleta e entrega de volumes e mercadorias.' },
 ]
 
-const requestTypes = [
-  { value: 'DIRECIONADA', label: 'Solicitação direcionada', description: 'Enviar a solicitação para um prestador específico.' },
-  { value: 'ABERTA', label: 'Solicitação aberta', description: 'Receber propostas de diferentes prestadores elegíveis.' },
-]
-
 export default function SelectionComponentsDemo() {
   const [vehicleModalities, setVehicleModalities] = useState<string[]>([])
   const [requestModality, setRequestModality] = useState('')
-  const [requestType, setRequestType] = useState('')
   const [attempted, setAttempted] = useState(false)
   const [message, setMessage] = useState('')
 
   const vehicleError = attempted && vehicleModalities.length === 0
   const modalityError = attempted && !requestModality ? 'Selecione uma modalidade.' : undefined
-  const requestTypeError = attempted && !requestType ? 'Selecione o tipo de solicitação.' : undefined
 
   function toggleVehicleModality(modality: string) {
     setVehicleModalities((previous) => previous.includes(modality)
@@ -38,7 +31,7 @@ export default function SelectionComponentsDemo() {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     setAttempted(true)
-    if (vehicleModalities.length === 0 || !requestModality || !requestType) {
+    if (vehicleModalities.length === 0 || !requestModality) {
       setMessage('Revise as seleções obrigatórias.')
       return
     }
@@ -48,7 +41,6 @@ export default function SelectionComponentsDemo() {
   function handleReset() {
     setVehicleModalities([])
     setRequestModality('')
-    setRequestType('')
     setAttempted(false)
     setMessage('')
   }
@@ -109,19 +101,9 @@ export default function SelectionComponentsDemo() {
             value={requestModality}
             onChange={(value) => { setRequestModality(value); setMessage('') }}
             helperText="Cada solicitação possui apenas uma modalidade."
-            error={modalityError}
-            required
-          />
-          <div className="border-t border-border" />
-          <RadioGroup
-            name="requestType"
-            label="Tipo de solicitação"
-            options={requestTypes}
-            value={requestType}
-            onChange={(value) => { setRequestType(value); setMessage('') }}
             variant="card"
             orientation="horizontal"
-            error={requestTypeError}
+            error={modalityError}
             required
           />
           <div className="space-y-2 rounded-muv-card bg-background p-4">
@@ -135,10 +117,6 @@ export default function SelectionComponentsDemo() {
             <p className="text-muted">
               Modalidade da solicitação:{' '}
               {modalities.find((item) => item.value === requestModality)?.label ?? 'Não selecionada'}
-            </p>
-            <p className="text-muted">
-              Tipo de solicitação:{' '}
-              {requestTypes.find((item) => item.value === requestType)?.label ?? 'Não selecionado'}
             </p>
           </div>
           <div className="flex flex-wrap gap-3">

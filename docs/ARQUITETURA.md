@@ -435,3 +435,17 @@ A página tem estrutura própria, independente dos layouts de perfil e de
 sessão. O tratamento acontece no React Router. No preview da SPA, o
 servidor entrega o documento inicial com HTTP 200. O tratamento de
 acesso negado (403) permanece previsto separadamente.
+
+## Modelo de solicitação planejado
+
+A DEC-038 estabelece que cada solicitação encaminhada tem um único
+prestador, selecionado pelo cliente após a pesquisa de compatibilidade.
+O cálculo usa as tarifas do destinatário. A resposta do prestador e a
+decisão final do cliente pertencem à mesma solicitação. A confirmação
+gera o frete, e empresas e cooperativas designam os recursos depois.
+
+Uma recusa encerra o registro. O reaproveitamento dos dados cria uma
+nova solicitação direcionada e preserva o registro anterior. O domínio
+deverá impedir negociações simultâneas para a mesma necessidade. O
+critério técnico de identificação permanece pendente. As páginas
+atuais continuam provisórias.

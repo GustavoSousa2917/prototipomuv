@@ -2,23 +2,26 @@
 
 Data de consolidação: 26/11/2026. Fonte: aprovações explícitas na conversa de planejamento. As decisões prevalecem sobre versões anteriores das referências; não constituem implementação ou alteração do PDF original.
 
-## Aprovadas
+## Aprovadas e histórico
+
+A DEC-038 consolida a revisão do modelo de solicitações. As redações
+anteriores permanecem na tabela com a situação indicada.
 
 | ID | Decisão |
 |---|---|
-| DEC-003.1 | Permitir solicitações direcionadas. |
+| DEC-003.1 | Permitir solicitações direcionadas. **Substituída pela DEC-038.1**, que torna esse modelo exclusivo. |
 | DEC-003.2 | Utilizar valor base estimado. |
 | DEC-003.3 | Prestador pode concordar com o valor base ou apresentar contraproposta. |
 | DEC-003.4 | Cliente confirma a contratação. |
 | DEC-003.5 | Prestador pode recusar solicitação direcionada. |
 | DEC-003.6 | Valor base calculado a partir das tarifas do prestador. |
-| DEC-003.7 | Manter solicitações abertas. |
+| DEC-003.7 | Manter solicitações abertas. **Revogada pela DEC-038.1.** |
 | DEC-003.8 | Cliente aceita ou recusa, sem contrapropor. |
 | DEC-003.9 | Tarifas por categoria de veículo e modalidade. |
-| DEC-003.10 | Valor base individual por prestador em solicitações abertas. |
-| DEC-003.11 | Uma proposta por prestador por solicitação. |
-| DEC-003.12 | Recusa de proposta direcionada encerra a solicitação. |
-| DEC-003.13 | Recusa de proposta aberta não encerra a solicitação. |
+| DEC-003.10 | Valor base individual por prestador em solicitações abertas. **Revogada pela DEC-038.3.** |
+| DEC-003.11 | Uma proposta por prestador por solicitação. **Substituída pela DEC-038.4**, com resposta de um único prestador por solicitação. |
+| DEC-003.12 | Recusa de proposta direcionada encerra a solicitação. **Mantida e explicitada pela DEC-038.5**, que abrange a recusa de qualquer parte. |
+| DEC-003.13 | Recusa de proposta aberta não encerra a solicitação. **Revogada pela DEC-038.5.** |
 | DEC-003.14 | Sistema sugere categorias compatíveis; cliente escolhe. |
 | DEC-003.15 | Valor base = max(tarifa mínima, distância estimada × tarifa por km). |
 | DEC-001.1 | Conta única com múltiplos perfis. |
@@ -116,3 +119,23 @@ IDs preservados conforme conversa (não renumerar). As propostas iniciais genér
 | DEC-037.8 | Incorporar requisitos básicos de acessibilidade. | Aprovada |
 | DEC-037.9 | Criar uma página de demonstração do Design System. | Aprovada |
 | DEC-037.10 | Manter a aparência visual adaptando os conteúdos às regras aprovadas. | Aprovada |
+
+## DEC-038 — Solicitações exclusivamente direcionadas
+
+Aprovada em 27/11/2026 pelo responsável durante o alinhamento anterior
+à Etapa 07. A seleção do prestador passa a ocorrer antes do envio e a
+negociação fica restrita ao prestador selecionado.
+
+| ID | Decisão aprovada | Referências impactadas |
+|---|---|---|
+| DEC-038.1 | Excluir solicitações abertas do escopo e permitir exclusivamente solicitações direcionadas. Manter autônomos, empresas e cooperativas. | DEC-003.1, DEC-003.7, US-003, US-006, RU010, RF006 |
+| DEC-038.2 | O cliente informa os dados do frete, consulta prestadores compatíveis com modalidade, região e condições do serviço, e seleciona um único prestador antes de enviar a solicitação. | RF005, RU002, US-002, US-003 |
+| DEC-038.3 | Calcular o valor base com as tarifas do prestador escolhido, mantendo a fórmula e os critérios tarifários vigentes. | DEC-003.2, DEC-003.6, DEC-003.9, DEC-003.10, DEC-003.15 |
+| DEC-038.4 | O prestador escolhido pode concordar com o valor base, apresentar contraproposta justificada ou recusar. O cliente confirma ou recusa a contratação. A contraproposta cabe ao prestador. | DEC-003.3–5, DEC-003.8, DEC-003.11, US-007, US-008, RU003, RF007, RF008, RN009–010 |
+| DEC-038.5 | A recusa de qualquer parte encerra a solicitação correspondente. O cliente pode reaproveitar os dados para criar uma nova solicitação direcionada a outro prestador, preservando o registro original. | DEC-003.5, DEC-003.12–13, US-003, US-008, RN017 |
+| DEC-038.6 | Impedir negociações simultâneas para a mesma necessidade de frete e vedar encaminhamento automático a outro prestador. Detalhar os critérios técnicos de identificação antes da implementação. | US-003, US-007, US-008 |
+| DEC-038.7 | Empresas e cooperativas continuam responsáveis pela designação posterior de motorista e veículo. | RF009, RN011–013, RU011, US-011 |
+
+As demais decisões permanecem vigentes. A matriz de rastreabilidade
+registra as divergências com o PDF original, incluindo os diagramas e
+o modelo de classes.

@@ -134,7 +134,7 @@ Preserve especialmente:
 
 - Conta única com múltiplos perfis.
 - Alternância de perfis sem novo login.
-- Solicitações abertas e direcionadas.
+- Solicitações exclusivamente direcionadas a um único prestador, escolhido antes do envio, conforme DEC-038.
 - Valor base estimado pelas tarifas do prestador.
 - Confirmação final da contratação pelo cliente.
 - Autorização por modalidade.

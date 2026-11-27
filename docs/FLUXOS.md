@@ -7,10 +7,14 @@ Cadastro único (nome, CPF, telefone, e-mail, senha; confirmação como validaç
 Veículos ativos, capacidades reais, categoria, modalidade e disponibilidade; preservar histórico por inativação. Motorista compartilhado → convite simulado → aceite → vínculo ativo → verificação independente da organização. Designação requer recursos compatíveis e disponíveis, motorista apto e veículo pertencente ao prestador. Verificar conflitos básicos; duração e critério de sobreposição ainda precisam de definição.
 
 ## Solicitação direcionada
-Dados e modalidade → categoria compatível → pesquisa de prestadores elegíveis → valor base individual → selecionar prestador → enviar → concordância com base ou contraproposta justificada (ou recusa) → cliente aceita ou recusa. Recusa encerra sem contratação. Aceite cria exatamente um frete. Cliente pode encerrar antes da contratação.
 
-## Solicitação aberta
-Dados e modalidade → categoria compatível → publicar → prestadores autorizados e operacionalmente elegíveis consultam → valor base individual = max(mínimo, km estimados × tarifa/km) → uma proposta por prestador → cliente compara/aceita/recusa. Recusar uma proposta não encerra a solicitação. Aceitar uma bloqueia as demais; encerrar impede novas propostas. Não misturar direcionadas com abertas. Guardar estimativa original; distância simulada.
+Dados e modalidade → categoria compatível → pesquisa de prestadores autorizados e compatíveis com a modalidade, a região e as condições → seleção de um único prestador → cálculo do valor base com as tarifas desse prestador → envio direcionado.
+
+O valor base é o maior entre a tarifa mínima e a distância estimada multiplicada pela tarifa por quilômetro. A distância é simulada e a estimativa original é preservada. O prestador escolhido pode concordar com o valor base, apresentar contraproposta justificada ou recusar. Quando houver concordância ou contraproposta, o cliente confirma ou recusa a contratação. O aceite cria exatamente um frete. A contraproposta cabe ao prestador.
+
+A recusa de qualquer parte encerra a solicitação correspondente. O cliente pode reaproveitar os dados para criar outra solicitação, selecionando outro prestador e preservando o histórico original. O cliente também pode encerrar uma solicitação antes da contratação. A DEC-038 veda publicação aberta, negociações simultâneas para a mesma necessidade e encaminhamento automático.
+
+Empresas e cooperativas designam motorista e veículo depois da contratação. Solicitações direcionadas que aguardam resposta continuam disponíveis ao prestador escolhido.
 
 ## Frete contratado
 | Estado | Ação | Próximo estado |

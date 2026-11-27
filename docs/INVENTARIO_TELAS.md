@@ -16,7 +16,7 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 | T10 | Minhas viagens | 01–02 | ALTERAR |
 | T11 | Contraproposta recebida | 03–04 | MANTER |
 | T12 | Revisão de condições | 05–06 | MANTER |
-| T13 | Comparação de propostas | 33–34 | MANTER |
+| T13 | Comparação de propostas | 33–34 | EXCLUIR a comparação entre prestadores na mesma solicitação (DEC-038). A análise das condições permanece em T12. |
 | T14 | Confirmação | 35 | MANTER |
 | T15 | Cancelamento | 66 | MANTER |
 | T16 | Notificações | 42–43 | MANTER |
@@ -29,7 +29,7 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 | T23 | Gestão de veículos | 14,44 | ALTERAR |
 | T24 | Cadastro de veículo | 45 | ALTERAR |
 | T25 | Detalhes de solicitação | 46–47 | ALTERAR |
-| T26 | Solicitações na região | 48–49 | ALTERAR (separar direcionadas) |
+| T26 | Solicitações na região | 48–49 | ALTERAR para consultar as solicitações recebidas pelo prestador (DEC-038). |
 | T27 | Contraproposta | 50–51 | MANTER |
 | T28 | Vínculos | 52–53 | ALTERAR |
 | T29 | Cadastro de motorista | 54–55 | ALTERAR |
@@ -51,11 +51,11 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 | A01 | Pesquisa centrada no prestador | ADICIONAR |
 | A02 | Perfil público | ADICIONAR |
 | A03 | Solicitação de encomendas | ADICIONAR |
-| A04 | Escolha aberta/direcionada | ADICIONAR |
+| A04 | Escolha aberta/direcionada | RETIRADA pela DEC-038. ID preservado para histórico. |
 | A05 | Detalhes e encerramento de solicitação | ADICIONAR |
 | A06 | Direcionadas recebidas | ADICIONAR |
 | A07 | Proposta inicial | ADICIONAR |
-| A08 | Propostas apresentadas | ADICIONAR |
+| A08 | Propostas apresentadas | ADICIONAR como consulta da resposta vinculada à solicitação direcionada (DEC-038). |
 | A09 | Listagem de fretes | ADICIONAR |
 | A10 | Acompanhamento cliente | ADICIONAR |
 | A11 | Detalhes operacionais | ADICIONAR |

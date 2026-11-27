@@ -150,9 +150,8 @@ export default function HomePage() {
 
           <p className="mt-4 leading-relaxed text-muted">
             O cliente informa as características do serviço,
-            escolhe um prestador ou publica uma solicitação
-            aberta, analisa as propostas recebidas e confirma
-            a contratação.
+            escolhe um prestador compatível, envia a solicitação
+            e avalia a resposta para decidir sobre a contratação.
           </p>
         </Card>
 
