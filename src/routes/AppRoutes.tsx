@@ -5,7 +5,8 @@ import AuthLayout from '../layouts/AuthLayout'
 import AccessGuard from './AccessGuard'
 import ProviderEntryPage from '../pages/operational/ProviderEntryPage'
 import DemoAccountsPage from '../pages/dev/DemoAccountsPage'
-import { environmentRoutes } from '../constants/environmentRoutes'
+import AccountPage from '../pages/auth/AccountPage'
+import { accountRoute, environmentRoutes } from '../constants/environmentRoutes'
 
 import LoginPage from '../pages/auth/LoginPage'
 import RegisterPage from '../pages/auth/RegisterPage'
@@ -109,6 +110,15 @@ export default function AppRoutes() {
 
       {import.meta.env.DEV && <Route path="/dev/contas" element={<DemoAccountsPage />} />}
 
+      <Route path={accountRoute} element={
+        <AccessGuard requirement={{ ownAccount: true }}><AccountPage /></AccessGuard>
+      } />
+
+      <Route path={environmentRoutes.client + '/conta'} element={<Navigate to={accountRoute} replace />} />
+      {operationalProfiles.map(({ basePath }) => (
+        <Route key={basePath} path={basePath + '/conta'} element={<Navigate to={accountRoute} replace />} />
+      ))}
+
       {/* Ambiente do cliente */}
 
       <Route path={environmentRoutes.client} element={
@@ -186,16 +196,6 @@ export default function AppRoutes() {
         />
 
         <Route
-          path="conta"
-          element={
-            <ClientPlaceholderPage
-              title="Minha conta"
-              description="Gerencie suas informações pessoais e configurações."
-            />
-          }
-        />
-
-        <Route
           path="seja-prestador"
           element={
             <ClientPlaceholderPage
@@ -256,17 +256,6 @@ export default function AppRoutes() {
               />
             )
           })}
-
-          <Route
-            path="conta"
-            element={
-              <OperationalPlaceholderPage
-                title="Minha conta"
-                description="Gerencie suas informações pessoais e configurações."
-                areaLabel={config.areaLabel}
-              />
-            }
-          />
 
           <Route
             path="notificacoes"

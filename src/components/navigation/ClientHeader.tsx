@@ -15,6 +15,7 @@ import {
 import Logo from '../common/Logo'
 import Avatar from '../common/Avatar'
 import ContextDialog from '../common/ContextDialog'
+import { accountRoute } from '../../constants/environmentRoutes'
 import { useAuth } from '../../contexts/authContext'
 
 const navigationItems = [
@@ -234,7 +235,7 @@ export default function ClientHeader() {
               </div>
 
               <Link
-                to="/cliente/conta"
+                to={accountRoute}
                 onClick={closePanels}
                 className="
                   mt-2 flex items-center gap-3

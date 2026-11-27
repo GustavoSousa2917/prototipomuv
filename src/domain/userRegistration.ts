@@ -72,17 +72,22 @@ export function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@.]+(?:\.[^\s@.]+)+$/.test(email)
 }
 
-export function validateRegistrationDetails(details: RegistrationDetails): RegistrationErrors {
-  const errors: RegistrationErrors = {}
-  const cpf = details.cpf.trim()
-  const phone = details.phone.trim()
+export type PersonalDetails = Pick<User, 'fullName' | 'phone'>
 
-  if (!details.fullName.trim()) errors.fullName = 'Informe o nome completo.'
+export function validatePersonalDetails({ fullName, phone }: PersonalDetails) {
+  const errors: Partial<Record<keyof PersonalDetails, string>> = {}
+  if (!fullName.trim()) errors.fullName = 'Informe o nome completo.'
+  if (!/^[\d()\-\s]+$/.test(phone.trim()) || !isValidPhone(digitsOnly(phone))) {
+    errors.phone = 'Informe um telefone brasileiro válido com DDD.'
+  }
+  return errors
+}
+
+export function validateRegistrationDetails(details: RegistrationDetails): RegistrationErrors {
+  const errors: RegistrationErrors = validatePersonalDetails(details)
+  const cpf = details.cpf.trim()
   if (!/^[\d.\-\s]+$/.test(cpf) || !isValidCpf(digitsOnly(cpf))) {
     errors.cpf = 'Informe um CPF válido com 11 dígitos.'
-  }
-  if (!/^[\d()\-\s]+$/.test(phone) || !isValidPhone(digitsOnly(phone))) {
-    errors.phone = 'Informe um telefone brasileiro válido com DDD.'
   }
   if (!isValidEmail(normalizeEmail(details.email))) {
     errors.email = 'Informe um e-mail válido.'

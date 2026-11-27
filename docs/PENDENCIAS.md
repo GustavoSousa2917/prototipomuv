@@ -38,8 +38,7 @@
 
 ## Pendências após as Etapas 09.3 e 09.4
 
-- Conta canônica e integração mais ampla dos layouts permanecem nos
-  próximos incrementos. Cadastros profissionais e organizacionais,
+- A integração mais ampla dos layouts permanece prevista para 09.6. Cadastros profissionais e organizacionais,
   autorizações, prontidão e proteção efetiva dos registros ficam nos
   módulos próprios e na futura API.
 - As páginas de termos e privacidade continuam provisórias. O registro
@@ -52,7 +51,13 @@
 - A caixa demonstrativa permite distinguir contas existentes. Um
   canal de recuperação real e segurança de produção ficam para a
   futura integração com backend.
-- Versionamento das Etapas 09.3 e 09.4 aguarda autorização.
+- A conta canônica permite editar nome e telefone. CPF, e-mail,
+  alteração autenticada de senha e exclusão de conta exigem definição
+  posterior. A recuperação de senha continua disponível.
+- Edições simultâneas dos mesmos campos seguem a última gravação.
+  Sem Web Locks, a fila protege apenas operações da mesma aba.
+  Sessões sucessivas de uma mesma conta continuam indistinguíveis.
+- Versionamento da Etapa 09.5 aguarda autorização.
 
 ## Futuro
 Ver exclusões em ESCOPO.md. Não implementar sem aprovação de escopo.

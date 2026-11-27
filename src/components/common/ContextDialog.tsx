@@ -1,5 +1,8 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
+import { Link } from 'react-router'
+
+import { accountRoute } from '../../constants/environmentRoutes'
 
 import { useAuth } from '../../contexts/authContext'
 import { contextLabel } from '../../domain/accountAccess'
@@ -81,6 +84,7 @@ export default function ContextDialog({ trigger, accountMenu = false }: {
             {contexts.length > 1
               ? <ContextChoices contexts={contexts} onCancel={close} onComplete={close} />
               : <Button variant="secondary" onClick={close}>Fechar</Button>}
+            {accountMenu && <Link to={accountRoute} onClick={close} className="block font-semibold text-primary underline">Minha conta</Link>}
             {accountMenu && <Button variant="outline" loading={loggingOut} onClick={handleLogout}>Sair da conta</Button>}
             {logoutError && <Alert role="alert" variant="danger">Não foi possível encerrar a sessão. Tente novamente.</Alert>}
           </div>

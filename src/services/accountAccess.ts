@@ -32,7 +32,7 @@ export function clearActiveContext() {
   }
 }
 
-export function resolveAccountAccess(userId: string, useDefault = false): AccountAccess {
+export function resolveAccountAccess(userId: string, useDefault = false, persistSelection = true): AccountAccess {
   const contexts = resolveContexts(userId, readAccessAssignments())
   let activeContext = contexts[0] ?? null
   if (!useDefault) {
@@ -45,6 +45,8 @@ export function resolveAccountAccess(userId: string, useDefault = false): Accoun
       // A seleção ilegível será substituída pelo contexto padrão permitido.
     }
   }
+
+  if (!persistSelection) return { contexts, activeContext, capabilities: contextCapabilities(activeContext) }
 
   if (activeContext) {
     try {

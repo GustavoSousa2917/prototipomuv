@@ -1,4 +1,5 @@
 import OperationalLayout from './OperationalLayout'
+import { accountRoute } from '../constants/environmentRoutes'
 import { useAuth } from '../contexts/authContext'
 import { contextLabel } from '../domain/accountAccess'
 
@@ -38,7 +39,7 @@ export default function ProfileOperationalLayout({
       profileLabel={contextLabel(active)}
       authenticated
       homeTo={config.basePath}
-      accountTo={`${config.basePath}/conta`}
+      accountTo={accountRoute}
       notificationsTo={`${config.basePath}/notificacoes`}
       items={items}
     />

@@ -13,8 +13,9 @@
 | 07 | Concluída | Página institucional |
 | 08.1–08.4 | Concluídas e sincronizadas | Cadastro, login, sessão, logout e recuperação |
 | 09.1–09.2 | Implementadas, validadas e sincronizadas | Contextos de atuação, cliente automático e sessão entre abas |
-| 09.3–09.4 | Implementadas e validadas, versionamento pendente | Alternância, guardas e controle de acesso demonstrativo |
-| 09.5 em diante | Pendente | Conta e demais incrementos |
+| 09.3–09.4 | Implementadas, validadas e sincronizadas | Alternância, guardas e controle de acesso demonstrativo |
+| 09.5 | Implementada, versionamento pendente | Gerenciamento básico da conta |
+| 09.6 em diante | Pendente | Integração de layouts e validação integrada |
 
 ## Planejamento inicial (registro histórico)
 
@@ -832,7 +833,9 @@ permanecem pendentes.
 
 ## Etapas 09.3 e 09.4 — Alternância e controle de acesso
 
-Status: implementadas e validadas. Versionamento pendente.
+Status: implementadas, validadas e versionadas em
+`957c99795f97bc1b60a78d72a486411ea9ef4f49`. Integração à `main` e
+sincronização remota confirmadas pelo responsável.
 
 O seletor segue a referência T06 (capturas 70–71). A seleção explícita
 revalida a conta e as atribuições e persiste apenas na aba atual.
@@ -879,3 +882,42 @@ A política de escopo foi verificada com dados isolados. Autorização
 por modalidade, prontidão e proteção de registros de negócio ficam
 nos seus módulos. A proteção cliente-side é demonstrativa e o RNF003
 permanece pendente. A próxima etapa prevista é 09.5.
+
+## Etapa 09.5 — Gerenciamento básico da conta
+
+A rota autenticada `/conta` atende contas comuns e administrativas
+e implementa A23 conforme DEC-040.10. As capturas 70–71 de T06
+orientaram a apresentação separada dos dados e contextos de uma conta
+única. A entrega cobre consulta dos dados básicos, edição de nome e
+telefone, identificação do contexto ativo e alternância existente.
+Cadastro profissional, autorização por modalidade e prontidão
+operacional permanecem nos módulos próprios.
+
+A edição preserva os demais campos, as atribuições, a sessão e a
+seleção da aba. A sincronização por eventos de armazenamento atualiza
+a identidade em outras abas. O protótipo mantém as limitações de
+concorrência e segurança documentadas em PENDENCIAS.md.
+
+### Validação
+
+- Testes isolados com dados fictícios verificaram contas legadas e
+  recém-cadastradas, projeção sem credenciais, validação, atualização
+  individual de nome e telefone, normalização, rejeição de campos
+  adicionais, falha de gravação, preservação dos demais dados e recusa
+  de gravação quando a conta muda antes da persistência.
+- No Chromium, contas demonstrativas comuns e administrativas
+  acessaram a própria conta. Foram verificados retorno após login,
+  atalhos dos cabeçalhos, alias administrativo, rótulos de contextos
+  distintos, validação de campos, cancelamento, falha de gravação,
+  submissão duplicada, confirmação e persistência após recarga.
+- Duas abas confirmaram a atualização do nome e das iniciais e a
+  preservação dos contextos independentes. As regressões abrangeram
+  cadastro, login, logout, recuperação após edição, alternância,
+  guardas, 403 e 404. O navegador reportou o 404 de favicon já conhecido.
+- Visualização e edição foram inspecionadas em 1440 × 900, 1280 × 720,
+  1024 × 768, 768 × 1024, 390 × 844 e 320 × 568. Foram verificados
+  foco de entrada e de retorno, acionamento por teclado e ausência
+  de rolagem horizontal indevida.
+- Build, lint e verificações de whitespace passaram. `git fsck --full`
+  terminou com código 0 e reportou três árvores sem referência já
+  identificadas. O versionamento da Etapa 09.5 aguarda autorização.

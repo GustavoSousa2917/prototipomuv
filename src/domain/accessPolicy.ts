@@ -3,7 +3,7 @@ import type { ActingContext, EnvironmentCapability } from './accountAccess'
 
 type AccessScope = { organizationId: string } | { linkId: string }
 
-export type AccessRequirement = {
+export type AccessRequirement = { ownAccount: true } | {
   capabilities: readonly EnvironmentCapability[]
   scope?: AccessScope
 }
@@ -15,6 +15,7 @@ export type AccessSubject = {
 
 export function decideAccess(subject: AccessSubject, requirement: AccessRequirement) {
   if (!subject.user) return { kind: 'login' } as const
+  if ('ownAccount' in requirement) return { kind: 'allowed' } as const
   const candidates = subject.access?.contexts.filter((context) => {
     if (!contextCapabilities(context).some((capability) => requirement.capabilities.includes(capability))) return false
     const { scope } = requirement

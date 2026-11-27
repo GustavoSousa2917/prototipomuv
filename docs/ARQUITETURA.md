@@ -476,6 +476,27 @@ ou vínculo. Serviços futuros poderão exigir escopo específico na
 mesma política. A validação de escopo isolada não equivale à proteção
 de dados de negócio nem a autorização por modalidade ou prontidão.
 
+### Gerenciamento básico da própria conta
+
+A rota canônica `/conta` usa a guarda compartilhada com uma exigência
+de identidade autenticada, aplicável também à administração exclusiva.
+Os cabeçalhos cliente e operacional oferecem **Minha conta**. As rotas
+pessoais provisórias redirecionam para a rota canônica. As páginas de
+perfil do prestador e o demonstrador operacional mantêm sua finalidade.
+
+`src/services/manageAccount.ts` deriva a conta da sessão validada e
+confere se ela corresponde à identidade conhecida pela interface.
+A projeção contém nome, CPF, telefone, e-mail, finalidade inicial,
+data de cadastro e contextos, sem credenciais ou tokens. A visualização
+usa o contexto resolvido sem regravar a seleção da aba.
+
+A gravação reutiliza a validação cadastral e o bloqueio das operações
+de autenticação. No bloqueio do repositório, relê o registro e confere
+a sessão imediatamente antes de gravar somente nome, telefone e
+`updatedAt`. O formato de `muv.users.v1` permanece o mesmo. A aba que
+salva atualiza o contexto de autenticação. As demais recebem o evento
+da chave de usuários e mantêm seu próprio contexto ativo válido.
+
 ## Layout do cliente
 
 O ClientLayout é responsável pela estrutura

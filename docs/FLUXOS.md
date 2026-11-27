@@ -27,6 +27,14 @@ acesso, exibe 403 e preserva a URL. A rota `/prestador` reúne as
 atuações profissionais da conta comum, com orientação para cadastro
 futuro quando não existem atribuições.
 
+**Minha conta (09.5).** A partir dos cabeçalhos autenticados ou de
+`/conta`, a pessoa consulta os próprios dados e contextos. Visitantes
+passam pelo login com retorno à página. Em **Editar dados**, nome e
+telefone podem ser atualizados. Cancelar descarta o rascunho. Uma
+gravação bem-sucedida volta à consulta com confirmação e atualiza o
+nome e as iniciais sem novo login. A alternância usa a seleção explícita
+já existente. CPF e e-mail são somente leitura.
+
 **Fluxo posterior.** A intenção de oferecer serviços ou atuar como
 motorista vinculado abre caminho para processos próprios. Autônomos e
 organizações informam regiões e modalidade para análise administrativa.

@@ -1,5 +1,5 @@
 import { digitsOnly, isInitialPurpose, isValidCpf, isValidEmail, isValidPhone, normalizeEmail } from '../domain/userRegistration'
-import type { User } from '../domain/userRegistration'
+import type { PersonalDetails, User } from '../domain/userRegistration'
 
 export const userStorageKey = 'muv.users.v1'
 
@@ -9,6 +9,7 @@ type CreateResult = { kind: 'created' } | { kind: 'duplicate'; fields: Duplicate
 export interface UserRepository {
   create(user: User): Promise<CreateResult>
   updateCredential(id: string, credential: User['credential'], updatedAt: string): Promise<boolean>
+  updatePersonalDetails(id: string, details: PersonalDetails, isCurrentSession: () => boolean): Promise<User | null>
   findById(id: string): User | undefined
   findByCpf(cpf: string): User | undefined
   findByEmail(email: string): User | undefined
@@ -80,6 +81,20 @@ export const userRepository: UserRepository = {
       users[index] = { ...users[index], credential, updatedAt }
       localStorage.setItem(userStorageKey, JSON.stringify(users))
       return true
+    }
+
+    return navigator.locks ? navigator.locks.request(userStorageKey, save) : save()
+  },
+  async updatePersonalDetails(id, { fullName, phone }, isCurrentSession) {
+    function save() {
+      const users = readUsers()
+      const index = users.findIndex((user) => user.id === id)
+      if (index < 0 || !isCurrentSession()) return null
+
+      const updated = { ...users[index], fullName, phone, updatedAt: new Date().toISOString() }
+      users[index] = updated
+      localStorage.setItem(userStorageKey, JSON.stringify(users))
+      return updated
     }
 
     return navigator.locks ? navigator.locks.request(userStorageKey, save) : save()
