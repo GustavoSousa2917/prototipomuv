@@ -67,7 +67,7 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 | A17 | Registrar contestação | ADICIONAR |
 | A18 | Resposta do prestador | ADICIONAR |
 | A19 | Consulta administrativa de contestação | ADICIONAR |
-| A20 | Perfil e regiões | ADICIONAR |
+| A20 | Perfil e regiões | PARCIALMENTE IMPLEMENTADA em 10.1–10.2. Cadastro, consulta e edição do autônomo a partir de T03 (58–59) e T06 (70–71). Regiões e cadastro organizacional pendentes. |
 | A21 | Verificação de vínculo | ADICIONAR |
 | A22 | Devolução de objeto | ADICIONAR |
 | A23 | Edição da conta | IMPLEMENTADA na Etapa 09.5 em `/conta`, para nome e telefone. |

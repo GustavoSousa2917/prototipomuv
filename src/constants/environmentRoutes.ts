@@ -14,9 +14,12 @@ export const environmentRoutes = {
 const clientRoutes = ['', '/solicitar-frete', '/prestadores', '/solicitacoes', '/fretes', '/historico', '/notificacoes', '/conta', '/seja-prestador']
   .map((suffix) => environmentRoutes.client + suffix)
 export const accountRoute = '/conta'
+export const autonomousRegistrationRoute = environmentRoutes.autonomous + '/cadastro'
+export const autonomousProfileRoute = environmentRoutes.autonomous + '/perfil'
 
 const protectedPaths = [
   accountRoute,
+  autonomousRegistrationRoute,
   '/prestador',
   ...clientRoutes,
   ...operationalProfiles.flatMap(({ basePath, pages }) => [

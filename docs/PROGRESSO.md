@@ -15,7 +15,9 @@
 | 09.1–09.2 | Implementadas, validadas e sincronizadas | Contextos de atuação, cliente automático e sessão entre abas |
 | 09.3–09.4 | Implementadas, validadas e sincronizadas | Alternância, guardas e controle de acesso demonstrativo |
 | 09.5 | Implementada, validada e sincronizada | Gerenciamento básico da conta |
-| 09.6–09.7 | Implementadas, versionamento pendente | Integração de layouts e validação integrada |
+| 09.6–09.7 | Implementadas, validadas e sincronizadas | Integração de layouts e validação integrada |
+| 10.1–10.2 | Implementadas, versionamento pendente | Fundação de prestadores e cadastro autônomo |
+| 10.3–10.5 | Pendentes | Empresas e cooperativas, contextos organizacionais e validação integrada |
 
 ## Planejamento inicial (registro histórico)
 
@@ -965,5 +967,47 @@ A Etapa 09 encerra o escopo técnico de conta e contextos do protótipo.
 Permanecem as limitações da persistência simulada, da concorrência
 e da distinção entre sessões sucessivas da mesma conta. RNF003,
 autorização por modalidade, prontidão e proteção de registros de
-negócio seguem pendentes. O versionamento de 09.6 e 09.7 aguarda
-autorização.
+negócio seguem pendentes. As etapas 09.6 e 09.7 foram versionadas em
+`436183e8cc60b6e4441dffa36430be5e41128751`. Integração à `main` e
+sincronização remota confirmadas pelo responsável.
+
+## Etapas 10.1 e 10.2 — Fundação de prestadores e cadastro autônomo
+
+Implementadas conforme DEC-041. A entrada de prestadores oferece
+cadastro autônomo, e a rota de perfil permite consulta e edição pelo
+titular. O contexto deriva da chave profissional e é selecionado
+explicitamente. Os formatos da conta, sessão, atribuições demonstrativas
+e seleção por aba são preservados. RF002 permanece parcial.
+
+### Validação
+
+- Testes isolados cobriram CNH obrigatória, estrutura, dígitos e
+  sequências inválidas, categorias, datas e vigência, EAR explícita e
+  modalidades vazias, inválidas, duplicadas e válidas. Verificaram
+  unicidade por conta e CNH, normalização, erros de leitura e gravação,
+  integridade dos registros e rejeição de alterações de titularidade.
+- Testes isolados confirmaram bloqueio de outra conta e de uma sessão
+  substituída, exclusividade administrativa, ausência de contexto
+  derivado de dados inválidos, manutenção do contexto após expiração
+  posterior, criação a partir de outro contexto e deduplicação com
+  atribuições demonstrativas.
+- No Chromium, a jornada percorreu cadastro básico, login com retorno
+  à rota protegida, formulário, falha simulada de gravação, cadastro
+  válido, sincronização em outra aba, seleção explícita, consulta,
+  cancelamento, edição e recarga. A conta demonstrativa sem cadastro
+  mostrou estado informativo. Administrador recebeu 403.
+- Capturas de entrada, formulário, consulta e edição foram revisadas
+  em 1440 × 900, 1280 × 720, 1024 × 768, 768 × 1024, 390 × 844 e
+  320 × 568. Verificou-se foco e ausência de rolagem lateral.
+- Regressões no Chromium cobriram cadastro básico, login, recuperação,
+  logout, Minha conta, alternância, sincronização, guardas,
+  administração, 403, 404, contas demonstrativas e página institucional.
+  O console reportou somente o 404 conhecido do favicon.
+- Tab, Espaço e Enter foram usados para navegar, selecionar EAR e ambas
+  as modalidades e submeter. A confirmação recebeu foco e ficou sem
+  rolagem lateral nas seis resoluções.
+- Build e lint passaram. O bundle de produção não apresentou a rota de
+  provisionamento, seus identificadores ou a senha fictícia.
+  `git diff --check` passou e os quatro arquivos novos foram revisados
+  separadamente. `git fsck --full` terminou com código 0, com as três
+  árvores sem referência já conhecidas.

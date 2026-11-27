@@ -94,3 +94,19 @@ Cliente: /cliente/solicitar, /cliente/prestadores/:id (e listagem), /cliente/sol
 Prestador: /prestador, /prestador/solicitacoes/:id, /prestador/propostas, /prestador/fretes/:id, /prestador/veiculos/:id, /prestador/motoristas/:id (gestor), /prestador/perfil, /prestador/tarifas, /prestador/autorizacoes, /prestador/achados-perdidos, /prestador/contestacoes, /prestador/historico; respectivas listagens.
 Motorista: /motorista, /motorista/fretes/:id (e listagem), /motorista/achados-perdidos, /motorista/historico, vínculos em conta.
 Admin: /admin, /admin/prestadores, /admin/autorizacoes/:id e /admin/contestacoes/:id, respectivas listagens.
+
+## Cadastro autônomo (10.1–10.2)
+
+Uma conta comum abre `/prestador` e inicia o cadastro em
+`/prestador/autonomo/cadastro`. Os dados pessoais vêm da conta.
+Após validação e gravação, o seletor oferece o contexto autônomo,
+mantendo o contexto ativo. A conta pode continuar no ambiente atual
+ou selecionar explicitamente o ambiente de preparação. Empresa e
+cooperativa são apresentadas como entregas futuras.
+
+A consulta e edição ficam em `/prestador/autonomo/perfil`, atrás
+da guarda de contexto. Contas demonstrativas sem cadastro recebem
+estado informativo. A edição preserva ID, titular e data de criação.
+O cadastro registra intenção e disponibiliza acesso para preparação,
+enquanto autorização, prontidão, elegibilidade e recebimento de
+solicitações seguem pendentes.

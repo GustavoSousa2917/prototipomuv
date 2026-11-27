@@ -15,6 +15,14 @@ Página institucional; cadastro, login e recuperação simulados; conta única e
 
 A DEC-038 veda solicitações abertas, negociações simultâneas para a mesma necessidade de frete e encaminhamento automático a outros prestadores. Empresas e cooperativas mantêm a responsabilidade pela designação posterior de motorista e veículo.
 
+## Recorte da Etapa 10
+
+DEC-041 define a Etapa 10 como cadastros de prestadores. 10.1 e 10.2
+entregam fundação e cadastro autônomo. Empresas, cooperativas,
+contextos organizacionais e validação integrada ficam para 10.3–10.5.
+Autorização administrativa, documentos, regiões, veículos, tarifas e
+prontidão seguem em módulos próprios.
+
 ## Fora do MVP
 Pagamentos, carteira, comissões, multas/reembolsos automáticos, GPS em tempo real, chat, WhatsApp, notificações externas, pacotes turísticos, roteiros prontos, agenda completa, tarifação dinâmica, indicadores financeiros avançados, favoritos, cupons, substituição do autônomo, sucessivas contrapropostas, múltiplas paradas e ida/volta.
 

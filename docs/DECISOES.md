@@ -186,3 +186,24 @@ entre acesso, autorização administrativa e prontidão operacional.
 As Etapas 09.1 e 09.2 entregam o domínio, a resolução, a persistência
 por aba e a integração com autenticação. As demais aplicações da
 DEC-040 seguem os incrementos correspondentes.
+
+## DEC-041 — Fundação de prestadores e cadastro autônomo
+
+Propostas P10-01 a P10-14 aprovadas pelo responsável.
+
+| ID | Proposta | Decisão aprovada |
+|---|---|---|
+| DEC-041.1 | P10-01 | Etapa 10 dedicada aos cadastros de prestadores. 10.1 Fundação do domínio, 10.2 Cadastro autônomo, 10.3 Empresas e cooperativas, 10.4 Contextos organizacionais, 10.5 Validação integrada. |
+| DEC-041.2 | P10-02 | Uma conta pessoal comum pode ter um único cadastro autônomo. |
+| DEC-041.3 | P10-03 | Cadastro profissional independente de User, associado pelo ID da conta. |
+| DEC-041.4 | P10-04 | Reutilizar nome, CPF, telefone e e-mail da conta, sem duplicá-los. |
+| DEC-041.5 | P10-05 | CNH obrigatória, estruturalmente válida e única entre contas. Validação local sem comprovação documental. |
+| DEC-041.6 | P10-06 | Categoria e validade obrigatórias. A CNH deve estar vigente no cadastro e na atualização. |
+| DEC-041.7 | P10-07 | EAR autodeclarada, afirmativa ou negativa, com resposta obrigatória. |
+| DEC-041.8 | P10-08 | Selecionar pessoas, encomendas ou ambas como intenção, sem solicitar ou conceder autorização. |
+| DEC-041.9 | P10-09 | O contexto autônomo de negócio deriva do cadastro válido persistido. |
+| DEC-041.10 | P10-10 | Disponibilizar contexto sem alterar o ativo. A seleção continua explícita conforme DEC-040. |
+| DEC-041.11 | P10-11 | Cadastro, preparação, autorização, prontidão e elegibilidade são condições distintas. |
+| DEC-041.12 | P10-12 | Criação, consulta e edição básica do próprio cadastro. Exclusão, inativação e efeitos sobre autorizações ficam para módulos futuros. |
+| DEC-041.13 | P10-13 | Upload e verificação documental ficam fora deste incremento. |
+| DEC-041.14 | P10-14 | Preservar contas, sessões e atribuições demonstrativas. Essas atribuições não comprovam cadastro ou autorização. |

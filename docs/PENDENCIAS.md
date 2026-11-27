@@ -57,7 +57,17 @@
 - Edições simultâneas dos mesmos campos seguem a última gravação.
   Sem Web Locks, a fila protege apenas operações da mesma aba.
   Sessões sucessivas de uma mesma conta continuam indistinguíveis.
-- Versionamento das Etapas 09.6 e 09.7 aguarda autorização.
+## Pendências após 10.1–10.2
+
+- Empresas, cooperativas, respectivos contextos e validação integrada
+  seguem nas etapas 10.3–10.5.
+- A checagem de CNH é estrutural e EAR é autodeclarada. Verificação e
+  upload de documentos, exclusão, inativação e efeitos de edição sobre
+  autorização ficam para módulos futuros.
+- Sem Web Locks, a serialização é local à aba. Registros inconsistentes
+  precisam de correção explícita antes de novas gravações. A validação
+  do cadastro profissional não substitui segurança de backend.
+- Versionamento das etapas 10.1–10.2 aguarda autorização.
 
 ## Futuro
 Ver exclusões em ESCOPO.md. Não implementar sem aprovação de escopo.

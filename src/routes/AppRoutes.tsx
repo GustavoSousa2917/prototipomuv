@@ -3,10 +3,11 @@ import { Routes, Route, Navigate } from 'react-router'
 import PublicLayout from '../layouts/PublicLayout'
 import AuthLayout from '../layouts/AuthLayout'
 import AccessGuard from './AccessGuard'
+import AutonomousProviderPage from '../pages/operational/AutonomousProviderPage'
 import ProviderEntryPage from '../pages/operational/ProviderEntryPage'
 import DemoAccountsPage from '../pages/dev/DemoAccountsPage'
 import AccountPage from '../pages/auth/AccountPage'
-import { accountRoute, environmentRoutes } from '../constants/environmentRoutes'
+import { accountRoute, autonomousRegistrationRoute, environmentRoutes } from '../constants/environmentRoutes'
 
 import LoginPage from '../pages/auth/LoginPage'
 import RegisterPage from '../pages/auth/RegisterPage'
@@ -218,6 +219,15 @@ export default function AppRoutes() {
         }
       />
 
+      <Route
+        path={autonomousRegistrationRoute}
+        element={
+          <AccessGuard requirement={{ capabilities: ['accessClient', 'accessAutonomous', 'accessCompany', 'accessCooperative', 'accessLinkedDriver'] }}>
+            <AutonomousProviderPage create />
+          </AccessGuard>
+        }
+      />
+
       {operationalProfiles.map((config) => (
         <Route
           key={config.profile}
@@ -230,7 +240,7 @@ export default function AppRoutes() {
         >
 
           {config.pages.map((page) => {
-            const element = (
+            const element = config.profile === 'autonomous' && page.path === 'perfil' ? <AutonomousProviderPage /> : (
               <OperationalPlaceholderPage
                 title={page.label}
                 description={page.description}

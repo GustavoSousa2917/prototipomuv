@@ -1,6 +1,7 @@
 import { contextCapabilities, contextKey, resolveContexts } from '../domain/accountAccess'
 import type { ActingContext, EnvironmentCapability } from '../domain/accountAccess'
 import { readAccessAssignments } from '../repositories/accessAssignmentRepository'
+import { autonomousProviderRepository } from '../repositories/autonomousProviderRepository'
 import { activeContextRepository } from '../repositories/activeContextRepository'
 
 export type AccountAccess = {
@@ -11,8 +12,20 @@ export type AccountAccess = {
 
 export type ContextSelectionResult = { kind: 'selected'; access: AccountAccess } | { kind: 'unavailable' | 'storageError' }
 
-export function selectAccountContext(userId: string, requestedKey: string): ContextSelectionResult {
+function availableContexts(userId: string): ActingContext[] {
   const contexts = resolveContexts(userId, readAccessAssignments())
+  if (!contexts.some(({ kind }) => kind === 'client') || contexts.some(({ kind }) => kind === 'autonomous')) return contexts
+
+  try {
+    if (autonomousProviderRepository.findByUserId(userId)) return [...contexts, { kind: 'autonomous' }]
+  } catch {
+    // Uma leitura inconsistente não acrescenta um contexto profissional.
+  }
+  return contexts
+}
+
+export function selectAccountContext(userId: string, requestedKey: string): ContextSelectionResult {
+  const contexts = availableContexts(userId)
   const activeContext = contexts.find((context) => contextKey(context) === requestedKey)
   if (!activeContext) return { kind: 'unavailable' }
 
@@ -33,7 +46,7 @@ export function clearActiveContext() {
 }
 
 export function resolveAccountAccess(userId: string, useDefault = false, persistSelection = true): AccountAccess {
-  const contexts = resolveContexts(userId, readAccessAssignments())
+  const contexts = availableContexts(userId)
   let activeContext = contexts[0] ?? null
   if (!useDefault) {
     try {

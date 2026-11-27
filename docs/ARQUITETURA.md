@@ -691,3 +691,40 @@ nova solicitação direcionada e preserva o registro anterior. O domínio
 deverá impedir negociações simultâneas para a mesma necessidade. O
 critério técnico de identificação permanece pendente. As páginas
 atuais continuam provisórias.
+
+## Fundação e cadastro autônomo
+
+O domínio `src/domain/autonomousProvider.ts` representa o cadastro
+profissional e as modalidades `PESSOA` e `ENCOMENDA`. A chave
+`muv.autonomousProviders.v1` armazena uma lista de registros com ID estável,
+ID da conta, número normalizado da CNH, categoria, validade ISO de
+calendário, declaração de EAR, modalidades e datas de criação e edição.
+Nome, CPF, telefone, e-mail e credenciais permanecem na conta.
+
+`src/services/autonomousProvider.ts` resolve o titular pela sessão,
+revalida a conta antes de gravar e usa o bloqueio de mutações existente.
+O repositório rejeita estruturas inválidas e duplicidades de ID, titular
+ou CNH sem sobrescrever dados. A consulta apresenta erros de leitura.
+O resolvedor de contextos combina o registro íntegro com atribuições
+demonstrativas sem repetir o contexto e preserva a exclusividade
+administrativa. A aba autora atualiza a sessão em memória. As outras
+abas observam a chave profissional e revalidam a seleção local.
+
+### Validação da habilitação
+
+Valida-se o **número de registro**, com nove dígitos-base e dois
+verificadores, conforme a estrutura indicada no art. 4º da
+[Resolução CONTRAN 886/2021](https://gestaoconteudo.detran.sp.gov.br/wps/wcm/connect/27397fbf-c227-4ca7-b8d0-47e9f1165910/Resolucao8862021F.pdf).
+A implementação local segue o algoritmo de módulo 11 do
+[validate-docbr](https://github.com/alvarofpp/validate-docbr/blob/master/validate_docbr/CNH.py):
+pesos 9 a 1 no primeiro dígito e 1 a 9 no segundo. Primeiro resto
+10 resulta em zero e desconto de dois no segundo, calculado módulo 11.
+Resto ajustado 10 resulta em zero. Sequências repetidas são rejeitadas.
+A checagem matemática não comprova emissão, autenticidade ou titularidade.
+
+O catálogo adotado inclui A a E e combinações AB, AC, AD e AE.
+A data de validade deve ser real e pelo menos igual ao dia local no
+momento de salvar. Uma expiração posterior mantém o contexto de
+preparação. EAR exige Sim ou Não e é autodeclarada. A intenção exige
+uma ou ambas as modalidades, sem regras cruzadas com categoria, EAR
+ou veículo nesta etapa.
