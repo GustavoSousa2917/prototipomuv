@@ -30,11 +30,12 @@ export default function Sidebar({
       className="
         flex min-h-full w-full flex-col
         bg-surface
+        lg:h-full lg:min-h-0 lg:overflow-hidden
       "
     >
       {/* Identificação do perfil ativo */}
 
-      <div className="border-b border-border p-5">
+      <div className="shrink-0 border-b border-border p-5">
         <div className="flex items-center gap-3">
 
           <Avatar
@@ -43,7 +44,12 @@ export default function Sidebar({
           />
 
           <div className="min-w-0">
-            <p className="truncate font-semibold text-foreground">
+            <p
+							className="
+                font-semibold text-foreground
+								[overflow-wrap:anywhere]
+							"
+						>
               {userName}
             </p>
 
@@ -59,7 +65,11 @@ export default function Sidebar({
 
       <nav
         aria-label="Navegação operacional"
-        className="flex-1 px-3 py-5"
+        className="
+					flex-1 px-3 py-5
+					lg:min-h-0 lg:overflow-y-auto
+					lg:overscroll-contain
+				"
       >
         <p
           className="
@@ -87,7 +97,7 @@ export default function Sidebar({
       <nav
         aria-label="Conta e saída"
         className="
-          space-y-1 border-t
+          shrink-0 space-y-1 border-t
           border-border p-3
         "
       >

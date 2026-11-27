@@ -167,9 +167,11 @@ export default function OperationalLayout({
 
           <div
             className="
-              flex min-h-18 items-center
+              sticky top-0 z-10
+              flex min-h-18 shrink-0 items-center
               justify-between gap-3
-              border-b border-border px-4
+              border-b border-border
+              bg-surface px-4
             "
           >
             <Logo size="md" />

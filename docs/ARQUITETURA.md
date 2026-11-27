@@ -370,3 +370,54 @@ configurados posteriormente.
 
 A autenticação e as permissões de acesso
 ainda não estão implementadas.
+
+## Navegação operacional por perfil
+
+Os ambientes operacionais reutilizam o OperationalLayout,
+o OperationalHeader, o Sidebar e o SidebarItem.
+
+O ProfileOperationalLayout é responsável pela integração
+das configurações específicas de cada ambiente operacional.
+
+### Ambientes
+
+- Prestador autônomo.
+- Empresa.
+- Cooperativa.
+- Motorista vinculado.
+- Administrador.
+
+### Responsividade
+
+Em desktop, a barra lateral apresenta três regiões:
+
+- Identificação persistente do perfil.
+- Navegação principal com rolagem independente.
+- Navegação secundária persistente.
+
+Em telas menores, a navegação utiliza um diálogo
+modal nativo com barra lateral recolhível.
+
+O cabeçalho interno do diálogo permanece visível
+durante a rolagem.
+
+### Reutilização
+
+Os ambientes operacionais compartilham a mesma
+estrutura visual, diferenciando-se pelos itens
+de navegação e pela identificação do perfil.
+
+Empresas e cooperativas reutilizam a estrutura
+funcional dos prestadores organizacionais.
+
+### Limitações temporárias
+
+Os dados de identificação são fictícios.
+
+As páginas apresentam conteúdos provisórios.
+
+A configuração da navegação não representa um
+mecanismo de autorização ou proteção de rotas.
+
+A autenticação, a sessão e as permissões serão
+integradas em incrementos posteriores.

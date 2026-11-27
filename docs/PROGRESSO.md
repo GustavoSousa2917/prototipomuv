@@ -419,3 +419,56 @@ para testes independentes.
 ### Próximo incremento
 
 Etapa 06.4 — Navegação específica por perfil.
+
+## Etapa 06.4 — Navegação específica por perfil
+
+Status: implementada, em validação final.
+
+### Implementação
+
+- [x] Configuração da navegação por perfil.
+- [x] Criação do ProfileOperationalLayout.
+- [x] Criação das páginas operacionais provisórias.
+- [x] Configuração do ambiente do prestador autônomo.
+- [x] Configuração do ambiente da empresa.
+- [x] Configuração do ambiente da cooperativa.
+- [x] Configuração do ambiente do motorista.
+- [x] Configuração do ambiente administrativo.
+- [x] Reutilização do OperationalLayout.
+- [x] Preservação da demonstração operacional.
+
+### Etapa 06.4.1 — Refinamento da navegação
+
+- [x] Rolagem independente da navegação desktop.
+- [x] Identificação persistente do perfil.
+- [x] Navegação secundária persistente em desktop.
+- [x] Quebra de linha dos nomes dos prestadores.
+- [x] Cabeçalho persistente no menu mobile.
+- [x] Validação visual em 1440 x 900.
+- [x] Validação visual em 1280 x 720.
+- [x] Validação visual em 768 x 1024.
+- [x] Validação visual do conteúdo em 320 x 568.
+
+### Validação final
+
+- [x] Build.
+- [x] ESLint.
+- [ ] Revisão da formatação.
+- [ ] Validação completa da navegação mobile.
+- [ ] Validação em 1024 x 768.
+- [ ] Navegação por teclado.
+- [ ] Testes de regressão.
+- [ ] Commit.
+- [ ] Sincronização com GitHub.
+
+### Resultado
+
+Estrutura de navegação específica para os ambientes
+operacionais do MUV, utilizando componentes
+compartilhados e configurações por perfil.
+
+A autenticação e as permissões permanecem pendentes.
+
+### Próximo incremento
+
+Etapa 06.5 — Layout de autenticação.

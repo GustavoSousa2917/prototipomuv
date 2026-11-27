@@ -13,6 +13,15 @@ import ClientPlaceholderPage from '../pages/client/ClientPlaceholderPage'
 import OperationalLayoutDemo, {
   OperationalPreviewPage,
 } from '../pages/dev/OperationalLayoutDemo'
+import ProfileOperationalLayout
+  from '../layouts/ProfileOperationalLayout'
+
+import OperationalPlaceholderPage
+  from '../pages/operational/OperationalPlaceholderPage'
+
+import {
+  operationalProfiles,
+} from '../constants/operationalNavigation'
 
 export default function AppRoutes() {
   return (
@@ -181,6 +190,82 @@ export default function AppRoutes() {
         />
 
       </Route>
+
+      {/* Ambientes operacionais por perfil */}
+
+      <Route
+        path="/prestador"
+        element={
+          <Navigate
+            to="/prestador/autonomo"
+            replace
+          />
+        }
+      />
+
+      {operationalProfiles.map((config) => (
+        <Route
+          key={config.profile}
+          path={config.basePath}
+          element={
+            <ProfileOperationalLayout
+              config={config}
+            />
+          }
+        >
+
+          {config.pages.map((page) => {
+            const element = (
+              <OperationalPlaceholderPage
+                title={page.label}
+                description={page.description}
+                areaLabel={config.areaLabel}
+              />
+            )
+
+            if (page.path === '') {
+              return (
+                <Route
+                  key="index"
+                  index
+                  element={element}
+                />
+              )
+            }
+
+            return (
+              <Route
+                key={page.path}
+                path={page.path}
+                element={element}
+              />
+            )
+          })}
+
+          <Route
+            path="conta"
+            element={
+              <OperationalPlaceholderPage
+                title="Minha conta"
+                description="Gerencie suas informações pessoais e configurações."
+                areaLabel={config.areaLabel}
+              />
+            }
+          />
+
+          <Route
+            path="notificacoes"
+            element={
+              <OperationalPlaceholderPage
+                title="Notificações"
+                description="Acompanhe os acontecimentos relacionados às suas atividades."
+                areaLabel={config.areaLabel}
+              />
+            }
+          />
+
+        </Route>
+      ))}
 
       {/* Demonstração do layout operacional */}
 
