@@ -4,7 +4,7 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 
 | ID | Interface | Capturas | Classificação |
 |---|---|---|---|
-| T01 | Página institucional | 09–11 | ALTERAR |
+| T01 | Página institucional | 09–11 | IMPLEMENTADA na Etapa 07, com conteúdo adaptado à DEC-038. |
 | T02 | Login | 62 | MANTER |
 | T03 | Cadastro por perfil | 56–61 | ALTERAR |
 | T04 | Recuperação | 12 | MANTER |

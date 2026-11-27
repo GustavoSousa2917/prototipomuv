@@ -578,5 +578,44 @@ preservados. Solicitação e contratação funcionais permanecem pendentes.
   referência já conhecida.
 
 Permanece pendente a definição dos critérios técnicos para identificar
-a mesma necessidade de frete. A revisão antecede a Etapa 07 e aguarda
-autorização para versionamento.
+a mesma necessidade de frete.
+
+O commit `aee048a7c4f4b20984b6f7b1cc1cfef1ea30d124` registrou a revisão.
+Integração à `main` e sincronização remota confirmadas pelo responsável.
+
+## Etapa 07 — Página institucional definitiva
+
+Status: T01 implementada e validada no Chromium headless. Versionamento
+pendente.
+
+A página inicial reúne hero, públicos, benefícios, cinco passos,
+exemplo de solicitação direcionada, seção de prestadores, seis perguntas
+frequentes, banner final e rodapé. As cinco chamadas da página apontam
+para o cadastro provisório. O rodapé identifica o caráter acadêmico e
+demonstrativo do protótipo.
+
+As capturas T01 09, 10 e 11 do `prototipo.zip` orientaram a composição.
+Os painéis gráficos usam ícones Lucide e tokens do Design System. Os
+recursos locais foram inspecionados e não incluem fotografias adequadas.
+O arquivo `src/assets/hero.png` é uma ilustração do projeto inicial.
+
+### Validação
+
+- Capturas inspecionadas e dimensões verificadas em 1440 × 900,
+  1280 × 720, 1024 × 768, 768 × 1024, 390 × 844 e 320 × 568.
+  Hero em duas colunas a partir de 1024 px e coluna única abaixo
+  desse limite, sem rolagem horizontal.
+- Menu mobile abriu, fechou por Escape com retorno de foco e fechou
+  após navegação. As âncoras posicionaram a seção abaixo do cabeçalho
+  e transferiram o foco. Passaram os testes a partir da página
+  inicial, de termos e de privacidade.
+- As seis perguntas abriram por clique. A primeira recebeu foco
+  visível por Tab e abriu e fechou com Enter. Login, cadastro, termos,
+  privacidade e as cinco chamadas da T01 foram verificados.
+- Passaram dez verificações pontuais nas rotas de autenticação,
+  página 404, cliente, autônomo, empresa, cooperativa, motorista,
+  administrador e demonstração operacional. O console registrou
+  somente o HTTP 404 de favicon já conhecido.
+- Build com TypeScript, ESLint e `git diff --check` passaram.
+  `git fsck --full` terminou com código 0 e reportou duas árvores sem
+  referência.

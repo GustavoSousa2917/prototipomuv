@@ -29,5 +29,13 @@
 
 - O tratamento de acesso negado (403) permanece previsto no item A24.
 
+## Pendências da Etapa 07
+
+- A T01 usa painéis gráficos com tokens e ícones porque os recursos
+  locais não incluem fotografias adequadas. A inclusão de fotografias
+  depende de recursos com origem e uso autorizados.
+- As chamadas da T01 apontam para a página provisória de cadastro.
+- O versionamento da Etapa 07 aguarda autorização.
+
 ## Futuro
 Ver exclusões em ESCOPO.md. Não implementar sem aprovação de escopo.

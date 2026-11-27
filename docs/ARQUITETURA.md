@@ -260,6 +260,17 @@ compartilhada das páginas públicas do MUV.
 As rotas de desenvolvimento permanecem
 independentes do layout público.
 
+### Página institucional (T01)
+
+A rota `/` renderiza `HomePage` no `PublicLayout`, com cabeçalho e
+rodapé compartilhados. Os links institucionais usam âncoras com caminho
+absoluto. O layout público posiciona a seção e transfere o foco ao
+destino, inclusive ao navegar a partir de uma página legal.
+
+As chamadas da T01 apontam para `/cadastro`. Os cinco passos e o
+exemplo ilustrativo descrevem a solicitação exclusivamente direcionada
+da DEC-038. A FAQ usa `details` e `summary` nativos.
+
 ## Layout de autenticação
 
 O `AuthLayout` é implementado como um grupo de rotas independente do

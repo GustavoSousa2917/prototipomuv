@@ -77,6 +77,9 @@ export default function PublicFooter() {
             <p className="mt-4 max-w-xs leading-relaxed text-muted">
               Conectando pessoas, encomendas e destinos.
             </p>
+            <p className="mt-2 text-muv-small text-muted">
+              Protótipo acadêmico e demonstrativo.
+            </p>
           </div>
 
           {/* Grupos de navegação */}
