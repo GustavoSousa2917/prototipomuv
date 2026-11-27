@@ -664,4 +664,46 @@ demonstrativa. As páginas legais permanecem provisórias.
 
 RF001 está parcialmente implementado. Próximos incrementos previstos:
 login e sessão (08.3), recuperação simulada (08.4) e integração do
-perfil cliente (09). Versionamento desta entrega aguarda autorização.
+perfil cliente (09). As Etapas 08.1 e 08.2 foram registradas no commit
+`2ca3b2c62ac6e6147f17d35aab4870cf4d2930cf`, integradas à `main` e
+sincronizadas conforme confirmação do responsável.
+
+## Etapa 08.3 — Login, sessão e logout
+
+Status: implementada e validada. Versionamento pendente.
+
+A T02 segue a captura 62 e a DEC-039. A conta é acessada por e-mail e
+senha. A derivação PBKDF2 foi compartilhada com o cadastro e verifica
+os parâmetros e o salt persistidos, preservando `muv.users.v1`.
+A sessão simulada guarda apenas o ID da conta em `muv.session.v1`.
+O contexto restaura a identidade na recarga quando encontra o usuário.
+O cabeçalho do cliente apresenta nome, iniciais e a ação de saída.
+
+### Validação
+
+- Serviços e repositórios: passaram a compatibilidade com uma
+  credencial sintética no formato anterior, conferida por PBKDF2
+  independente, e o login de conta nova. Foram verificadas a
+  normalização do e-mail, as validações, credenciais incorretas,
+  restauração com dados inválidos ou usuário ausente e falhas de
+  leitura, gravação e remoção.
+- Chromium headless com perfil isolado: capturas do login inspecionadas
+  em 1440 × 900, 1280 × 720, 1024 × 768, 768 × 1024, 390 × 844 e
+  320 × 568, sem rolagem horizontal.
+- Cadastro → login → cliente → recarga → logout passou. Foram
+  verificados o foco após erros, o controle de visibilidade de senha,
+  a mensagem genérica para credenciais inválidas, o envio único,
+  a falha de gravação, o nome e as iniciais, o login por teclado e
+  o logout em desktop e mobile. Uma recarga após logout permaneceu
+  sem sessão, e a conta foi preservada.
+- As verificações pontuais cobriram a página institucional, cadastro,
+  páginas legais, 404 e ambientes operacionais. O console registrou
+  somente o 404 de favicon já conhecido.
+- Build com TypeScript, ESLint e verificação de whitespace passaram.
+  `git fsck --full` retornou código 0 e listou as duas árvores sem
+  referência já registradas.
+
+A sessão é demonstrativa e manipulável. O contexto é local à aba e
+reflete a sessão persistida na próxima recarga. RF001 segue parcialmente
+implementado. A recuperação fica para a Etapa 08.4 e a integração de
+conta e perfis para a Etapa 09.

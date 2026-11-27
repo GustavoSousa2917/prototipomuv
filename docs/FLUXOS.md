@@ -8,14 +8,21 @@ confirmar cadastro e oferecer acesso à página de login. Os links legais
 do formulário abrem em outra aba. CPF é verificado estrutural e
 matematicamente. O aceite indica a manifestação no protótipo.
 
+**Login e sessão (08.3).** Informar e-mail e senha → verificar a
+credencial → gravar a sessão → navegar para `/cliente`, que redireciona
+para `/cliente/solicitar-frete`. Recarregar restaura a identidade se o
+usuário ainda existir. Sair pelo menu da conta remove a sessão e
+retorna a `/login`, com o cadastro preservado. As rotas continuam
+navegáveis em modo demonstrativo sem sessão.
+
 **Fluxo posterior.** Todo usuário comum terá acesso ao perfil cliente
 (integração na Etapa 09). A intenção de oferecer serviços ou atuar como
 motorista vinculado abre caminho para processos próprios. Autônomos e
 organizações informam regiões e modalidade para análise administrativa.
 Pendentes ou rejeitados podem preparar recursos e tarifas, e a oferta
 depende de autorização. Rejeição justificada permite nova análise com
-histórico preservado. Login, sessão e recuperação seguem a DEC-039
-nos incrementos 08.3 e 08.4.
+histórico preservado. A recuperação simulada segue a DEC-039 no
+incremento 08.4.
 
 ## Recursos
 Veículos ativos, capacidades reais, categoria, modalidade e disponibilidade; preservar histórico por inativação. Motorista compartilhado → convite simulado → aceite → vínculo ativo → verificação independente da organização. Designação requer recursos compatíveis e disponíveis, motorista apto e veículo pertencente ao prestador. Verificar conflitos básicos; duração e critério de sobreposição ainda precisam de definição.

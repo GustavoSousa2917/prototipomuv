@@ -35,17 +35,16 @@
   locais não incluem fotografias adequadas. A inclusão de fotografias
   depende de recursos com origem e uso autorizados.
 
-## Pendências após as Etapas 08.1 e 08.2
-
-- 08.3: login por e-mail e senha, verificação da credencial derivada,
-  sessão básica persistente e saída.
+## Pendências após a Etapa 08.3
 - 08.4: recuperação simulada com token de uso único e validade de
   15 minutos.
 - Etapa 09: integração do perfil cliente. Cadastros profissionais e
   organizacionais permanecem previstos em seus próprios incrementos.
 - As páginas de termos e privacidade continuam provisórias. O registro
   de aceite é demonstrativo e não comprova conformidade com a LGPD.
-- Versionamento das Etapas 08.1 e 08.2 aguarda autorização.
+- O estado de sessão em memória não se sincroniza entre abas. A recarga
+  restaura a última sessão gravada, se válida.
+- Versionamento da Etapa 08.3 aguarda autorização.
 
 ## Futuro
 Ver exclusões em ESCOPO.md. Não implementar sem aprovação de escopo.

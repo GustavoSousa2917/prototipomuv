@@ -1,10 +1,10 @@
 # Matriz inicial de rastreabilidade
 
-As rotas abaixo são referências de planejamento. A linha de RF001 registra a implementação parcial e a validação de cadastro. As demais linhas orientam testes de aceitação futuros. Requisitos novos não recebem IDs definitivos até revisão da documentação.
+As rotas abaixo são referências de planejamento. A linha de RF001 registra a implementação parcial e a validação de cadastro, login, sessão e logout. As demais linhas orientam testes de aceitação futuros. Requisitos novos não recebem IDs definitivos até revisão da documentação.
 
 | Referências | Perfil | Fluxo | Telas | Rota proposta | Teste de aceitação futuro |
 |---|---|---|---|---|---|
-| RF001, RU001, US-001, RN002, DEC-039 | Todos | Conta e login. RF001 parcialmente implementado. | T02–T06,A23 | /login, /cadastro, /conta | Cadastro em duas etapas, validação, CPF/e-mail duplicados e persistência verificados. Login e recuperação pendentes. |
+| RF001, RU001, US-001, RN002, DEC-039 | Todos | Conta e login. RF001 parcialmente implementado. | T02–T06,A23 | /login, /cadastro, /conta | Cadastro, login por e-mail e senha, recarga da sessão e logout verificados. Recuperação pendente. |
 | RF002, RU008,RU012,US-016,RN004 | Prestador/admin | Autorização | T03,T06,T39,A20 | /prestador/autorizacoes, /admin/autorizacoes | Aprovação independente, rejeição justificada |
 | RF003,RU009,US-010,RN005 | Gestor/motorista | Vínculo | T28,T29,A21 | /prestador/motoristas | Aceite, verificação por organização |
 | RF004,RU009,US-009,RN012 | Prestador | Veículos | T20,T23,T24,A26 | /prestador/veiculos | Placa duplicada, capacidade, inativação |

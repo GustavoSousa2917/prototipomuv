@@ -7,6 +7,7 @@ import {
 } from '../domain/userRegistration'
 import type { RegistrationErrors, RegistrationInput, User } from '../domain/userRegistration'
 import { userRepository } from '../repositories/userRepository'
+import { deriveCredential } from './passwordCredential'
 
 type RegistrationResult =
   | { kind: 'registered'; userId: string }
@@ -19,20 +20,6 @@ function duplicateErrors(cpf: boolean, email: boolean): RegistrationErrors {
     ...(cpf && { cpf: 'Já existe uma conta com este CPF.' }),
     ...(email && { email: 'Já existe uma conta com este e-mail.' }),
   }
-}
-
-function toHex(buffer: Uint8Array) {
-  return Array.from(buffer, (byte) => byte.toString(16).padStart(2, '0')).join('')
-}
-
-async function deriveCredential(password: string): Promise<User['credential']> {
-  const algorithm = 'PBKDF2'
-  const hash = 'SHA-256'
-  const iterations = 600_000
-  const salt = crypto.getRandomValues(new Uint8Array(16))
-  const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), algorithm, false, ['deriveBits'])
-  const bits = await crypto.subtle.deriveBits({ name: algorithm, hash, iterations, salt }, key, 256)
-  return { algorithm, hash, iterations, salt: toHex(salt), derivedKey: toHex(new Uint8Array(bits)) }
 }
 
 export async function registerUser(input: RegistrationInput): Promise<RegistrationResult> {

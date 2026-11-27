@@ -1,5 +1,5 @@
 import { useId, useRef, useState } from 'react'
-import { Link, NavLink } from 'react-router'
+import { Link, NavLink, useNavigate } from 'react-router'
 
 import {
   Bell,
@@ -9,10 +9,12 @@ import {
   UserRound,
   Truck,
   ArrowLeft,
+  LogOut,
 } from 'lucide-react'
 
 import Logo from '../common/Logo'
 import Avatar from '../common/Avatar'
+import { useAuth } from '../../contexts/authContext'
 
 const navigationItems = [
   {
@@ -41,6 +43,17 @@ type OpenPanel = 'navigation' | 'account' | null
 
 export default function ClientHeader() {
   const [openPanel, setOpenPanel] = useState<OpenPanel>(null)
+  const [logoutError, setLogoutError] = useState(false)
+  const { user, initializing, logout } = useAuth()
+  const navigate = useNavigate()
+
+  function handleLogout() {
+    if (!logout()) {
+      setLogoutError(true)
+      return
+    }
+    navigate('/login', { replace: true })
+  }
 
   const navigationId = useId()
   const accountId = useId()
@@ -164,7 +177,7 @@ export default function ClientHeader() {
 
           {/* Identificação e menu da conta */}
 
-          <div className="relative">
+          <div className="sm:relative">
 
             <button
               ref={accountButton}
@@ -179,7 +192,7 @@ export default function ClientHeader() {
                 hover:bg-primary-light
               "
             >
-              <Avatar name="Maria Silva" />
+              <Avatar name={user?.fullName ?? ''} />
 
               <ChevronDown
                 size={16}
@@ -192,19 +205,19 @@ export default function ClientHeader() {
               id={accountId}
               hidden={openPanel !== 'account'}
               className="
-                absolute right-0 top-full mt-2
+                absolute right-4 top-full mt-2 sm:right-0
                 w-60 max-w-[calc(100vw-2rem)]
                 rounded-muv-card border border-border
                 bg-surface p-2 shadow-muv-lg
               "
             >
               <div className="border-b border-border px-3 py-3">
-                <p className="font-semibold text-foreground">
-                  Maria Silva
+                <p className="break-words font-semibold text-foreground">
+                  {user?.fullName ?? (initializing ? 'Carregando sessão…' : 'Cliente demonstrativo')}
                 </p>
 
                 <p className="mt-1 text-muv-small text-muted">
-                  Cliente demonstrativo
+                  {user ? 'Sessão demonstrativa' : 'Sem sessão iniciada'}
                 </p>
               </div>
 
@@ -248,6 +261,27 @@ export default function ClientHeader() {
                 <ArrowLeft size={18} aria-hidden="true" />
                 Voltar ao site
               </Link>
+
+              {user && (
+                <>
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="
+                      flex w-full items-center gap-3 rounded-muv-button
+                      px-3 py-3 text-left text-primary hover:bg-primary-light
+                    "
+                  >
+                    <LogOut size={18} aria-hidden="true" />
+                    Sair da conta
+                  </button>
+                  {logoutError && (
+                    <p role="alert" className="px-3 py-2 text-muv-small text-danger">
+                      Não foi possível encerrar a sessão. Tente novamente.
+                    </p>
+                  )}
+                </>
+              )}
             </div>
           </div>
 

@@ -283,10 +283,9 @@ painel institucional aparece na composição de duas colunas. O atalho
 para o conteúdo, o foco no elemento principal e o retorno da rolagem ao
 topo apoiam a navegação entre as duas rotas.
 
-A página de login permanece provisória e reutiliza
-`AuthPlaceholderPage`, `Card` e `EmptyState`. A página de cadastro usa
-`Input`, `RadioGroup`, `Checkbox`, `Button` e `Alert`. Login, sessão,
-recuperação e proteção de rotas permanecem pendentes.
+A página de login reutiliza `Card`, `Input`, `Button` e `Alert`.
+A página de cadastro também usa `RadioGroup` e `Checkbox`. A
+recuperação de senha e a proteção de rotas permanecem pendentes.
 
 ### Fundação do cadastro
 
@@ -314,6 +313,36 @@ necessários à futura verificação. Senha em texto puro e confirmação
 ficam fora da persistência. O cadastro requer contexto seguro, como
 HTTPS ou localhost. LocalStorage é demonstrativo, manipulável e
 inadequado para credenciais reais ou segurança de produção.
+
+### Login e sessão demonstrativa
+
+`src/services/passwordCredential.ts` compartilha a derivação entre
+cadastro e login. A verificação reaplica o algoritmo, o hash, as
+iterações e o salt do registro. O formato de `muv.users.v1` é preservado.
+
+`src/services/authSession.ts` normaliza o e-mail, consulta o
+repositório de usuários e verifica a credencial. O sucesso depende
+da gravação da sessão. Credenciais incorretas recebem uma mensagem
+genérica. Falhas de armazenamento ou de criptografia são distintas.
+
+`src/repositories/sessionRepository.ts` mantém a chave
+`muv.session.v1` com apenas `userId`. Na inicialização, o serviço
+consulta o usuário correspondente. Uma referência ausente, um
+registro inválido ou uma falha de leitura resulta em estado sem
+sessão, preservando a base de usuários.
+
+O `AuthProvider` em `App.tsx` distribui o estado de inicialização,
+a identidade resumida (ID e nome) e as ações de login e logout.
+O `ClientHeader` usa o nome e as iniciais da conta. O logout remove
+somente a chave de sessão, atualiza o contexto e navega para `/login`.
+Se a remoção falhar, a interface mantém a sessão e oferece nova
+tentativa. Sem sessão, o ambiente cliente continua demonstrativo.
+
+O armazenamento é manipulável e oferece apenas uma simulação.
+As abas compartilham a chave persistida, mas o contexto de cada
+aba é atualizado pelas suas próprias ações ou pela recarga. A
+última gravação prevalece. A sessão não controla acesso às rotas
+nem concede permissões operacionais.
 
 ## Layout do cliente
 
