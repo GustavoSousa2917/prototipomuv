@@ -15,8 +15,15 @@ usuário ainda existir. Sair pelo menu da conta remove a sessão e
 retorna a `/login`, com o cadastro preservado. As rotas continuam
 navegáveis em modo demonstrativo sem sessão.
 
-**Fluxo posterior.** Todo usuário comum terá acesso ao perfil cliente
-(integração na Etapa 09). A intenção de oferecer serviços ou atuar como
+**Contexto de atuação (09.1–09.2).** Contas comuns recebem
+automaticamente o contexto cliente, inclusive as cadastradas antes
+da Etapa 09. Contas com atribuição administrativa exclusiva iniciam
+em `/admin`. A recarga restaura uma seleção válida da mesma conta na
+mesma aba e, em caso contrário, utiliza um contexto permitido. Login,
+logout e invalidação de sessão são refletidos nas demais abas. A
+interface de troca e a proteção das rotas seguem pendentes.
+
+**Fluxo posterior.** A intenção de oferecer serviços ou atuar como
 motorista vinculado abre caminho para processos próprios. Autônomos e
 organizações informam regiões e modalidade para análise administrativa.
 Pendentes ou rejeitados podem preparar recursos e tarifas, e a oferta

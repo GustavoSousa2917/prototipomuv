@@ -2,41 +2,71 @@ import { useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 
 import { AuthContext } from './authContext'
+import { accessAssignmentStorageKey } from '../repositories/accessAssignmentRepository'
+import { sessionStorageKey } from '../repositories/sessionRepository'
+import { userStorageKey } from '../repositories/userRepository'
 import { loginUser, logoutUser, restoreSession } from '../services/authSession'
-import type { AuthenticatedUser } from '../services/authSession'
+import type { Authentication } from '../services/authSession'
+
+const observedKeys = [sessionStorageKey, userStorageKey, accessAssignmentStorageKey]
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<AuthenticatedUser | null>(null)
+  const [authentication, setAuthentication] = useState<Authentication | null>(null)
   const [initializing, setInitializing] = useState(true)
 
   useEffect(() => {
     let active = true
+
+    function synchronize(event: StorageEvent) {
+      // Ignora alterações no sessionStorage, inclusive as de iframes da mesma aba.
+      if (event.storageArea !== localStorage) return
+      if (event.key === null || observedKeys.includes(event.key)) {
+        setAuthentication(restoreSession())
+      }
+    }
+
+    window.addEventListener('storage', synchronize)
     queueMicrotask(() => {
       if (!active) return
-      setUser(restoreSession())
+      setAuthentication(restoreSession())
       setInitializing(false)
     })
-    return () => { active = false }
+
+    return () => {
+      active = false
+      window.removeEventListener('storage', synchronize)
+    }
   }, [])
 
   const login: typeof loginUser = async (input) => {
     const result = await loginUser(input)
-    if (result.kind === 'authenticated') setUser(result.user)
+    if (result.kind === 'authenticated') {
+      setAuthentication(restoreSession())
+    }
     return result
   }
 
   function refreshSession() {
-    setUser(restoreSession())
+    setAuthentication(restoreSession())
   }
 
-  function logout() {
-    if (!logoutUser()) return false
-    setUser(null)
-    return true
+  async function logout() {
+    if (!authentication) return 'sessionChanged'
+
+    const result = await logoutUser(authentication.user.id)
+    if (result !== 'storageError') refreshSession()
+    return result
   }
 
   return (
-    <AuthContext.Provider value={{ user, initializing, login, refreshSession, logout }}>
+    <AuthContext.Provider value={{
+      user: authentication?.user ?? null,
+      access: authentication?.access ?? null,
+      initializing,
+      login,
+      refreshSession,
+      logout,
+    }}>
       {children}
     </AuthContext.Provider>
   )

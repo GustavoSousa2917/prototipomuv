@@ -1,4 +1,4 @@
-const storageKey = 'muv.session.v1'
+export const sessionStorageKey = 'muv.session.v1'
 
 type StoredSession = { userId: string }
 
@@ -10,7 +10,7 @@ function isStoredSession(value: unknown): value is StoredSession {
 
 export const sessionRepository = {
   read(): StoredSession | null {
-    const raw = localStorage.getItem(storageKey)
+    const raw = localStorage.getItem(sessionStorageKey)
     if (raw === null) return null
     try {
       const value: unknown = JSON.parse(raw)
@@ -20,12 +20,11 @@ export const sessionRepository = {
     }
   },
   save(userId: string) {
-    localStorage.setItem(storageKey, JSON.stringify({ userId }))
+    localStorage.setItem(sessionStorageKey, JSON.stringify({ userId }))
   },
   removeForUser(userId: string) {
-    if (this.read()?.userId === userId) this.remove()
-  },
-  remove() {
-    localStorage.removeItem(storageKey)
+    if (this.read()?.userId !== userId) return false
+    localStorage.removeItem(sessionStorageKey)
+    return true
   },
 }

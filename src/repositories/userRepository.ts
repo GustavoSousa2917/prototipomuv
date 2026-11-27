@@ -1,7 +1,7 @@
 import { digitsOnly, isInitialPurpose, isValidCpf, isValidEmail, isValidPhone, normalizeEmail } from '../domain/userRegistration'
 import type { User } from '../domain/userRegistration'
 
-const storageKey = 'muv.users.v1'
+export const userStorageKey = 'muv.users.v1'
 
 type DuplicateFields = { cpf: boolean; email: boolean }
 type CreateResult = { kind: 'created' } | { kind: 'duplicate'; fields: DuplicateFields }
@@ -40,7 +40,7 @@ function isStoredUser(value: unknown): value is User {
 }
 
 function readUsers(): User[] {
-  const raw = localStorage.getItem(storageKey)
+  const raw = localStorage.getItem(userStorageKey)
   if (raw === null) return []
   const stored: unknown = JSON.parse(raw)
   if (!Array.isArray(stored) || !stored.every(isStoredUser)
@@ -62,11 +62,11 @@ export const userRepository: UserRepository = {
       }
       if (fields.cpf || fields.email) return { kind: 'duplicate', fields }
 
-      localStorage.setItem(storageKey, JSON.stringify([...users, user]))
+      localStorage.setItem(userStorageKey, JSON.stringify([...users, user]))
       return { kind: 'created' }
     }
 
-    return navigator.locks ? navigator.locks.request(storageKey, save) : save()
+    return navigator.locks ? navigator.locks.request(userStorageKey, save) : save()
   },
   async updateCredential(id, credential, updatedAt) {
     function save() {
@@ -74,11 +74,11 @@ export const userRepository: UserRepository = {
       const index = users.findIndex((user) => user.id === id)
       if (index < 0) return false
       users[index] = { ...users[index], credential, updatedAt }
-      localStorage.setItem(storageKey, JSON.stringify(users))
+      localStorage.setItem(userStorageKey, JSON.stringify(users))
       return true
     }
 
-    return navigator.locks ? navigator.locks.request(storageKey, save) : save()
+    return navigator.locks ? navigator.locks.request(userStorageKey, save) : save()
   },
   findById: (id) => readUsers().find((user) => user.id === id),
   findByCpf: (cpf) => readUsers().find((user) => user.cpf === digitsOnly(cpf)),

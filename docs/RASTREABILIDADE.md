@@ -4,7 +4,8 @@ As rotas abaixo são referências de planejamento. A linha de RF001, RU001 e US-
 
 | Referências | Perfil | Fluxo | Telas | Rota proposta | Teste de aceitação futuro |
 |---|---|---|---|---|---|
-| RF001, RU001, US-001, RN002, DEC-039 | Todos | RF001, RU001 e US-001 atendidos no escopo demonstrativo da Etapa 08. | T02–T05 (T06 e A23 previstos para conta e perfis) | /login, /cadastro, /recuperar-senha, /redefinir-senha | Cadastro, login, recarga da sessão, logout, recuperação e redefinição por token verificados. |
+| RF001, RU001, US-001, RN002, DEC-039 | Todos | RF001, RU001 e US-001 atendidos no escopo demonstrativo da Etapa 08. | T02–T05 (T06 parcialmente implementada, A23 pendente) | /login, /cadastro, /recuperar-senha, /redefinir-senha | Cadastro, login, recarga da sessão, logout, recuperação e redefinição por token verificados. |
+| RN002, DEC-001.1–5, DEC-040 | Conta comum/admin | Contexto cliente automático, administração exclusiva, sessão e seleção por aba (09.1–09.2) | T06 | /cliente, /admin | Conta nova e legada, seleção revalidada e sincronização de sessão verificadas. Alternância, guardas e conta canônica pendentes. |
 | RF002, RU008,RU012,US-016,RN004 | Prestador/admin | Autorização | T03,T06,T39,A20 | /prestador/autorizacoes, /admin/autorizacoes | Aprovação independente, rejeição justificada |
 | RF003,RU009,US-010,RN005 | Gestor/motorista | Vínculo | T28,T29,A21 | /prestador/motoristas | Aceite, verificação por organização |
 | RF004,RU009,US-009,RN012 | Prestador | Veículos | T20,T23,T24,A26 | /prestador/veiculos | Placa duplicada, capacidade, inativação |

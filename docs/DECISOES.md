@@ -162,3 +162,27 @@ cuja integração está prevista para a Etapa 09.
 
 A finalidade inicial registra a intenção declarada. Perfis profissionais,
 autorizações e vínculos seguem seus próprios fluxos.
+
+## DEC-040 — Conta e contextos de atuação
+
+Aprovada em 27/11/2026. Consolida P09-01 a P09-11 e mantém as
+decisões vigentes sobre conta única, finalidade inicial e separação
+entre acesso, autorização administrativa e prontidão operacional.
+
+| ID | Proposta | Decisão aprovada |
+|---|---|---|
+| DEC-040.1 | P09-01 | Preservar `muv.users.v1` e `muv.session.v1`. Manter atribuições explícitas separadas, por ID da conta, e derivar o contexto cliente para contas comuns. |
+| DEC-040.2 | P09-02 | Persistir o contexto ativo por conta em `sessionStorage`. Abas podem manter seleções distintas. Revalidar na recarga e recorrer a um contexto permitido. |
+| DEC-040.3 | P09-03 | Sincronizar login, logout e invalidação da sessão entre abas. Revalidar o contexto quando a conta ou suas atribuições mudarem. A troca é local à aba. Uma operação de aba desatualizada deve preservar a sessão de outra conta. |
+| DEC-040.4 | P09-04 | Contas comuns iniciam no cliente e administradores exclusivos no ambiente administrativo. Retornos de rotas protegidas devem usar caminhos internos permitidos e revalidados. A finalidade inicial não concede acesso profissional. |
+| DEC-040.5 | P09-05 | Usar `/prestador` como entrada dos contextos de prestação. Sem contexto, orientar sobre o cadastro profissional conforme a funcionalidade disponível. Com um contexto, oferecer acesso. Com mais de um, apresentar seleção explícita. |
+| DEC-040.6 | P09-06 | Preservar o contexto ativo ao navegar diretamente por URL. Oferecer troca explícita se o contexto requerido estiver disponível. Apresentar 403 se faltar acesso. |
+| DEC-040.7 | P09-07 | Preservar `/dev` como demonstradores públicos, sem dados ou operações protegidas. |
+| DEC-040.8 | P09-08 | Provisionar administração explicitamente fora do cadastro público. Contas administrativas são exclusivas, sem cliente automático ou atuação comercial. |
+| DEC-040.9 | P09-09 | Provisionar futuramente contas fictícias de forma idempotente, preservando contas e sessões. Incluir cliente, autônomo, empresa, cooperativa, motorista vinculado, administrador, múltiplos contextos e múltiplas organizações. As atribuições demonstrativas são independentes da autorização por modalidade e da prontidão operacional. |
+| DEC-040.10 | P09-10 | Usar `/conta` como rota canônica autenticada, com visualização de dados básicos e contextos e edição de nome e telefone. CPF, e-mail e senha exigem fluxos próprios. A credencial derivada permanece fora da interface. |
+| DEC-040.11 | P09-11 | Centralizar a verificação da conta autenticada, contexto válido, capacidade e escopo do registro ou organização. Verificar autorização por modalidade e prontidão quando aplicável. Implementar verificações de negócio nos respectivos módulos. |
+
+As Etapas 09.1 e 09.2 entregam o domínio, a resolução, a persistência
+por aba e a integração com autenticação. As demais aplicações da
+DEC-040 seguem os incrementos correspondentes.

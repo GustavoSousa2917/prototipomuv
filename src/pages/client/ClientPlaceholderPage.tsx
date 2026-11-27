@@ -39,7 +39,7 @@ export default function ClientPlaceholderPage({
 
       <Alert variant="info">
         Ambiente demonstrativo do MUV.
-        A autenticação será integrada posteriormente.
+        As funcionalidades de frete desta página ainda são provisórias.
       </Alert>
 
       <Card>

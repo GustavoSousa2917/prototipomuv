@@ -1,5 +1,25 @@
 # Progresso
 
+## Etapas registradas
+
+| Etapa | Situação | Entrega |
+|---|---|---|
+| 00 | Concluída | Análise inicial, decisões e inventário |
+| 01 | Concluída | Configuração inicial |
+| 02 | Concluída | Arquitetura inicial |
+| 03–04 | Concluídas | Identidade visual e Design System |
+| 05.1–05.6 | Concluídas | Componentes compartilhados |
+| 06.1–06.6 | Concluídas | Layouts, navegação e página 404 |
+| 07 | Concluída | Página institucional |
+| 08.1–08.4 | Concluídas e sincronizadas | Cadastro, login, sessão, logout e recuperação |
+| 09.1–09.2 | Implementadas e validadas, versionamento pendente | Contextos de atuação, cliente automático e sessão entre abas |
+| 09.3 em diante | Pendente | Alternância de contextos e demais incrementos de conta e acesso |
+
+## Planejamento inicial (registro histórico)
+
+A tabela abaixo preserva a numeração de planejamento de 26/11/2026.
+A tabela acima acompanha os registros efetivos de implementação.
+
 Atualização: 26/11/2026. Análise conceitual inicial encerrada; 91 decisões específicas aprovadas. Nenhuma instalação no computador do usuário confirmada. Nenhuma tela implementada ou testada. PDF/Figma originais não modificados.
 
 | Etapa | Situação | Entrega |
@@ -712,7 +732,9 @@ conta e perfis para a Etapa 09.
 
 ## Etapa 08.4 — Recuperação e redefinição de senha
 
-Status: implementada e validada. Versionamento pendente.
+Status: implementada, validada e versionada em
+`2af5212a789420dc12be66505a9d8775056fd22a`. Integração à `main` e
+sincronização remota confirmadas pelo responsável.
 
 As telas T04 e T05 seguem as capturas 12 e 13 e a DEC-039. As rotas
 `/recuperar-senha` e `/redefinir-senha` reutilizam o AuthLayout. O
@@ -756,3 +778,51 @@ RF001, RU001 e US-001 estão funcionalmente atendidos no escopo
 demonstrativo da Etapa 08. A segurança de produção e o atendimento
 integral ao RNF003 permanecem fora desta entrega. Integração de conta
 e perfis, permissões e controle de acesso continuam para a Etapa 09.
+
+## Etapas 09.1 e 09.2 — Fundação de contas e contextos de atuação
+
+Status: implementadas e validadas. Versionamento pendente.
+
+A DEC-040 registra P09-01 a P09-11. Nesta entrega, contas comuns
+novas e legadas recebem contexto cliente derivado. Atribuições
+explícitas são lidas separadamente e identificam a organização ou o
+vínculo, quando aplicável. Administração exclusiva requer atribuição
+válida. As capacidades indicam acesso conceitual aos ambientes.
+Os formatos de `muv.users.v1` e `muv.session.v1` foram preservados.
+
+A seleção é validada por conta e por aba em `muv.activeContext.v1`
+no sessionStorage. Eventos de armazenamento propagam autenticação,
+mudanças de conta e atribuições. Logout confere a conta sob o mesmo
+bloqueio das outras mutações de autenticação. O contexto expõe
+identidade resumida e capacidades, sem credenciais.
+
+### Validação
+
+- Testes isolados de domínio e serviços passaram para conta legada e
+  nova, atribuições organizacionais distintas, rejeição de dados
+  inválidos, inconsistentes ou de outra conta, administração exclusiva,
+  ausência de administração no cadastro público, resolução e restauração
+  da seleção, destinos iniciais, logout condicionado e falhas de
+  armazenamento.
+- No Chromium headless, duas abas de um perfil isolado confirmaram
+  login, logout, substituição e atualização da conta, revalidação ao
+  remover atribuição e invalidação após recuperação. As seleções
+  permaneceram independentes. Uma operação de logout iniciada por A
+  antes da substituição por B preservou a sessão de B.
+- O cabeçalho do cliente foi inspecionado em 1440 × 900, 1280 × 720,
+  1024 × 768, 768 × 1024, 390 × 844 e 320 × 568. Nome, iniciais,
+  contexto, foco, teclado e saída foram verificados, sem rolagem
+  horizontal indevida.
+- Passaram as regressões direcionadas de cadastro, login, recuperação
+  e redefinição, restauração, logout, página institucional, 404 e
+  ambientes existentes. O console apresentou apenas o 404 de favicon
+  já conhecido.
+- Build com TypeScript, ESLint e verificações de whitespace passaram.
+  `git fsck --full` retornou código 0 e listou duas árvores sem
+  referência já conhecidas.
+
+Sem Web Locks a fila serializa apenas a aba atual. Não há transações
+entre chaves nem distinção entre sessões consecutivas da mesma conta.
+O armazenamento é demonstrativo. Seletor, guardas, 403, conta canônica,
+atribuições demonstrativas permanentes e autorização operacional
+permanecem pendentes.

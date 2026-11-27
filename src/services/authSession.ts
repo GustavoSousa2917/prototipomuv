@@ -2,14 +2,17 @@ import { isValidEmail, normalizeEmail } from '../domain/userRegistration'
 import type { User } from '../domain/userRegistration'
 import { sessionRepository } from '../repositories/sessionRepository'
 import { userRepository } from '../repositories/userRepository'
+import { clearActiveContext, initialAccountDestination, resolveAccountAccess } from './accountAccess'
+import type { AccountAccess } from './accountAccess'
 import { withAuthMutation } from './authMutation'
 import { verifyCredential } from './passwordCredential'
 
 export type AuthenticatedUser = Pick<User, 'id' | 'fullName'>
+export type Authentication = { user: AuthenticatedUser; access: AccountAccess }
 type LoginFields = { email: string; password: string }
 type LoginErrors = Partial<Record<keyof LoginFields, string>>
 export type LoginResult =
-  | { kind: 'authenticated'; user: AuthenticatedUser }
+  | ({ kind: 'authenticated'; destination: string } & Authentication)
   | { kind: 'invalidFields'; errors: LoginErrors }
   | { kind: 'invalidCredentials' }
   | { kind: 'storageError' }
@@ -49,14 +52,20 @@ export async function loginUser(input: LoginFields): Promise<LoginResult> {
         return { kind: 'invalidCredentials' }
       }
       sessionRepository.save(currentUser.id)
-      return { kind: 'authenticated', user: toAuthenticatedUser(currentUser) }
+      const access = resolveAccountAccess(currentUser.id, true)
+      return {
+        kind: 'authenticated',
+        user: toAuthenticatedUser(currentUser),
+        access,
+        destination: initialAccountDestination(access),
+      }
     })
   } catch {
     return { kind: 'storageError' }
   }
 }
 
-export function restoreSession(): AuthenticatedUser | null {
+function readAuthenticatedUser(): AuthenticatedUser | null {
   try {
     const session = sessionRepository.read()
     if (!session) return null
@@ -67,11 +76,20 @@ export function restoreSession(): AuthenticatedUser | null {
   }
 }
 
-export function logoutUser() {
+export function restoreSession(): Authentication | null {
+  const user = readAuthenticatedUser()
+  if (user) return { user, access: resolveAccountAccess(user.id) }
+
+  clearActiveContext()
+  return null
+}
+
+export async function logoutUser(expectedUserId: string): Promise<'loggedOut' | 'sessionChanged' | 'storageError'> {
   try {
-    sessionRepository.remove()
-    return true
+    return await withAuthMutation(async () => {
+      return sessionRepository.removeForUser(expectedUserId) ? 'loggedOut' : 'sessionChanged'
+    })
   } catch {
-    return false
+    return 'storageError'
   }
 }

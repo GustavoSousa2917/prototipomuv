@@ -44,15 +44,22 @@ type OpenPanel = 'navigation' | 'account' | null
 export default function ClientHeader() {
   const [openPanel, setOpenPanel] = useState<OpenPanel>(null)
   const [logoutError, setLogoutError] = useState(false)
-  const { user, initializing, logout } = useAuth()
+  const { user, access, initializing, logout } = useAuth()
+  const [loggingOut, setLoggingOut] = useState(false)
+  const logoutInProgress = useRef(false)
   const navigate = useNavigate()
 
-  function handleLogout() {
-    if (!logout()) {
-      setLogoutError(true)
-      return
-    }
-    navigate('/login', { replace: true })
+  async function handleLogout() {
+    if (logoutInProgress.current) return
+    logoutInProgress.current = true
+    setLoggingOut(true)
+    setLogoutError(false)
+    const result = await logout()
+    logoutInProgress.current = false
+    setLoggingOut(false)
+
+    if (result === 'storageError') setLogoutError(true)
+    else if (result === 'loggedOut') navigate('/login', { replace: true })
   }
 
   const navigationId = useId()
@@ -217,7 +224,13 @@ export default function ClientHeader() {
                 </p>
 
                 <p className="mt-1 text-muv-small text-muted">
-                  {user ? 'Sessão demonstrativa' : 'Sem sessão iniciada'}
+                  {!user
+                    ? 'Sem sessão iniciada'
+                    : access?.capabilities.includes('accessClient')
+                      ? 'Contexto ativo: Cliente'
+                      : access?.contexts.some(({ kind }) => kind === 'client')
+                        ? 'Contexto cliente disponível'
+                        : 'Sessão demonstrativa'}
                 </p>
               </div>
 
@@ -267,13 +280,14 @@ export default function ClientHeader() {
                   <button
                     type="button"
                     onClick={handleLogout}
+                    disabled={loggingOut}
                     className="
                       flex w-full items-center gap-3 rounded-muv-button
                       px-3 py-3 text-left text-primary hover:bg-primary-light
                     "
                   >
                     <LogOut size={18} aria-hidden="true" />
-                    Sair da conta
+                    {loggingOut ? 'Encerrando sessão…' : 'Sair da conta'}
                   </button>
                   {logoutError && (
                     <p role="alert" className="px-3 py-2 text-muv-small text-danger">

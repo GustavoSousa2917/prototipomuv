@@ -9,7 +9,7 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 | T03 | Cadastro único em duas etapas | 56–61 | IMPLEMENTADA nas Etapas 08.1–08.2, adaptada à DEC-039. |
 | T04 | Recuperação simulada | 12 | IMPLEMENTADA na Etapa 08.4, adaptada à DEC-039. |
 | T05 | Redefinição com token temporário | 13 | IMPLEMENTADA na Etapa 08.4, adaptada à DEC-039. |
-| T06 | Conta e perfis | 70–71 | MANTER |
+| T06 | Conta e perfis | 70–71 | PARCIALMENTE IMPLEMENTADA em 09.1–09.2, com contexto cliente no cabeçalho. Seletor e página de conta pendentes. |
 | T07 | Planejamento e solicitação | 15–16,27–28 | ALTERAR |
 | T08 | Pesquisa e estimativas | 17–18,29–30 | ALTERAR |
 | T09 | Detalhes de veículo | 31–32 | ALTERAR |

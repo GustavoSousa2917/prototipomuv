@@ -49,7 +49,7 @@ export default function LoginPage() {
     setProcessing(false)
 
     if (result.kind === 'authenticated') {
-      navigate('/cliente', { replace: true })
+      navigate(result.destination, { replace: true })
       return
     }
 

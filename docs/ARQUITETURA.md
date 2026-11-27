@@ -340,10 +340,10 @@ Se a remoção falhar, a interface mantém a sessão e oferece nova
 tentativa. Sem sessão, o ambiente cliente continua demonstrativo.
 
 O armazenamento é manipulável e oferece apenas uma simulação.
-As abas compartilham a chave persistida, mas o contexto de cada
-aba é atualizado pelas suas próprias ações ou pela recarga. A
-última gravação prevalece. A sessão não controla acesso às rotas
-nem concede permissões operacionais.
+As abas compartilham a chave persistida e revalidam a autenticação
+ao receber eventos de armazenamento da sessão, usuários e atribuições.
+A última gravação da sessão prevalece. A sessão ainda não controla
+acesso às rotas nem concede permissões operacionais.
 
 ### Recuperação e redefinição demonstrativas
 
@@ -374,10 +374,49 @@ depois, o token permanece consumido, a senha anterior fica válida e
 a sessão pode ter sido encerrada. A interface informa falha e pede
 um novo link. Web Locks coordena operações entre abas quando
 disponível. Sem Web Locks, a fila local serializa apenas a aba
-corrente. As demais abas atualizam o contexto na próxima recarga.
+corrente. A remoção da sessão persistida é refletida nas outras abas
+pelo evento de armazenamento.
 
 Os dados são manipuláveis pelo navegador e servem exclusivamente à
 demonstração. É necessário um contexto seguro para Web Crypto.
+
+### Contas e contextos de atuação
+
+`src/domain/accountAccess.ts` modela os contextos cliente, autônomo,
+empresa, cooperativa, motorista vinculado e administração. Empresa e
+cooperativa carregam o ID da organização. Motorista vinculado carrega
+o ID do vínculo. As capacidades desta entrega identificam somente o
+ambiente correspondente ao contexto ativo.
+
+`src/repositories/accessAssignmentRepository.ts` lê a lista de
+atribuições em `muv.accessAssignments.v1` no LocalStorage. Cada entrada
+contém `userId` e `context`. O contexto contém `kind` e, quando
+aplicável, `organizationId` ou `linkId`. Registros inválidos ou
+duplicados da conta não concedem capacidades adicionais. Uma
+atribuição administrativa válida e exclusiva habilita somente o
+contexto administrativo. Atribuições administrativas conflitantes
+bloqueiam a resolução de contextos daquela conta.
+
+`src/services/accountAccess.ts` deriva cliente para contas comuns
+novas ou legadas, sem alterar `muv.users.v1`. A finalidade inicial
+permanece apenas informativa. O repositório de seleção guarda
+`{ userId, contextKey }` em `muv.activeContext.v1` no sessionStorage.
+A restauração revalida a conta e a seleção. A ausência ou falha
+de leitura da seleção usa o contexto padrão permitido. Se o
+sessionStorage estiver indisponível, a resolução fica em memória.
+
+O `AuthProvider` compartilha identidade resumida, contextos,
+capacidade ativa e inicialização. O login explícito começa no
+contexto cliente ou administrativo exclusivo. O evento `storage`
+revalida a sessão a partir do valor atual, sem replicar a seleção
+da aba. O logout usa o bloqueio de autenticação e confere o ID da
+conta antes de remover a sessão. A chave persistida continua
+`muv.session.v1` com apenas `{ userId }`.
+
+LocalStorage é manipulável. Sem Web Locks, as abas podem disputar
+gravações e a fila serializa apenas uma aba. A sessão identifica
+a conta, mas não diferencia duas sessões consecutivas do mesmo
+usuário. A entrega não provisiona atribuições pela interface.
 
 ## Layout do cliente
 
@@ -417,10 +456,10 @@ compartilhada das interfaces do cliente.
 
 As páginas possuem conteúdos provisórios.
 
-A identificação do cliente utiliza dados fictícios.
-
-A autenticação, a sessão, a persistência e as
-permissões de acesso serão integradas posteriormente.
+O cabeçalho identifica a conta autenticada, informa o contexto
+cliente quando aplicável e oferece logout. Sem sessão, apresenta o
+modo demonstrativo. O conteúdo de frete e a proteção de rotas
+permanecem pendentes.
 
 ## Layout operacional compartilhado
 
