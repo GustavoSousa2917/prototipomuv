@@ -207,3 +207,28 @@ Propostas P10-01 a P10-14 aprovadas pelo responsável.
 | DEC-041.12 | P10-12 | Criação, consulta e edição básica do próprio cadastro. Exclusão, inativação e efeitos sobre autorizações ficam para módulos futuros. |
 | DEC-041.13 | P10-13 | Upload e verificação documental ficam fora deste incremento. |
 | DEC-041.14 | P10-14 | Preservar contas, sessões e atribuições demonstrativas. Essas atribuições não comprovam cadastro ou autorização. |
+
+## DEC-042 — Cadastros e contextos organizacionais
+
+Propostas P10-15 a P10-32 aprovadas pelo responsável.
+
+| ID | Proposta | Decisão aprovada |
+|---|---|---|
+| DEC-042.1 | P10-15 | Usar estrutura cadastral compartilhada entre empresas e cooperativas. |
+| DEC-042.2 | P10-16 | Manter a organização independente da conta pessoal. |
+| DEC-042.3 | P10-17 | Representar responsabilidade por associação independente. |
+| DEC-042.4 | P10-18 | Permitir múltiplas organizações por conta. |
+| DEC-042.5 | P10-19 | Permitir inicialmente um responsável por organização. |
+| DEC-042.6 | P10-20 | Usar declaração simulada de responsabilidade. |
+| DEC-042.7 | P10-21 | Exigir CNPJ estruturalmente válido e único entre organizações. |
+| DEC-042.8 | P10-22 | Adotar identificação, contato comercial e endereço cadastral do incremento. |
+| DEC-042.9 | P10-23 | Separar endereço cadastral de regiões de atendimento. |
+| DEC-042.10 | P10-24 | Permitir uma ou ambas as modalidades pretendidas. |
+| DEC-042.11 | P10-25 | Derivar contextos organizacionais dos cadastros e associações válidos. |
+| DEC-042.12 | P10-26 | Disponibilizar novos contextos sem ativação automática. |
+| DEC-042.13 | P10-27 | Implementar criação, consulta e edição cadastral básica. |
+| DEC-042.14 | P10-28 | Manter CNPJ e tipo imutáveis neste incremento. |
+| DEC-042.15 | P10-29 | Exigir controle de acesso pelo contexto e ID da organização. |
+| DEC-042.16 | P10-30 | Preservar contas, cadastros autônomos e atribuições demonstrativas. |
+| DEC-042.17 | P10-31 | Adiar convites, transferência de responsabilidade, inativação e exclusão. |
+| DEC-042.18 | P10-32 | Separar cadastro de autorização e elegibilidade operacional. |

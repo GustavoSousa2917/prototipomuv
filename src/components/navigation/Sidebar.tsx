@@ -53,7 +53,7 @@ export default function Sidebar({
               {userName}
             </p>
 
-            <p className="mt-1 text-muv-small text-muted">
+            <p className="mt-1 text-muv-small text-muted [overflow-wrap:anywhere]">
               {profileLabel}
             </p>
           </div>

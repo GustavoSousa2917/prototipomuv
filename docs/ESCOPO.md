@@ -18,8 +18,9 @@ A DEC-038 veda solicitações abertas, negociações simultâneas para a mesma n
 ## Recorte da Etapa 10
 
 DEC-041 define a Etapa 10 como cadastros de prestadores. 10.1 e 10.2
-entregam fundação e cadastro autônomo. Empresas, cooperativas,
-contextos organizacionais e validação integrada ficam para 10.3–10.5.
+entregam fundação e cadastro autônomo. 10.3 e 10.4 entregam empresas,
+cooperativas e contextos organizacionais conforme DEC-042. A validação
+integrada da Etapa 10 fica para 10.5.
 Autorização administrativa, documentos, regiões, veículos, tarifas e
 prontidão seguem em módulos próprios.
 

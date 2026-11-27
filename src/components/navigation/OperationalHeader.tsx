@@ -61,7 +61,7 @@ export default function OperationalHeader({
 
           <div
             className="
-              hidden border-l border-border
+              hidden min-w-0 border-l border-border
               pl-5 sm:block
             "
           >
@@ -69,7 +69,7 @@ export default function OperationalHeader({
               {areaLabel}
             </p>
 
-            <p className="text-muv-small text-muted">
+            <p className="truncate text-muv-small text-muted" title={authenticated ? profileLabel : undefined}>
               {authenticated ? profileLabel : 'Ambiente operacional'}
             </p>
           </div>

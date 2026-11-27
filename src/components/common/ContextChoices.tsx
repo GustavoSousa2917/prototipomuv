@@ -56,7 +56,7 @@ export default function ContextChoices({
   }
 
   return (
-    <form onSubmit={submit} className="min-w-0 space-y-4" aria-busy={processing}>
+    <form onSubmit={submit} className="min-w-0 space-y-4 [overflow-wrap:anywhere]" aria-busy={processing}>
       {contexts.length > 1 && (
         <RadioGroup
           name={name}

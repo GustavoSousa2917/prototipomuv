@@ -17,7 +17,13 @@ export const accountRoute = '/conta'
 export const autonomousRegistrationRoute = environmentRoutes.autonomous + '/cadastro'
 export const autonomousProfileRoute = environmentRoutes.autonomous + '/perfil'
 
+export const organizationRegistrationRoutes = {
+  company: environmentRoutes.company + '/cadastro',
+  cooperative: environmentRoutes.cooperative + '/cadastro',
+} as const
+
 const protectedPaths = [
+  ...Object.values(organizationRegistrationRoutes),
   accountRoute,
   autonomousRegistrationRoute,
   '/prestador',

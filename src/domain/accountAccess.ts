@@ -1,7 +1,7 @@
 export type ActingContext =
   | { kind: 'client' }
   | { kind: 'autonomous' | 'admin' }
-  | { kind: 'company' | 'cooperative'; organizationId: string }
+  | { kind: 'company' | 'cooperative'; organizationId: string; organizationLabel?: string }
   | { kind: 'linkedDriver'; linkId: string }
 
 export type AssignedContext = Exclude<ActingContext, { kind: 'client' }>
@@ -78,8 +78,8 @@ export function contextLabel(context: ActingContext) {
   switch (context.kind) {
     case 'client': return 'Cliente'
     case 'autonomous': return 'Prestador autônomo'
-    case 'company': return 'Empresa · ' + context.organizationId
-    case 'cooperative': return 'Cooperativa · ' + context.organizationId
+    case 'company': return 'Empresa · ' + (context.organizationLabel ?? context.organizationId)
+    case 'cooperative': return 'Cooperativa · ' + (context.organizationLabel ?? context.organizationId)
     case 'linkedDriver': return 'Motorista vinculado · ' + context.linkId
     case 'admin': return 'Administração'
   }

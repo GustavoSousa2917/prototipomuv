@@ -2,7 +2,7 @@ import { Link } from 'react-router'
 
 import AccessScreen from '../../components/common/AccessScreen'
 import ContextChoices from '../../components/common/ContextChoices'
-import { autonomousProfileRoute, autonomousRegistrationRoute, environmentRoutes } from '../../constants/environmentRoutes'
+import { autonomousProfileRoute, autonomousRegistrationRoute, environmentRoutes, organizationRegistrationRoutes } from '../../constants/environmentRoutes'
 import { useAuth } from '../../contexts/authContext'
 import { readOwnProfessionalRegistration } from '../../services/autonomousProvider'
 import { contextLabel } from '../../domain/accountAccess'
@@ -25,8 +25,8 @@ export default function ProviderEntryPage() {
             {registration.provider ? 'Consultar cadastro profissional' : 'Iniciar cadastro autônomo'}
           </Link>
         ) : <p className="text-muted">Cadastro profissional indisponível no momento.</p>}
-        <p className="text-muted">Empresa — cadastro em etapa futura.</p>
-        <p className="text-muted">Cooperativa — cadastro em etapa futura.</p>
+        <Link to={organizationRegistrationRoutes.company} className="block font-semibold text-primary underline">Cadastrar empresa</Link>
+        <Link to={organizationRegistrationRoutes.cooperative} className="block font-semibold text-primary underline">Cadastrar cooperativa</Link>
       </section>
       <Link to={active ? environmentRoutes[active.kind] : '/'} className="inline-block font-semibold text-primary underline">
         Voltar ao meu ambiente

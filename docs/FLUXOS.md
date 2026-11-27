@@ -110,3 +110,18 @@ estado informativo. A edição preserva ID, titular e data de criação.
 O cadastro registra intenção e disponibiliza acesso para preparação,
 enquanto autorização, prontidão, elegibilidade e recebimento de
 solicitações seguem pendentes.
+
+## Empresas e cooperativas (10.3–10.4)
+
+Uma conta comum abre `/prestador`, escolhe empresa ou cooperativa
+e preenche o formulário compartilhado em `/prestador/empresa/cadastro`
+ou `/prestador/cooperativa/cadastro`. A criação grava a organização e
+a declaração de responsabilidade juntas. Um CNPJ em uso gera erro
+sem expor dados do responsável. A confirmação oferece seleção
+explícita do novo contexto ou permanência no contexto atual.
+
+`/prestador/empresa/perfil` e `/prestador/cooperativa/perfil` usam
+a organização ativa e permitem edição cadastral pelo responsável.
+A conta seleciona outra organização pelo seletor. Um contexto
+demonstrativo sem registro oferece orientação. Dados e nomes
+atualizados são revalidados nas outras abas.

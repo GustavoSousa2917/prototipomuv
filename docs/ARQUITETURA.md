@@ -728,3 +728,47 @@ momento de salvar. Uma expiração posterior mantém o contexto de
 preparação. EAR exige Sim ou Não e é autodeclarada. A intenção exige
 uma ou ambas as modalidades, sem regras cruzadas com categoria, EAR
 ou veículo nesta etapa.
+
+## Cadastro e contextos organizacionais
+
+Empresa e cooperativa compartilham o mesmo domínio e formulário.
+`muv.organizations.v1` contém duas coleções: organizações e associações
+de responsabilidade. A organização conserva ID, tipo, CNPJ, razão
+social, nome fantasia opcional, telefone e e-mail comerciais, endereço
+cadastral (CEP, logradouro, número, complemento opcional, bairro,
+município e UF), modalidades pretendidas e datas. A associação conserva
+ID, organização, conta, papel de responsável e datas da declaração
+e da criação. Ela é simulada.
+
+O repositório grava as duas coleções juntas ao criar, valida unicidade
+de CNPJ e IDs e exige exatamente uma associação por organização.
+Uma leitura inconsistente bloqueia mutações e não gera contextos de
+negócio. As operações usam o bloqueio de autenticação existente.
+Isso reduz concorrência com Web Locks, mas a fila alternativa é local
+à aba. LocalStorage não oferece transações entre chaves nem isolamento
+de produção. Edições concorrentes dos mesmos campos seguem a última
+gravação processada.
+
+O CNPJ é persistido como texto, com zeros iniciais e letras maiúsculas.
+A normalização aceita caracteres alfanuméricos, máscara e espaços.
+São 12 caracteres alfanuméricos e dois verificadores numéricos.
+O cálculo usa ASCII menos 48, pesos de 2 a 9 da direita para a
+esquerda, repetidos, e módulo 11. Resto 0 ou 1 gera zero. Nos
+demais casos, usa-se 11 menos o resto. A segunda rodada inclui o
+primeiro dígito. Referência: [manual do CNPJ da Receita Federal, pp. 3–4](https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/publicacoes/documentos-tecnicos/cnpj/manual-dv-cnpj.pdf).
+A validação é local e estrutural.
+
+O resolvedor combina as fontes autônoma, organizacional e demonstrativa
+pela chave de contexto existente, com administração exclusiva.
+Nome fantasia ou razão social identificam o contexto em memória.
+CNPJ distingue organizações homônimas de mesmo tipo. Contextos
+demonstrativos conservam o identificador quando faltam registros.
+A seleção persistida continua usando tipo e ID. A aba autora atualiza
+a sessão local, e outras abas reagem à chave organizacional.
+
+Criação usa a sessão da conta comum. Consulta e edição exigem a
+associação e a política de capacidade, tipo e ID do contexto ativo.
+CNPJ, tipo, responsável e data de criação são preservados na edição.
+O endereço cadastral e as modalidades pretendidas são dados do
+cadastro. Regiões, autorizações e elegibilidade pertencem aos seus
+respectivos módulos.

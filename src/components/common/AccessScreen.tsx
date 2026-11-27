@@ -16,8 +16,8 @@ export default function AccessScreen({ title, code, children }: {
   }, [title])
 
   return (
-    <main className="grid min-h-dvh place-items-center bg-background px-4 py-8">
-      <Card className="w-full max-w-md space-y-5 sm:p-8">
+    <main className="grid min-h-dvh grid-cols-[minmax(0,1fr)] place-items-center bg-background px-4 py-8">
+      <Card className="w-full max-w-md space-y-5 [overflow-wrap:anywhere] sm:p-8">
         <Logo />
         {code && <p className="text-muv-display font-bold text-primary">{code}</p>}
         <h1 ref={titleRef} tabIndex={-1} className="text-muv-h1 font-bold">{title}</h1>

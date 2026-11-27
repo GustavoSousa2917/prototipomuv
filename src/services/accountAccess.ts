@@ -2,6 +2,7 @@ import { contextCapabilities, contextKey, resolveContexts } from '../domain/acco
 import type { ActingContext, EnvironmentCapability } from '../domain/accountAccess'
 import { readAccessAssignments } from '../repositories/accessAssignmentRepository'
 import { autonomousProviderRepository } from '../repositories/autonomousProviderRepository'
+import { organizationRepository } from '../repositories/organizationRepository'
 import { activeContextRepository } from '../repositories/activeContextRepository'
 
 export type AccountAccess = {
@@ -14,12 +15,35 @@ export type ContextSelectionResult = { kind: 'selected'; access: AccountAccess }
 
 function availableContexts(userId: string): ActingContext[] {
   const contexts = resolveContexts(userId, readAccessAssignments())
-  if (!contexts.some(({ kind }) => kind === 'client') || contexts.some(({ kind }) => kind === 'autonomous')) return contexts
+  if (!contexts.some(({ kind }) => kind === 'client')) return contexts
+
+  if (!contexts.some(({ kind }) => kind === 'autonomous')) {
+    try {
+      if (autonomousProviderRepository.findByUserId(userId)) contexts.push({ kind: 'autonomous' })
+    } catch {
+      // A fonte autônoma não impede a resolução organizacional.
+    }
+  }
 
   try {
-    if (autonomousProviderRepository.findByUserId(userId)) return [...contexts, { kind: 'autonomous' }]
+    const { organizations, responsibilities } = organizationRepository.read()
+    const ownedIds = new Set(responsibilities.filter((entry) => entry.userId === userId).map(({ organizationId }) => organizationId))
+    const owned = organizations.filter(({ id }) => ownedIds.has(id))
+    const byKey = new Map(contexts.map((context) => [contextKey(context), context]))
+    for (const organization of owned) {
+      const name = organization.tradeName || organization.legalName
+      const ambiguous = owned.some((other) => other.id !== organization.id && other.kind === organization.kind
+        && (other.tradeName || other.legalName).toLocaleLowerCase('pt-BR') === name.toLocaleLowerCase('pt-BR'))
+      const context: ActingContext = {
+        kind: organization.kind,
+        organizationId: organization.id,
+        organizationLabel: ambiguous ? `${name} (${organization.cnpj})` : name,
+      }
+      byKey.set(contextKey(context), context)
+    }
+    return [...byKey.values()]
   } catch {
-    // Uma leitura inconsistente não acrescenta um contexto profissional.
+    // Uma leitura inconsistente não concede contextos organizacionais.
   }
   return contexts
 }

@@ -16,8 +16,9 @@
 | 09.3–09.4 | Implementadas, validadas e sincronizadas | Alternância, guardas e controle de acesso demonstrativo |
 | 09.5 | Implementada, validada e sincronizada | Gerenciamento básico da conta |
 | 09.6–09.7 | Implementadas, validadas e sincronizadas | Integração de layouts e validação integrada |
-| 10.1–10.2 | Implementadas, versionamento pendente | Fundação de prestadores e cadastro autônomo |
-| 10.3–10.5 | Pendentes | Empresas e cooperativas, contextos organizacionais e validação integrada |
+| 10.1–10.2 | Implementadas, validadas e sincronizadas | Fundação de prestadores e cadastro autônomo |
+| 10.3–10.4 | Implementadas, versionamento pendente | Empresas, cooperativas e contextos organizacionais |
+| 10.5 | Pendente | Validação integrada |
 
 ## Planejamento inicial (registro histórico)
 
@@ -973,6 +974,10 @@ sincronização remota confirmadas pelo responsável.
 
 ## Etapas 10.1 e 10.2 — Fundação de prestadores e cadastro autônomo
 
+Versionadas em `f7e8645d82ec842cba29fd69a8e690a7205ae412`.
+A integração à main e a sincronização remota foram confirmadas
+pelo responsável.
+
 Implementadas conforme DEC-041. A entrada de prestadores oferece
 cadastro autônomo, e a rota de perfil permite consulta e edição pelo
 titular. O contexto deriva da chave profissional e é selecionado
@@ -1011,3 +1016,48 @@ e seleção por aba são preservados. RF002 permanece parcial.
   `git diff --check` passou e os quatro arquivos novos foram revisados
   separadamente. `git fsck --full` terminou com código 0, com as três
   árvores sem referência já conhecidas.
+
+## Etapas 10.3 e 10.4 — Empresas, cooperativas e contextos organizacionais
+
+DEC-042 registra as propostas P10-15 a P10-32. A conta comum cria
+organizações com CNPJ numérico ou alfanumérico, contato comercial,
+endereço cadastral, intenção por modalidade e responsabilidade
+declarada. Consulta e edição revalidam sessão, associação, capacidade,
+tipo e ID da organização ativa. A conta mantém seus contextos
+anteriores e escolhe explicitamente cada organização. Os rótulos são
+sincronizados entre abas. RF002 continua parcialmente implementado,
+com regiões e autorização pendentes. RNF003 permanece pendente.
+
+### Validação
+
+- Testes isolados verificaram as duas variantes de CNPJ, incluindo o
+  vetor alfanumérico do manual oficial, zeros iniciais e máscara.
+  Foram cobertos campos inválidos, unicidade entre os dois tipos,
+  gravação conjunta, associações inconsistentes, falhas de leitura e
+  escrita e preservação dos dados imutáveis.
+- Testes isolados confirmaram bloqueio para visitante, administrador,
+  outra conta, contexto cliente e organização ativa incompatível.
+  Uma atribuição demonstrativa isolada não deu acesso ao cadastro de
+  terceiros. Múltiplas fontes de contextos coexistiram sem alterar a
+  seleção da aba.
+- No Chromium, as jornadas de empresa e cooperativa passaram por
+  cadastro, seleção explícita, edição e recarga. Uma mesma conta
+  reuniu cliente, autônomo, duas empresas e cooperativa. Empresas
+  homônimas foram distinguidas pelo CNPJ. A criação e a edição do
+  nome foram refletidas na outra aba, que manteve o contexto cliente.
+- Foram inspecionados entrada, formulário, consulta, edição e seletor
+  em 1440 × 900, 1280 × 720, 1024 × 768, 768 × 1024, 390 × 844 e
+  320 × 568. Foram verificados Tab, foco do primeiro erro, cancelamento,
+  confirmação e quebra de nomes longos sem rolagem horizontal.
+- Regressões no Chromium abrangeram cadastro básico, login, logout,
+  recuperação, Minha conta, cadastro e edição autônomos, troca de
+  contexto, sincronização, administração, guardas, 403, 404 e página
+  institucional. O console apresentou somente o 404 conhecido do
+  favicon.
+- Build, lint, verificação de whitespace e revisão separada dos quatro
+  arquivos novos passaram. O bundle de produção ficou sem a rota e os
+  dados de provisionamento privilegiado. `git fsck --full` retornou
+  código 0 e reportou as três árvores sem referência já conhecidas.
+- Os oito cenários demonstrativos ficaram disponíveis. O perfil de
+  empresa sem cadastro mostrou orientação e não gravou organização.
+  Uma URL com ID arbitrário retornou 404.

@@ -4,10 +4,11 @@ import PublicLayout from '../layouts/PublicLayout'
 import AuthLayout from '../layouts/AuthLayout'
 import AccessGuard from './AccessGuard'
 import AutonomousProviderPage from '../pages/operational/AutonomousProviderPage'
+import OrganizationPage from '../pages/operational/OrganizationPage'
 import ProviderEntryPage from '../pages/operational/ProviderEntryPage'
 import DemoAccountsPage from '../pages/dev/DemoAccountsPage'
 import AccountPage from '../pages/auth/AccountPage'
-import { accountRoute, autonomousRegistrationRoute, environmentRoutes } from '../constants/environmentRoutes'
+import { accountRoute, autonomousRegistrationRoute, environmentRoutes, organizationRegistrationRoutes } from '../constants/environmentRoutes'
 
 import LoginPage from '../pages/auth/LoginPage'
 import RegisterPage from '../pages/auth/RegisterPage'
@@ -116,6 +117,14 @@ export default function AppRoutes() {
       } />
 
       <Route path={environmentRoutes.client + '/conta'} element={<Navigate to={accountRoute} replace />} />
+      {(['company', 'cooperative'] as const).map((kind) => (
+        <Route key={kind} path={organizationRegistrationRoutes[kind]} element={
+          <AccessGuard requirement={{ capabilities: ['accessClient', 'accessAutonomous', 'accessCompany', 'accessCooperative', 'accessLinkedDriver'] }}>
+            <OrganizationPage register={kind} />
+          </AccessGuard>
+        } />
+      ))}
+
       {operationalProfiles.map(({ basePath }) => (
         <Route key={basePath} path={basePath + '/conta'} element={<Navigate to={accountRoute} replace />} />
       ))}
@@ -240,13 +249,18 @@ export default function AppRoutes() {
         >
 
           {config.pages.map((page) => {
-            const element = config.profile === 'autonomous' && page.path === 'perfil' ? <AutonomousProviderPage /> : (
+            let element = (
               <OperationalPlaceholderPage
                 title={page.label}
                 description={page.description}
                 areaLabel={config.areaLabel}
               />
             )
+
+            if (page.path === 'perfil') {
+              if (config.profile === 'autonomous') element = <AutonomousProviderPage />
+              if (config.profile === 'company' || config.profile === 'cooperative') element = <OrganizationPage />
+            }
 
             if (page.path === '') {
               return (
