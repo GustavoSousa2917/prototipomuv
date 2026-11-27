@@ -59,7 +59,6 @@
   Sessões sucessivas de uma mesma conta continuam indistinguíveis.
 ## Pendências após 10.1–10.2
 
-- A validação integrada da Etapa 10 segue em 10.5.
 - A checagem de CNH é estrutural e EAR é autodeclarada. Verificação e
   upload de documentos, exclusão, inativação e efeitos de edição sobre
   autorização ficam para módulos futuros.
@@ -75,7 +74,15 @@
 - A gravação conjunta vale para a chave organizacional. Sem Web Locks,
   a serialização é local à aba. Sessões sucessivas da mesma conta
   permanecem indistinguíveis e RNF003 continua pendente.
-- Versionamento das etapas 10.3–10.4 aguarda autorização.
+## Pendências após 10.5
+
+- Versionamento e sincronização da Etapa 10.5 aguardam confirmação.
+- Persistência, controle de acesso e responsabilidade continuam
+  demonstrativos. A gravação conjunta se restringe à chave
+  organizacional. Permanecem as limitações de concorrência e
+  identificação de sessões descritas acima.
+- RF002 segue parcial até a entrega de regiões e autorização
+  administrativa. RNF003 permanece pendente.
 
 ## Futuro
 Ver exclusões em ESCOPO.md. Não implementar sem aprovação de escopo.

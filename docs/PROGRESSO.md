@@ -17,8 +17,8 @@
 | 09.5 | Implementada, validada e sincronizada | Gerenciamento básico da conta |
 | 09.6–09.7 | Implementadas, validadas e sincronizadas | Integração de layouts e validação integrada |
 | 10.1–10.2 | Implementadas, validadas e sincronizadas | Fundação de prestadores e cadastro autônomo |
-| 10.3–10.4 | Implementadas, versionamento pendente | Empresas, cooperativas e contextos organizacionais |
-| 10.5 | Pendente | Validação integrada |
+| 10.3–10.4 | Implementadas, validadas e sincronizadas | Empresas, cooperativas e contextos organizacionais |
+| 10.5 | Validação concluída, versionamento pendente | Encerramento técnico dos cadastros de prestadores |
 
 ## Planejamento inicial (registro histórico)
 
@@ -1019,6 +1019,10 @@ e seleção por aba são preservados. RF002 permanece parcial.
 
 ## Etapas 10.3 e 10.4 — Empresas, cooperativas e contextos organizacionais
 
+Versionadas em `448cc59afe7ebb2a6087515c7bae023662cc5811`.
+A integração à `main` e a sincronização remota foram confirmadas
+pelo responsável.
+
 DEC-042 registra as propostas P10-15 a P10-32. A conta comum cria
 organizações com CNPJ numérico ou alfanumérico, contato comercial,
 endereço cadastral, intenção por modalidade e responsabilidade
@@ -1061,3 +1065,41 @@ com regiões e autorização pendentes. RNF003 permanece pendente.
 - Os oito cenários demonstrativos ficaram disponíveis. O perfil de
   empresa sem cadastro mostrou orientação e não gravou organização.
   Uma URL com ID arbitrário retornou 404.
+
+## Etapa 10.5 — Validação integrada dos cadastros de prestadores
+
+A revisão confirmou as DEC-039 a DEC-042. Conta pessoal, cadastro
+autônomo, organização e responsabilidade são registros separados.
+Os perfis consultam os dados pessoais da conta, e as edições preservam
+IDs, titularidade, responsabilidade, CNPJ e tipo. A resolução combina
+as fontes válidas sem duplicar contextos ou substituir a seleção da
+aba. Os serviços verificam a sessão e o escopo do registro.
+A implementação validada nas etapas anteriores foi suficiente.
+
+| Jornada | Evidência da validação |
+|---|---|
+| A — Conta multiperfil | Chromium. Cadastro básico, login, autônomo, duas empresas e cooperativa na mesma conta. Cinco contextos selecionáveis, troca sem novo login, recarga e novo login no cliente com todos os cadastros disponíveis. |
+| B — Isolamento | Chromium. Perfis distintos após seleção e 403 para outra conta. Testes isolados rejeitaram edição fora da organização ativa, tentativa com tipo incompatível, sessão ou contexto substituído e atribuição demonstrativa sem responsabilidade. |
+| C — Edição e identidade | Chromium. Nome e telefone atualizados em Minha conta apareceram nos três perfis. Edição dos três tipos de cadastro, alteração do nome fantasia e cancelamento sem gravação. Testes isolados confirmaram preservação dos identificadores e campos imutáveis. |
+| D — Abas | Chromium. Criação de cadastro autônomo e empresa apareceu na segunda aba. Mudança de nome foi sincronizada, as seleções permaneceram independentes e logout se propagou. |
+| E — Inconsistências e falhas | Testes isolados. Cadastro autônomo, CNH e CNPJ duplicados, CNPJ numérico e alfanumérico, falhas de leitura e escrita e associação órfã. Uma fonte inconsistente não concedeu seus contextos nem alterou os dados da outra. No Chromium, falha de escrita preservou os registros e exibiu erro sem confirmação. |
+| F — Administração e demonstração | Chromium. Administração exclusiva recebeu 403 ao tentar cadastrar. O provisionamento disponibilizou os oito cenários e preservou os registros funcionais. Um perfil demonstrativo sem cadastro exibiu orientação. A inspeção do bundle confirmou a ausência da rota e dos dados do provisionamento. |
+
+No Chromium foram conferidos entrada, formulário, seletor,
+organizações homônimas, cabeçalhos e menu mobile, perfis e Minha conta.
+As larguras priorizadas foram 1440, 768, 390 e 320 px, sem rolagem
+horizontal indevida. Foram verificados Tab, foco dos erros e
+legibilidade com nomes extensos. O console registrou o 404 conhecido
+do favicon.
+
+Os cadastros registram intenção por modalidade e dão acesso à
+preparação pelo contexto selecionado. Autorização administrativa,
+prontidão, elegibilidade, recebimento de solicitações e contratação
+continuam fora do cadastro. A expiração posterior da CNH preserva o
+contexto de preparação, conforme teste isolado.
+
+Build, lint e verificação de whitespace passaram. `git fsck --full`
+retornou código 0 e reportou três árvores sem referência já conhecidas.
+A Etapa 10 está tecnicamente concluída no escopo de cadastro.
+RF002 permanece parcial e RNF003 continua pendente. O versionamento
+e a sincronização de 10.5 aguardam autorização e confirmação.
