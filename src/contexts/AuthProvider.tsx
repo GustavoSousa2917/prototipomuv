@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
+import { useLocation, useNavigate } from 'react-router'
 
 import { AuthContext } from './authContext'
 import { accessAssignmentStorageKey } from '../repositories/accessAssignmentRepository'
 import { sessionStorageKey } from '../repositories/sessionRepository'
 import { userStorageKey } from '../repositories/userRepository'
-import { loginUser, logoutUser, restoreSession } from '../services/authSession'
+import { loginUser, logoutUser, restoreSession, switchContext } from '../services/authSession'
 import type { Authentication } from '../services/authSession'
 
 const observedKeys = [sessionStorageKey, userStorageKey, accessAssignmentStorageKey]
@@ -13,6 +14,9 @@ const observedKeys = [sessionStorageKey, userStorageKey, accessAssignmentStorage
 export default function AuthProvider({ children }: { children: ReactNode }) {
   const [authentication, setAuthentication] = useState<Authentication | null>(null)
   const [initializing, setInitializing] = useState(true)
+  const navigate = useNavigate()
+  const location = useLocation()
+  const [logoutOrigin, setLogoutOrigin] = useState<string | null>(null)
 
   useEffect(() => {
     let active = true
@@ -50,10 +54,20 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     setAuthentication(restoreSession())
   }
 
+  async function changeContext(contextKey: string) {
+    if (!authentication) return { kind: 'unavailable' } as const
+    const result = await switchContext(authentication.user.id, contextKey)
+    if (result.kind !== 'storageError') refreshSession()
+    return result
+  }
+
   async function logout() {
     if (!authentication) return 'sessionChanged'
 
+    setLogoutOrigin(location.key)
     const result = await logoutUser(authentication.user.id)
+    if (result === 'loggedOut') navigate('/login', { replace: true, state: null })
+    else setLogoutOrigin(null)
     if (result !== 'storageError') refreshSession()
     return result
   }
@@ -63,7 +77,9 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
       user: authentication?.user ?? null,
       access: authentication?.access ?? null,
       initializing,
+      logoutFromCurrentRoute: logoutOrigin === location.key,
       login,
+      changeContext,
       refreshSession,
       logout,
     }}>

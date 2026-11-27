@@ -9,6 +9,21 @@ export type AccountAccess = {
   capabilities: EnvironmentCapability[]
 }
 
+export type ContextSelectionResult = { kind: 'selected'; access: AccountAccess } | { kind: 'unavailable' | 'storageError' }
+
+export function selectAccountContext(userId: string, requestedKey: string): ContextSelectionResult {
+  const contexts = resolveContexts(userId, readAccessAssignments())
+  const activeContext = contexts.find((context) => contextKey(context) === requestedKey)
+  if (!activeContext) return { kind: 'unavailable' }
+
+  try {
+    activeContextRepository.save({ userId, contextKey: requestedKey })
+    return { kind: 'selected', access: { contexts, activeContext, capabilities: contextCapabilities(activeContext) } }
+  } catch {
+    return { kind: 'storageError' }
+  }
+}
+
 export function clearActiveContext() {
   try {
     activeContextRepository.remove()

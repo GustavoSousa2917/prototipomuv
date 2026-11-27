@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
-import { Link, useNavigate } from 'react-router'
+import { Link, useLocation, useNavigate } from 'react-router'
 
 import Alert from '../../components/feedback/Alert'
 import Button from '../../components/ui/Button'
 import Card from '../../components/ui/Card'
 import Input from '../../components/ui/Input'
+import { protectedReturn } from '../../constants/environmentRoutes'
 import { useAuth } from '../../contexts/authContext'
 
 const errorMessages = {
@@ -17,6 +18,7 @@ const errorMessages = {
 export default function LoginPage() {
   const { initializing, login } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -49,7 +51,7 @@ export default function LoginPage() {
     setProcessing(false)
 
     if (result.kind === 'authenticated') {
-      navigate(result.destination, { replace: true })
+      navigate(protectedReturn(location.state?.returnTo) ?? result.destination, { replace: true })
       return
     }
 

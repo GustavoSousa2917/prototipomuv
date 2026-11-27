@@ -1,5 +1,5 @@
 import { useId, useRef, useState } from 'react'
-import { Link, NavLink, useNavigate } from 'react-router'
+import { Link, NavLink } from 'react-router'
 
 import {
   Bell,
@@ -14,6 +14,7 @@ import {
 
 import Logo from '../common/Logo'
 import Avatar from '../common/Avatar'
+import ContextDialog from '../common/ContextDialog'
 import { useAuth } from '../../contexts/authContext'
 
 const navigationItems = [
@@ -47,7 +48,6 @@ export default function ClientHeader() {
   const { user, access, initializing, logout } = useAuth()
   const [loggingOut, setLoggingOut] = useState(false)
   const logoutInProgress = useRef(false)
-  const navigate = useNavigate()
 
   async function handleLogout() {
     if (logoutInProgress.current) return
@@ -59,7 +59,6 @@ export default function ClientHeader() {
     setLoggingOut(false)
 
     if (result === 'storageError') setLogoutError(true)
-    else if (result === 'loggedOut') navigate('/login', { replace: true })
   }
 
   const navigationId = useId()
@@ -274,6 +273,10 @@ export default function ClientHeader() {
                 <ArrowLeft size={18} aria-hidden="true" />
                 Voltar ao site
               </Link>
+
+              {(access?.contexts.length ?? 0) > 1 && (
+                <ContextDialog trigger="Trocar contexto" />
+              )}
 
               {user && (
                 <>

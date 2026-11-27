@@ -12,8 +12,8 @@ matematicamente. O aceite indica a manifestação no protótipo.
 credencial → gravar a sessão → navegar para `/cliente`, que redireciona
 para `/cliente/solicitar-frete`. Recarregar restaura a identidade se o
 usuário ainda existir. Sair pelo menu da conta remove a sessão e
-retorna a `/login`, com o cadastro preservado. As rotas continuam
-navegáveis em modo demonstrativo sem sessão.
+retorna a `/login`, com o cadastro preservado. Os ambientes protegidos encaminham visitantes ao login. O retorno
+usa apenas um destino interno conhecido e passa novamente pela guarda.
 
 **Contexto de atuação (09.1–09.2).** Contas comuns recebem
 automaticamente o contexto cliente, inclusive as cadastradas antes
@@ -21,7 +21,11 @@ da Etapa 09. Contas com atribuição administrativa exclusiva iniciam
 em `/admin`. A recarga restaura uma seleção válida da mesma conta na
 mesma aba e, em caso contrário, utiliza um contexto permitido. Login,
 logout e invalidação de sessão são refletidos nas demais abas. A
-interface de troca e a proteção das rotas seguem pendentes.
+interface de troca é explícita e local à aba. Quando o destino exige
+outro contexto disponível, a guarda oferece seleção. Quando falta
+acesso, exibe 403 e preserva a URL. A rota `/prestador` reúne as
+atuações profissionais da conta comum, com orientação para cadastro
+futuro quando não existem atribuições.
 
 **Fluxo posterior.** A intenção de oferecer serviços ou atuar como
 motorista vinculado abre caminho para processos próprios. Autônomos e

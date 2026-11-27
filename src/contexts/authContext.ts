@@ -1,12 +1,14 @@
 import { createContext, useContext } from 'react'
 
-import type { Authentication, LoginResult, logoutUser } from '../services/authSession'
+import type { Authentication, LoginResult, logoutUser, switchContext } from '../services/authSession'
 
 type AuthContextValue = {
   user: Authentication['user'] | null
   access: Authentication['access'] | null
   initializing: boolean
+  logoutFromCurrentRoute: boolean
   login: (input: { email: string; password: string }) => Promise<LoginResult>
+  changeContext: (contextKey: string) => ReturnType<typeof switchContext>
   refreshSession: () => void
   logout: () => ReturnType<typeof logoutUser>
 }

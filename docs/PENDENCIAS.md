@@ -27,7 +27,8 @@
 
 ## Pendências técnicas da Etapa 06.6
 
-- O tratamento de acesso negado (403) permanece previsto no item A24.
+- O tratamento visual de acesso negado (403) do item A24 foi entregue
+  em 09.4. A futura API continua responsável pelo controle real.
 
 ## Pendências da Etapa 07
 
@@ -35,12 +36,12 @@
   locais não incluem fotografias adequadas. A inclusão de fotografias
   depende de recursos com origem e uso autorizados.
 
-## Pendências após as Etapas 09.1 e 09.2
+## Pendências após as Etapas 09.3 e 09.4
 
-- Seleção e alternância de contexto, entrada de prestadores, guardas,
-  página 403, conta canônica e contas demonstrativas permanecem para
-  incrementos seguintes. Cadastros profissionais e organizacionais,
-  autorizações e prontidão ficam nos módulos próprios.
+- Conta canônica e integração mais ampla dos layouts permanecem nos
+  próximos incrementos. Cadastros profissionais e organizacionais,
+  autorizações, prontidão e proteção efetiva dos registros ficam nos
+  módulos próprios e na futura API.
 - As páginas de termos e privacidade continuam provisórias. O registro
   de aceite é demonstrativo e não comprova conformidade com a LGPD.
 - A sessão usa eventos nativos entre abas. O contexto ativo é local à
@@ -51,7 +52,7 @@
 - A caixa demonstrativa permite distinguir contas existentes. Um
   canal de recuperação real e segurança de produção ficam para a
   futura integração com backend.
-- Versionamento das Etapas 09.1 e 09.2 aguarda autorização.
+- Versionamento das Etapas 09.3 e 09.4 aguarda autorização.
 
 ## Futuro
 Ver exclusões em ESCOPO.md. Não implementar sem aprovação de escopo.

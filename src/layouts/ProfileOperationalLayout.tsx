@@ -1,6 +1,6 @@
-import { ArrowLeft } from 'lucide-react'
-
 import OperationalLayout from './OperationalLayout'
+import { useAuth } from '../contexts/authContext'
+import { contextLabel } from '../domain/accountAccess'
 
 import type {
   OperationalProfileConfig,
@@ -17,6 +17,10 @@ type ProfileOperationalLayoutProps = {
 export default function ProfileOperationalLayout({
   config,
 }: ProfileOperationalLayoutProps) {
+  const { user, access } = useAuth()
+  const active = access?.activeContext
+  if (!user || !active) return null
+
   const items: SidebarNavigationItem[] =
     config.pages.map((page) => ({
       label: page.label,
@@ -27,19 +31,12 @@ export default function ProfileOperationalLayout({
       end: page.path === '',
     }))
 
-  if (config.canAccessClientArea) {
-    items.push({
-      label: 'Área do cliente',
-      to: '/cliente',
-      icon: ArrowLeft,
-    })
-  }
-
   return (
     <OperationalLayout
       areaLabel={config.areaLabel}
-      userName={config.userName}
-      profileLabel={config.profileLabel}
+      userName={user.fullName}
+      profileLabel={contextLabel(active)}
+      authenticated
       homeTo={config.basePath}
       accountTo={`${config.basePath}/conta`}
       notificationsTo={`${config.basePath}/notificacoes`}

@@ -4,9 +4,11 @@ export type ActingContext =
   | { kind: 'company' | 'cooperative'; organizationId: string }
   | { kind: 'linkedDriver'; linkId: string }
 
+export type AssignedContext = Exclude<ActingContext, { kind: 'client' }>
+
 export type AccessAssignment = {
   userId: string
-  context: Exclude<ActingContext, { kind: 'client' }>
+  context: AssignedContext
 }
 
 const capabilities = {
@@ -28,7 +30,7 @@ function isIdentifier(value: unknown): value is string {
   return typeof value === 'string' && value.length > 0 && value.trim() === value
 }
 
-function isAssignment(value: unknown): value is AccessAssignment {
+export function isAccessAssignment(value: unknown): value is AccessAssignment {
   if (!isRecord(value) || Object.keys(value).length !== 2 || !isIdentifier(value.userId) || !isRecord(value.context)) return false
 
   const { context } = value
@@ -57,7 +59,7 @@ export function resolveContexts(userId: string, stored: unknown): ActingContext[
   if (!Array.isArray(stored)) return [client]
 
   const candidates = stored.filter((entry: unknown) => isRecord(entry) && entry.userId === userId)
-  const contexts = candidates.filter(isAssignment).map(({ context }) => context)
+  const contexts = candidates.filter(isAccessAssignment).map(({ context }) => context)
   const consistent = candidates.length === contexts.length
     && new Set(contexts.map(contextKey)).size === contexts.length
 
@@ -70,4 +72,15 @@ export function resolveContexts(userId: string, stored: unknown): ActingContext[
 
 export function contextCapabilities(context: ActingContext | null): EnvironmentCapability[] {
   return context ? [capabilities[context.kind]] : []
+}
+
+export function contextLabel(context: ActingContext) {
+  switch (context.kind) {
+    case 'client': return 'Cliente'
+    case 'autonomous': return 'Prestador autônomo'
+    case 'company': return 'Empresa · ' + context.organizationId
+    case 'cooperative': return 'Cooperativa · ' + context.organizationId
+    case 'linkedDriver': return 'Motorista vinculado · ' + context.linkId
+    case 'admin': return 'Administração'
+  }
 }

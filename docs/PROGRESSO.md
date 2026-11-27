@@ -12,8 +12,9 @@
 | 06.1–06.6 | Concluídas | Layouts, navegação e página 404 |
 | 07 | Concluída | Página institucional |
 | 08.1–08.4 | Concluídas e sincronizadas | Cadastro, login, sessão, logout e recuperação |
-| 09.1–09.2 | Implementadas e validadas, versionamento pendente | Contextos de atuação, cliente automático e sessão entre abas |
-| 09.3 em diante | Pendente | Alternância de contextos e demais incrementos de conta e acesso |
+| 09.1–09.2 | Implementadas, validadas e sincronizadas | Contextos de atuação, cliente automático e sessão entre abas |
+| 09.3–09.4 | Implementadas e validadas, versionamento pendente | Alternância, guardas e controle de acesso demonstrativo |
+| 09.5 em diante | Pendente | Conta e demais incrementos |
 
 ## Planejamento inicial (registro histórico)
 
@@ -781,7 +782,9 @@ e perfis, permissões e controle de acesso continuam para a Etapa 09.
 
 ## Etapas 09.1 e 09.2 — Fundação de contas e contextos de atuação
 
-Status: implementadas e validadas. Versionamento pendente.
+Status: implementadas, validadas e versionadas em
+`32b4d108b25cb658950d112b45d219a4fed419c6`. Integração à `main` e
+sincronização remota confirmadas pelo responsável.
 
 A DEC-040 registra P09-01 a P09-11. Nesta entrega, contas comuns
 novas e legadas recebem contexto cliente derivado. Atribuições
@@ -826,3 +829,53 @@ entre chaves nem distinção entre sessões consecutivas da mesma conta.
 O armazenamento é demonstrativo. Seletor, guardas, 403, conta canônica,
 atribuições demonstrativas permanentes e autorização operacional
 permanecem pendentes.
+
+## Etapas 09.3 e 09.4 — Alternância e controle de acesso
+
+Status: implementadas e validadas. Versionamento pendente.
+
+O seletor segue a referência T06 (capturas 70–71). A seleção explícita
+revalida a conta e as atribuições e persiste apenas na aba atual.
+Cabeçalhos apresentam identidade e contexto separadamente e oferecem
+logout. A saída explícita descarta o destino de retorno.
+
+A política central verifica conta, contexto, capacidade e escopo
+opcional. As rotas válidas de cliente, autônomo, empresa, cooperativa,
+motorista e administração têm guardas. A entrada `/prestador` lista
+atuações profissionais ou orienta sobre o cadastro futuro. O 403 do
+item A24 mantém a URL solicitada. Endereços desconhecidos continuam
+no 404. Rotas públicas e demonstradores permanecem acessíveis.
+
+O provisionamento idempotente fica em `/dev/contas`, apenas em modo
+de desenvolvimento. As instruções de acesso estão em ARQUITETURA.md.
+Contas existentes e sessões são preservadas. Uma colisão não promove
+uma conta comum. O bundle de produção foi conferido e não contém a
+rota de provisionamento nem a senha fictícia.
+
+### Validação
+
+- Testes isolados passaram para política de acesso, escopo entre
+  empresas e cooperativas, vínculo incompatível, troca inválida ou
+  de outra conta, falha de persistência da seleção, revogação,
+  provisionamento inicial e idempotente e colisão administrativa.
+- Chromium headless em perfis isolados: passaram as jornadas dos
+  seis ambientes protegidos, retorno interno e rejeição de destino
+  externo, troca explícita, 403/404, entrada de prestador com zero,
+  um ou vários contextos, logout e destino administrativo após a saída.
+- Duas abas confirmaram seleção independente, recarga, revogação e
+  invalidação de sessão após recuperação de senha.
+- Foram inspecionadas capturas do seletor, dos cabeçalhos com a conta
+  aberta, do 403, da troca necessária e da entrada de prestadores em
+  1440 × 900, 1280 × 720, 1024 × 768, 768 × 1024, 390 × 844 e
+  320 × 568. Passaram foco, Escape e verificação de rolagem horizontal.
+- Passaram regressões na estrutura pública, cadastro, login, sessão,
+  recuperação, 404, páginas legais e demonstradores. O console
+  apresentou somente o 404 de favicon já conhecido.
+- Build, lint e verificações de whitespace passaram. `git fsck --full`
+  terminou com código 0 e reportou as duas árvores sem referência
+  já conhecidas.
+
+A política de escopo foi verificada com dados isolados. Autorização
+por modalidade, prontidão e proteção de registros de negócio ficam
+nos seus módulos. A proteção cliente-side é demonstrativa e o RNF003
+permanece pendente. A próxima etapa prevista é 09.5.

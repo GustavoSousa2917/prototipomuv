@@ -16,6 +16,7 @@ import {
 } from 'lucide-react'
 
 import type { LucideIcon } from 'lucide-react'
+import type { EnvironmentCapability } from '../domain/accountAccess'
 
 export type OperationalProfile =
   | 'autonomous'
@@ -35,9 +36,7 @@ export type OperationalProfileConfig = {
   profile: OperationalProfile
   basePath: string
   areaLabel: string
-  userName: string
-  profileLabel: string
-  canAccessClientArea: boolean
+  capability: EnvironmentCapability
   pages: readonly OperationalPageDefinition[]
 }
 
@@ -140,36 +139,28 @@ export const operationalProfiles: readonly OperationalProfileConfig[] = [
     profile: 'autonomous',
     basePath: '/prestador/autonomo',
     areaLabel: 'Área do prestador',
-    userName: 'João Ferreira',
-    profileLabel: 'Prestador autônomo',
-    canAccessClientArea: true,
+    capability: 'accessAutonomous',
     pages: providerPages,
   },
   {
     profile: 'company',
     basePath: '/prestador/empresa',
     areaLabel: 'Área da empresa',
-    userName: 'Transportadora Sertão',
-    profileLabel: 'Empresa de transporte',
-    canAccessClientArea: true,
+    capability: 'accessCompany',
     pages: organizationPages,
   },
   {
     profile: 'cooperative',
     basePath: '/prestador/cooperativa',
     areaLabel: 'Área da cooperativa',
-    userName: 'Cooperativa Caminhos',
-    profileLabel: 'Cooperativa de transporte',
-    canAccessClientArea: true,
+    capability: 'accessCooperative',
     pages: organizationPages,
   },
   {
     profile: 'driver',
     basePath: '/motorista',
     areaLabel: 'Área do motorista',
-    userName: 'Carlos Santos',
-    profileLabel: 'Motorista vinculado',
-    canAccessClientArea: true,
+    capability: 'accessLinkedDriver',
     pages: [
       {
         path: '',
@@ -205,9 +196,7 @@ export const operationalProfiles: readonly OperationalProfileConfig[] = [
     profile: 'admin',
     basePath: '/admin',
     areaLabel: 'Área administrativa',
-    userName: 'Ana Oliveira',
-    profileLabel: 'Administrador',
-    canAccessClientArea: false,
+    capability: 'accessAdmin',
     pages: [
       {
         path: '',

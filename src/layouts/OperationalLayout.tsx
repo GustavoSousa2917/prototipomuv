@@ -4,7 +4,7 @@ import {
   useRef,
 } from 'react'
 
-import { Outlet } from 'react-router'
+import { Outlet, useLocation } from 'react-router'
 import { X } from 'lucide-react'
 
 import Logo from '../components/common/Logo'
@@ -17,6 +17,7 @@ import type {
 } from '../components/navigation/SidebarItem'
 
 type OperationalLayoutProps = {
+  authenticated?: boolean
   areaLabel: string
   userName: string
   profileLabel: string
@@ -27,6 +28,7 @@ type OperationalLayoutProps = {
 }
 
 export default function OperationalLayout({
+  authenticated = false,
   areaLabel,
   userName,
   profileLabel,
@@ -35,6 +37,14 @@ export default function OperationalLayout({
   notificationsTo,
   items,
 }: OperationalLayoutProps) {
+  const location = useLocation()
+  const mainRef = useRef<HTMLElement>(null)
+  useEffect(() => {
+    if (!authenticated) return
+    mainRef.current?.focus({ preventScroll: true })
+    window.scrollTo(0, 0)
+  }, [authenticated, location.key])
+
   const navigationDialog = useRef<HTMLDialogElement>(null)
 
   const navigationId = useId()
@@ -95,6 +105,8 @@ export default function OperationalLayout({
 
       <OperationalHeader
         areaLabel={areaLabel}
+        authenticated={authenticated}
+        profileLabel={profileLabel}
         userName={userName}
         homeTo={homeTo}
         notificationsTo={notificationsTo}
@@ -130,6 +142,7 @@ export default function OperationalLayout({
         {/* Conteúdo da página */}
 
         <main
+          ref={mainRef}
           id="operational-main-content"
           tabIndex={-1}
           className="

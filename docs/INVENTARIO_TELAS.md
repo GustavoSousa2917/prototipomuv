@@ -9,7 +9,7 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 | T03 | Cadastro único em duas etapas | 56–61 | IMPLEMENTADA nas Etapas 08.1–08.2, adaptada à DEC-039. |
 | T04 | Recuperação simulada | 12 | IMPLEMENTADA na Etapa 08.4, adaptada à DEC-039. |
 | T05 | Redefinição com token temporário | 13 | IMPLEMENTADA na Etapa 08.4, adaptada à DEC-039. |
-| T06 | Conta e perfis | 70–71 | PARCIALMENTE IMPLEMENTADA em 09.1–09.2, com contexto cliente no cabeçalho. Seletor e página de conta pendentes. |
+| T06 | Conta e perfis | 70–71 | PARCIALMENTE IMPLEMENTADA em 09.1–09.2, com seletor e contexto em 09.3–09.4. Página canônica de conta pendente. |
 | T07 | Planejamento e solicitação | 15–16,27–28 | ALTERAR |
 | T08 | Pesquisa e estimativas | 17–18,29–30 | ALTERAR |
 | T09 | Detalhes de veículo | 31–32 | ALTERAR |
@@ -71,7 +71,7 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 | A21 | Verificação de vínculo | ADICIONAR |
 | A22 | Devolução de objeto | ADICIONAR |
 | A23 | Edição da conta | ADICIONAR |
-| A24 | Página não encontrada (404) e acesso negado (403) | 404 implementada e validada na Etapa 06.6. 403 pendente. |
+| A24 | Página não encontrada (404) e acesso negado (403) | 404 implementada na Etapa 06.6 e 403 demonstrativo implementado na Etapa 09.4. |
 | A25 | Tarifas | ADICIONAR |
 | A26 | Edição de veículo | ADICIONAR |
 | A27 | Avaliação do prestador | ADICIONAR |

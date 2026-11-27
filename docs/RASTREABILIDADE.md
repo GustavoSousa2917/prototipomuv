@@ -5,7 +5,7 @@ As rotas abaixo são referências de planejamento. A linha de RF001, RU001 e US-
 | Referências | Perfil | Fluxo | Telas | Rota proposta | Teste de aceitação futuro |
 |---|---|---|---|---|---|
 | RF001, RU001, US-001, RN002, DEC-039 | Todos | RF001, RU001 e US-001 atendidos no escopo demonstrativo da Etapa 08. | T02–T05 (T06 parcialmente implementada, A23 pendente) | /login, /cadastro, /recuperar-senha, /redefinir-senha | Cadastro, login, recarga da sessão, logout, recuperação e redefinição por token verificados. |
-| RN002, DEC-001.1–5, DEC-040 | Conta comum/admin | Contexto cliente automático, administração exclusiva, sessão e seleção por aba (09.1–09.2) | T06 | /cliente, /admin | Conta nova e legada, seleção revalidada e sincronização de sessão verificadas. Alternância, guardas e conta canônica pendentes. |
+| RN002, DEC-001.1–5, DEC-040 | Conta comum/admin | Contexto cliente automático, administração exclusiva, sessão e seleção por aba (09.1–09.2) | T06 | /cliente, /admin | Conta nova e legada, seleção revalidada e sincronização de sessão verificadas. Alternância e guardas em 09.3–09.4. Conta canônica pendente. |
 | RF002, RU008,RU012,US-016,RN004 | Prestador/admin | Autorização | T03,T06,T39,A20 | /prestador/autorizacoes, /admin/autorizacoes | Aprovação independente, rejeição justificada |
 | RF003,RU009,US-010,RN005 | Gestor/motorista | Vínculo | T28,T29,A21 | /prestador/motoristas | Aceite, verificação por organização |
 | RF004,RU009,US-009,RN012 | Prestador | Veículos | T20,T23,T24,A26 | /prestador/veiculos | Placa duplicada, capacidade, inativação |
@@ -24,6 +24,7 @@ As rotas abaixo são referências de planejamento. A linha de RF001, RU001 e US-
 | RF015 | Prestador/motorista | Achados e perdidos | T37,T38,A22 | /prestador/achados-perdidos, /motorista/achados-perdidos | Foto, data, veículo e devolução |
 | US-015,RU012 (RF a formalizar) | Cliente/prestador/admin | Contestação | A17–A19 | /admin/contestacoes, detalhes do frete | Uma por concluído, sem mudar estado |
 | DEC-035.1–4 (RF a formalizar) | Cliente | Avaliação | Nova | /cliente/fretes/:id | Uma por concluído, média correta |
+| DEC-040.4–11 | Todos | Alternância, guardas e controle demonstrativo | T06,A24 | /cliente, /prestador, /motorista, /admin | Contexto ativo, retorno interno, 403/404 e política de escopo isolada. |
 | RNF001–004 | Todos | Transversal | Todas,A24 | Todas | Responsividade, desempenho, limites de segurança e disponibilidade |
 
 ## Divergências com o PDF original após a DEC-038

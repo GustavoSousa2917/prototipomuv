@@ -56,6 +56,10 @@ export const userRepository: UserRepository = {
   async create(user) {
     function save(): CreateResult {
       const users = readUsers()
+      if (users.some((existing) => existing.id === user.id)) {
+        throw new Error('Identificador de conta já existente.')
+      }
+
       const fields = {
         cpf: users.some((existing) => existing.cpf === user.cpf),
         email: users.some((existing) => existing.email === user.email),

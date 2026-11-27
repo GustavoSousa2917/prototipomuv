@@ -7,8 +7,11 @@ import {
 
 import Logo from '../common/Logo'
 import Avatar from '../common/Avatar'
+import ContextDialog from '../common/ContextDialog'
 
 type OperationalHeaderProps = {
+  authenticated: boolean
+  profileLabel: string
   areaLabel: string
   userName: string
   homeTo: string
@@ -19,6 +22,8 @@ type OperationalHeaderProps = {
 }
 
 export default function OperationalHeader({
+  authenticated,
+  profileLabel,
   areaLabel,
   userName,
   homeTo,
@@ -65,7 +70,7 @@ export default function OperationalHeader({
             </p>
 
             <p className="text-muv-small text-muted">
-              Ambiente operacional
+              {authenticated ? profileLabel : 'Ambiente operacional'}
             </p>
           </div>
         </div>
@@ -95,26 +100,31 @@ export default function OperationalHeader({
             />
           </NavLink>
 
-          <NavLink
-            to={accountTo}
-            aria-label="Minha conta"
-            title="Minha conta"
-            className={({ isActive }) => `
-              flex size-11 items-center justify-center
-              rounded-muv-button
+          {authenticated ? (
+            <ContextDialog accountMenu trigger={<Avatar name={userName} />} />
+          ) : (
+            <NavLink
+              to={accountTo}
+              aria-label="Minha conta"
+              title="Minha conta"
+              className={({ isActive }) => `
+                flex size-11 items-center justify-center
+                rounded-muv-button
 
-              ${
-                isActive
-                  ? 'bg-primary-light'
-                  : 'hover:bg-background'
-              }
-            `}
-          >
-            <Avatar
-              name={userName}
-              size="md"
-            />
-          </NavLink>
+                ${
+                  isActive
+                    ? 'bg-primary-light'
+                    : 'hover:bg-background'
+                }
+              `}
+            >
+              <Avatar
+                name={userName}
+                size="md"
+              />
+            </NavLink>
+
+          )}
 
           {/* Abertura da barra lateral mobile */}
 

@@ -221,9 +221,7 @@ Características:
 As rotas de desenvolvimento não utilizam
 o layout público.
 
-As permissões de acesso serão tratadas
-posteriormente pelo módulo de autenticação
-e pelos mecanismos de proteção de rotas.
+As rotas públicas ficam fora das guardas dos ambientes autenticados.
 
 ## Layout público
 
@@ -342,8 +340,9 @@ tentativa. Sem sessão, o ambiente cliente continua demonstrativo.
 O armazenamento é manipulável e oferece apenas uma simulação.
 As abas compartilham a chave persistida e revalidam a autenticação
 ao receber eventos de armazenamento da sessão, usuários e atribuições.
-A última gravação da sessão prevalece. A sessão ainda não controla
-acesso às rotas nem concede permissões operacionais.
+A última gravação da sessão prevalece. As guardas usam a sessão e o contexto ativo para controlar a
+navegação demonstrativa. Permissões de operações de negócio seguem
+pendentes.
 
 ### Recuperação e redefinição demonstrativas
 
@@ -416,7 +415,66 @@ conta antes de remover a sessão. A chave persistida continua
 LocalStorage é manipulável. Sem Web Locks, as abas podem disputar
 gravações e a fila serializa apenas uma aba. A sessão identifica
 a conta, mas não diferencia duas sessões consecutivas do mesmo
-usuário. A entrega não provisiona atribuições pela interface.
+usuário. A interface de provisionamento fica restrita ao modo de
+desenvolvimento.
+
+### Alternância e política de acesso
+
+`src/domain/accessPolicy.ts` avalia identidade, contexto disponível,
+contexto ativo, capacidade e escopo opcional por ID de organização
+ou vínculo. A troca passa pelo serviço de autenticação, que confirma
+a conta sob o bloqueio compartilhado e revalida as atribuições antes
+de gravar o contexto no sessionStorage da aba. Os cabeçalhos do
+cliente e operacionais oferecem seleção explícita e logout.
+
+| Contexto | Capacidade | Ambiente |
+|---|---|---|
+| Cliente | `accessClient` | `/cliente` |
+| Autônomo | `accessAutonomous` | `/prestador/autonomo` |
+| Empresa | `accessCompany` | `/prestador/empresa` |
+| Cooperativa | `accessCooperative` | `/prestador/cooperativa` |
+| Motorista vinculado | `accessLinkedDriver` | `/motorista` |
+| Administração | `accessAdmin` | `/admin` |
+
+`AccessGuard` usa essa política nos ramos que correspondem às
+rotas válidas. Exibe carregamento durante a inicialização. Depois,
+encaminha visitantes a `/login`, oferece troca explícita quando
+houver contexto disponível ou renderiza o 403 no endereço solicitado.
+O login aceita somente destinos internos entre as rotas protegidas
+conhecidas e executa a guarda novamente. A rota curinga continua
+tratando endereços inexistentes como 404. O 403 é visual na SPA.
+
+A rota `/prestador` apresenta contextos profissionais disponíveis às
+contas comuns. Sem contexto, oferece orientação sobre cadastro futuro.
+Páginas institucionais, legais, autenticação e demonstradores existentes
+continuam públicas. O provisionamento `/dev/contas` só existe no servidor
+de desenvolvimento e usa identificadores reservados, validação de
+colisões e credenciais sintéticas derivadas no navegador. Reexecutar
+preserva usuários e sessões. As gravações de conta e atribuição usam
+chaves distintas, portanto uma falha parcial pode exigir nova tentativa.
+
+Para validar os ambientes, execute `npm run dev`, abra `/dev/contas`
+e selecione **Provisionar contas demonstrativas**. Em `/login`, use
+um dos endereços abaixo com a senha inicial fictícia `MuvDemo2026`.
+A página também informa colisões ou falhas por conta. Uma senha já
+alterada pelo fluxo de recuperação é preservada.
+
+| Conta | E-mail demonstrativo |
+|---|---|
+| Cliente | `cliente@demo.muv.invalid` |
+| Autônomo | `autonomo@demo.muv.invalid` |
+| Empresa | `empresa@demo.muv.invalid` |
+| Cooperativa | `cooperativa@demo.muv.invalid` |
+| Motorista | `motorista@demo.muv.invalid` |
+| Multiperfil | `multiperfil@demo.muv.invalid` |
+| Multiorganização | `multiorganizacao@demo.muv.invalid` |
+| Administração exclusiva | `admin@demo.muv.invalid` |
+
+Os ambientes de empresa, cooperativa e motorista representam a
+atuação ativa. Os módulos ainda não carregam registros de organização
+ou vínculo. Serviços futuros poderão exigir escopo específico na
+mesma política. A validação de escopo isolada não equivale à proteção
+de dados de negócio nem a autorização por modalidade ou prontidão.
 
 ## Layout do cliente
 
@@ -457,9 +515,9 @@ compartilhada das interfaces do cliente.
 As páginas possuem conteúdos provisórios.
 
 O cabeçalho identifica a conta autenticada, informa o contexto
-cliente quando aplicável e oferece logout. Sem sessão, apresenta o
-modo demonstrativo. O conteúdo de frete e a proteção de rotas
-permanecem pendentes.
+cliente quando aplicável e oferece logout. Sem sessão, a guarda exibe a
+página de login antes de acessar as rotas protegidas. O conteúdo de
+frete permanece provisório.
 
 ## Layout operacional compartilhado
 
@@ -512,8 +570,8 @@ Os dados de identificação são fictícios.
 Os menus definitivos de cada perfil serão
 configurados posteriormente.
 
-A autenticação e as permissões de acesso
-ainda não estão implementadas.
+A autenticação e as guardas estão integradas aos ambientes.
+Permissões de operações de negócio seguem pendentes.
 
 ## Navegação operacional por perfil
 
@@ -560,11 +618,10 @@ Os dados de identificação são fictícios.
 
 As páginas apresentam conteúdos provisórios.
 
-A configuração da navegação não representa um
-mecanismo de autorização ou proteção de rotas.
-
-A autenticação, a sessão e as permissões serão
-integradas em incrementos posteriores.
+A guarda separada controla a entrada. Os cabeçalhos autenticados
+apresentam a conta e o contexto ativo. Os demonstradores preservam
+seus próprios dados fictícios. Permissões operacionais serão
+integradas nos módulos correspondentes.
 
 ## Rota inexistente
 

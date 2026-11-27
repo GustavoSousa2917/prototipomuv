@@ -2,6 +2,10 @@ import { Routes, Route, Navigate } from 'react-router'
 
 import PublicLayout from '../layouts/PublicLayout'
 import AuthLayout from '../layouts/AuthLayout'
+import AccessGuard from './AccessGuard'
+import ProviderEntryPage from '../pages/operational/ProviderEntryPage'
+import DemoAccountsPage from '../pages/dev/DemoAccountsPage'
+import { environmentRoutes } from '../constants/environmentRoutes'
 
 import LoginPage from '../pages/auth/LoginPage'
 import RegisterPage from '../pages/auth/RegisterPage'
@@ -103,9 +107,13 @@ export default function AppRoutes() {
         element={<DesignSystemPage />}
       />
 
+      {import.meta.env.DEV && <Route path="/dev/contas" element={<DemoAccountsPage />} />}
+
       {/* Ambiente do cliente */}
 
-      <Route path="/cliente" element={<ClientLayout />}>
+      <Route path={environmentRoutes.client} element={
+        <AccessGuard requirement={{ capabilities: ['accessClient'] }}><ClientLayout /></AccessGuard>
+      }>
 
         <Route
           index
@@ -204,10 +212,9 @@ export default function AppRoutes() {
       <Route
         path="/prestador"
         element={
-          <Navigate
-            to="/prestador/autonomo"
-            replace
-          />
+          <AccessGuard requirement={{ capabilities: ['accessClient', 'accessAutonomous', 'accessCompany', 'accessCooperative', 'accessLinkedDriver'] }}>
+            <ProviderEntryPage />
+          </AccessGuard>
         }
       />
 
@@ -216,9 +223,9 @@ export default function AppRoutes() {
           key={config.profile}
           path={config.basePath}
           element={
-            <ProfileOperationalLayout
-              config={config}
-            />
+            <AccessGuard requirement={{ capabilities: [config.capability] }}>
+              <ProfileOperationalLayout config={config} />
+            </AccessGuard>
           }
         >
 

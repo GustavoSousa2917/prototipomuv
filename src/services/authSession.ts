@@ -2,8 +2,8 @@ import { isValidEmail, normalizeEmail } from '../domain/userRegistration'
 import type { User } from '../domain/userRegistration'
 import { sessionRepository } from '../repositories/sessionRepository'
 import { userRepository } from '../repositories/userRepository'
-import { clearActiveContext, initialAccountDestination, resolveAccountAccess } from './accountAccess'
-import type { AccountAccess } from './accountAccess'
+import { clearActiveContext, initialAccountDestination, resolveAccountAccess, selectAccountContext } from './accountAccess'
+import type { AccountAccess, ContextSelectionResult } from './accountAccess'
 import { withAuthMutation } from './authMutation'
 import { verifyCredential } from './passwordCredential'
 
@@ -91,5 +91,17 @@ export async function logoutUser(expectedUserId: string): Promise<'loggedOut' | 
     })
   } catch {
     return 'storageError'
+  }
+}
+
+
+export async function switchContext(expectedUserId: string, contextKey: string): Promise<ContextSelectionResult> {
+  try {
+    return await withAuthMutation(async () => {
+      if (readAuthenticatedUser()?.id !== expectedUserId) return { kind: 'unavailable' }
+      return selectAccountContext(expectedUserId, contextKey)
+    })
+  } catch {
+    return { kind: 'storageError' }
   }
 }
