@@ -146,3 +146,13 @@ RU009, US-009, US-010 e US-016 rastreiam fontes cadastrais das pp.
 10–11, 16 e 18. O diagnóstico deriva da DEC-050 sem atribuir um novo
 RF. IN-004 segue aberto, IN-005 e IN-017 continuam pendentes e
 IN-009, IN-014 e IN-016 conservam a cobertura vigente.
+
+#### Validação integrada da Etapa 15.5
+
+| Referências | Cobertura verificada |
+|---|---|
+| DEC-018–024, DEC-043–044, RF002 e US-016 | A preparação e a autorização continuam distintas. Perda de região, recursos ou intenção altera a avaliação derivada e preserva decisões e retratos administrativos. RF002 segue parcial. |
+| DEC-045–047, RU009, RF003 e US-010 | Identidade compartilhada, vínculos e verificações forneceram os fatos profissionais. O diagnóstico exige critérios reunidos na mesma pessoa e no mesmo vínculo. RF003 segue parcial. |
+| DEC-048–050, RU009, RF004 e US-009 | A correspondência de veículo e tarifa por modalidade e categoria é cadastral. RF004 mantém cobertura cadastral demonstrativa. T06, T19–20, T23, T28–29 e T39 continuam referências das áreas de origem. |
+| DEC-038, RN012, US-011, RF005–RF009 e RNF003 | Busca, critérios operacionais, elegibilidade comercial, designação e segurança de produção permanecem pendentes. A DEC-050 fundamenta o diagnóstico sem criar um RF específico. |
+| IN-004, IN-005, IN-009, IN-014, IN-016 e IN-017 | IN-004 segue aberto. Busca e compatibilidade territorial continuam pendentes. A cobertura de modalidades, notificações e convites conserva os limites já registrados. |

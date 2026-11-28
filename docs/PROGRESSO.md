@@ -1510,5 +1510,73 @@ Build e lint passaram. O JavaScript de entrada passou de 465,99 kB para
 origem do catálogo municipal têm respectivamente 14,39 kB, 13,48 kB,
 15,37 kB e 180,65 kB.
 
-A validação de encerramento 15.5 permanece pendente. A decisão sobre o
-nível de compatibilidade motorista–veículo precisa preceder a busca.
+As etapas 15.1–15.4 foram versionadas e sincronizadas em
+`731cc60db59069e939b40f24b664e8be52385b4d`.
+
+## Etapa 15.5 — Validação integrada do diagnóstico cadastral
+
+A auditoria confirmou que a avaliação recebe fatos e data explícitos,
+independe de React, sessão e armazenamento e aplica a DEC-050 às duas
+modalidades e às quatro categorias da DEC-048. O serviço restringe a
+coleta ao prestador ativo e revalida sessão, contexto e responsabilidade.
+A projeção do legado profissional permanece em memória. A publicação
+dos dados migrados continua no fluxo profissional anterior.
+
+### Execução atual
+
+As jornadas foram executadas no Chromium 159.0.8154.6, com Playwright
+1.65.1, Vite em porta estrita e armazenamento fictício isolado.
+A preparação e parte das transições usaram os serviços existentes
+dentro do navegador. O log registrou a conclusão de todas as
+asserções. O processo recebeu SIGTERM após o último resultado,
+antes de confirmar saída normal.
+
+| Jornada | Resultado |
+|---|---|
+| A — Autônomo | Autorização não solicitada, pendente e aprovada. Resultado cadastral por modalidade, ressalva de compatibilidade e ausência de exigência de vínculo. |
+| B — Empresa | Vínculo sem verificação, aprovação, divergência e restauração, rejeição posterior, encerramento e suficiência de outro profissional. As verificações históricas permaneceram intactas após as consultas. |
+| C — Cooperativa | Vínculos, verificações, frota e tarifas específicos de cada organização. O encerramento de um vínculo preservou o outro. |
+| D — Modalidades e categorias | Categoria suficiente após correspondência de veículo e tarifa. Demais categorias preservaram resultados próprios. Modalidade desmarcada deixou de contar mesmo com capacidade preservada. |
+| E — Perda e restauração | Região, tarifa, veículo e intenção alteraram somente os fatos de origem esperados e os resultados derivados. Autorizações e retratos permaneceram idênticos. Duas empresas da mesma conta mantiveram contextos independentes. |
+| F — Integridade e data | Guardas 403 e 404, contexto demonstrativo, acesso incompatível, falha de leitura, coleção inválida, precedência e recuperação. Duas abas confirmaram sincronização, seleções válidas e logout compartilhado. |
+
+Consultas e atualizações repetidas mantiveram iguais as chaves e os
+valores completos de LocalStorage e SessionStorage, inclusive na
+virada da data civil. O teste avançou o relógio do navegador do dia
+anterior ao vencimento até o dia posterior. A CNH permaneceu vigente
+no dia do vencimento e passou a vencida sem evento de armazenamento.
+Foco, retorno à página, notificação de visibilidade e atualização
+manual também foram exercitados.
+
+### Evidências reaproveitadas
+
+Os testes isolados de 15.1–15.4 cobrem as quatro divergências de CNH,
+o nome fora da comparação, candidatos parcialmente avaliáveis,
+consolidação com categoria inconclusiva, referências inconsistentes
+e legado sem publicação. A auditoria confirma que telefone também
+fica fora da comparação. Os fluxos completos de cadastro e migração
+profissional, proteção da intenção durante análise, solicitação sem
+recursos operacionais e simulação de tarifa mantêm as evidências dos
+incrementos anteriores. A regressão atual percorreu login, Minha conta,
+logout, seleção de contextos, convites, vínculos, verificações,
+autorizações, regiões, frota e tarifas nas transições das jornadas.
+
+### Interface e encerramento
+
+Quatro estados representativos foram capturados em 1440 × 900,
+768 × 1024, 390 × 844 e 320 × 568. Foram conferidos teclado, foco
+visível e preservado, títulos e agrupamentos, links nomeados,
+situações em texto, atualização via região de status e ausência
+de rolagem horizontal indevida. As 16 capturas estão em
+`/workspaces/muv-test-tools/screenshots/etapa-15.5/`.
+
+Build, lint e verificações Git passaram. Prontidão, Veículos, Tarifas
+e catálogo municipal permanecem sob demanda. A inspeção dos chunks
+confirmou ausência de ciclos pertinentes e de provisionamento
+privilegiado na produção. Nenhum defeito funcional reproduzível
+exigiu correção. Os ajustes desta etapa são documentais.
+
+A Etapa 15 está funcionalmente encerrada no escopo cadastral
+demonstrativo. O versionamento da 15.5 aguarda autorização. A
+próxima atividade é o diagnóstico direcionado da compatibilidade
+motorista–veículo antes da busca comercial.

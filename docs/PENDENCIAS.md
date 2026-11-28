@@ -203,4 +203,14 @@ seleção comercial, designação e os fluxos de frete. A integração
 entre múltiplas chaves segue sem transação global. O diagnóstico
 demonstrativo depende da integridade das fontes locais. Segurança
 e consistência de produção dependem do backend. O encerramento
-funcional fica para 15.5.
+cadastral demonstrativo na 15.5 preserva essas pendências.
+
+Os módulos de origem continuam sujeitos a fallback restrito à aba sem
+Web Locks, sessão simulada por `userId` e compatibilidade limitada entre
+versões. O diagnóstico permanece derivado das fontes atuais e sem
+persistência. A condição cadastral positiva não oferece comprovação
+documental nem verificação legal de motorista e veículo. A próxima
+atividade será o diagnóstico direcionado da compatibilidade, incluindo
+classificação e composição documental, PBT, lotação, categoria da CNH,
+EAR, requisitos do serviço, avaliação conjunta e relação com
+elegibilidade comercial.

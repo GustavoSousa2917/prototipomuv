@@ -117,4 +117,6 @@ O diagnóstico cruza identidade, intenção, autorização, regiões,
 dados profissionais, frota e tarifas. O estado cadastral é derivado
 e a compatibilidade motorista–veículo permanece não verificada.
 Disponibilidade, elegibilidade comercial, busca e designação
-seguem pendentes. A validação integrada de encerramento fica para 15.5.
+seguem pendentes. A validação 15.5 encerra a Etapa 15 no escopo
+cadastral demonstrativo. A próxima atividade é o diagnóstico
+direcionado da compatibilidade motorista–veículo antes da busca comercial.
