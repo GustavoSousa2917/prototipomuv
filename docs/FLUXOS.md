@@ -176,3 +176,9 @@ dados atuais antes de editar novamente.
 No contexto de empresa ou cooperativa, abra Motoristas e informe o e-mail exato da conta convidada. A lista reúne pendentes e históricos. Um pendente pode ser cancelado com confirmação. Após recusa ou cancelamento, outro convite pode ser enviado se o par estiver livre.
 
 Em Minha conta, abra o perfil profissional e selecione Convites recebidos. A recusa admite conta sem perfil. Para aceitar, cadastre primeiro a habilitação, se necessário. Um perfil estruturalmente válido com CNH vencida ainda pode aceitar. O aceite cria vínculo, mantém a seleção corrente e disponibiliza novo contexto em Minha conta. O contexto selecionado identifica a organização em Motorista → Vínculos.
+
+### Verificação e encerramento
+
+A organização abre o vínculo em Motoristas, consulta habilitação e histórico e confirma a aprovação ou registra rejeição fundamentada. Nova análise usa os dados correntes; o vencimento bloqueia nova aprovação. O motorista consulta e pode encerrar pelo contexto vinculado ou pelo histórico em Perfil profissional → Meus vínculos.
+
+O encerramento exige justificativa e retira o contexto vinculado, mantendo a sessão e o histórico de ambas as partes. Na organização, os dados disponíveis passam a ser os registros históricos. Novo convite inicia outro vínculo após aceite, com verificação pendente.

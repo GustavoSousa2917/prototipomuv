@@ -16,6 +16,7 @@ const clientRoutes = ['', '/solicitar-frete', '/prestadores', '/solicitacoes', '
 export const accountRoute = '/conta'
 export const driverProfessionalRoute = accountRoute + '/motorista'
 export const driverInvitationsRoute = driverProfessionalRoute + '/convites'
+export const driverOwnLinksRoute = driverProfessionalRoute + '/vinculos'
 export const autonomousRegistrationRoute = environmentRoutes.autonomous + '/cadastro'
 export const autonomousProfileRoute = environmentRoutes.autonomous + '/perfil'
 
@@ -40,6 +41,9 @@ const protectedPaths = [
   accountRoute,
   driverProfessionalRoute,
   driverInvitationsRoute,
+  driverOwnLinksRoute,
+  environmentRoutes.company + '/motoristas/:linkId',
+  environmentRoutes.cooperative + '/motoristas/:linkId',
   autonomousRegistrationRoute,
   '/prestador',
   ...clientRoutes,

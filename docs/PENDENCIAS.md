@@ -112,3 +112,9 @@ Ver exclusões em ESCOPO.md. Não implementar sem aprovação de escopo.
 ### Após 12.4
 
 IN-016 passou a ter convite interno por e-mail exato para conta comum existente, sem expiração automática. Convites sem conta e códigos permanecem adiados. Senhas e credenciais continuam sob responsabilidade do titular. IN-014 permanece pendente para notificações gerais. P12-12, P12-13, P12-14 e P12-16 seguem sem aprovação. RF003 e RF002 continuam parciais; RNF003 e a compatibilidade territorial de IN-017 permanecem pendentes.
+
+### Após 12.6
+
+P12-12, P12-13, P12-14 e P12-16 foram aprovadas na DEC-047. IN-016 inclui convites internos e encerramento; convites sem conta e códigos permanecem adiados. IN-014 permanece pendente quanto a notificações gerais e IN-017 quanto à compatibilidade territorial. RF002 e RF003 permanecem parciais; RF005 e RNF003 seguem pendentes.
+
+Ainda precisam ser definidos os efeitos de verificação e vigência na aptidão, prontidão e designação. Antes de integrar a operação de fretes, definir as condições para encerramento com motorista designado ou em execução, substituição e acesso ao histórico operacional.

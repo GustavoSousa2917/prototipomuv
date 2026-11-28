@@ -10,7 +10,7 @@ import OrganizationPage from '../pages/operational/OrganizationPage'
 import ProviderEntryPage from '../pages/operational/ProviderEntryPage'
 import DemoAccountsPage from '../pages/dev/DemoAccountsPage'
 import AccountPage from '../pages/auth/AccountPage'
-import { accountRoute, autonomousRegistrationRoute, driverInvitationsRoute, driverProfessionalRoute, environmentRoutes, organizationRegistrationRoutes, serviceRegionsPath } from '../constants/environmentRoutes'
+import { accountRoute, autonomousRegistrationRoute, driverInvitationsRoute, driverOwnLinksRoute, driverProfessionalRoute, environmentRoutes, organizationRegistrationRoutes, serviceRegionsPath } from '../constants/environmentRoutes'
 
 import LoginPage from '../pages/auth/LoginPage'
 import RegisterPage from '../pages/auth/RegisterPage'
@@ -42,7 +42,8 @@ import {
 
 const DriverInvitationsPage = lazy(() => import('../pages/operational/DriverLinksPage').then((module) => ({ default: module.DriverInvitationsPage })))
 const OrganizationDriversPage = lazy(() => import('../pages/operational/DriverLinksPage').then((module) => ({ default: module.OrganizationDriversPage })))
-const ActiveDriverLinkPage = lazy(() => import('../pages/operational/DriverLinksPage').then((module) => ({ default: module.ActiveDriverLinkPage })))
+const OwnDriverLinksPage = lazy(() => import('../pages/operational/DriverVerificationPage').then((module) => ({ default: module.OwnDriverLinksPage })))
+const OrganizationDriverDetailPage = lazy(() => import('../pages/operational/DriverVerificationPage').then((module) => ({ default: module.OrganizationDriverDetailPage })))
 const DriverProfessionalPage = lazy(() => import('../pages/auth/DriverProfessionalPage'))
 const ProviderAuthorizationsPage = lazy(() => import('../pages/operational/ProviderAuthorizationsPage'))
 const AdminAuthorizationsPage = lazy(() => import('../pages/operational/AdminAuthorizationsPage'))
@@ -136,6 +137,12 @@ export default function AppRoutes() {
       <Route path={driverInvitationsRoute} element={
         <AccessGuard requirement={{ capabilities: ['accessClient', 'accessAutonomous', 'accessCompany', 'accessCooperative', 'accessLinkedDriver'] }}>
           <Suspense fallback={<Loading message="Carregando convites..." />}><DriverInvitationsPage /></Suspense>
+        </AccessGuard>
+      } />
+
+      <Route path={driverOwnLinksRoute} element={
+        <AccessGuard requirement={{ capabilities: ['accessClient', 'accessAutonomous', 'accessCompany', 'accessCooperative', 'accessLinkedDriver'] }}>
+          <Suspense fallback={<Loading />}><OwnDriverLinksPage /></Suspense>
         </AccessGuard>
       } />
 
@@ -279,6 +286,10 @@ export default function AppRoutes() {
             } />
           )}
 
+          {(config.profile === 'company' || config.profile === 'cooperative') && <Route path="motoristas/:linkId" element={
+            <Suspense fallback={<Loading />}><OrganizationDriverDetailPage /></Suspense>
+          } />}
+
           {config.profile === 'admin' && <Route path="autorizacoes/:id" element={
             <Suspense fallback={<Loading message="Carregando tentativa..." />}><AdminAuthorizationDetailPage /></Suspense>
           } />}
@@ -296,7 +307,7 @@ export default function AppRoutes() {
               element = <Suspense fallback={<Loading message="Carregando motoristas..." />}><OrganizationDriversPage /></Suspense>
             }
             if (config.capability === 'accessLinkedDriver' && (page.path === 'vinculos' || page.path === '')) {
-              element = <Suspense fallback={<Loading message="Carregando vínculo..." />}><ActiveDriverLinkPage /></Suspense>
+              element = <Suspense fallback={<Loading message="Carregando vínculo..." />}><OwnDriverLinksPage selected /></Suspense>
             }
 
             if (page.path === 'autorizacoes') {

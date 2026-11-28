@@ -31,7 +31,7 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 | T25 | Detalhes de solicitação | 46–47 | ALTERAR |
 | T26 | Solicitações na região | 48–49 | ALTERAR para consultar as solicitações recebidas pelo prestador (DEC-038). |
 | T27 | Contraproposta | 50–51 | MANTER |
-| T28 | Vínculos | 52–53 | IMPLEMENTADA COM ADAPTAÇÃO em 12.3–12.4. Verificação e encerramento pendentes. |
+| T28 | Vínculos | 52–53 | IMPLEMENTADA COM ADAPTAÇÃO em 12.3–12.6, com verificação e encerramento em A21. |
 | T29 | Cadastro de motorista | 54–55 | IMPLEMENTADA COM ADAPTAÇÃO em 12.1–12.2. Cadastro próprio da conta, com habilitação compartilhada e dados pessoais da conta. |
 | T30 | Designação | 67–68 | MANTER |
 | T31 | Substituição | 69 | ALTERAR |
@@ -68,7 +68,7 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 | A18 | Resposta do prestador | ADICIONAR |
 | A19 | Consulta administrativa de contestação | ADICIONAR |
 | A20 | Perfil e regiões | IMPLEMENTADA. Cadastro, consulta e edição do autônomo em 10.1–10.2 a partir de T03 (58–59) e T06 (70–71). Cadastro e perfil organizacional em 10.3–10.4, adaptados da variante empresarial de T03 (60–61) e da entrada de empresa de T06 (70–71). Regiões implementadas em 11.1–11.2, acessíveis pelo perfil operacional e separadas por modalidade (DEC-043). |
-| A21 | Verificação de vínculo | ADICIONAR |
+| A21 | Verificação e encerramento de vínculo | IMPLEMENTADA em 12.5–12.6 |
 | A22 | Devolução de objeto | ADICIONAR |
 | A23 | Edição da conta | IMPLEMENTADA na Etapa 09.5 em `/conta`, para nome e telefone. |
 | A24 | Página não encontrada (404) e acesso negado (403) | 404 implementada na Etapa 06.6 e 403 demonstrativo implementado na Etapa 09.4. |
@@ -156,4 +156,6 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 
 ### Etapas 12.3–12.4
 
-T28 foi adaptada para Motoristas nos ambientes de empresa e cooperativa, Convites recebidos em `/conta/motorista/convites` e consulta do vínculo selecionado em `/motorista/vinculos`. T29 mantém o cadastro pelo titular conforme DEC-045. A21 permanece pendente para verificação.
+T28 foi adaptada para Motoristas nos ambientes de empresa e cooperativa, Convites recebidos em `/conta/motorista/convites` e consulta do vínculo selecionado em `/motorista/vinculos`. T29 mantém o cadastro pelo titular conforme DEC-045. A verificação e o encerramento foram entregues em 12.5–12.6.
+
+A21 está implementada nas rotas `/prestador/{empresa,cooperativa}/motoristas/:linkId`. O motorista acompanha o vínculo selecionado em `/motorista/vinculos` e o histórico próprio em `/conta/motorista/vinculos`. A lista T28 agrupa ativos e encerrados.

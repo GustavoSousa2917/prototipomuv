@@ -1256,3 +1256,15 @@ O Chromium executou as jornadas A–H com contas fictícias e armazenamento isol
 As capturas externas de Motoristas, convites sem perfil, vínculo ativo e seleção de contextos cobrem 1440 × 900, 1280 × 720, 1024 × 768, 768 × 1024, 390 × 844 e 320 × 568. As verificações incluíram largura do conteúdo, rótulos, estados em texto, Escape e retorno de foco. Evidências em `/workspaces/muv-test-tools/screenshots/etapa-12.3-12.4/`.
 
 Build, lint e `git diff --check` passaram. A guarda de visitante e a página 404 foram verificadas no Chromium. O JS inicial mede 461,21 kB (133,46 kB gzip), com a interface de vínculos sob demanda em 12,40 kB (4,08 kB gzip) e o perfil em 6,37 kB (2,38 kB gzip). O catálogo municipal permanece em chunk separado e o provisionamento privilegiado permanece ausente do build de produção.
+
+## Etapas 12.5 e 12.6 — Verificação e encerramento
+
+A sincronização de 12.3–12.4 foi confirmada no commit `d7f709078c4ad8588f33914d30730fb51985efe3`. A DEC-047 põe em funcionamento análise, histórico de verificações e encerramento por ambas as partes. A validação integrada da Etapa 12 continua prevista para 12.7.
+
+Os testes isolados passaram para revisão de dados e histórico, CNH vencida, rejeição com cadastro inconsistente, autoria e escopo, preservação dos registros em falhas, disputas entre decisões e encerramentos, revalidação de sessão e contexto e privacidade pós-encerramento. A projeção histórica permaneceu consultável com a leitura da fonte profissional interrompida. A regressão isolada de identidade profissional, regiões, autorizações e retratos da Etapa 11 também passou.
+
+As jornadas A–H foram verificadas no Chromium com contas fictícias em sessões isoladas, em duas execuções complementares. As verificações incluíram aprovação empresarial, rejeição e nova análise na cooperativa, independência dos vínculos, vencimento e confirmação obsoleta, encerramento por ambas as partes, retirada de contexto, novo convite com vínculo pendente, escopo e concorrência por Web Locks. As falhas de gravação preservaram as chaves anteriores. Cadastro básico e organizacional, perfil profissional, visitante e 404 passaram nos testes complementares.
+
+Nos seis tamanhos previstos, a verificação visual incluiu equipe, diálogo de encerramento, comparação, justificativa longa e histórico encerrado. Os testes conferiram largura, rótulo, foco inicial, Escape e retorno de foco. Capturas em `/workspaces/muv-test-tools/screenshots/etapa-12.5-12.6/`.
+
+Build, lint e verificações Git passaram. O JS inicial mede 464,26 kB (134,27 kB gzip), o chunk de verificações 15,79 kB (5,24 kB gzip) e o chunk de convites 7,54 kB (2,77 kB gzip). As telas seguem sob demanda, o catálogo municipal permanece separado e o provisionamento privilegiado permanece ausente do bundle.

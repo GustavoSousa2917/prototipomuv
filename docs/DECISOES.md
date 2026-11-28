@@ -361,3 +361,12 @@ mantêm seu escopo futuro.
 | P12-17 | A caixa de convites consulta registros próprios. O módulo geral de notificações permanece pendente em IN-014. |
 
 P12-12, P12-13, P12-14 e P12-16 continuam sem aprovação. A DEC-046 preserva a DEC-020 e a identidade profissional da DEC-045.
+
+## DEC-047 — Verificação organizacional e encerramento de vínculos
+
+| Proposta | Definição aprovada |
+|---|---|
+| P12-12 | A organização analisa diretamente. A situação é Pendente na ausência de decisões. Aprovações e rejeições mantêm autoria, data, retrato e histórico, com justificativa obrigatória na rejeição. Novas análises geram novos registros. |
+| P12-13 | A aprovação exige contexto e responsabilidade correspondentes, vínculo ativo, perfil válido e CNH vigente. Categoria e EAR são informativas. Os dados e o histórico devem corresponder à confirmação. A rejeição fundamentada continua disponível quando a aprovação estiver bloqueada por dados profissionais. |
+| P12-14 | Alterações profissionais e vencimento da CNH preservam as decisões. A interface sinaliza divergências e vigência; os efeitos operacionais ficam pendentes. |
+| P12-16 | Motorista titular ou organização responsável pode encerrar unilateralmente com confirmação e justificativa. São preservados autoria, data e histórico restrito. O contexto é retirado; o histórico organizacional deixa de consultar a habilitação atual. Um novo aceite cria outro vínculo, inicialmente com verificação pendente. |

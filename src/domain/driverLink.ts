@@ -19,6 +19,20 @@ export type DriverInvitation = {
   | { status: 'accepted'; decision: Decision; linkId: string }
 )
 
+export type LinkEnding = {
+  at: string
+  authorId: string
+  authorName: string
+  source: 'driver' | 'organization'
+  reason: string
+  driverName: string
+  organizationName: string
+}
+
+export function normalizeDecisionReason(value: string) {
+  return value.trim().replace(/\s+/g, ' ')
+}
+
 export type DriverLink = {
   id: string
   organization: OrganizationReference
@@ -26,8 +40,7 @@ export type DriverLink = {
   invitationId: string
   acceptedBy: string
   acceptedAt: string
-  status: 'active' | 'ended'
-}
+} & ({ status: 'active' } | { status: 'ended'; ending: LinkEnding })
 
 export type DriverLinkStore = { invitations: DriverInvitation[]; links: DriverLink[] }
 
@@ -39,11 +52,11 @@ function record(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value)
 }
 
-function identifier(value: unknown): value is string {
+export function identifier(value: unknown): value is string {
   return typeof value === 'string' && value.length > 0 && value.trim() === value
 }
 
-function date(value: unknown): value is string {
+export function date(value: unknown): value is string {
   if (typeof value !== 'string') return false
   const instant = new Date(value)
   return Number.isFinite(instant.getTime()) && instant.toISOString() === value
@@ -69,10 +82,17 @@ function invitation(value: unknown): value is DriverInvitation {
 }
 
 function link(value: unknown): value is DriverLink {
-  return record(value) && Object.keys(value).length === 7 && identifier(value.id)
-    && organization(value.organization) && identifier(value.professionalId) && identifier(value.invitationId)
-    && identifier(value.acceptedBy) && date(value.acceptedAt)
-    && (value.status === 'active' || value.status === 'ended')
+  if (!record(value) || !identifier(value.id) || !organization(value.organization)
+    || !identifier(value.professionalId) || !identifier(value.invitationId)
+    || !identifier(value.acceptedBy) || !date(value.acceptedAt)) return false
+  if (value.status === 'active') return Object.keys(value).length === 7
+  const ending = value.ending
+  return value.status === 'ended' && Object.keys(value).length === 8 && record(ending)
+    && Object.keys(ending).length === 7 && date(ending.at) && ending.at >= value.acceptedAt
+    && identifier(ending.authorId) && identifier(ending.authorName)
+    && (ending.source === 'organization' || (ending.source === 'driver' && ending.authorId === value.acceptedBy))
+    && identifier(ending.reason) && normalizeDecisionReason(ending.reason) === ending.reason
+    && identifier(ending.driverName) && identifier(ending.organizationName)
 }
 
 function unique(values: string[]) {

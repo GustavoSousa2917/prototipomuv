@@ -6,7 +6,7 @@ import ConfirmDialog from '../../components/feedback/ConfirmDialog'
 import Button from '../../components/ui/Button'
 import Card from '../../components/ui/Card'
 import Input from '../../components/ui/Input'
-import { accountRoute, driverInvitationsRoute, driverProfessionalRoute } from '../../constants/environmentRoutes'
+import { accountRoute, driverProfessionalRoute } from '../../constants/environmentRoutes'
 import { useAuth } from '../../contexts/authContext'
 import { contextKey } from '../../domain/accountAccess'
 import { isCnhCurrent } from '../../domain/driverProfessional'
@@ -14,8 +14,11 @@ import type { OrganizationReference } from '../../domain/driverLink'
 import { organizationKinds } from '../../domain/organization'
 import { readOwnDriverProfessional } from '../../services/driverProfessional'
 import {
-  decideDriverInvitation, readActiveDriverLink, readDriverInvitations, readOrganizationDrivers, sendDriverInvitation,
+  decideDriverInvitation, readDriverInvitations, readOrganizationDrivers, sendDriverInvitation,
 } from '../../services/driverLinks'
+
+import { readDriverLinkDetails } from '../../services/driverVerification'
+import { VerificationSummary } from './DriverVerificationPage'
 
 const labels = { pending: 'Pendente', accepted: 'Aceito', declined: 'Recusado', canceled: 'Cancelado' }
 const linkLabels = { active: 'Ativo', ended: 'Encerrado' }
@@ -84,6 +87,7 @@ function useInvitationFlow(userId: string, organization?: OrganizationReference)
 function OrganizationDrivers({ userId, organization }: { userId: string; organization: OrganizationReference }) {
   const data = readOrganizationDrivers(userId, organization)
   const flow = useInvitationFlow(userId, organization)
+  const reviews = readDriverLinkDetails({ kind: 'organization', userId, organization })
   const [email, setEmail] = useState('')
   const [invalid, setInvalid] = useState(false)
   function send(event: FormEvent) {
@@ -113,12 +117,23 @@ function OrganizationDrivers({ userId, organization }: { userId: string; organiz
     </Card>
     <Card className="space-y-3">
       <h2 className="text-muv-h2 font-semibold">Motoristas vinculados</h2>
-      <p>A verificação organizacional será disponibilizada em etapa posterior.</p>
-      {data.links.length ? <ul className="divide-y">{data.links.map((row) => <li key={row.id} className="py-3">
-        <strong>{row.name ?? 'Identidade profissional indisponível'}</strong>
-        {row.professionalId && <p>Perfil profissional · {row.professionalId}</p>}
-        <p>{linkLabels[row.status]} · Aceite em {date(row.acceptedAt)}</p>
-      </li>)}</ul> : <p>Nenhum motorista vinculado.</p>}
+      {reviews.kind !== 'ready' && <Alert role="alert" variant="danger">Não foi possível consultar as verificações.</Alert>}
+      {data.links.length ? (['active', 'ended'] as const).map((status) => {
+        const rows = data.links.filter((row) => row.status === status)
+        if (!rows.length) return null
+        return <section key={status} className="space-y-1">
+          <h3 className="font-semibold">{status === 'active' ? 'Ativos' : 'Encerrados'}</h3>
+          <ul className="divide-y">{rows.map((row) => {
+            const detail = reviews.kind === 'ready' && reviews.links.find(({ id }) => id === row.id)
+            return <li key={row.id} className="space-y-1 py-3">
+              <strong>{row.name ?? 'Identidade profissional indisponível'}</strong>
+              <p>{linkLabels[row.status]} · Aceite em {date(row.acceptedAt)}</p>
+              {detail && <VerificationSummary detail={detail} />}
+              <Link className={linkStyle} to={row.id}>Consultar vínculo de {row.name ?? 'motorista'}</Link>
+            </li>
+          })}</ul>
+        </section>
+      }) : <p>Nenhum motorista vinculado.</p>}
     </Card>
     <Card className="space-y-3">
       <h2 className="text-muv-h2 font-semibold">Convites enviados</h2>
@@ -185,28 +200,4 @@ export function OrganizationDriversPage() {
   if (!user || (active?.kind !== 'company' && active?.kind !== 'cooperative')) return null
   return <OrganizationDrivers key={user.id + ':' + contextKey(active)} userId={user.id}
     organization={{ kind: active.kind, organizationId: active.organizationId }} />
-}
-
-export function ActiveDriverLinkPage() {
-  const { user, access } = useAuth()
-  const active = access?.activeContext
-  if (!user || active?.kind !== 'linkedDriver') return null
-  const data = readActiveDriverLink(user.id, active.linkId)
-  return <div className="space-y-4 [overflow-wrap:anywhere]">
-    <h1 className="text-muv-h1 font-bold">Vínculo selecionado</h1>
-    {data.kind === 'ready' ? <Card className="space-y-2">
-      <h2 className="text-muv-h2 font-semibold">{data.organizationName}</h2>
-      <p>{organizationKinds[data.organizationKind]} · CNPJ {data.cnpj}</p>
-      <p>Motorista: {data.name}</p>
-      <p>Vínculo {linkLabels[data.link.status].toLowerCase()} · Aceite em {date(data.link.acceptedAt)}</p>
-      <p>A verificação organizacional é uma etapa posterior. O vínculo permite consultar esta organização.</p>
-    </Card> : <Alert role="status" variant="warning">
-      {data.kind === 'missingLink' ? 'Este contexto está sem vínculo organizacional de negócio.' : readError}
-    </Alert>}
-    <ul className="space-y-2">
-      <li><Link className={linkStyle} to={driverProfessionalRoute}>Perfil profissional</Link></li>
-      <li><Link className={linkStyle} to={driverInvitationsRoute}>Convites recebidos</Link></li>
-      <li><Link className={linkStyle} to={accountRoute}>Selecionar contexto em Minha conta</Link></li>
-    </ul>
-  </div>
 }

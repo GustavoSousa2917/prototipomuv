@@ -15,14 +15,14 @@ import { withAuthMutation } from './authMutation'
 import { authenticatedProfessionalOwner } from './driverProfessional'
 import { resolveActiveProvider } from './providerAccess'
 
-function resolveOrganization(expectedUserId: string, expectedOrganization: OrganizationReference) {
+export function resolveOrganization(expectedUserId: string, expectedOrganization: OrganizationReference) {
   const scope = resolveActiveProvider()
   if (scope.kind !== 'ready' || scope.userId !== expectedUserId || scope.provider.kind === 'autonomous'
     || providerKey(scope.provider) !== providerKey(expectedOrganization)) return null
   return scope
 }
 
-function findOrganization(reference: OrganizationReference) {
+export function findOrganization(reference: OrganizationReference) {
   const { organizations, responsibilities } = organizationRepository.read()
   const organization = organizations.find(({ id, kind }) => id === reference.organizationId && kind === reference.kind)
   const responsible = responsibilities.find(({ organizationId }) => organizationId === reference.organizationId)
@@ -48,14 +48,13 @@ export function readOrganizationDrivers(userId: string, organization: Organizati
     const { invitations, links } = driverLinkRepository.read()
     const belongs = (row: { organization: OrganizationReference }) => providerKey(row.organization) === providerKey(organization)
     const ownLinks = links.filter(belongs)
-    const professionals = ownLinks.length ? driverProfessionalRepository.read().store.professionals : []
     return {
       kind: 'ready', label: scope.label,
       invitations: invitations.filter(belongs).reverse().map((row) => ({ ...invitationSummary(row), email: row.email })),
       links: ownLinks.map((row) => {
-        const professional = professionals.find(({ id, userId }) => id === row.professionalId && userId === row.acceptedBy)
-        const owner = professional && userRepository.findById(professional.userId)
-        return { ...linkSummary(row), name: owner?.fullName, professionalId: professional?.id }
+        if (row.status === 'ended') return { ...linkSummary(row), name: row.ending.driverName, professionalId: row.professionalId }
+        const owner = userRepository.findById(row.acceptedBy)
+        return { ...linkSummary(row), name: owner?.fullName, professionalId: row.professionalId }
       }),
     } as const
   } catch {
