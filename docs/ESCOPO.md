@@ -68,3 +68,7 @@ Convites simulados para contas comuns existentes, caixa pessoal, recusa, cancela
 ## Etapas 12.5 e 12.6
 
 Verificação por vínculo ativo, nova análise, histórico imutável, comparação de habilitação e encerramento unilateral com histórico restrito. A verificação organizacional e a autorização administrativa são registros independentes. Aptidão, prontidão, designação e execução seguem pendentes.
+
+## Etapa 12.7 — Encerramento funcional
+
+A validação integrada encerra a Etapa 12 no escopo demonstrativo definido pelas DEC-045, DEC-046 e DEC-047. O módulo cobre identidade profissional compartilhada, convites, vínculos, verificações independentes e encerramento com histórico restrito. RF002 e RF003 mantêm cobertura parcial. Aptidão, disponibilidade, prontidão e operação de fretes permanecem pendentes. O próximo módulo planejado é veículos e capacidades.

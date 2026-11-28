@@ -1268,3 +1268,24 @@ As jornadas A–H foram verificadas no Chromium com contas fictícias em sessõe
 Nos seis tamanhos previstos, a verificação visual incluiu equipe, diálogo de encerramento, comparação, justificativa longa e histórico encerrado. Os testes conferiram largura, rótulo, foco inicial, Escape e retorno de foco. Capturas em `/workspaces/muv-test-tools/screenshots/etapa-12.5-12.6/`.
 
 Build, lint e verificações Git passaram. O JS inicial mede 464,26 kB (134,27 kB gzip), o chunk de verificações 15,79 kB (5,24 kB gzip) e o chunk de convites 7,54 kB (2,77 kB gzip). As telas seguem sob demanda, o catálogo municipal permanece separado e o provisionamento privilegiado permanece ausente do bundle.
+
+## Etapa 12.7 — Validação integrada e encerramento
+
+A `main` remota foi confirmada em `4e2435150b8199faef60944e07d61374e8c3f63f` (12.5–12.6), contendo `263e982511c78e53bbfd8fe5b33b8b054de26782` (12.1–12.2) e `d7f709078c4ad8588f33914d30730fb51985efe3` (12.3–12.4). Os testes usaram Chromium Headless Shell 159.0.8154.6 e dados fictícios, com Vite local na porta 41741 em modo strictPort.
+
+| Jornada executada | Resultado |
+|---|---|
+| A — Identidade compartilhada | As interfaces convergiram após edição. Uma CNH já usada foi bloqueada em outra conta. ID autônomo, modalidades, regiões e retratos da Etapa 11 foram preservados. A administração viu a habilitação atual e bloqueou ciência obsoleta. A intenção pendente permaneceu protegida. |
+| B — Empresa | Convite e aceite disponibilizaram contexto selecionável. A verificação iniciou pendente. O motorista consultou a aprovação e a organização encerrou o vínculo sem perder convite ou retrato. |
+| C — Cooperativa | Recusa sem perfil, cancelamento e reenvio preservaram o histórico. O aceite exigiu perfil; a rejeição fundamentada manteve o vínculo ativo e a nova aprovação acrescentou outra decisão. |
+| D — Múltiplos contextos | Cliente, autônomo, duas empresas e cooperativa coexistiram com uma habilitação. Seleção explícita, recarga, escopo e verificações independentes foram conferidos. A organização verificou sem autorização administrativa aprovada. |
+| E — Encerramento e privacidade | Encerramento pelo titular retirou um contexto, preservando os demais. O histórico da organização permaneceu acessível com a fonte profissional indisponível. A nova habilitação ficou fora da projeção encerrada. Outro aceite gerou ID distinto e estado Pendente. |
+| F — Escopo e sincronização | Contextos demonstrativos, administração exclusiva, visitante, 403, 404, falhas de leitura e gravação e logout entre abas foram exercitados. O encerramento removeu o contexto da aba receptora mantendo sua seleção válida. |
+
+A análise estática confirmou as validações de `muv.driverProfessionals.v1`, `muv.driverLinks.v1` e `muv.driverVerifications.v1`. A chave `muv.autonomousProviders.v1` permanece como origem legada preservada. Foram reaproveitadas as evidências anteriores de transição e recuperação do legado, disputa com Web Locks, revalidação após mudança de sessão ou contexto e cobertura dos campos de CNH, categoria, validade e EAR. O cadastro básico e a edição de conta foram executados em 12.7. Para a criação de organizações, a validação atual usou registros fictícios preparados pelos serviços e reaproveitou a evidência anterior das telas de cadastro.
+
+O Chromium também confirmou aceite com CNH vencida, bloqueio de nova aprovação, rejeição fundamentada com CNH vencida e manutenção do retrato anterior. Uma mudança durante a confirmação bloqueou a decisão, e a nova análise deliberada foi registrada. A edição de telefone manteve as decisões.
+
+As capturas complementares cobrem 1440 × 900, 768 × 1024, 390 × 844 e 320 × 568. Foram verificados os fluxos representativos de perfil, convites, equipe, verificação, histórico e seleção de contextos, com testes de teclado, foco, Escape e retorno de foco. Capturas em `/workspaces/muv-test-tools/screenshots/etapa-12.7/`.
+
+Build, lint, verificação de whitespace e integridade do Git passaram. A inspeção do bundle confirmou catálogo municipal em chunk sob demanda e ausência de provisionamento privilegiado. Nenhum defeito funcional reproduzível exigiu correção. As alterações são documentais. A Etapa 12 está funcionalmente encerrada no escopo demonstrativo e o versionamento de 12.7 aguarda autorização. O próximo módulo planejado é veículos e capacidades.
