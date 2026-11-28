@@ -127,10 +127,25 @@ Ainda precisam ser definidos os efeitos de verificação e vigência na aptidão
 - RN012, RF009 e US-011 dependem de critérios futuros de aptidão, disponibilidade e prontidão, da compatibilidade entre motorista, veículo e modalidade e das regras de designação e substituição.
 - Antes da execução de fretes, definir regras de encerramento de vínculos com motorista designado ou em execução e o acesso posterior ao histórico operacional. RF002 e RF003 permanecem parciais.
 
-### Após 13.4
+### Pendências preservadas na Etapa 13.5
 
-- Ampliar catálogo veicular e decidir fotos, documentos, compartilhamento e transferência.
-- IN-005 mantém pesquisa e compatibilidade pendentes. IN-009 mantém a revisão documental de AMBOS; o cadastro veicular usa duas modalidades individuais. IN-014, IN-016 e IN-017 mantêm as pendências registradas.
-- Definir compatibilidade dimensional, combinação de capacidades, transporte simultâneo, disponibilidade e relação motorista–veículo.
-- Definir prontidão, designação, substituição e inativação durante fretes, com retratos históricos dos recursos utilizados.
-- A Etapa 13.5 continua prevista para validação integrada.
+- Ampliar o catálogo veicular e definir fotos, documentos veiculares,
+  verificação documental real, compartilhamento e transferência de veículos.
+- Definir disponibilidade temporal, compatibilidade dimensional e
+  compatibilidade entre motorista, veículo e modalidade. Combinação de
+  capacidades e transporte simultâneo de passageiros e carga seguem pendentes.
+- Definir prontidão operacional, designação e substituição de recursos,
+  inativação de veículos durante fretes designados ou em execução e
+  retratos dos recursos efetivamente utilizados.
+- IN-005 mantém pendente a busca de prestadores compatíveis. IN-017 mantém
+  pendente a compatibilidade territorial por origem, destino e trajetos.
+  IN-009 mantém a revisão documental de AMBOS, com duas modalidades
+  individuais no cadastro veicular. IN-014 mantém notificações gerais
+  pendentes. IN-016 conserva as pendências de convites.
+- RF004 cobre o gerenciamento cadastral demonstrativo. RF002 e RF003
+  permanecem parciais. RF005 e RNF003 continuam pendentes.
+- A frota usa LocalStorage. O protótipo tem segurança demonstrativa no
+  frontend, sessão simulada por `userId` e compatibilidade limitada entre
+  versões. A fila sem Web Locks se limita à aba atual. A gravação da
+  frota reúne veículo e eventos na mesma chave. Transações entre chaves e
+  garantias de segurança e integridade de produção dependem do backend.

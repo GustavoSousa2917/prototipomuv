@@ -76,3 +76,16 @@ A validação integrada encerra a Etapa 12 no escopo demonstrativo definido pela
 ## Etapas 13.1–13.4
 
 Cadastro, consulta, edição, histórico mínimo e situação cadastral de veículos para autônomos, empresas e cooperativas. A frota registra capacidades declaradas por modalidade e pode ser preparada antes de solicitar a autorização. O incremento adia fotos, documentos, transferência, disponibilidade, tarifas, prontidão, pesquisa e designação.
+
+## Etapa 13.5 — Validação integrada
+
+RF004 tem cobertura demonstrativa de cadastro, consulta, edição, correção
+auditável de placa, inativação e reativação no contexto do prestador
+responsável. A placa atual é única em toda a coleção, inclusive em
+inativos. As capacidades declaradas são independentes da intenção e da
+autorização administrativa. Cada modalidade tem seus próprios campos.
+
+A situação do veículo é cadastral. Disponibilidade, compatibilidade,
+transporte simultâneo e designação permanecem em aberto. RF002 e RF003
+continuam parciais. RF005 e RNF003 permanecem pendentes. O próximo
+módulo planejado é tarifas.

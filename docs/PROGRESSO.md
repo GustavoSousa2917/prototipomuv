@@ -1292,7 +1292,7 @@ Build, lint, verificação de whitespace e integridade do Git passaram. A inspe�
 
 ## Etapas 13.1–13.4 — Veículos e capacidades
 
-O encerramento da Etapa 12 foi confirmado na `main` remota em `3485ebf82a4ce02aace03092b45814489891df94`. A DEC-048 entrega frota por prestador, placa única entre registros atuais, capacidades por modalidade e histórico mínimo. A Etapa 13.5 segue prevista.
+O encerramento da Etapa 12 foi confirmado na `main` remota em `3485ebf82a4ce02aace03092b45814489891df94`. A DEC-048 entrega frota por prestador, placa única entre registros atuais, capacidades por modalidade e histórico mínimo.
 
 Os testes isolados passaram para identificação, placa, limites de ano, unidades, precisão, modalidades condicionais, preservação de capacidades, transições, histórico, isolamento, erros de leitura e gravação e operações obsoletas. Os cenários concorrentes incluíram unicidade, correção de placa, edição contra inativação e mudança de sessão ou contexto.
 
@@ -1300,4 +1300,64 @@ No Chromium Headless Shell 159.0.8154.6, as jornadas A–H passaram com dados fi
 
 A validação visual em seis resoluções cobriu estados vazios, lista e filtros, formulário, detalhe e confirmação. O foco do primeiro erro foi ajustado para ocorrer após a renderização da mensagem, e a regressão passou. Rótulos, associação do erro, foco visível, Escape, retorno de foco e largura foram verificados. Capturas em `/workspaces/muv-test-tools/screenshots/etapa-13.1-13.4/`.
 
-Build, lint, whitespace e integridade do Git passaram. O JS inicial mede 465,12 kB (134,44 kB gzip) e o chunk de veículos 20,29 kB (6,77 kB gzip). Provedor privilegiado ausente do bundle e catálogo municipal em chunk separado. O versionamento de 13.1–13.4 aguarda autorização.
+Build, lint, whitespace e integridade do Git passaram. O JS inicial mede 465,12 kB (134,44 kB gzip) e o chunk de veículos 20,29 kB (6,77 kB gzip). O provisionamento privilegiado ficou fora do bundle, com o catálogo municipal em chunk separado. As etapas 13.1–13.4 foram versionadas e sincronizadas na `main` em `df4159793dc7828662b037f3687c6619e0671bed`, conforme consulta ao remoto na Etapa 13.5.
+
+## Etapa 13.5 — Validação integrada e encerramento funcional
+
+A validação partiu da `main` limpa, com o mesmo commit local e remoto
+de 13.1–13.4, e seguiu na branch
+`work/etapa-13.5-validacao-integrada`. O Playwright externo 1.65.1
+executou as jornadas no Chromium Headless Shell 159.0.8154.6 (rev. 1255),
+com Vite em loopback na porta 41753 e `strictPort`. Os cadastros fictícios
+de base foram preparados pelos serviços existentes em contextos isolados
+do navegador. As abas da mesma origem compartilharam a sessão e mantiveram
+seleções de contexto próprias.
+
+| Jornada executada | Resultado |
+|---|---|
+| A — Autônomo | Seleção explícita, cadastro de Pessoas, consulta, edição, recarga e filtro. Passageiros excluem o condutor. O ID e o prestador foram preservados e a autorização continuou sem solicitação. |
+| B — Empresa | Carga e volume obrigatórios. Ponto e vírgula aceitos. Zero, negativo, precisão excessiva e trio incompleto rejeitados. A menor entrada positiva persistiu como 1 g e 1 L, com dimensões ausentes. A edição e a recarga preservaram 750.500 g, 3.250 L e 2.405 × 1.200 × 1.102 mm, com apresentação em kg, m³ e cm. |
+| C — Cooperativa | As duas modalidades foram declaradas. Desmarcar Encomendas retirou a declaração ativa e preservou o bloco de carga após recarga. A nova seleção recuperou os valores. A mudança de intenção em outra aba sinalizou divergência e preservou integralmente a coleção veicular. |
+| D — Identidade e histórico | Duplicidades no mesmo prestador e em outro contexto foram rejeitadas com mensagem genérica. A correção confirmada preservou ID e responsabilidade, com placas anterior e nova, autoria e data no histórico. Uma mudança só de apresentação não criou evento. A placa anterior ficou reutilizável e a atual ficou reservada durante a inativação. Edição do inativo, reativação explícita e preservação das capacidades foram conferidas. |
+| E — Isolamento e integração | Uma conta alternou autônomo e duas empresas com frotas separadas. A recarga conservou a seleção, e o escopo bloqueou consulta, edição e transição alheias. Cadastros antes da solicitação foram aceitos. Regiões, autorização e retrato, convites, vínculos, verificações, perfil profissional e cadastro organizacional foram preservados byte a byte nas operações veiculares. |
+| F — Acesso e integridade | Visitante, cliente, motorista vinculado, administração exclusiva, contextos demonstrativos sem cadastro e guardas 403/404. Atualização entre abas, revisão obsoleta, contexto e sessão desatualizados e logout compartilhado foram exercitados. Coleções inválidas foram rejeitadas. Falhas simuladas de leitura e escrita preservaram os registros com seus eventos. |
+
+Na auditoria estática, o domínio e o repositório confirmaram catálogo
+aprovado, formatos normalizados, medidas positivas em inteiros seguros,
+unicidade da placa atual e validação de coerência do histórico. O serviço
+preserva ID, responsabilidade e eventos já gravados, revalida conta,
+contexto, responsabilidade, escopo e revisão, e grava veículo e os eventos
+obrigatórios juntos em `muv.vehicles.v1`. Rotas, página e sincronização
+aplicam a seleção vigente. As gravações veiculares se limitam à frota,
+sem atribuir autorização, prontidão ou designação.
+
+Foram executadas regressões de login, Minha conta, seleção de contextos,
+logout, guardas e preservação das coleções das Etapas 11 e 12. A massa de
+integração exercitou, pelos serviços, cadastro profissional e
+organizacional, região, autorização com retrato, convite, aceite, vínculo
+e verificação. Foram reaproveitadas evidências anteriores das telas de
+cadastro, da identidade profissional compartilhada e da proteção da
+intenção durante autorização pendente. Os limites numéricos e as disputas
+com Web Locks, inclusive cadastro concorrente de placa duplicada, usam
+as evidências de 13.1–13.4. A nova execução conferiu a revalidação de
+contexto durante espera pelo bloqueio, com seleção preservada na outra aba.
+
+A revisão visual complementar cobriu lista e filtros, estado vazio,
+cadastro, edição, ambas as modalidades, unidades, histórico, confirmações,
+divergência e falha de leitura, em 1440 × 900, 768 × 1024, 390 × 844 e
+320 × 568. A automação verificou largura sem rolagem horizontal indevida,
+navegação por teclado, foco visível, foco no primeiro erro renderizado,
+associação dos erros, Escape e retorno do foco. As situações cadastrais
+estão identificadas em texto. Capturas em
+`/workspaces/muv-test-tools/screenshots/etapa-13.5/`.
+
+Build, lint e verificações Git passaram. A inspeção do build confirmou
+veículos e catálogo municipal sob demanda e ausência do provisionamento
+privilegiado. O código e os formatos persistidos foram preservados.
+Não foi encontrado defeito funcional reproduzível que exigisse correção.
+
+A Etapa 13 está funcionalmente encerrada no escopo demonstrativo.
+RF004 cobre gerenciamento cadastral. Disponibilidade, compatibilidade,
+prontidão e designação permanecem em aberto. RF002 e RF003 continuam
+parciais e RF005 e RNF003 pendentes. O versionamento de 13.5 aguarda
+autorização. O próximo módulo planejado é tarifas.
