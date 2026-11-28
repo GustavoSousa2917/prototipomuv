@@ -1359,5 +1359,53 @@ Não foi encontrado defeito funcional reproduzível que exigisse correção.
 A Etapa 13 está funcionalmente encerrada no escopo demonstrativo.
 RF004 cobre gerenciamento cadastral. Disponibilidade, compatibilidade,
 prontidão e designação permanecem em aberto. RF002 e RF003 continuam
-parciais e RF005 e RNF003 pendentes. O versionamento de 13.5 aguarda
-autorização. O próximo módulo planejado é tarifas.
+parciais e RF005 e RNF003 pendentes. O encerramento foi versionado e
+sincronizado na `main` em `abea97662e629e5c471d33975de5c530bd1e0e5b`,
+conforme consulta ao remoto antes da Etapa 14.
+
+## Etapas 14.1–14.4 — Tarifas
+
+A DEC-049 registra P14-01 a P14-14. As rotas de Tarifas nos ambientes
+autônomo, empresarial e cooperativo oferecem cadastro, consulta, edição
+de valores, transições confirmadas, histórico e simulação manual. O
+cadastro combina prestador, modalidade individual e categoria. A tarifa
+é independente da frota, da intenção e da autorização. A simulação usa
+distância manual e não grava consulta ou solicitação comercial.
+
+O domínio converte texto decimal em inteiros seguros, mantém centavos
+exatos inclusive na apresentação extrema e calcula o maior valor
+antes de arredondar uma vez. O repositório valida e grava tarifa e
+eventos juntos em `muv.tariffs.v1`. O serviço revalida sessão, contexto,
+escopo e revisão dentro do bloqueio. A simulação exige tarifa própria
+ativa, e uma alteração recebida de outra aba invalida o resultado
+anterior. Indicações de intenção e frota permanecem complementares.
+
+| Evidência | Resultado |
+|---|---|
+| Testes isolados | Oito combinações, ID estável, integridade dos eventos, situação, gravação sem falso evento, valores extremos, distâncias, empate, arredondamento em torno de meio centavo, produto intermediário grande, estouro final, escopo, revisão e falhas foram exercitados em armazenamento em memória. A serialização foi simulada nessa suíte. |
+| Chromium A–B | Autônomo antes de autorização, edição com recarga e simulação de mínimo, distância e empate. Empresa sem frota, entradas inválidas, 25,125 km, histórico monetário e gravação equivalente sem revisão. |
+| Chromium C–D | Cooperativa com combinações distintas, duplicidade, intenção atualizada noutra aba e valores extensos. Inativação reserva a combinação e bloqueia simulação. Edição de inativo e reativação preservam o ID e o histórico. |
+| Chromium E–F | A frota passou por cadastro, inativação, reativação, retirada de modalidade e falha de leitura. A gestão tarifária permaneceu disponível. As operações tarifárias preservaram byte a byte frota, regiões, autorizações com retratos, identidade profissional, organizações, convites, vínculos e verificações. Autônomo e duas empresas na mesma conta mantiveram contextos e tarifas independentes. |
+| Chromium G–H | Visitante, cliente, motorista vinculado, administração exclusiva, conta demonstrativa e 403/404. Duas abas reais com Web Locks testaram cadastro duplicado, duas edições concorrentes, edição contra inativação, formulário obsoleto, troca de contexto e sessão durante espera pelo bloqueio, invalidação de simulação, falhas de gravação e leitura e logout compartilhado. |
+| Visual | 1440 × 900, 1280 × 720, 1024 × 768, 768 × 1024, 390 × 844 e 320 × 568. Verificados largura, foco visível, primeiro erro e associação, Escape, retorno de foco, unidades e situação em texto. |
+
+Playwright externo 1.65.1, Chromium Headless Shell 159.0.8154.6
+(rev. 1255) e Vite em loopback na porta 41754 com `strictPort`.
+As jornadas usaram cadastros fictícios em armazenamento isolado e
+sessão compartilhada pelas abas da mesma origem. Login, edição de Minha conta e logout foram exercitados. As ações de
+frota e a preparação das coleções protegidas ocorreram pelos serviços
+existentes. Os fluxos completos de cadastro, identidade compartilhada,
+proteção da intenção pendente e operação veicular reaproveitam a
+evidência anterior. Capturas externas em
+`/workspaces/muv-test-tools/screenshots/etapa-14.1-14.4/`.
+
+O build e o lint passaram. O JS inicial ficou em 465,99 kB
+(134,58 kB gzip). O chunk de Tarifas tem 18,19 kB (5,92 kB gzip),
+o de Veículos tem 13,44 kB (4,30 kB gzip) e o código veicular
+compartilhado tem 7,05 kB (2,91 kB gzip). O catálogo municipal
+permanece sob demanda e o provisionamento privilegiado está ausente
+do bundle de produção.
+
+As Etapas 14.1–14.4 estão disponíveis para revisão e versionamento.
+14.5 permanece reservada para a validação integrada e o encerramento
+da Etapa 14.

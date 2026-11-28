@@ -14,7 +14,7 @@ As rotas abaixo são referências de planejamento. A linha de RF001, RU001 e US-
 | US-003,RN001,RN006–008,DEC-038 (RF a formalizar) | Cliente | Criar e encerrar solicitação direcionada | T07,A03,A05 | /cliente/solicitar, /cliente/solicitacoes/:id | Prestador único antes do envio, encerramento após recusa, nova solicitação com histórico preservado, bloqueio de simultaneidade e ausência de reenvio automático |
 | RF006,RU010,US-006 | Prestador | Consultar solicitações direcionadas | T25,T26,A06 | /prestador/solicitacoes | Somente solicitações destinadas ao prestador; incluir as que aguardam resposta |
 | RF007,RN009,US-007,RU010 | Prestador | Propostas | T25,T27,A07,A08 | /prestador/solicitacoes/:id | Autorização, resposta exclusiva do prestador escolhido, concordância, contraproposta justificada ou recusa |
-| DEC-003.6, DEC-003.9, DEC-003.15, DEC-038.3 (RF a formalizar) | Prestador/cliente | Tarifas | A25,T08 | /prestador/tarifas | Mínimo, km e categoria; tarifas do prestador selecionado |
+| DEC-003.2, DEC-003.6, DEC-003.9, DEC-003.14, DEC-003.15, DEC-038.3, DEC-049 | Prestador | Tarifas próprias e simulação manual entregues em 14.1–14.4. Seleção comercial pendente. | A25,T19,T20,T08 | /prestador/{autonomo,empresa,cooperativa}/tarifas | Jornadas A–H. Unicidade, histórico, escopo e cálculo exato. RF a formalizar em IN-004. |
 | RF008,RN010,RU003,US-008 | Cliente | Contratação | T12,T14 | /cliente/solicitacoes/:id/propostas | Confirmar uma vez e criar um frete, ou recusar e encerrar a solicitação |
 | RF009,RN011–013,US-011,RU011 | Prestador | Designação e substituição pendentes. Capacidades cadastrais da Etapa 13 são insumos futuros. | T30,T31,A15,A16 | /prestador/fretes/:id | Recursos aptos, acordo e bloqueios |
 | RF010,RN015,US-012,RU011 | Motorista/gestor | Execução | T32–T34,A09–A14 | /motorista/fretes/:id, /prestador/fretes/:id | Transições válidas, ocorrência não interrompe |
@@ -98,3 +98,20 @@ O PDF (pp. 22–23) modela um prestador por veículo e capacidade de passageiros
 | T19, T20, T23, T24 e A26 | A conferência direcionada das capturas originais confirmou T19 como referência de entrada e T20 como fonte dos campos de pessoas, excluindo o condutor. T23, T24 e A26 correspondem à frota, cadastro e edição adaptados. T24 apresenta Renavam, dimensões em metros e capacidade conforme o tipo. O fluxo aprovado adia Renavam, informa as dimensões em centímetros e condiciona os campos à modalidade. |
 | RN012, RF005, RF009, US-011 e IN-005 | Capacidades são dados para integração futura. Busca, aptidão, disponibilidade, compatibilidade, designação e substituição continuam pendentes. |
 | IN-009 | O veículo pode declarar Pessoas, Encomendas ou as duas modalidades individuais. A revisão documental de AMBOS e os critérios operacionais para transporte simultâneo permanecem pendentes. |
+
+### Tarifas na DEC-049
+
+DEC-003.2, .6, .9, .14 e .15 e DEC-038.3 sustentam a configuração e
+o cálculo demonstrativo. T19 indica a entrada, T20 fundamenta mínimo
+e preço por km, A25 materializa a gestão compartilhada e T08
+permanece referência para comparação futura. A interface separa
+Tarifas de Veículos. Hora, diária, franquia e pedágios ilustrados em
+T20 ficam adiados. O PDF (pp. 22–24) modela os valores da proposta e
+do frete, enquanto a estimativa reproduzível exige futuro retrato.
+
+RF005–RF008 e as atividades das pp. 30–32 permanecem dependências
+futuras de pesquisa, solicitação direcionada, negociação e
+contratação, conforme a DEC-038. A entrega não formaliza novo RF.
+IN-004 segue aberto. IN-005 e IN-017 mantêm pesquisa e compatibilidade
+territorial pendentes. RF002 e RF003 permanecem parciais, RF004 tem
+cobertura cadastral demonstrativa e RF009 e RNF003 seguem pendentes.

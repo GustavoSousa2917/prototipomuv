@@ -389,3 +389,35 @@ P12-12, P12-13, P12-14 e P12-16 continuam sem aprovação. A DEC-046 preserva a 
 | P13-12 | Preservar a independência de veículos, habilitação, regiões e autorizações. Adiar disponibilidade, prontidão, designação, associação permanente e compatibilidade automática. |
 
 A DEC-048 preserva a DEC-019. A associação representa responsabilidade declarada no MUV. Bagagem e descrição não têm efeitos automáticos sobre compatibilidade. Histórico mínimo inclui criação, última atualização, correções de placa e transições cadastrais, sem retrato integral de cada edição.
+
+## DEC-049 — Tarifas
+
+| Proposta | Decisão aprovada |
+|---|---|
+| P14-01 | Uma configuração por prestador, modalidade individual e categoria veicular. |
+| P14-02 | Reutilizar os códigos da DEC-048 nas oito combinações possíveis, com preenchimento independente. |
+| P14-03 | Exigir valor mínimo em BRL e valor por km em BRL/km, ambos estritamente positivos. Adiar componentes adicionais. |
+| P14-04 | Persistir centavos inteiros seguros. Aceitar até duas casas decimais, vírgula ou ponto, sem arredondamento implícito. |
+| P14-05 | Usar distância simulada em metros inteiros positivos, com até três casas decimais na entrada em quilômetros. |
+| P14-06 | Calcular o valor base em função pura com aritmética inteira exata, arredondamento final de meio centavo para cima e erro explícito de limite. |
+| P14-07 | Preservar ID estável e combinação imutável, com unicidade inclusive em inativos. |
+| P14-08 | Criar ativa, listar, consultar, editar, inativar e reativar. Confirmar as transições e preservar a situação na edição de inativos. Adiar exclusão física. |
+| P14-09 | Registrar autoria, datas, revisão, valores anteriores e novos e transições. Entradas monetárias equivalentes não geram evento. Adiar vigência programada. |
+| P14-10 | Permitir preparação antes da autorização e antes de solicitá-la, com gestão pelo titular ou responsável no contexto correspondente. |
+| P14-11 | Permitir tarifa fora da intenção ou sem frota correspondente. Sinalizar essas condições e distinguir ausência de veículo de falha de consulta. |
+| P14-12 | Usar persistência versionada própria, gravação conjunta de tarifa e eventos, revisão, Web Locks e sincronização entre abas. |
+| P14-13 | Oferecer área compartilhada sob demanda e simulação manual de tarifa ativa explicitamente selecionada, sem persistir a simulação. |
+| P14-14 | Preparar referências para retratos comerciais e preservar a escolha de categoria pelo cliente conforme DEC-003.14. Adiar seleção comercial, revalidação no envio e designação de outro tipo. |
+
+A correspondência inicial usa `CAR` para Automóvel, `VAN` para Van,
+`CARGO_VAN` para Furgão e `TRUCK` para Caminhão. Cada combinação usa
+`PESSOA` ou `ENCOMENDA`. A tarifa pertence ao prestador e permanece
+independente de frota, intenção, autorização e prontidão.
+
+A DEC-049 preserva a fórmula e a escolha de categoria da DEC-003 e o
+fluxo exclusivamente direcionado da DEC-038. DEC-018, DEC-019,
+DEC-021, DEC-044 e DEC-048 continuam vigentes. A tarifa usa mínimo e
+preço por km. T20 também ilustra hora, diária, franquia e pedágios,
+que ficam fora deste recorte. O PDF original não especifica um RF de
+gestão tarifária nem modela o retrato da estimativa. IN-004 permanece
+aberto.

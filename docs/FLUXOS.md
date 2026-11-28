@@ -91,7 +91,7 @@ Contestações: uma por frete concluído, cliente abre, prestador responde uma v
 ## Rotas propostas (não implementadas)
 Público: /, /login, /cadastro, /recuperar-senha, /redefinir-senha. Compartilhadas: /conta, /notificacoes.
 Cliente: /cliente/solicitar, /cliente/prestadores/:id (e listagem), /cliente/solicitacoes/:id (e listagem), /cliente/solicitacoes/:id/propostas, /cliente/fretes/:id (e listagem), /cliente/historico.
-Prestador: /prestador, /prestador/solicitacoes/:id, /prestador/propostas, /prestador/fretes/:id, /prestador/veiculos/:id, /prestador/motoristas/:id (gestor), /prestador/perfil, /prestador/tarifas, /prestador/autorizacoes, /prestador/achados-perdidos, /prestador/contestacoes, /prestador/historico; respectivas listagens.
+Prestador: /prestador, /prestador/solicitacoes/:id, /prestador/propostas, /prestador/fretes/:id, /prestador/veiculos/:id, /prestador/motoristas/:id (gestor), /prestador/perfil, /prestador/{autonomo,empresa,cooperativa}/tarifas, /prestador/autorizacoes, /prestador/achados-perdidos, /prestador/contestacoes, /prestador/historico; respectivas listagens.
 Motorista: /motorista, /motorista/fretes/:id (e listagem), /motorista/achados-perdidos, /motorista/historico, vínculos em conta.
 Admin: /admin, /admin/prestadores, /admin/autorizacoes/:id e /admin/contestacoes/:id, respectivas listagens.
 
@@ -186,3 +186,14 @@ O encerramento exige justificativa e retira o contexto vinculado, mantendo a ses
 ### Gerenciamento de veículos
 
 No contexto do prestador, abra Veículos para listar, filtrar e cadastrar. Informe as modalidades e suas capacidades; passageiros excluem o condutor. A declaração pode divergir da intenção do prestador. Desmarcar modalidade preserva o bloco anterior para eventual restauração. A edição de placa exige confirmação; inativação e reativação preservam placa atual, dados e histórico. A situação ativa é cadastral.
+
+### Gerenciamento de tarifas
+
+No contexto do prestador, abra Tarifas para cadastrar, filtrar,
+consultar e editar. Selecione modalidade e categoria uma vez no
+cadastro e informe o mínimo e o preço por km. Inativação e reativação
+exigem confirmação e preservam a combinação. O detalhe registra
+autoria, valores e transições. As indicações de intenção e frota são
+complementares. No detalhe de uma tarifa ativa, informe distância
+em quilômetros e simule o valor base. O cálculo fica na interface
+e independe do fluxo de solicitação direcionada.

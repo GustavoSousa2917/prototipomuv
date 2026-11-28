@@ -149,3 +149,21 @@ Ainda precisam ser definidos os efeitos de verificação e vigência na aptidão
   versões. A fila sem Web Locks se limita à aba atual. A gravação da
   frota reúne veículo e eventos na mesma chave. Transações entre chaves e
   garantias de segurança e integridade de produção dependem do backend.
+
+### Após 14.1–14.4
+
+- IN-004 permanece aberto para formalização documental de tarifas.
+  Hora, diária, franquia, pedágios e demais componentes precisam de
+  definição e aprovação.
+- Definir quando o cliente escolhe a categoria, como apresentar
+  múltiplas categorias, como selecionar a tarifa comercial e quando
+  vence uma estimativa. Definir revalidação antes do envio, fixação do
+  valor base e retratos comerciais.
+- Preservar IN-005 e IN-017 para busca e compatibilidade territorial.
+  Prontidão, disponibilidade, compatibilidade operacional, designação
+  de tipo distinto, alteração de acordo, solicitações direcionadas,
+  negociação, contratação, pagamentos e notificações seguem fora da
+  entrega.
+- Segurança definitiva, transações entre chaves e concorrência entre
+  versões dependem da evolução para o backend. A validação integrada
+  e o encerramento da Etapa 14 ficam para 14.5.

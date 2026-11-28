@@ -964,3 +964,38 @@ Ambas as chaves são observadas pelas abas atuais. Uma decisão não altera vín
 Os serviços revalidam sessão, escopo, responsabilidade e revisão dentro de `withAuthMutation`. Uma aba autora reflete a gravação imediatamente; as demais observam a chave na página. O contexto e as intenções são reavaliados pelos mecanismos já existentes. A frota e os validadores são carregados sob demanda. Sem Web Locks, a fila é restrita à aba. LocalStorage não oferece transações entre chaves; a sessão usa `userId`. Versões antigas podem ignorar a nova chave. Segurança, concorrência e integridade definitivas dependem do backend.
 
 Limites técnicos: marca 80, modelo 100, cor 40, descrição 500 e bagagem 240 caracteres. Ano entre 1900 e ano corrente mais um. Carga e volume têm até três casas em kg e m³; dimensões têm uma em cm. A conversão textual exata gera gramas, litros e milímetros inteiros seguros, sem arredondamento. Dimensões são opcionais em trio. Alterações não descartam blocos da modalidade desmarcada.
+
+## Tarifas
+
+A página compartilhada é carregada sob demanda nos três ambientes de
+prestador. O serviço resolve o prestador ativo e filtra por
+`ProviderReference`. `muv.tariffs.v1` mantém um ID estável e unicidade
+por prestador, modalidade e tipo do catálogo veicular, inclusive em
+inativos. A revisão começa em 1 e corresponde ao número de eventos
+preservados. A coleção valida IDs, combinação, moeda, valores, autoria,
+datas, sequência de situações e continuidade dos valores históricos.
+Edição monetária equivalente revalida o escopo e a revisão e encerra
+sem escrita.
+
+O serviço relê a coleção sob `withAuthMutation` e grava a configuração
+junto de seus eventos. A aba autora reflete a mudança após gravar.
+Abas interessadas observam tarifas e veículos. Intenção e contexto
+seguem a sincronização existente da conta. A leitura complementar da
+frota própria distingue consulta indisponível de ausência de veículo
+ativo com tipo e modalidade declarada. O serviço tarifário não depende
+da frota. Com LocalStorage, a gravação é por chave e não há transações
+entre chaves. O fallback sem Web Locks é local à aba. A sessão
+simulada usa `userId`. Compatibilidade entre versões é limitada e as
+garantias de autorização, histórico e concorrência de produção
+dependem do backend.
+
+A regra de reprodução é o máximo entre o mínimo em centavos
+multiplicado por 1.000 e o produto entre metros inteiros e centavos
+por km. O maior numerador é dividido por 1.000, com meio centavo
+arredondado para cima uma única vez. O cálculo usa BigInt internamente
+e retorna centavos inteiros seguros, a base aplicada ou erro. Valores
+em BRL aceitam até duas casas e quilômetros até três casas, com
+conversão textual. BigInt não é persistido. Um retrato comercial
+futuro pode guardar a regra, a distância, o resultado e a configuração
+aplicada com ID, revisão, referência do prestador, combinação, moeda
+e valores. A simulação atual não grava esses dados.

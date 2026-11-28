@@ -72,7 +72,7 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 | A22 | Devolução de objeto | ADICIONAR |
 | A23 | Edição da conta | IMPLEMENTADA na Etapa 09.5 em `/conta`, para nome e telefone. |
 | A24 | Página não encontrada (404) e acesso negado (403) | 404 implementada na Etapa 06.6 e 403 demonstrativo implementado na Etapa 09.4. |
-| A25 | Tarifas | ADICIONAR |
+| A25 | Tarifas | IMPLEMENTADA em 14.1–14.4, com gestão cadastral, histórico e simulação manual. |
 | A26 | Edição de veículo | IMPLEMENTADA em 13.1–13.4. |
 | A27 | Avaliação do prestador | ADICIONAR |
 
@@ -163,3 +163,8 @@ A21 está implementada nas rotas `/prestador/{empresa,cooperativa}/motoristas/:l
 ### Etapas 13.1–13.4
 
 T19 serve de referência à entrada Veículos, separada de Tarifas. T20 contribui com dados e capacidades, com documentos, fotos e tarifas adiados. T23, T24 e A26 são atendidas pelas rotas de lista, cadastro, detalhe e edição em `/prestador/{autonomo,empresa,cooperativa}/veiculos` e suas subrotas.
+
+A25 usa as rotas `/prestador/{autonomo,empresa,cooperativa}/tarifas` e
+suas subrotas de cadastro, detalhe e edição. A entrada de T19 e os
+campos de mínimo e preço por km de T20 foram adaptados à DEC-049.
+T08 permanece referência para comparação de estimativas na busca.

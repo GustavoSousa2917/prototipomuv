@@ -48,6 +48,7 @@ const DriverProfessionalPage = lazy(() => import('../pages/auth/DriverProfession
 const ProviderAuthorizationsPage = lazy(() => import('../pages/operational/ProviderAuthorizationsPage'))
 const AdminAuthorizationsPage = lazy(() => import('../pages/operational/AdminAuthorizationsPage'))
 const AdminAuthorizationDetailPage = lazy(() => import('../pages/operational/AdminAuthorizationDetailPage'))
+const TariffsPage = lazy(() => import('../pages/operational/TariffsPage'))
 const VehiclesPage = lazy(() => import('../pages/operational/VehiclesPage'))
 const ServiceRegionsPage = lazy(() => import('../pages/operational/ServiceRegionsPage'))
 
@@ -288,6 +289,12 @@ export default function AppRoutes() {
           )}
 
           {(config.profile === 'autonomous' || config.profile === 'company' || config.profile === 'cooperative') &&
+            ([['tarifas/novo', 'create'], ['tarifas/:tariffId', 'detail'], ['tarifas/:tariffId/editar', 'edit']] as const)
+              .map(([path, mode]) => <Route key={path} path={path} element={
+                <Suspense fallback={<Loading />}><TariffsPage mode={mode} profile={config.profile as 'autonomous' | 'company' | 'cooperative'} /></Suspense>
+              } />)}
+
+          {(config.profile === 'autonomous' || config.profile === 'company' || config.profile === 'cooperative') &&
             ([['veiculos/novo', 'create'], ['veiculos/:vehicleId', 'detail'], ['veiculos/:vehicleId/editar', 'edit']] as const)
               .map(([path, mode]) => <Route key={path} path={path} element={
                 <Suspense fallback={<Loading />}><VehiclesPage mode={mode} profile={config.profile as 'autonomous' | 'company' | 'cooperative'} /></Suspense>
@@ -309,6 +316,10 @@ export default function AppRoutes() {
                 areaLabel={config.areaLabel}
               />
             )
+
+            if (page.path === 'tarifas' && (config.profile === 'autonomous' || config.profile === 'company' || config.profile === 'cooperative')) {
+              element = <Suspense fallback={<Loading />}><TariffsPage mode="list" profile={config.profile} /></Suspense>
+            }
 
             if (page.path === 'veiculos' && (config.profile === 'autonomous' || config.profile === 'company' || config.profile === 'cooperative')) {
               element = <Suspense fallback={<Loading />}><VehiclesPage mode="list" profile={config.profile} /></Suspense>

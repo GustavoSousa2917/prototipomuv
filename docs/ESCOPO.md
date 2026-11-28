@@ -89,3 +89,12 @@ A situação do veículo é cadastral. Disponibilidade, compatibilidade,
 transporte simultâneo e designação permanecem em aberto. RF002 e RF003
 continuam parciais. RF005 e RNF003 permanecem pendentes. O próximo
 módulo planejado é tarifas.
+
+## Etapas 14.1–14.4 — Tarifas
+
+A DEC-049 entrega gestão cadastral de tarifas próprias por modalidade
+e categoria nos três ambientes de prestador. Inclui consulta, edição,
+inativação, reativação, histórico e simulação manual de tarifa ativa.
+Preparação independe de intenção, frota e autorização administrativa.
+A validação integrada da Etapa 14 fica para 14.5. Busca, prontidão e
+fluxos comerciais continuam em seus módulos.

@@ -38,12 +38,19 @@ export const vehicleRoutes = {
   cooperative: environmentRoutes.cooperative + '/veiculos',
 } as const
 
+export const tariffRoutes = {
+  autonomous: environmentRoutes.autonomous + '/tarifas',
+  company: environmentRoutes.company + '/tarifas',
+  cooperative: environmentRoutes.cooperative + '/tarifas',
+} as const
+
 export const adminAuthorizationRoute = environmentRoutes.admin + '/autorizacoes'
 
 const protectedPaths = [
   adminAuthorizationRoute + '/:id',
   ...Object.values(serviceRegionRoutes),
   ...Object.values(vehicleRoutes).flatMap((base) => [base + '/novo', base + '/:vehicleId', base + '/:vehicleId/editar']),
+  ...Object.values(tariffRoutes).flatMap((base) => [base + '/novo', base + '/:tariffId', base + '/:tariffId/editar']),
   ...Object.values(organizationRegistrationRoutes),
   accountRoute,
   driverProfessionalRoute,
