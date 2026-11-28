@@ -5,13 +5,14 @@ import { useLocation, useNavigate } from 'react-router'
 import { AuthContext } from './authContext'
 import { accessAssignmentStorageKey } from '../repositories/accessAssignmentRepository'
 import { autonomousProviderStorageKey, driverProfessionalStorageKey } from '../repositories/driverProfessionalRepository'
+import { driverLinkStorageKey } from '../repositories/driverLinkRepository'
 import { organizationStorageKey } from '../repositories/organizationRepository'
 import { sessionStorageKey } from '../repositories/sessionRepository'
 import { userStorageKey } from '../repositories/userRepository'
 import { loginUser, logoutUser, restoreSession, switchContext } from '../services/authSession'
 import type { Authentication } from '../services/authSession'
 
-const observedKeys = [sessionStorageKey, userStorageKey, accessAssignmentStorageKey, autonomousProviderStorageKey, driverProfessionalStorageKey, organizationStorageKey]
+const observedKeys = [sessionStorageKey, userStorageKey, accessAssignmentStorageKey, autonomousProviderStorageKey, driverProfessionalStorageKey, organizationStorageKey, driverLinkStorageKey]
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
   const [authentication, setAuthentication] = useState<Authentication | null>(null)

@@ -60,3 +60,7 @@ habilitação, projeção compartilhada no cadastro autônomo e transição
 do legado com preservação das referências existentes. RF003 está
 parcialmente implementado. Convites, vínculos, verificações e
 notificações permanecem fora desta entrega.
+
+## Etapas 12.3 e 12.4
+
+Convites simulados para contas comuns existentes, caixa pessoal, recusa, cancelamento, aceite com criação de vínculo e seleção explícita do contexto correspondente. Empresas e cooperativas podem preparar equipes sem autorização administrativa aprovada. Verificação, encerramento e prontidão permanecem pendentes.

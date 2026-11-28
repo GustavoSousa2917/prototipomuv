@@ -3,6 +3,10 @@ import type { ActingContext, EnvironmentCapability } from '../domain/accountAcce
 import { readAccessAssignments } from '../repositories/accessAssignmentRepository'
 import { autonomousProviderRepository } from '../repositories/autonomousProviderRepository'
 import { organizationRepository } from '../repositories/organizationRepository'
+import { driverLinkRepository } from '../repositories/driverLinkRepository'
+import { driverProfessionalRepository } from '../repositories/driverProfessionalRepository'
+import { organizationKinds } from '../domain/organization'
+import { userRepository } from '../repositories/userRepository'
 import { activeContextRepository } from '../repositories/activeContextRepository'
 
 export type AccountAccess = {
@@ -41,9 +45,36 @@ function availableContexts(userId: string): ActingContext[] {
       }
       byKey.set(contextKey(context), context)
     }
-    return [...byKey.values()]
+    contexts.splice(0, contexts.length, ...byKey.values())
   } catch {
     // Uma leitura inconsistente não concede contextos organizacionais.
+  }
+  try {
+    const linked = driverLinkRepository.read().links.filter(({ acceptedBy, status }) => acceptedBy === userId && status === 'active')
+    if (linked.length) {
+      const profile = driverProfessionalRepository.findByUserId(userId)
+      const { organizations, responsibilities } = organizationRepository.read()
+      const assignments = readAccessAssignments()
+      const entries = linked.flatMap((link) => {
+        if (link.professionalId !== profile?.id) return []
+        const organization = organizations.find(({ kind, id }) => kind === link.organization.kind && id === link.organization.organizationId)
+        const responsible = responsibilities.find(({ organizationId }) => organizationId === organization?.id)
+        if (!organization || !responsible || !userRepository.findById(responsible.userId)
+          || !resolveContexts(responsible.userId, assignments).some(({ kind }) => kind === 'client')) return []
+        return [{ link, organization, name: organization.tradeName || organization.legalName }]
+      })
+      const byKey = new Map(contexts.map((context) => [contextKey(context), context]))
+      for (const { link, organization, name } of entries) {
+        const ambiguous = entries.some((entry) => entry.link.id !== link.id && entry.organization.kind === organization.kind
+          && entry.name.toLocaleLowerCase('pt-BR') === name.toLocaleLowerCase('pt-BR'))
+        const context: ActingContext = { kind: 'linkedDriver', linkId: link.id,
+          organizationLabel: organizationKinds[organization.kind] + ' · ' + name + (ambiguous ? ' (' + organization.cnpj + ')' : '') }
+        byKey.set(contextKey(context), context)
+      }
+      return [...byKey.values()]
+    }
+  } catch {
+    // A indisponibilidade de vínculos não invalida os demais contextos.
   }
   return contexts
 }

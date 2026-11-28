@@ -346,3 +346,18 @@ do motorista mostrados em T29 ficam fora desse formulário.
 
 P12-06 a P12-17 seguem em discussão. Convites, vínculos e verificações
 mantêm seu escopo futuro.
+
+## DEC-046 — Convites e vínculos organizacionais
+
+| Proposta | Definição aprovada |
+|---|---|
+| P12-06 | O responsável convida no contexto organizacional correspondente pelo e-mail exato e normalizado de conta comum existente, com resposta genérica e exposição mínima. |
+| P12-07 | O envio admite conta sem perfil. O aceite exige perfil estruturalmente válido e admite CNH vencida. A recusa independe de perfil. Convites sem conta e códigos ficam adiados. |
+| P12-08 | Convites pendentes podem ser aceitos, recusados ou cancelados, sem expiração automática. Decisões são terminais. Um par com convite pendente ou vínculo ativo impede novo convite. |
+| P12-09 | Vínculos simultâneos com empresas e cooperativas são permitidos, com um ativo por par motorista–organização. Novo vínculo após futuro encerramento terá outro ID. |
+| P12-10 | O vínculo é ativo ou encerrado. O aceite cria o vínculo com referências, autoria e data; o encerramento fica para incremento posterior. |
+| P12-11 | Organizações com cadastro e responsabilidade válidos podem preparar a equipe independentemente da autorização por modalidade. |
+| P12-15 | Cada vínculo ativo disponibiliza um contexto de preparação com identificação da organização, seleção explícita e revalidação por aba. |
+| P12-17 | A caixa de convites consulta registros próprios. O módulo geral de notificações permanece pendente em IN-014. |
+
+P12-12, P12-13, P12-14 e P12-16 continuam sem aprovação. A DEC-046 preserva a DEC-020 e a identidade profissional da DEC-045.

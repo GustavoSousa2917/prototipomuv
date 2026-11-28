@@ -108,3 +108,7 @@ Ver exclusões em ESCOPO.md. Não implementar sem aprovação de escopo.
 - O aplicativo novo detecta alterações no legado em telas
   profissionais por assinatura diagnóstica. Escritas de abas
   antigas não podem ser impedidas pelo aplicativo novo.
+
+### Após 12.4
+
+IN-016 passou a ter convite interno por e-mail exato para conta comum existente, sem expiração automática. Convites sem conta e códigos permanecem adiados. Senhas e credenciais continuam sob responsabilidade do titular. IN-014 permanece pendente para notificações gerais. P12-12, P12-13, P12-14 e P12-16 seguem sem aprovação. RF003 e RF002 continuam parciais; RNF003 e a compatibilidade territorial de IN-017 permanecem pendentes.

@@ -1244,3 +1244,15 @@ usaram contas fictícias e armazenamento isolado. As capturas estão em
 RF003 continua parcial. RF002, RNF003, IN-014, IN-016 e IN-017
 mantêm as pendências registradas. P12-06 a P12-17 seguem em discussão.
 O próximo incremento previsto envolve convites e depende de aprovação.
+
+## Etapas 12.3 e 12.4 — Convites e vínculos
+
+A sincronização de 12.1–12.2 foi confirmada em `263e982511c78e53bbfd8fe5b33b8b054de26782`. A DEC-046 registra o fluxo demonstrativo de convite, aceite, recusa, cancelamento e seleção do vínculo ativo. A Etapa 12 segue aberta para verificação e encerramento.
+
+A suíte isolada verificou envio normalizado e resposta genérica, escopos de conta e organização, histórico, aceite com CNH vencida, integridade referencial e falhas simuladas de leitura e escrita. Foram exercitadas disputas de envio e decisão, inclusive aceite contra cancelamento, e mudanças de sessão ou contexto durante a espera pelo bloqueio. Também passou a regressão isolada da identidade profissional, com regiões, autorizações e retratos preservados.
+
+O Chromium executou as jornadas A–H com contas fictícias e armazenamento isolado. Verificou empresa sem autorização administrativa, cooperativa convidando conta sem perfil, recusa, cancelamento, reenvio, três vínculos concorrentes com a atuação autônoma, CNH vencida, isolamento por contexto, demonstração sem vínculo de negócio e sincronização por aba. A concorrência em duas abas produziu um convite no envio duplicado e uma decisão na disputa entre aceite e recusa. A falha de persistência deixou a coleção intacta. Cadastro básico e organizacional e edição do perfil foram exercitados no teste complementar.
+
+As capturas externas de Motoristas, convites sem perfil, vínculo ativo e seleção de contextos cobrem 1440 × 900, 1280 × 720, 1024 × 768, 768 × 1024, 390 × 844 e 320 × 568. As verificações incluíram largura do conteúdo, rótulos, estados em texto, Escape e retorno de foco. Evidências em `/workspaces/muv-test-tools/screenshots/etapa-12.3-12.4/`.
+
+Build, lint e `git diff --check` passaram. A guarda de visitante e a página 404 foram verificadas no Chromium. O JS inicial mede 461,21 kB (133,46 kB gzip), com a interface de vínculos sob demanda em 12,40 kB (4,08 kB gzip) e o perfil em 6,37 kB (2,38 kB gzip). O catálogo municipal permanece em chunk separado e o provisionamento privilegiado permanece ausente do build de produção.

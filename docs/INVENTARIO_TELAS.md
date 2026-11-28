@@ -31,7 +31,7 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 | T25 | Detalhes de solicitação | 46–47 | ALTERAR |
 | T26 | Solicitações na região | 48–49 | ALTERAR para consultar as solicitações recebidas pelo prestador (DEC-038). |
 | T27 | Contraproposta | 50–51 | MANTER |
-| T28 | Vínculos | 52–53 | PENDENTE. O perfil de habilitação já está disponível em Minha conta. |
+| T28 | Vínculos | 52–53 | IMPLEMENTADA COM ADAPTAÇÃO em 12.3–12.4. Verificação e encerramento pendentes. |
 | T29 | Cadastro de motorista | 54–55 | IMPLEMENTADA COM ADAPTAÇÃO em 12.1–12.2. Cadastro próprio da conta, com habilitação compartilhada e dados pessoais da conta. |
 | T30 | Designação | 67–68 | MANTER |
 | T31 | Substituição | 69 | ALTERAR |
@@ -153,3 +153,7 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 73. `prototipo/Captura de tela de 2026-11-26 14-03-56.png`
 74. `prototipo/Captura de tela de 2026-11-26 14-04-28.png`
 75. `prototipo/Captura de tela de 2026-11-26 14-04-33.png`
+
+### Etapas 12.3–12.4
+
+T28 foi adaptada para Motoristas nos ambientes de empresa e cooperativa, Convites recebidos em `/conta/motorista/convites` e consulta do vínculo selecionado em `/motorista/vinculos`. T29 mantém o cadastro pelo titular conforme DEC-045. A21 permanece pendente para verificação.

@@ -170,3 +170,9 @@ vencida. A conclusão disponibiliza o contexto autônomo para
 seleção explícita. Criar somente o perfil mantém os contextos
 existentes. Se o formulário estiver desatualizado, revise os
 dados atuais antes de editar novamente.
+
+## Convites e vínculos
+
+No contexto de empresa ou cooperativa, abra Motoristas e informe o e-mail exato da conta convidada. A lista reúne pendentes e históricos. Um pendente pode ser cancelado com confirmação. Após recusa ou cancelamento, outro convite pode ser enviado se o par estiver livre.
+
+Em Minha conta, abra o perfil profissional e selecione Convites recebidos. A recusa admite conta sem perfil. Para aceitar, cadastre primeiro a habilitação, se necessário. Um perfil estruturalmente válido com CNH vencida ainda pode aceitar. O aceite cria vínculo, mantém a seleção corrente e disponibiliza novo contexto em Minha conta. O contexto selecionado identifica a organização em Motorista → Vínculos.

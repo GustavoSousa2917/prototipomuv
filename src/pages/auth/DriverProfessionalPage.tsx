@@ -6,7 +6,7 @@ import Alert from '../../components/feedback/Alert'
 import DriverProfessionalFields from '../../components/forms/DriverProfessionalFields'
 import Button from '../../components/ui/Button'
 import Card from '../../components/ui/Card'
-import { accountRoute } from '../../constants/environmentRoutes'
+import { accountRoute, driverInvitationsRoute } from '../../constants/environmentRoutes'
 import { useAuth } from '../../contexts/authContext'
 import { driverDetails, emptyDriverProfessional, formatCnh, isCnhCurrent } from '../../domain/driverProfessional'
 import type { DriverProfessionalErrors, DriverProfessionalInput } from '../../domain/driverProfessional'
@@ -109,6 +109,7 @@ function DriverProfessionalContent({ userId }: { userId: string }) {
       <Alert role={feedback.success ? 'status' : 'alert'} variant={feedback.success ? 'success' : 'danger'}>{feedback.message}</Alert>
     </div>}
     {!ready ? <Alert role="alert" variant="danger">{errorsByKind[result.kind]}</Alert> : <>
+      <Link to={driverInvitationsRoute} className={linkStyle}>Convites recebidos</Link>
       <Card className="space-y-3">
         <h2 className="text-muv-h2 font-semibold">Dados pessoais</h2>
         <dl className="grid gap-3 sm:grid-cols-2">

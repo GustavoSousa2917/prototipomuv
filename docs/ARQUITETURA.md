@@ -940,3 +940,11 @@ antes de gravar. `AuthProvider` observa as duas chaves para
 revalidar as telas e os contextos, preservando a seleção por aba.
 A página de perfil é carregada sob demanda. A integração
 profissional não precisa carregar o catálogo municipal.
+
+## Convites e vínculos organizacionais
+
+`muv.driverLinks.v1` agrega convites e vínculos. O aceite grava em uma única operação o estado terminal do convite e o vínculo ativo com o ID do perfil profissional. A validação interna confere pares únicos, autoria, datas e referências recíprocas. Os serviços revalidam referências externas, titularidade, responsabilidade, sessão e contexto nas operações correspondentes. Chave ausente inicia coleção vazia. Dados inválidos ou falha de escrita interrompem a operação.
+
+A organização recebe somente e-mail, estado e datas do convite. A equipe apresenta nome e ID profissional após aceite. A resposta ao envio é genérica e a listagem de um convite permite inferir que a conta é elegível. A caixa pessoal usa a conta autenticada, inclusive sem perfil. O vínculo não duplica a CNH. O serviço de consulta do vínculo verifica o contexto selecionado, o perfil titular e a organização vigente.
+
+O resolvedor de acesso lê referências de negócio e preserva seleções por aba. A chave agregada aciona atualização por evento de armazenamento nas demais abas. A aba autora revalida localmente. Web Locks coordena as mutações nas abas compatíveis. O fallback serializa apenas na própria aba. LocalStorage não oferece transações entre chaves, e a sessão simulada é identificada somente por ID da conta. Abas com versão anterior podem ignorar os contextos reais até recarregar. Controle de acesso e privacidade definitivos dependem do backend.
