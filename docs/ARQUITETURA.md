@@ -999,3 +999,32 @@ conversão textual. BigInt não é persistido. Um retrato comercial
 futuro pode guardar a regra, a distância, o resultado e a configuração
 aplicada com ID, revisão, referência do prestador, combinação, moeda
 e valores. A simulação atual não grava esses dados.
+
+## Diagnóstico cadastral de prontidão
+
+O domínio recebe fatos explícitos e data civil de referência.
+Cada fonte fornece dados confirmados ou indisponíveis, distinguindo
+indisponibilidade de ausência confirmada. A função avalia condições
+comuns e profissionais e cruza veículo e tarifa por modalidade e
+categoria. O resultado por categoria conserva a correspondência
+local e o estado cadastral completo. O resultado por modalidade
+aplica a precedência documentada na DEC-050, sem inferir
+compatibilidade conjunta.
+
+A consulta privada resolve e revalida o contexto em
+`resolveActiveProvider`. O coletor filtra pela referência do prestador
+e usa as validações de cada repositório, carregando uma coleção por
+fonte de avaliação. A identidade usa a projeção existente. A leitura
+do legado é feita em memória e a transição permanece no fluxo
+profissional anterior. Nenhuma consulta ao diagnóstico grava dados.
+A validação integral de uma coleção pode torná-la indisponível,
+inclusive quando a inconsistência pertence a outro registro.
+
+A área carrega sob demanda e observa as chaves pertinentes apenas
+enquanto montada. Reavalia ao entrar, recarregar, trocar contexto,
+receber alterações, recuperar foco e visibilidade ou atualizar
+manualmente. Um temporizador local à página visível recalcula na
+mudança da data civil. O resultado não é armazenado. Como LocalStorage
+não tem transações entre chaves, leituras podem observar versões
+distintas. Web Locks das mutações de origem e reavaliações não criam
+um retrato global transacional.

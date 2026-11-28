@@ -168,3 +168,13 @@ A25 usa as rotas `/prestador/{autonomo,empresa,cooperativa}/tarifas` e
 suas subrotas de cadastro, detalhe e edição. A entrada de T19 e os
 campos de mínimo e preço por km de T20 foram adaptados à DEC-049.
 T08 permanece referência para comparação de estimativas na busca.
+
+### Etapas 15.1–15.4
+
+Prontidão está disponível em
+`/prestador/{autonomo,empresa,cooperativa}/prontidao`. O diagnóstico
+privado agrega a situação administrativa vista em T06 e T39 e
+condições relacionadas ao perfil, à equipe, à frota e às tarifas
+(T19, T20, T23, T28 e T29). As capturas originais ilustram estados
+de seus módulos. A DEC-050 estabelece a avaliação cadastral e a
+ressalva explícita de compatibilidade conjunta.

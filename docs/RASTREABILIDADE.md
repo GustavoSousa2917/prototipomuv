@@ -125,3 +125,24 @@ cobertura cadastral demonstrativa e RF009 e RNF003 seguem pendentes.
 | RF005–RF008, US-002, US-003, US-006–008 e RN009–010 | O PDF (requisitos na p. 19 e atividades nas pp. 30–32) fundamenta a pesquisa e modela o painel aberto e a comparação de propostas. A DEC-038 mantém a pesquisa antes do envio e estabelece um único destinatário com concordância, contraproposta justificada ou recusa. Busca, envio, negociação, confirmação e retratos comerciais continuam pendentes. |
 | IN-004, IN-005 e IN-017 | IN-004 permanece aberto para formalização documental da gestão tarifária. IN-005 e IN-017 continuam pendentes para busca, compatibilidade e cobertura territorial aplicável. |
 | RF002–RF004, RF009 e RNF003 | RF002 e RF003 continuam parciais. RF004 preserva cobertura cadastral demonstrativa. Designação e segurança de produção continuam pendentes. |
+
+### Diagnóstico cadastral na DEC-050
+
+DEC-018, DEC-021 e DEC-040–049 sustentam a separação entre acesso,
+autorização e fontes de preparação. O diagnóstico privado usa
+cadastro, intenção, autorização, regiões, habilitação, equipe,
+frota e tarifas. T06 e T39 aproximam autorização, documentos e
+oferta, enquanto a DEC-044 preserva as condições de preparação
+em módulos próprios. T19 ilustra estado online, T23 aproxima frota
+e disponibilidade, e T28–T29 mostram vinculação e cadastro diretos.
+As DEC-019 e DEC-045–048 separam esses conceitos e preservam o aceite
+e a verificação no vínculo. T20 contribui com veículo e tarifa.
+
+RF002 e RF003 mantêm cobertura parcial. RF004 preserva cobertura
+cadastral demonstrativa. RF005–RF009 e RNF003 permanecem pendentes.
+RN012 e US-011 (PDF pp. 11–12 e 17, atividade RF009 na p. 33)
+continuam dependentes de compatibilidade e critérios operacionais.
+RU009, US-009, US-010 e US-016 rastreiam fontes cadastrais das pp.
+10–11, 16 e 18. O diagnóstico deriva da DEC-050 sem atribuir um novo
+RF. IN-004 segue aberto, IN-005 e IN-017 continuam pendentes e
+IN-009, IN-014 e IN-016 conservam a cobertura vigente.

@@ -197,3 +197,13 @@ autoria, valores e transições. As indicações de intenção e frota são
 complementares. No detalhe de uma tarifa ativa, informe distância
 em quilômetros e simule o valor base. O cálculo fica na interface
 e independe do fluxo de solicitação direcionada.
+
+### Diagnóstico cadastral de prontidão
+
+Selecione o contexto de titular ou responsável e abra Prontidão.
+Consulte autorização e condição cadastral por modalidade. Cada
+categoria mostra a correspondência entre veículo e tarifa e o
+resultado completo, com motivos conhecidos e informação indisponível.
+Os links levam aos módulos de origem. A avaliação é atualizada pelos
+eventos pertinentes, pelo horário local e pela ação de atualização.
+A preparação cadastral preserva as decisões e os registros de origem.

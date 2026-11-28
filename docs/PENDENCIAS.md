@@ -185,3 +185,22 @@ Ainda precisam ser definidos os efeitos de verificação e vigência na aptidão
   sem Web Locks é restrito à aba, a sessão simulada usa `userId` e a
   compatibilidade entre versões é limitada. A segurança do frontend é
   demonstrativa. As garantias de produção dependem do backend.
+
+### Após 15.1–15.4
+
+Antes da busca, decidir o nível de compatibilidade motorista–veículo
+exigido no protótipo. Avaliar eventual regra demonstrativa delimitada,
+dados documentais adicionais e critérios legais oficiais. A decisão
+deve tratar categoria da CNH, EAR, PBT, lotação documental, limitações
+do catálogo, requisitos do serviço e avaliação de pares. Carga útil
+e capacidade declarada têm finalidades próprias. A exigência para
+elegibilidade comercial depende dessa decisão e das condições da
+necessidade. Condições cadastrais atendidas não autorizam publicação
+na busca.
+
+Permanecem pendentes disponibilidade, compatibilidade territorial,
+seleção comercial, designação e os fluxos de frete. A integração
+entre múltiplas chaves segue sem transação global. O diagnóstico
+demonstrativo depende da integridade das fontes locais. Segurança
+e consistência de produção dependem do backend. O encerramento
+funcional fica para 15.5.

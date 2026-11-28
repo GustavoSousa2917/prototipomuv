@@ -421,3 +421,39 @@ preço por km. T20 também ilustra hora, diária, franquia e pedágios,
 que ficam fora deste recorte. O PDF original não especifica um RF de
 gestão tarifária nem modela o retrato da estimativa. IN-004 permanece
 aberto.
+
+## DEC-050 — Diagnóstico cadastral de prontidão
+
+| Proposta | Decisão aprovada |
+|---|---|
+| P15-01 | Fazer diagnóstico privado em dois níveis. Exibir condições cadastrais e compatibilidade motorista–veículo em dimensões distintas, sem declarar prontidão plena. |
+| P15-02 | Consolidar por prestador e modalidade, com detalhe por categoria. Exigir todas as condições comuns e profissionais e pelo menos uma categoria com correspondência confirmada. |
+| P15-03 | Exigir cadastro de negócio, identidade correspondente e responsabilidade vigente quando aplicável. A sessão protege o acesso à consulta privada. |
+| P15-04 | Exigir intenção vigente, autorização aprovada e ao menos um município válido na mesma modalidade. Preservar registros e históricos após perda de condições. |
+| P15-05 | Exigir do autônomo identidade profissional própria e habilitação estruturalmente válida e vigente na data de referência. |
+| P15-06 | Exigir de empresa ou cooperativa pelo menos um profissional que reúna, no mesmo vínculo ativo da própria organização, a última verificação aprovada e habilitação atual estruturalmente válida e vigente. |
+| P15-07 | Excluir do conjunto suficiente o profissional com divergência atual de número da CNH, categoria, validade ou EAR frente ao último retrato aprovado. Preservar a decisão e aceitar a correspondência restaurada se os demais critérios forem satisfeitos. Nome e telefone ficam fora da comparação. |
+| P15-08 | Tratar categoria da CNH e EAR declarada como informações. Reservar política de compatibilidade conjunta e atributos documentais para decisão posterior. |
+| P15-09 | Exigir veículo próprio ativo, com modalidade declarada e capacidade válida, e tarifa ativa da mesma modalidade e categoria. A autorização pode ser solicitada sem tarifa. |
+| P15-10 | Derivar sob demanda, sem persistência, com estados explícitos, motivos determinísticos e distinção entre ausência e indisponibilidade. |
+| P15-11 | Restringir diagnóstico completo ao titular ou responsável no contexto ativo. Manter independente uma futura projeção comercial mínima. |
+| P15-12 | Usar área compartilhada sob demanda, com modalidade, categoria, autorização em campo próprio, impedimentos e links de regularização. |
+| P15-13 | Reavaliar após mudanças pertinentes, troca de contexto, recarga, retorno, foco e mudança de data civil local. Preservar seleções válidas entre abas. |
+| P15-14 | Adiar compatibilidade conjunta, elegibilidade específica, critérios territoriais, disponibilidade, seleção comercial, designação e fluxos de frete. |
+
+Intenção confirmadamente ausente tem precedência. Uma condição
+obrigatória conhecida como não satisfeita produz pendência, inclusive
+quando todas as categorias são comprovadamente insuficientes. A
+presença de uma categoria suficiente permite resultado cadastral
+positivo se as condições comuns e profissionais estiverem confirmadas.
+Categorias inconclusivas mantêm sua indicação. Quando um fato
+indisponível puder mudar a conclusão restante, a avaliação fica
+inconclusiva. Motivos conhecidos e indisponibilidades são apresentados
+separadamente. Um candidato comprovadamente suficiente satisfaz a
+condição profissional independentemente dos demais.
+
+A validade da CNH inclui a data de vencimento pela convenção civil
+local. O diagnóstico reavalia a vigência pela data de referência
+sem alterar decisões, origem dos dados ou histórico. O resultado
+positivo expressa condições cadastrais atendidas com compatibilidade
+motorista–veículo não verificada.

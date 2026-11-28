@@ -48,6 +48,7 @@ const DriverProfessionalPage = lazy(() => import('../pages/auth/DriverProfession
 const ProviderAuthorizationsPage = lazy(() => import('../pages/operational/ProviderAuthorizationsPage'))
 const AdminAuthorizationsPage = lazy(() => import('../pages/operational/AdminAuthorizationsPage'))
 const AdminAuthorizationDetailPage = lazy(() => import('../pages/operational/AdminAuthorizationDetailPage'))
+const ProviderReadinessPage = lazy(() => import('../pages/operational/ProviderReadinessPage'))
 const TariffsPage = lazy(() => import('../pages/operational/TariffsPage'))
 const VehiclesPage = lazy(() => import('../pages/operational/VehiclesPage'))
 const ServiceRegionsPage = lazy(() => import('../pages/operational/ServiceRegionsPage'))
@@ -316,6 +317,10 @@ export default function AppRoutes() {
                 areaLabel={config.areaLabel}
               />
             )
+
+            if (page.path === 'prontidao' && (config.profile === 'autonomous' || config.profile === 'company' || config.profile === 'cooperative')) {
+              element = <Suspense fallback={<Loading />}><ProviderReadinessPage profile={config.profile} /></Suspense>
+            }
 
             if (page.path === 'tarifas' && (config.profile === 'autonomous' || config.profile === 'company' || config.profile === 'cooperative')) {
               element = <Suspense fallback={<Loading />}><TariffsPage mode="list" profile={config.profile} /></Suspense>

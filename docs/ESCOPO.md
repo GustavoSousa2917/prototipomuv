@@ -108,3 +108,13 @@ continua independente de frota, intenção e autorização. RF002 e RF003
 permanecem parciais. RF004 tem cobertura cadastral demonstrativa.
 RF005–RF009 e RNF003 permanecem pendentes. O próximo módulo planejado
 é prontidão operacional.
+
+## Etapas 15.1–15.4 — Diagnóstico de prontidão
+
+A DEC-050 entrega consulta privada de condições cadastrais para
+autônomos, empresas e cooperativas, por modalidade e categoria.
+O diagnóstico cruza identidade, intenção, autorização, regiões,
+dados profissionais, frota e tarifas. O estado cadastral é derivado
+e a compatibilidade motorista–veículo permanece não verificada.
+Disponibilidade, elegibilidade comercial, busca e designação
+seguem pendentes. A validação integrada de encerramento fica para 15.5.

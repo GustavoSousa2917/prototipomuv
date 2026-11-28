@@ -67,7 +67,9 @@ export const evidenceFields = {
   cnhNumber: 'Número da CNH', cnhCategory: 'Categoria', cnhExpiresAt: 'Validade da CNH', hasEar: 'EAR autodeclarada',
 } as const
 
-export function evidenceDifferences(current?: DriverEvidence, historical?: DriverEvidence) {
+type ComparableEvidence = { kind: 'available'; details: DriverProfessionalDetails } | { kind: 'unavailable' }
+
+export function evidenceDifferences(current?: ComparableEvidence, historical?: ComparableEvidence) {
   if (current?.kind !== 'available' || historical?.kind !== 'available') return []
   return (Object.keys(evidenceFields) as (keyof DriverProfessionalDetails)[])
     .filter((key) => current.details[key] !== historical.details[key])

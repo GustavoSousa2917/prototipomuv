@@ -9,6 +9,7 @@ import {
   MessageSquare,
   Package,
   ShieldCheck,
+  ClipboardCheck,
   Star,
   Building2,
   UserRound,
@@ -75,6 +76,12 @@ const providerPages: OperationalPageDefinition[] = [
     description:
       'Configure os valores por modalidade e categoria de veículo.',
     icon: DollarSign,
+  },
+  {
+    path: 'prontidao',
+    label: 'Prontidão',
+    description: 'Consulte as condições cadastrais por modalidade e categoria.',
+    icon: ClipboardCheck,
   },
   {
     path: 'historico',

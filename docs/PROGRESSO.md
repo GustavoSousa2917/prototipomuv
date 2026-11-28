@@ -1469,5 +1469,46 @@ As alterações foram documentais e preservam DEC-049, código e formatos
 persistidos.
 
 A Etapa 14 está funcionalmente encerrada no escopo demonstrativo de
-gerenciamento tarifário. O versionamento de 14.5 aguarda autorização.
-Prontidão operacional é o próximo módulo planejado.
+gerenciamento tarifário. O encerramento foi versionado e sincronizado em
+`6581d495bf254c78d96df3e37998967c0534818d`.
+
+
+## Etapas 15.1–15.4 — Diagnóstico privado de prontidão
+
+A DEC-050 foi implementada nas áreas de autônomo, empresa e cooperativa.
+A avaliação deriva o resultado por modalidade e categoria, reúne condições
+cadastrais, profissionais, territoriais, veiculares e tarifárias e apresenta
+a autorização administrativa separadamente. Um resultado cadastral
+positivo mantém a ressalva de compatibilidade motorista–veículo não
+verificada. O diagnóstico usa as coleções existentes em modo somente
+leitura e reavalia ao mudar o contexto, ao retornar à página, ao receber
+alterações de armazenamento e na virada da data civil local.
+
+Os testes isolados exercitaram a precedência dos estados, a vigência
+inclusiva da CNH, a correspondência com a verificação, o isolamento, falhas
+de origem e a ausência de escrita, inclusive na leitura do legado profissional.
+
+No Chromium, com dados fictícios isolados e preparação pelos serviços
+existentes, foram verificadas as jornadas A–H de autorização do autônomo,
+condição profissional na empresa, isolamento na cooperativa, modalidades
+e categorias, perda e restauração de condições, acesso em múltiplos
+contextos, falhas e precedência, sincronização em duas abas e mudança
+da data civil com relógio de navegador controlado. Foram comparados os
+conteúdos persistidos antes e depois de consultas ao diagnóstico. A
+validação atual também percorreu login, Minha conta, logout, guardas e
+alterações representativas nos módulos de origem. Os fluxos completos
+de cadastro, migração profissional, proteção da intenção pendente e
+simulação tarifária permanecem cobertos pelas evidências anteriores.
+
+A validação visual usou seis resoluções de 320 × 568 a 1440 × 900.
+Foram conferidos largura, navegação por teclado, foco, títulos, links,
+estado em texto e atualização anunciável. As 24 capturas estão em
+`/workspaces/muv-test-tools/screenshots/etapa-15.1-15.4/`.
+
+Build e lint passaram. O JavaScript de entrada passou de 465,99 kB para
+466,63 kB. Os chunks sob demanda de Prontidão, Veículos, Tarifas e da
+origem do catálogo municipal têm respectivamente 14,39 kB, 13,48 kB,
+15,37 kB e 180,65 kB.
+
+A validação de encerramento 15.5 permanece pendente. A decisão sobre o
+nível de compatibilidade motorista–veículo precisa preceder a busca.
