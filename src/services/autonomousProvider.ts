@@ -1,30 +1,26 @@
-import { resolveContexts } from '../domain/accountAccess'
 import { validateProfessionalInput } from '../domain/autonomousProvider'
 import type { ProfessionalInput } from '../domain/autonomousProvider'
-import { readAccessAssignments } from '../repositories/accessAssignmentRepository'
 import { autonomousProviderRepository } from '../repositories/autonomousProviderRepository'
-import { sessionRepository } from '../repositories/sessionRepository'
-import { userRepository } from '../repositories/userRepository'
+import { driverProfessionalRepository } from '../repositories/driverProfessionalRepository'
+import { driverRevision } from '../domain/driverProfessional'
+import { authenticatedProfessionalOwner, professionalStorageFailure } from './driverProfessional'
 import { withAuthMutation } from './authMutation'
 import { pendingIntentMessage, removesPendingModality } from './protectAuthorizationIntent'
 
-function eligibleUser(expectedUserId: string) {
-  const session = sessionRepository.read()
-  if (!session || session.userId !== expectedUserId) return null
-  const user = userRepository.findById(session.userId)
-  if (!user || !resolveContexts(user.id, readAccessAssignments()).some(({ kind }) => kind === 'client')) return null
-  return user
+function registrationRevision({ provider, professional }: ReturnType<typeof autonomousProviderRepository.readForAccount>) {
+  return JSON.stringify([provider?.id, provider?.updatedAt, provider?.intendedModalities, driverRevision(professional)])
 }
 
 export function readOwnProfessionalRegistration(expectedUserId: string) {
   try {
-    const user = eligibleUser(expectedUserId)
+    const user = authenticatedProfessionalOwner(expectedUserId)
     if (!user) return { kind: 'denied' } as const
     const { fullName, cpf, phone, email } = user
-    const provider = autonomousProviderRepository.findByUserId(user.id)
-    return { kind: 'ready', account: { fullName, cpf, phone, email }, provider } as const
-  } catch {
-    return { kind: 'storageError' } as const
+    const registration = autonomousProviderRepository.readForAccount(user.id)
+    return { kind: 'ready', account: { fullName, cpf, phone, email }, ...registration,
+      revision: registrationRevision(registration) } as const
+  } catch (error) {
+    return professionalStorageFailure(error)
   }
 }
 
@@ -32,26 +28,31 @@ export async function saveOwnProfessionalRegistration(
   expectedUserId: string,
   input: ProfessionalInput,
   mode: 'create' | 'edit',
+  expectedRevision?: string,
 ) {
   if (!input || Object.keys(input).some((field) => !['cnhNumber', 'cnhCategory', 'cnhExpiresAt', 'hasEar', 'intendedModalities'].includes(field))) {
     return { kind: 'invalidInput' } as const
   }
 
   try {
+    if (!authenticatedProfessionalOwner(expectedUserId)) return { kind: 'denied' } as const
+    const revision = expectedRevision ?? registrationRevision(autonomousProviderRepository.readForAccount(expectedUserId))
     return await withAuthMutation(async () => {
-      const user = eligibleUser(expectedUserId)
+      const user = authenticatedProfessionalOwner(expectedUserId)
       if (!user) return { kind: 'denied' } as const
       const validation = validateProfessionalInput(input)
       if (validation.kind === 'invalid') return validation
 
-      const existing = autonomousProviderRepository.findByUserId(user.id)
+      const registration = autonomousProviderRepository.readForAccount(user.id)
+      const existing = registration.provider
       if (mode === 'create' && existing) return { kind: 'alreadyExists' } as const
+      if (registrationRevision(registration) !== revision) return { kind: 'stale' } as const
       if (mode === 'edit' && !existing) return { kind: 'missing' } as const
       if (existing && removesPendingModality({ kind: 'autonomous', providerId: existing.id },
         existing.intendedModalities, validation.details.intendedModalities)) {
         return { kind: 'invalid', errors: { intendedModalities: pendingIntentMessage } } as const
       }
-      const owner = autonomousProviderRepository.findByCnh(validation.details.cnhNumber)
+      const owner = driverProfessionalRepository.findByCnh(validation.details.cnhNumber)
       if (owner && owner.userId !== user.id) {
         return { kind: 'invalid', errors: { cnhNumber: 'Esta CNH já está associada a outro cadastro.' } } as const
       }
@@ -64,11 +65,11 @@ export async function saveOwnProfessionalRegistration(
         createdAt: existing?.createdAt ?? now,
         updatedAt: now,
       }
-      if (!eligibleUser(expectedUserId)) return { kind: 'denied' } as const
+      if (!authenticatedProfessionalOwner(expectedUserId)) return { kind: 'denied' } as const
       autonomousProviderRepository.save(record)
       return { kind: 'saved', provider: record } as const
     })
-  } catch {
-    return { kind: 'storageError' } as const
+  } catch (error) {
+    return professionalStorageFailure(error)
   }
 }

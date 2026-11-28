@@ -52,3 +52,11 @@ A validação integrada de 11.6 confirmou o fluxo demonstrativo de
 cadastros, regiões e autorizações. RF002 permanece parcial, inclusive
 quanto às notificações. O próximo módulo planejado é motoristas e
 vínculos organizacionais.
+
+## Etapas 12.1 e 12.2
+
+Identidade profissional própria da conta comum, cadastro e edição da
+habilitação, projeção compartilhada no cadastro autônomo e transição
+do legado com preservação das referências existentes. RF003 está
+parcialmente implementado. Convites, vínculos, verificações e
+notificações permanecem fora desta entrega.

@@ -877,3 +877,66 @@ A navegação carrega as páginas de autorização sob demanda. A lista
 administrativa e a proteção da intenção cadastral podem ler a coleção
 sem carregar o catálogo municipal. O detalhe e o envio consultam
 a cobertura atual usando o catálogo local.
+
+## Identidade profissional do motorista
+
+`muv.driverProfessionals.v1` reúne `professionals`,
+`autonomousRegistrations` e a assinatura diagnóstica do legado. O
+profissional tem ID estável, ID de conta existente, CNH normalizada,
+categoria, validade, EAR autodeclarada e datas. Nome, CPF, telefone
+e e-mail vêm da conta. O registro autônomo conserva seu próprio ID,
+`userId`, modalidades e datas e referencia a identidade por
+`professionalId`. O repositório valida titularidade da referência,
+contas existentes, datas, categorias, unicidade da conta e da CNH,
+IDs e modalidades na coleção integral. Vigência é avaliada em
+criação, atualização e operações que a exigem. Uma CNH vencida
+continua legível e preserva o contexto de preparação.
+
+`autonomousProviderRepository` mantém `findById`, `findByUserId`,
+`findByCnh` e `save`. As leituras projetam os dados de habilitação
+a partir da identidade. `findByCnh` recebe o número normalizado e
+retorna somente a atuação autônoma quando existir. A unicidade
+consulta toda a coleção profissional, inclusive perfis sem atuação
+autônoma. Regiões e autorizações continuam referenciando o ID
+autônomo. Envio e análise consultam os dados atuais compartilhados,
+e os retratos históricos e decisões persistidos conservam seus dados.
+
+A leitura sem chave nova valida e projeta `muv.autonomousProviders.v1`
+em memória. O legado é um array de cadastros autônomos com dados de
+habilitação, titularidade, modalidades e datas. A projeção deriva
+o ID profissional legado do ID autônomo, com prefixo `legacy:`.
+A entrada no perfil solicita transição quando houver chave legada.
+A primeira gravação de perfil ou cadastro autônomo também pode
+transicionar e gravar a mutação no mesmo ato. A seção serializada
+relê a origem e a presença da chave ativa. Uma única escrita
+publica a coleção integral. Após publicação, o legado serve como
+origem histórica e diagnóstico. A coleção ativa inválida gera erro
+e impede gravações. A chave antiga permanece intacta.
+
+O aplicativo novo compara a assinatura da origem ao abrir as telas
+profissionais e sinaliza alterações posteriores. A assinatura é
+diagnóstica e pode ter colisões. Abas em versões antigas devem ser
+fechadas ou recarregadas antes da transição. Essas versões ainda
+podem escrever no legado, mesmo usando Web Locks. A mudança fica
+fora da fonte ativa, sem reconciliação automática. Sem Web Locks,
+a serialização atual continua restrita à aba. LocalStorage não
+oferece transação entre chaves e a sessão continua identificada
+somente pelo ID da conta.
+
+Em falha, feche abas antigas, preserve as duas chaves e tente
+novamente após verificar a disponibilidade do armazenamento. Se
+houver inconsistência, suspenda a edição e examine os registros
+em sessão isolada, usando somente dados fictícios. Uma recuperação
+manual deve conferir IDs, contas, unicidade e referências e
+preservar as alterações da fonte ativa antes de qualquer reparo.
+Evite excluir a chave ativa para retentar a transição, pois a
+ausência da chave representa primeira inicialização e o legado
+pode estar desatualizado. A aplicação não restaura automaticamente
+uma coleção ativa inválida nem exporta material de autenticação.
+
+As interfaces enviam a revisão dos dados aberta no formulário.
+Os serviços comparam a versão sob bloqueio e verificam a sessão
+antes de gravar. `AuthProvider` observa as duas chaves para
+revalidar as telas e os contextos, preservando a seleção por aba.
+A página de perfil é carregada sob demanda. A integração
+profissional não precisa carregar o catálogo municipal.

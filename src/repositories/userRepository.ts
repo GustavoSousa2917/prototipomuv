@@ -103,3 +103,7 @@ export const userRepository: UserRepository = {
   findByCpf: (cpf) => readUsers().find((user) => user.cpf === digitsOnly(cpf)),
   findByEmail: (email) => readUsers().find((user) => user.email === normalizeEmail(email)),
 }
+
+export function registeredUserIds(): ReadonlySet<string> {
+  return new Set(readUsers().map(({ id }) => id))
+}

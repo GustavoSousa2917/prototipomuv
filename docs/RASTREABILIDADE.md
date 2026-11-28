@@ -8,7 +8,7 @@ As rotas abaixo são referências de planejamento. A linha de RF001, RU001 e US-
 | RN002, DEC-001.1–5, DEC-040 | Conta comum/admin | Contexto cliente automático, administração exclusiva, sessão e seleção por aba (09.1–09.2) | T06 | /cliente, /admin | Conta nova e legada, seleção revalidada e sincronização de sessão verificadas. Alternância e guardas em 09.3–09.4. Conta canônica em 09.5. |
 | RF002, RU008,RU012,US-016,RN004, DEC-041, DEC-042, DEC-043, DEC-044 | Prestador/admin | RF002 parcialmente implementado. Cadastros autônomo e organizacional, responsabilidade e contextos de preparação. Regiões por modalidade entregues em 11.1–11.2. Solicitação, análise e histórico demonstrativos em 11.3–11.5. Fluxo integrado validado em 11.6. Notificações ainda pendentes em IN-014. | T03,T06,T39,A20 | /prestador/autonomo/cadastro, /prestador/autonomo/perfil, /prestador/empresa/perfil, /prestador/cooperativa/perfil e `/prestador/{autonomo,empresa,cooperativa}/perfil/regioes` | Titularidade, CNH e CNPJ únicos, seleção explícita e ausência de autorização automática. Unicidade, escopo e preservação da cobertura por modalidade. A linha de autorizações detalha a entrega. |
 | RF002, US-016, RN004, RU008, RU012, DEC-044 | Prestador/admin | Solicitação, pré-requisitos, análise com ciência de diferenças, decisão, histórico e reenvio. | T06,T39 | /prestador/{autonomo,empresa,cooperativa}/autorizacoes, /admin/autorizacoes e /admin/autorizacoes/:id | Jornadas 1–6 de 11.6 e evidências de concorrência de 11.1–11.5. Independência, escopo, retrato imutável, confirmação, intenção protegida e decisão única. |
-| RF003,RU009,US-010,RN005 | Gestor/motorista | Vínculo | T28,T29,A21 | /prestador/motoristas | Aceite, verificação por organização |
+| RF003,RU009,US-010,RN005,DEC-045 | Gestor/motorista | RF003 parcial. Perfil e habilitação compartilhados em 12.1–12.2. Convites, vínculos e verificação pendentes. | T28,T29,A21 | /conta/motorista; áreas organizacionais de motoristas permanecem provisórias | Titularidade, unicidade, transição, coexistência com cadastro autônomo e preservação de referências. |
 | RF004,RU009,US-009,RN012 | Prestador | Veículos | T20,T23,T24,A26 | /prestador/veiculos | Placa duplicada, capacidade, inativação |
 | RF005,RU002,US-002 | Cliente | Pesquisa pendente. A DEC-043 define a unidade territorial. A Etapa 11 prepara cobertura e situação administrativa. Compatibilidade segue em IN-017. | T08,T09,A01,A02 | /cliente/prestadores | Compatibilidade por modalidade, região e condições; apenas elegíveis, filtros e estado vazio |
 | US-003,RN001,RN006–008,DEC-038 (RF a formalizar) | Cliente | Criar e encerrar solicitação direcionada | T07,A03,A05 | /cliente/solicitar, /cliente/solicitacoes/:id | Prestador único antes do envio, encerramento após recusa, nova solicitação com histórico preservado, bloqueio de simultaneidade e ausência de reenvio automático |
@@ -53,3 +53,11 @@ para rastreabilidade. A revisão do PDF permanece pendente.
 | `AutorizacaoModalidade` (pp. 22–24), RN004 e US-016 | Cada tentativa usa uma modalidade individual. A DEC-044 detalha retrato, histórico, reenvio e ciência das diferenças. A aprovação registra situação administrativa e a prontidão segue separada. |
 | Atividade RF002 (p. 28), T06 e T39 | O fluxo demonstrativo permite solicitar, analisar, decidir e consultar o histórico. As notificações previstas na atividade seguem em IN-014. Veículo e verificação documental ilustrados nas capturas ficam fora dos pré-requisitos do incremento. |
 | RF005 (pp. 19 e 30) | Município e modalidade estruturam os dados da Etapa 11. A pesquisa ainda está pendente, assim como os critérios de origem, destino e trajetos em IN-017. |
+
+## Adaptações da Etapa 12 ao PDF e ao Figma
+
+A DEC-045 adapta o Motorista do diagrama de classes (pp. 22–23), a
+atividade RF003 (p. 29) e T28–T29. O perfil exige conta pessoal e
+é mantido pelo titular. O cadastro direto pelo gestor, associação
+opcional à conta e campos pessoais duplicados das fontes originais
+ficam fora desse fluxo. DEC-020 continua vigente para os vínculos.

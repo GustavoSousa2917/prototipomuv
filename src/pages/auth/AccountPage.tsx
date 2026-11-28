@@ -8,7 +8,7 @@ import Alert from '../../components/feedback/Alert'
 import Button from '../../components/ui/Button'
 import Card from '../../components/ui/Card'
 import Input from '../../components/ui/Input'
-import { environmentRoutes } from '../../constants/environmentRoutes'
+import { driverProfessionalRoute, environmentRoutes } from '../../constants/environmentRoutes'
 import { useAuth } from '../../contexts/authContext'
 import { contextKey, contextLabel } from '../../domain/accountAccess'
 import type { PersonalDetails, User } from '../../domain/userRegistration'
@@ -149,6 +149,10 @@ function AccountDetails({ userId }: { userId: string }) {
               )}
             </Card>
           </div>
+          {account.contexts.some(({ kind }) => kind === 'client') && <Card className="space-y-2">
+            <h2 className="text-muv-h2 font-bold">Habilitação profissional</h2>
+            <Link to={driverProfessionalRoute} className={linkStyle}>Cadastrar ou consultar perfil profissional</Link>
+          </Card>}
           <Card className="space-y-4">
             <h2 className="text-muv-h2 font-bold">Contextos de atuação</h2>
             <ul className="list-disc space-y-1 pl-5">

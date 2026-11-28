@@ -14,6 +14,7 @@ export const environmentRoutes = {
 const clientRoutes = ['', '/solicitar-frete', '/prestadores', '/solicitacoes', '/fretes', '/historico', '/notificacoes', '/conta', '/seja-prestador']
   .map((suffix) => environmentRoutes.client + suffix)
 export const accountRoute = '/conta'
+export const driverProfessionalRoute = accountRoute + '/motorista'
 export const autonomousRegistrationRoute = environmentRoutes.autonomous + '/cadastro'
 export const autonomousProfileRoute = environmentRoutes.autonomous + '/perfil'
 
@@ -36,6 +37,7 @@ const protectedPaths = [
   ...Object.values(serviceRegionRoutes),
   ...Object.values(organizationRegistrationRoutes),
   accountRoute,
+  driverProfessionalRoute,
   autonomousRegistrationRoute,
   '/prestador',
   ...clientRoutes,

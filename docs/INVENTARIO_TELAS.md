@@ -31,8 +31,8 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 | T25 | Detalhes de solicitação | 46–47 | ALTERAR |
 | T26 | Solicitações na região | 48–49 | ALTERAR para consultar as solicitações recebidas pelo prestador (DEC-038). |
 | T27 | Contraproposta | 50–51 | MANTER |
-| T28 | Vínculos | 52–53 | ALTERAR |
-| T29 | Cadastro de motorista | 54–55 | ALTERAR |
+| T28 | Vínculos | 52–53 | PENDENTE. O perfil de habilitação já está disponível em Minha conta. |
+| T29 | Cadastro de motorista | 54–55 | IMPLEMENTADA COM ADAPTAÇÃO em 12.1–12.2. Cadastro próprio da conta, com habilitação compartilhada e dados pessoais da conta. |
 | T30 | Designação | 67–68 | MANTER |
 | T31 | Substituição | 69 | ALTERAR |
 | T32 | Ocorrência/interrupção | 63 | ALTERAR |

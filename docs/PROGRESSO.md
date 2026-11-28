@@ -1211,5 +1211,36 @@ código zero e informou a árvore sem referência já conhecida.
 Nenhum defeito funcional reproduzível exigiu alteração de código.
 
 A Etapa 11 está funcionalmente encerrada no escopo demonstrativo.
-O versionamento e a sincronização de 11.6 ainda estão pendentes.
+A Etapa 11.6 foi versionada e sincronizada na `main` em
+`92daed1bdc71ab2f117e11b7470017f1f5ae4ab5`.
 O próximo módulo planejado é motoristas e vínculos organizacionais.
+
+## Etapas 12.1 e 12.2 — Identidade e perfil profissional
+
+A DEC-045 registra P12-01 a P12-05. A rota `/conta/motorista`,
+acessível por Minha conta para contas comuns, permite cadastrar,
+consultar e editar a habilitação. O perfil por si só não concede
+contexto profissional. A atuação autônoma compartilha os campos
+da habilitação e preserva ID, datas e modalidades. A transição
+publica a coleção integral em uma gravação e preserva a origem
+histórica. O repositório profissional garante unicidade de CNH
+entre todas as contas. A descrição da transição, o procedimento
+de recuperação e as limitações entre versões estão em ARQUITETURA.md.
+
+| Verificação executada | Resultado |
+|---|---|
+| Isolada | Validados campos, titularidade, unicidade entre contas, CNH vencida, projeção estável, transição vazia ou com múltiplos legados, estruturas inválidas, referências cruzadas, falhas de leitura e gravação, concorrência, proteção da intenção e revisão do formulário. Falhas preservaram registros anteriores. A expiração durante análise bloqueou aprovação. |
+| Chromium A–D | Cadastro e edição sem vínculo, persistência após recarga, transição de autônomo fictício com regiões e autorização existentes, ID estável, legado preservado, reaproveitamento de habilitação na criação autônoma e edição convergente pelas duas interfaces. |
+| Chromium E–H | Perfil atualizado apareceu na análise administrativa e invalidou ciência antiga, com retrato histórico preservado. Uma aprovação continuou registrada após nova edição e expiração simulada. Duas abas sincronizaram a projeção e rejeitaram formulário obsoleto, sem alterar outras seleções. Foram verificados troca de conta, logout, unicidade, conta demonstrativa, visitante, administração e 403/404. Falhas simuladas de transição, leitura e escrita preservaram os dados. |
+| Chromium complementar | Duas transições foram enfileiradas com Web Locks e somente uma publicou a coleção ativa. Cadastro organizacional pela interface e edição do perfil a partir do contexto organizacional foram conferidos. |
+| Visual e acessibilidade | Minha conta, cadastro, consulta, edição e reaproveitamento autônomo em 1440 × 900, 1280 × 720, 1024 × 768, 768 × 1024, 390 × 844 e 320 × 568. Sem rolagem horizontal indevida. Conferidos teclado, foco, rótulos, associação de erro, vigência e falha de transição. |
+| Verificações técnicas | Build, lint e whitespace passaram. A revisão de integridade do Git retornou código zero com a árvore sem referência já conhecida. O JS inicial ficou em 456,51 kB (132,29 kB gzip) e o perfil sob demanda em 6,30 kB (2,35 kB gzip). O catálogo municipal permaneceu fora do carregamento inicial e da página de perfil. O provisionamento privilegiado permaneceu fora do bundle. |
+
+Foi usado o Playwright externo no Chromium Headless Shell 159.0.8154.6,
+com Vite em loopback na porta 41738 e `strictPort`. Os testes
+usaram contas fictícias e armazenamento isolado. As capturas estão em
+`/workspaces/muv-test-tools/screenshots/etapa-12.1-12.2/`.
+
+RF003 continua parcial. RF002, RNF003, IN-014, IN-016 e IN-017
+mantêm as pendências registradas. P12-06 a P12-17 seguem em discussão.
+O próximo incremento previsto envolve convites e depende de aprovação.

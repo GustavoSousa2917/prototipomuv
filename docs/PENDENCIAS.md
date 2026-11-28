@@ -97,3 +97,14 @@ Ver exclusões em ESCOPO.md. Não implementar sem aprovação de escopo.
 - Retirada, revogação, suspensão e recurso administrativo permanecem adiados.
 - Os efeitos operacionais da expiração da CNH, a prontidão e a elegibilidade permanecem pendentes.
 - LocalStorage não oferece transações entre chaves. O fallback sem Web Locks serializa apenas na própria aba. A sessão simulada é identificada apenas pelo `userId`.
+
+## Pendências após 12.2
+
+- RF003 tem perfil e identidade profissional. IN-016 permanece
+  pendente quanto aos convites e vínculos. P12-06 a P12-17 seguem em
+  discussão, incluindo verificações e encerramento.
+- RF002 permanece parcial. RNF003, IN-014 e os critérios de
+  compatibilidade territorial de IN-017 permanecem pendentes.
+- O aplicativo novo detecta alterações no legado em telas
+  profissionais por assinatura diagnóstica. Escritas de abas
+  antigas não podem ser impedidas pelo aplicativo novo.

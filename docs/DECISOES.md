@@ -324,3 +324,25 @@ de T39 sobre veículo e verificação documental são referências visuais.
 O incremento usa cadastro simulado, CNH vigente para autônomos e
 cobertura válida. A explicação de T06 sobre liberação de propostas é
 subordinada à separação entre autorização, prontidão e elegibilidade.
+
+## DEC-045 — Identidade e perfil profissional do motorista
+
+Propostas P12-01 a P12-05 aprovadas pelo responsável para 12.1 e 12.2.
+
+| Decisão | Proposta | Definição aprovada |
+|---|---|---|
+| DEC-045.1 | P12-01 | Adotar uma identidade profissional por conta pessoal, compartilhada entre autônomo e motorista vinculado. Permitir coexistência e preservar o ID autônomo de negócio. |
+| DEC-045.2 | P12-02 | Exigir unicidade global da CNH normalizada entre contas. Reutilizar validação estrutural, categoria, vigência na criação e atualização e EAR autodeclarada. |
+| DEC-045.3 | P12-03 | Autorizar a transição versionada com fonte ativa única de habilitação. Preservar IDs, datas, modalidades, regiões, autorizações, contextos e retratos históricos. |
+| DEC-045.4 | P12-04 | Permitir cadastro, consulta e edição pelo titular sem vínculo organizacional ou atuação autônoma. Reutilizar os dados pessoais da conta. |
+| DEC-045.5 | P12-05 | Oferecer entrada de conta comum anterior ao vínculo para perfil e, futuramente, convites e históricos próprios. A criação não concede contexto operacional. |
+
+A decisão preserva DEC-020 e adapta RF003, US-010, o diagrama de
+classes (pp. 22–23), a atividade RF003 (p. 29) e T28–T29. O modelo
+original permite associação opcional de Motorista a uma conta e
+cadastro direto pelo gestor. O perfil adotado exige conta pessoal
+e é criado e editado pelo titular. Foto, gênero, nascimento e senha
+do motorista mostrados em T29 ficam fora desse formulário.
+
+P12-06 a P12-17 seguem em discussão. Convites, vínculos e verificações
+mantêm seu escopo futuro.

@@ -158,3 +158,15 @@ Após rejeição, pode atualizar dados e enviar nova tentativa, sujeita
 aos mesmos pré-requisitos. Depois de aprovada, a decisão continua
 consultável mesmo que a modalidade saia da intenção, a cobertura
 fique vazia ou a CNH expire.
+
+## Perfil profissional antes do vínculo
+
+Em Minha conta, uma conta comum abre `/conta/motorista` para
+cadastrar, consultar ou atualizar a habilitação. Os dados pessoais
+são consultados na conta. Um autônomo existente já encontra sua
+habilitação no perfil. Ao iniciar atuação autônoma com perfil
+existente, informe as modalidades e atualize a CNH se estiver
+vencida. A conclusão disponibiliza o contexto autônomo para
+seleção explícita. Criar somente o perfil mantém os contextos
+existentes. Se o formulário estiver desatualizado, revise os
+dados atuais antes de editar novamente.

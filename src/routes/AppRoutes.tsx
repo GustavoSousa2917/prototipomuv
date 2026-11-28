@@ -10,7 +10,7 @@ import OrganizationPage from '../pages/operational/OrganizationPage'
 import ProviderEntryPage from '../pages/operational/ProviderEntryPage'
 import DemoAccountsPage from '../pages/dev/DemoAccountsPage'
 import AccountPage from '../pages/auth/AccountPage'
-import { accountRoute, autonomousRegistrationRoute, environmentRoutes, organizationRegistrationRoutes, serviceRegionsPath } from '../constants/environmentRoutes'
+import { accountRoute, autonomousRegistrationRoute, driverProfessionalRoute, environmentRoutes, organizationRegistrationRoutes, serviceRegionsPath } from '../constants/environmentRoutes'
 
 import LoginPage from '../pages/auth/LoginPage'
 import RegisterPage from '../pages/auth/RegisterPage'
@@ -40,6 +40,7 @@ import {
   operationalProfiles,
 } from '../constants/operationalNavigation'
 
+const DriverProfessionalPage = lazy(() => import('../pages/auth/DriverProfessionalPage'))
 const ProviderAuthorizationsPage = lazy(() => import('../pages/operational/ProviderAuthorizationsPage'))
 const AdminAuthorizationsPage = lazy(() => import('../pages/operational/AdminAuthorizationsPage'))
 const AdminAuthorizationDetailPage = lazy(() => import('../pages/operational/AdminAuthorizationDetailPage'))
@@ -121,6 +122,12 @@ export default function AppRoutes() {
 
       <Route path={accountRoute} element={
         <AccessGuard requirement={{ ownAccount: true }}><AccountPage /></AccessGuard>
+      } />
+
+      <Route path={driverProfessionalRoute} element={
+        <AccessGuard requirement={{ ownAccount: true }}>
+          <Suspense fallback={<Loading message="Carregando perfil profissional..." />}><DriverProfessionalPage /></Suspense>
+        </AccessGuard>
       } />
 
       <Route path={environmentRoutes.client + '/conta'} element={<Navigate to={accountRoute} replace />} />

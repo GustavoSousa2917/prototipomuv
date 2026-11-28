@@ -3,35 +3,36 @@ import type { FormEvent } from 'react'
 import { Link } from 'react-router'
 
 import ContextChoices from '../../components/common/ContextChoices'
+import DriverProfessionalFields from '../../components/forms/DriverProfessionalFields'
 import Alert from '../../components/feedback/Alert'
 import Button from '../../components/ui/Button'
 import Card from '../../components/ui/Card'
 import Checkbox from '../../components/ui/Checkbox'
-import Input from '../../components/ui/Input'
-import RadioGroup from '../../components/ui/RadioGroup'
-import Select from '../../components/ui/Select'
-import { accountRoute, autonomousProfileRoute, autonomousRegistrationRoute, environmentRoutes, serviceRegionRoutes } from '../../constants/environmentRoutes'
+import { accountRoute, autonomousProfileRoute, autonomousRegistrationRoute, driverProfessionalRoute, environmentRoutes, serviceRegionRoutes } from '../../constants/environmentRoutes'
 import { useAuth } from '../../contexts/authContext'
-import { cnhCategories, freightModalities } from '../../domain/autonomousProvider'
+import { freightModalities } from '../../domain/autonomousProvider'
+import { driverDetails, emptyDriverProfessional, formatCnh, isCnhCurrent } from '../../domain/driverProfessional'
+import type { DriverProfessional, DriverProfessionalInput } from '../../domain/driverProfessional'
 import type { ProfessionalInput } from '../../domain/autonomousProvider'
 import { readOwnProfessionalRegistration, saveOwnProfessionalRegistration } from '../../services/autonomousProvider'
 
-const emptyDraft: ProfessionalInput = {
-  cnhNumber: '', cnhCategory: '', cnhExpiresAt: '', hasEar: null, intendedModalities: [],
-}
 const linkStyle = 'inline-block rounded-muv-button font-semibold text-primary underline underline-offset-2'
 const dateFormat = new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short' })
-const earOptions = [{ value: 'yes', label: 'Sim' }, { value: 'no', label: 'Não' }]
 
-function formatCnh(number: string) {
-  return number.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, '$1 $2 $3 $4')
+function initialDraft(professional?: DriverProfessional, intendedModalities: string[] = []): ProfessionalInput {
+  return {
+    ...(professional ? { ...driverDetails(professional), cnhNumber: formatCnh(professional.cnhNumber) } : emptyDriverProfessional),
+    intendedModalities,
+  }
 }
 
 function ProfessionalRegistration({ userId, create }: { userId: string; create: boolean }) {
   const { access, refreshSession } = useAuth()
   const result = readOwnProfessionalRegistration(userId)
   const provider = result.kind === 'ready' ? result.provider : undefined
-  const [draft, setDraft] = useState<ProfessionalInput | null>(create && !provider ? emptyDraft : null)
+  const professional = result.kind === 'ready' ? result.professional : undefined
+  const [draft, setDraft] = useState<ProfessionalInput | null>(() => create && !provider ? initialDraft(professional) : null)
+  const [revision, setRevision] = useState(result.kind === 'ready' ? result.revision : undefined)
   const [errors, setErrors] = useState<Partial<Record<keyof ProfessionalInput, string>>>({})
   const [feedback, setFeedback] = useState('')
   const [failed, setFailed] = useState(false)
@@ -57,9 +58,15 @@ function ProfessionalRegistration({ userId, create }: { userId: string; create: 
     target?.focus()
   }, [errors, feedback])
 
-  function change<Key extends keyof ProfessionalInput>(field: Key, value: ProfessionalInput[Key]) {
+  function changeDriver<Key extends keyof DriverProfessionalInput>(field: Key, value: DriverProfessionalInput[Key]) {
     setDraft((previous) => previous && { ...previous, [field]: value })
     setErrors((previous) => ({ ...previous, [field]: undefined }))
+    setFeedback('')
+  }
+
+  function changeModalities(intendedModalities: string[]) {
+    setDraft((previous) => previous && { ...previous, intendedModalities })
+    setErrors((previous) => ({ ...previous, intendedModalities: undefined }))
     setFeedback('')
   }
 
@@ -70,7 +77,7 @@ function ProfessionalRegistration({ userId, create }: { userId: string; create: 
     setProcessing(true)
     setErrors({})
     setFeedback('')
-    const outcome = await saveOwnProfessionalRegistration(userId, draft, create ? 'create' : 'edit')
+    const outcome = await saveOwnProfessionalRegistration(userId, draft, create ? 'create' : 'edit', revision ?? '')
     submitting.current = false
     setProcessing(false)
     feedbackFocus.current = true
@@ -91,8 +98,16 @@ function ProfessionalRegistration({ userId, create }: { userId: string; create: 
       setErrors(outcome.errors)
       setFeedback('Confira os campos indicados.')
     } else {
+      if (outcome.kind === 'stale') {
+        if (!create) setDraft(null)
+        setFeedback('A habilitação ou as modalidades mudaram. Confira os dados atuais antes de editar novamente.')
+        refreshSession()
+        return
+      }
       setFeedback(outcome.kind === 'denied' ? 'A sessão mudou. A operação foi interrompida.'
-        : outcome.kind === 'alreadyExists' ? 'A conta já possui cadastro profissional.'
+        : outcome.kind === 'transitionError' || outcome.kind === 'invalidLegacy'
+          ? 'Não foi possível concluir a transição dos dados profissionais. Os registros originais foram preservados.'
+          : outcome.kind === 'alreadyExists' ? 'A conta já possui cadastro profissional.'
           : 'Não foi possível salvar o cadastro profissional. Confira o armazenamento e tente novamente.')
       if (outcome.kind === 'denied') refreshSession()
     }
@@ -100,19 +115,35 @@ function ProfessionalRegistration({ userId, create }: { userId: string; create: 
 
   const active = access?.activeContext
   const autonomous = access?.contexts.filter(({ kind }) => kind === 'autonomous') ?? []
+  function restartDraft() {
+    if (result.kind !== 'ready') return
+    setRevision(result.revision)
+    setErrors({})
+    setFeedback('')
+    setDraft(initialDraft(result.professional, provider?.intendedModalities))
+  }
+
   const returnTo = active ? environmentRoutes[active.kind] : '/prestador'
 
   return (
-    <div className="mx-auto w-full max-w-3xl space-y-4">
+    <div className="mx-auto w-full max-w-3xl space-y-4 [overflow-wrap:anywhere]">
       {create && <Link to="/prestador" className={linkStyle}>Voltar à área do prestador</Link>}
       <h1 ref={title} tabIndex={-1} className="text-muv-h1 font-bold">{create ? 'Cadastro de prestador autônomo' : 'Perfil do prestador autônomo'}</h1>
       {feedback && <div ref={focusedFeedback} tabIndex={-1}>
         <Alert role={failed ? 'alert' : 'status'} variant={failed ? 'danger' : 'success'}>{feedback}</Alert>
       </div>}
       {result.kind !== 'ready' ? (
-        <Alert role="alert" variant="danger">Não foi possível consultar o cadastro profissional da conta atual.</Alert>
+        <Alert role="alert" variant="danger">{result.kind === 'invalidLegacy'
+          ? 'Os dados do cadastro anterior estão inconsistentes. A transição foi interrompida.'
+          : 'Não foi possível consultar o cadastro profissional da conta atual.'}</Alert>
       ) : (
         <>
+          {result.legacyChanged && <Alert role="status" variant="warning">
+            O cadastro anterior foi alterado após a transição. Recarregue ou feche abas antigas. Os dados atuais permanecem ativos.
+          </Alert>}
+          {professional && !isCnhCurrent(professional.cnhExpiresAt) && <Alert variant="warning">
+            CNH vencida. Informe uma validade vigente para atualizar o cadastro.
+          </Alert>}
           <Card className="space-y-3">
             <h2 className="text-muv-h2 font-semibold">Dados da conta</h2>
             <dl className="grid gap-3 break-words sm:grid-cols-2">
@@ -127,21 +158,9 @@ function ProfessionalRegistration({ userId, create }: { userId: string; create: 
             <form ref={form} onSubmit={submit} noValidate aria-busy={processing} className="space-y-4">
               <Card className="space-y-4">
                 <h2 className="text-muv-h2 font-semibold">Habilitação profissional</h2>
-                <Input label="Número da CNH" name="cnhNumber" inputMode="numeric" required readOnly={processing}
-                  value={draft.cnhNumber} error={errors.cnhNumber} onChange={(event) => change('cnhNumber', event.target.value)} />
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <Select label="Categoria" name="cnhCategory" required disabled={processing} value={draft.cnhCategory}
-                    error={errors.cnhCategory} onChange={(event) => change('cnhCategory', event.target.value)}>
-                    <option value="">Selecione</option>
-                    {cnhCategories.map((category) => <option key={category}>{category}</option>)}
-                  </Select>
-                  <Input label="Data de validade" name="cnhExpiresAt" type="date" required readOnly={processing}
-                    value={draft.cnhExpiresAt} error={errors.cnhExpiresAt} onChange={(event) => change('cnhExpiresAt', event.target.value)} />
-                </div>
-                <RadioGroup label="Possui EAR?" name="hasEar" options={earOptions} required disabled={processing}
-                  value={draft.hasEar === null ? '' : draft.hasEar ? 'yes' : 'no'} error={errors.hasEar}
-                  onChange={(value) => change('hasEar', value === 'yes')} />
-                <p className="text-muted">A declaração de atividade remunerada é informada pelo titular.</p>
+                {create && professional && <p className="text-muted">Habilitação reaproveitada do perfil profissional da conta.</p>}
+                <DriverProfessionalFields draft={draft} errors={errors} processing={processing} change={changeDriver} />
+                {create && revision !== result.revision && <Button type="button" variant="secondary" onClick={restartDraft}>Carregar dados atuais</Button>}
               </Card>
               <Card>
                 <fieldset className="space-y-3" aria-describedby="modality-hint">
@@ -150,7 +169,7 @@ function ProfessionalRegistration({ userId, create }: { userId: string; create: 
                   {Object.entries(freightModalities).map(([key, label], index) => (
                     <Checkbox key={key} label={label} name="intendedModalities" disabled={processing}
                       checked={draft.intendedModalities.includes(key)} error={index === 0 ? errors.intendedModalities : undefined}
-                      onChange={(event) => change('intendedModalities', event.target.checked
+                      onChange={(event) => changeModalities(event.target.checked
                         ? [...draft.intendedModalities, key] : draft.intendedModalities.filter((item) => item !== key))} />
                   ))}
                 </fieldset>
@@ -184,6 +203,7 @@ function ProfessionalRegistration({ userId, create }: { userId: string; create: 
                 </ul>
               </div>
               <p className="text-muted">O cadastro permite preparar a operação. Consulte a situação administrativa na página Autorizações. A prontidão operacional será determinada em etapa posterior.</p>
+              {!create && <Link to={driverProfessionalRoute} className={`block ${linkStyle}`}>Consultar habilitação compartilhada</Link>}
               {!create && <Link to={serviceRegionRoutes.autonomous} className={`block ${linkStyle}`}>Gerenciar regiões de atendimento</Link>}
               {create ? (
                 <div className="space-y-4">
@@ -192,16 +212,7 @@ function ProfessionalRegistration({ userId, create }: { userId: string; create: 
                   <Link to={returnTo} className={linkStyle}>Continuar no contexto atual</Link>
                 </div>
               ) : (
-                <Button onClick={() => {
-                  setFeedback('')
-                  setDraft({
-                    cnhNumber: formatCnh(provider.cnhNumber),
-                    cnhCategory: provider.cnhCategory,
-                    cnhExpiresAt: provider.cnhExpiresAt,
-                    hasEar: provider.hasEar,
-                    intendedModalities: provider.intendedModalities,
-                  })
-                }}>Editar dados profissionais</Button>
+                <Button onClick={restartDraft}>Editar dados profissionais</Button>
               )}
             </Card>
           ) : (
