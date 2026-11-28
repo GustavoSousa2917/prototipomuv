@@ -182,3 +182,7 @@ Em Minha conta, abra o perfil profissional e selecione Convites recebidos. A rec
 A organização abre o vínculo em Motoristas, consulta habilitação e histórico e confirma a aprovação ou registra rejeição fundamentada. Nova análise usa os dados correntes; o vencimento bloqueia nova aprovação. O motorista consulta e pode encerrar pelo contexto vinculado ou pelo histórico em Perfil profissional → Meus vínculos.
 
 O encerramento exige justificativa e retira o contexto vinculado, mantendo a sessão e o histórico de ambas as partes. Na organização, os dados disponíveis passam a ser os registros históricos. Novo convite inicia outro vínculo após aceite, com verificação pendente.
+
+### Gerenciamento de veículos
+
+No contexto do prestador, abra Veículos para listar, filtrar e cadastrar. Informe as modalidades e suas capacidades; passageiros excluem o condutor. A declaração pode divergir da intenção do prestador. Desmarcar modalidade preserva o bloco anterior para eventual restauração. A edição de placa exige confirmação; inativação e reativação preservam placa atual, dados e histórico. A situação ativa é cadastral.

@@ -26,8 +26,8 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 | T20 | Veículo e tarifas | 21–22 | UNIFICAR PARCIALMENTE |
 | T21 | Agenda | 23–24 | EXCLUIR do MVP |
 | T22 | Gestão de pacotes | 25–26 | EXCLUIR do MVP |
-| T23 | Gestão de veículos | 14,44 | ALTERAR |
-| T24 | Cadastro de veículo | 45 | ALTERAR |
+| T23 | Gestão de veículos | 14,44 | IMPLEMENTADA COM ADAPTAÇÃO em 13.1–13.4. |
+| T24 | Cadastro de veículo | 45 | IMPLEMENTADA COM ADAPTAÇÃO em 13.1–13.4. |
 | T25 | Detalhes de solicitação | 46–47 | ALTERAR |
 | T26 | Solicitações na região | 48–49 | ALTERAR para consultar as solicitações recebidas pelo prestador (DEC-038). |
 | T27 | Contraproposta | 50–51 | MANTER |
@@ -73,7 +73,7 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 | A23 | Edição da conta | IMPLEMENTADA na Etapa 09.5 em `/conta`, para nome e telefone. |
 | A24 | Página não encontrada (404) e acesso negado (403) | 404 implementada na Etapa 06.6 e 403 demonstrativo implementado na Etapa 09.4. |
 | A25 | Tarifas | ADICIONAR |
-| A26 | Edição de veículo | ADICIONAR |
+| A26 | Edição de veículo | IMPLEMENTADA em 13.1–13.4. |
 | A27 | Avaliação do prestador | ADICIONAR |
 
 ## Índice de capturas originais
@@ -159,3 +159,7 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 T28 foi adaptada para Motoristas nos ambientes de empresa e cooperativa, Convites recebidos em `/conta/motorista/convites` e consulta do vínculo selecionado em `/motorista/vinculos`. T29 mantém o cadastro pelo titular conforme DEC-045. A verificação e o encerramento foram entregues em 12.5–12.6.
 
 A21 está implementada nas rotas `/prestador/{empresa,cooperativa}/motoristas/:linkId`. O motorista acompanha o vínculo selecionado em `/motorista/vinculos` e o histórico próprio em `/conta/motorista/vinculos`. A lista T28 agrupa ativos e encerrados.
+
+### Etapas 13.1–13.4
+
+T19 serve de referência à entrada Veículos, separada de Tarifas. T20 contribui com dados e capacidades, com documentos, fotos e tarifas adiados. T23, T24 e A26 são atendidas pelas rotas de lista, cadastro, detalhe e edição em `/prestador/{autonomo,empresa,cooperativa}/veiculos` e suas subrotas.

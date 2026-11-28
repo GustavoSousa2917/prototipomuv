@@ -370,3 +370,22 @@ P12-12, P12-13, P12-14 e P12-16 continuam sem aprovação. A DEC-046 preserva a 
 | P12-13 | A aprovação exige contexto e responsabilidade correspondentes, vínculo ativo, perfil válido e CNH vigente. Categoria e EAR são informativas. Os dados e o histórico devem corresponder à confirmação. A rejeição fundamentada continua disponível quando a aprovação estiver bloqueada por dados profissionais. |
 | P12-14 | Alterações profissionais e vencimento da CNH preservam as decisões. A interface sinaliza divergências e vigência; os efeitos operacionais ficam pendentes. |
 | P12-16 | Motorista titular ou organização responsável pode encerrar unilateralmente com confirmação e justificativa. São preservados autoria, data e histórico restrito. O contexto é retirado; o histórico organizacional deixa de consultar a habilitação atual. Um novo aceite cria outro vínculo, inicialmente com verificação pendente. |
+
+## DEC-048 — Veículos e capacidades
+
+| Proposta | Definição aprovada |
+|---|---|
+| P13-01 | Veículo com ID imutável e responsabilidade de um prestador via ProviderReference. Permitir vários; adiar compartilhamento e transferência. |
+| P13-02 | Exigir placa, tipo, marca, modelo, ano e cor. Ano inteiro entre 1900 e o ano corrente mais um. |
+| P13-03 | Descrição opcional. Fotos seguem opcionais no MVP, com implementação adiada. Adiar Renavam, CRLV, seguro, upload e catálogo de carrocerias. |
+| P13-04 | Normalizar os dois formatos de placa. Unicidade global das placas atuais, inclusive inativas. Correção confirmada preserva ID, autoria e placas anterior e nova no histórico. A anterior não fica reservada. |
+| P13-05 | Catálogo inicial Automóvel, Van, Furgão e Caminhão. O tipo não determina capacidade, modalidade ou CNH. |
+| P13-06 | Permitir PESSOA, ENCOMENDA ou ambas. Preservar declarações veiculares quando a intenção mudar e sinalizar divergências. |
+| P13-07 | Passageiros em inteiro positivo, excluído o condutor. Bagagem descritiva opcional. |
+| P13-08 | Carga e volume úteis positivos e obrigatórios em ENCOMENDA. Dimensões úteis opcionais em trio. |
+| P13-09 | Persistir gramas, litros e milímetros inteiros. Validar precisão e campos condicionais. Preservar os dados das modalidades desmarcadas e distinguir ausência de zero. |
+| P13-10 | Criar ativo, inativar e reativar com confirmação e histórico mínimo. Preservar registro e placa atual. Adiar exclusão física e transferência. |
+| P13-11 | Gerenciar apenas como titular ou responsável no contexto correspondente. Permitir preparação antes da solicitação de autorização administrativa. |
+| P13-12 | Preservar a independência de veículos, habilitação, regiões e autorizações. Adiar disponibilidade, prontidão, designação, associação permanente e compatibilidade automática. |
+
+A DEC-048 preserva a DEC-019. A associação representa responsabilidade declarada no MUV. Bagagem e descrição não têm efeitos automáticos sobre compatibilidade. Histórico mínimo inclui criação, última atualização, correções de placa e transições cadastrais, sem retrato integral de cada edição.

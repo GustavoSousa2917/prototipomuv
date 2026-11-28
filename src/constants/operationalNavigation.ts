@@ -66,7 +66,7 @@ const providerPages: OperationalPageDefinition[] = [
     path: 'veiculos',
     label: 'Veículos',
     description:
-      'Gerencie os veículos cadastrados e sua disponibilidade operacional.',
+      'Gerencie veículos, capacidades declaradas e situação cadastral.',
     icon: Car,
   },
   {

@@ -126,3 +126,11 @@ Ainda precisam ser definidos os efeitos de verificação e vigência na aptidão
 - IN-017 mantém a compatibilidade territorial de origem, destino e trajetos pendente.
 - RN012, RF009 e US-011 dependem de critérios futuros de aptidão, disponibilidade e prontidão, da compatibilidade entre motorista, veículo e modalidade e das regras de designação e substituição.
 - Antes da execução de fretes, definir regras de encerramento de vínculos com motorista designado ou em execução e o acesso posterior ao histórico operacional. RF002 e RF003 permanecem parciais.
+
+### Após 13.4
+
+- Ampliar catálogo veicular e decidir fotos, documentos, compartilhamento e transferência.
+- IN-005 mantém pesquisa e compatibilidade pendentes. IN-009 mantém a revisão documental de AMBOS; o cadastro veicular usa duas modalidades individuais. IN-014, IN-016 e IN-017 mantêm as pendências registradas.
+- Definir compatibilidade dimensional, combinação de capacidades, transporte simultâneo, disponibilidade e relação motorista–veículo.
+- Definir prontidão, designação, substituição e inativação durante fretes, com retratos históricos dos recursos utilizados.
+- A Etapa 13.5 continua prevista para validação integrada.

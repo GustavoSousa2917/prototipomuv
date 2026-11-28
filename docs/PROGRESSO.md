@@ -1289,3 +1289,15 @@ O Chromium também confirmou aceite com CNH vencida, bloqueio de nova aprovaçã
 As capturas complementares cobrem 1440 × 900, 768 × 1024, 390 × 844 e 320 × 568. Foram verificados os fluxos representativos de perfil, convites, equipe, verificação, histórico e seleção de contextos, com testes de teclado, foco, Escape e retorno de foco. Capturas em `/workspaces/muv-test-tools/screenshots/etapa-12.7/`.
 
 Build, lint, verificação de whitespace e integridade do Git passaram. A inspeção do bundle confirmou catálogo municipal em chunk sob demanda e ausência de provisionamento privilegiado. Nenhum defeito funcional reproduzível exigiu correção. As alterações são documentais. A Etapa 12 está funcionalmente encerrada no escopo demonstrativo e o versionamento de 12.7 aguarda autorização. O próximo módulo planejado é veículos e capacidades.
+
+## Etapas 13.1–13.4 — Veículos e capacidades
+
+O encerramento da Etapa 12 foi confirmado na `main` remota em `3485ebf82a4ce02aace03092b45814489891df94`. A DEC-048 entrega frota por prestador, placa única entre registros atuais, capacidades por modalidade e histórico mínimo. A Etapa 13.5 segue prevista.
+
+Os testes isolados passaram para identificação, placa, limites de ano, unidades, precisão, modalidades condicionais, preservação de capacidades, transições, histórico, isolamento, erros de leitura e gravação e operações obsoletas. Os cenários concorrentes incluíram unicidade, correção de placa, edição contra inativação e mudança de sessão ou contexto.
+
+No Chromium Headless Shell 159.0.8154.6, as jornadas A–H passaram com dados fictícios e Vite local na porta 41742 em modo strictPort. A–C cobriram autônomo, empresa, cooperativa, medidas exatas e divergência de intenção. D–F cobriram correção de placa, reserva em inativos, reativação e isolamento entre dois contextos empresariais da mesma conta. G confirmou a preservação byte a byte de regiões, decisões, retratos, vínculos e verificações. H cobriu sincronização, Web Locks, falhas, revisão obsoleta, troca de contexto, logout e guardas 403/404. As evidências anteriores de cadastro, identidade compartilhada e proteção da intenção foram reaproveitadas; os cadastros de base das jornadas foram preparados pelos serviços existentes.
+
+A validação visual em seis resoluções cobriu estados vazios, lista e filtros, formulário, detalhe e confirmação. O foco do primeiro erro foi ajustado para ocorrer após a renderização da mensagem, e a regressão passou. Rótulos, associação do erro, foco visível, Escape, retorno de foco e largura foram verificados. Capturas em `/workspaces/muv-test-tools/screenshots/etapa-13.1-13.4/`.
+
+Build, lint, whitespace e integridade do Git passaram. O JS inicial mede 465,12 kB (134,44 kB gzip) e o chunk de veículos 20,29 kB (6,77 kB gzip). Provedor privilegiado ausente do bundle e catálogo municipal em chunk separado. O versionamento de 13.1–13.4 aguarda autorização.
