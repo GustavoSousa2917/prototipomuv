@@ -80,20 +80,20 @@
   demonstrativos. A gravação conjunta se restringe à chave
   organizacional. Permanecem as limitações de concorrência e
   identificação de sessões descritas acima.
-- RF002 teve regiões entregues em 11.1–11.2 e autorizações demonstrativas
-  em 11.3–11.5. Notificações e validação integrada seguem pendentes.
-  RNF003 permanece pendente.
 
 ## Futuro
 Ver exclusões em ESCOPO.md. Não implementar sem aprovação de escopo.
 
 ## Pendências após 11.2
 
-- RF005 e RNF003 permanecem pendentes. IN-017 ainda requer critérios de origem, destino e trajetos.
 - Uma futura edição do catálogo precisa tratar códigos descontinuados antes da adoção para preservar a leitura da cobertura existente.
 
-## Pendências após 11.5
+## Pendências da Etapa 11
 
-- IN-014 segue pendente. A DEC-044 recomenda uma notificação interna por decisão.
-- Retirada, revogação, suspensão e recurso seguem fora do fluxo entregue.
-- 11.6 permanece responsável pela validação integrada da Etapa 11. RF005, RNF003 e os critérios de origem, destino e trajetos de IN-017 seguem pendentes.
+- RF002 tem fluxo demonstrativo de cadastro, regiões e autorizações. A cobertura original permanece parcial, inclusive quanto às notificações.
+- RF005 permanece pendente. IN-017 define o município como unidade territorial e mantém em aberto a compatibilidade por origem, destino e trajetos.
+- RNF003 depende de autenticação, autorização e garantias de integridade no backend.
+- IN-014 mantém pendentes as notificações internas de autorizações e vínculos. A DEC-044 recomenda uma notificação por decisão.
+- Retirada, revogação, suspensão e recurso administrativo permanecem adiados.
+- Os efeitos operacionais da expiração da CNH, a prontidão e a elegibilidade permanecem pendentes.
+- LocalStorage não oferece transações entre chaves. O fallback sem Web Locks serializa apenas na própria aba. A sessão simulada é identificada apenas pelo `userId`.

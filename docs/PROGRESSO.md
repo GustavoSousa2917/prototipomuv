@@ -1163,8 +1163,53 @@ mantendo seleções individuais de contexto. Capturas em
 `/workspaces/muv-test-tools/screenshots/etapa-11.3-11.5/`.
 
 RF002 tem fluxo demonstrativo de cadastro, território e autorizações.
-A cobertura do requisito original continua parcial enquanto
-notificações e validação integrada estiverem pendentes. RF005 e RNF003
+Neste incremento, a cobertura do requisito original permaneceu
+parcial e a validação integrada estava reservada para 11.6. RF005 e RNF003
 permanecem pendentes. IN-014 trata das notificações. IN-017 ainda
 requer os critérios de origem, destino e trajetos. O incremento 11.6
 fica reservado para a validação integrada da Etapa 11.
+
+## Etapa 11.6 — Validação integrada e encerramento funcional
+
+A `main` remota foi conferida em `6e8edaa4b42fe8025d16a484faacd6e5041ca071`,
+commit sincronizado de 11.3–11.5. O commit de 11.1–11.2,
+`34bec213625b24480fa23ab04c3e362751dfaac3`, integra esse histórico.
+
+As jornadas usaram dados fictícios em contexto isolado do Playwright
+externo 1.65.1, com Chromium Headless Shell 159.0.8154.6 (rev. 1255)
+e Vite em loopback na porta 41736 com `strictPort`. A conta comum e a
+administrativa foram autenticadas em momentos diferentes no mesmo
+armazenamento. As organizações da massa de teste foram criadas pelos
+serviços de cadastro. O cadastro autônomo e as transições operacionais
+foram exercitados pela interface.
+
+| Jornada | Evidência da validação integrada |
+|---|---|
+| 1 — Autônomo | A criação manteve o contexto cliente até a seleção explícita. A cobertura foi configurada nas duas modalidades. Pessoas foi aprovada e manteve histórico após recarga. Encomendas permaneceu Não solicitada nesse ciclo. A aprovação exibiu a ressalva de prontidão e persistiu somente os dados da decisão administrativa. |
+| 2 — Empresa | A rejeição fundamentada foi consultada pelo prestador. Depois da correção cadastral, o reenvio criou novo ID e novo retrato. A aprovação da nova tentativa preservou o retrato, a justificativa e a situação da primeira. |
+| 3 — Cooperativa | As modalidades tiveram coberturas distintas e decisões independentes. Pessoas foi aprovada e encomendas, rejeitada. A alteração da cobertura de pessoas preservou a cobertura de encomendas e os dois históricos. |
+| 4 — Contextos | A mesma conta apresentou cliente, autônomo, duas empresas e cooperativa. A alternância, o isolamento e a seleção após recarga foram conferidos. Uma solicitação com a referência do contexto anterior foi bloqueada pelo serviço. |
+| 5 — Alterações | Retirar a intenção pendente foi bloqueado. Edições de cadastro e cobertura preservaram a submissão. A aprovação exigiu ciência e uma nova mudança invalidou a confirmação anterior. Cobertura vazia e CNH vencida impediram aprovação até regularização. Após a decisão, esvaziar a cobertura, retirar e restaurar intenção e simular vencimento preservaram o histórico. A cobertura continuou consultável fora da intenção e voltou a ser editável após a restauração. |
+| 6 — Administração e abas | A rota direta e os serviços impediram consulta ou decisão indevida. Contexto demonstrativo sem cadastro não permitiu operação. Duas abas sincronizaram envio, decisão e logout, com seleções próprias de contexto. Falhas de escrita simuladas preservaram cadastro, regiões e histórico. A concorrência com Web Locks reaproveita as evidências de 11.1–11.5. |
+
+A inspeção estática confirmou a separação entre conta e prestador,
+o uso de `ProviderReference` com modalidade, a preservação dos
+formatos anteriores e a autorização nos serviços. Retratos e
+projeções administrativas selecionam campos explicitamente, sem
+material de autenticação. O catálogo municipal continua local e a
+execução no Chromium não registrou requisições externas.
+
+A verificação visual complementar cobriu 1440 × 900, 768 × 1024,
+390 × 844 e 320 × 568 nas transições entre perfil, regiões,
+autorizações e administração. Foram conferidos foco visível,
+navegação por teclado, identificação do prestador, largura das telas
+e ausência de ações incompatíveis. Capturas em
+`/workspaces/muv-test-tools/screenshots/etapa-11.6/`.
+
+Build, lint e verificações Git passaram. `git fsck --full` retornou
+código zero e informou a árvore sem referência já conhecida.
+Nenhum defeito funcional reproduzível exigiu alteração de código.
+
+A Etapa 11 está funcionalmente encerrada no escopo demonstrativo.
+O versionamento e a sincronização de 11.6 ainda estão pendentes.
+O próximo módulo planejado é motoristas e vínculos organizacionais.

@@ -38,9 +38,9 @@ Decisões aprovadas > requisitos e regras > histórias > diagramas de atividades
 Preparação territorial por modalidade para autônomos, empresas e
 cooperativas com cadastro e contexto válidos. Inclui catálogo nacional
 local, consulta, inclusão e remoção de municípios e preservação da
-cobertura fora da intenção vigente. RF002 segue parcial até as
-autorizações. RF005, compatibilidade territorial e prontidão seguem
-em seus respectivos incrementos.
+cobertura fora da intenção vigente. A pesquisa de prestadores (RF005),
+a compatibilidade territorial e a prontidão seguem em seus respectivos
+incrementos.
 
 ## Etapas 11.3 a 11.5
 
@@ -48,4 +48,7 @@ Autorização administrativa independente por modalidade e prestador.
 Inclui envio, análise, confirmação da aprovação, rejeição fundamentada,
 reenvio e histórico demonstrativos. Permanecem pendentes notificações,
 retirada, revogação, suspensão, recurso e efeitos operacionais.
-A validação integrada da Etapa 11 fica no incremento 11.6.
+A validação integrada de 11.6 confirmou o fluxo demonstrativo de
+cadastros, regiões e autorizações. RF002 permanece parcial, inclusive
+quanto às notificações. O próximo módulo planejado é motoristas e
+vínculos organizacionais.
