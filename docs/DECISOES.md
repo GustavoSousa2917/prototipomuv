@@ -232,3 +232,41 @@ Propostas P10-15 a P10-32 aprovadas pelo responsável.
 | DEC-042.16 | P10-30 | Preservar contas, cadastros autônomos e atribuições demonstrativas. |
 | DEC-042.17 | P10-31 | Adiar convites, transferência de responsabilidade, inativação e exclusão. |
 | DEC-042.18 | P10-32 | Separar cadastro de autorização e elegibilidade operacional. |
+
+## DEC-043 — Regiões de atendimento
+
+Propostas P11-01 a P11-18 aprovadas pelo responsável para a Etapa 11.
+
+| Decisão | Proposta | Definição aprovada |
+|---|---|---|
+| DEC-043.1 | P11-01 | Organizar a etapa em regiões, autorizações e validação integrada. |
+| DEC-043.2 | P11-02 | Compartilhar uma referência de prestador baseada nos identificadores profissionais e organizacionais existentes. |
+| DEC-043.3 | P11-03 | Adotar município ou unidade equivalente apresentada pelo catálogo do IBGE. |
+| DEC-043.4 | P11-04 | Identificar a unidade pelo código oficial do IBGE. |
+| DEC-043.5 | P11-05 | Usar catálogo nacional local, versionado e sem consultas externas durante o uso. |
+| DEC-043.6 | P11-06 | Configurar regiões independentemente por modalidade. |
+| DEC-043.7 | P11-07 | Exigir unicidade por prestador, modalidade e município. |
+| DEC-043.8 | P11-08 | Permitir o mesmo município nas duas modalidades. |
+| DEC-043.9 | P11-09 | Permitir inclusão, consulta e remoção de regiões. |
+| DEC-043.10 | P11-10 | Permitir cobertura vazia durante a preparação operacional. |
+| DEC-043.11 | P11-11 | Manter endereço cadastral separado da cobertura territorial. |
+| DEC-043.12 | P11-12 | Exigir cadastro válido e contexto profissional correspondente para gerenciar regiões. |
+| DEC-043.13 | P11-13 | Gerenciar a cobertura das modalidades pretendidas no cadastro vigente. |
+| DEC-043.14 | P11-14 | Preservar a cobertura quando a modalidade deixar de ser pretendida e retomar o gerenciamento quando ela voltar à intenção. |
+| DEC-043.15 | P11-15 | Sincronizar alterações territoriais entre abas e preservar o contexto ativo de cada aba. |
+| DEC-043.16 | P11-16 | Configurar regiões sem conceder autorização, prontidão ou elegibilidade automática. |
+| DEC-043.17 | P11-17 | Adiar critérios definitivos de compatibilidade entre origem e destino até a definição de IN-017. |
+| DEC-043.18 | P11-18 | Preservar cadastros, contextos e atribuições demonstrativas existentes. |
+
+A cobertura por modalidade modifica a representação original de
+`RegiaoAtuacao`, compartilhada por prestador no diagrama de classes
+do PDF (pp. 22–23). O PDF e os identificadores históricos são preservados.
+
+| Incremento | Escopo |
+|---|---|
+| 11.1 | Domínio e persistência territorial. |
+| 11.2 | Gerenciamento das regiões. |
+| 11.3 | Solicitação de autorização por modalidade. |
+| 11.4 | Análise e decisão administrativa. |
+| 11.5 | Histórico, rejeição e reenvio. |
+| 11.6 | Validação integrada. |

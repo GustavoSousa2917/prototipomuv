@@ -1,14 +1,16 @@
+import { lazy, Suspense } from 'react'
 import { Routes, Route, Navigate } from 'react-router'
 
 import PublicLayout from '../layouts/PublicLayout'
 import AuthLayout from '../layouts/AuthLayout'
+import Loading from '../components/feedback/Loading'
 import AccessGuard from './AccessGuard'
 import AutonomousProviderPage from '../pages/operational/AutonomousProviderPage'
 import OrganizationPage from '../pages/operational/OrganizationPage'
 import ProviderEntryPage from '../pages/operational/ProviderEntryPage'
 import DemoAccountsPage from '../pages/dev/DemoAccountsPage'
 import AccountPage from '../pages/auth/AccountPage'
-import { accountRoute, autonomousRegistrationRoute, environmentRoutes, organizationRegistrationRoutes } from '../constants/environmentRoutes'
+import { accountRoute, autonomousRegistrationRoute, environmentRoutes, organizationRegistrationRoutes, serviceRegionsPath } from '../constants/environmentRoutes'
 
 import LoginPage from '../pages/auth/LoginPage'
 import RegisterPage from '../pages/auth/RegisterPage'
@@ -37,6 +39,8 @@ import OperationalPlaceholderPage
 import {
   operationalProfiles,
 } from '../constants/operationalNavigation'
+
+const ServiceRegionsPage = lazy(() => import('../pages/operational/ServiceRegionsPage'))
 
 export default function AppRoutes() {
   return (
@@ -247,6 +251,14 @@ export default function AppRoutes() {
             </AccessGuard>
           }
         >
+
+          {(config.profile === 'autonomous' || config.profile === 'company' || config.profile === 'cooperative') && (
+            <Route path={serviceRegionsPath} element={
+              <Suspense fallback={<Loading message="Carregando regiões de atendimento..." />}>
+                <ServiceRegionsPage profile={config.profile} />
+              </Suspense>
+            } />
+          )}
 
           {config.pages.map((page) => {
             let element = (

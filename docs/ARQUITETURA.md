@@ -772,3 +772,58 @@ CNPJ, tipo, responsável e data de criação são preservados na edição.
 O endereço cadastral e as modalidades pretendidas são dados do
 cadastro. Regiões, autorizações e elegibilidade pertencem aos seus
 respectivos módulos.
+
+## Regiões de atendimento
+
+`ProviderReference` identifica o autônomo pelo ID profissional e a
+empresa ou cooperativa pelo tipo e ID organizacional. O serviço resolve
+a conta pela sessão e usa o contexto ativo para identificar a atuação.
+Confere a capacidade na política centralizada e valida titularidade
+ou associação de responsabilidade no cadastro persistido. Uma atribuição
+demonstrativa de prestador permite navegação, mas o gerenciamento exige
+o respectivo registro de negócio. A identidade da conta serve para
+autenticação e para detectar mudanças de escopo em operações pendentes.
+
+`muv.serviceRegions.v1` armazena apenas a referência do prestador, a
+modalidade, o código IBGE e a data da inclusão. A combinação dos três
+primeiros campos é única. A ausência da chave equivale a uma coleção
+vazia. O repositório valida toda a coleção e impede sobrescrita quando
+encontra estrutura inválida, duplicata ou código desconhecido. Nenhuma
+cobertura é derivada do endereço cadastral. O serviço confere a intenção
+vigente dentro de `withAuthMutation` e revalida o escopo antes da escrita.
+Coberturas de modalidades fora da intenção permanecem visíveis para
+consulta, com as ações de edição indisponíveis.
+
+A página observa eventos de `storage` da chave territorial. A aba
+autora reconsulta após a mutação. O contexto ativo continua no
+`sessionStorage`, independente por aba. A sincronização de sessão e
+cadastros continua a cargo do `AuthProvider`. As gravações usam
+uma chave única, com leitura e escrita serializadas entre abas quando
+há Web Locks. A fila alternativa serializa apenas na própria aba.
+LocalStorage não oferece transações entre chaves e sessões sucessivas
+da mesma conta continuam indistinguíveis pela chave da sessão.
+
+### Catálogo municipal
+
+Fonte: [DTB 2025 do IBGE](https://geoftp.ibge.gov.br/organizacao_do_territorio/estrutura_territorial/divisao_territorial/2025/),
+planilha `RELATORIO_DTB_BRASIL_2025_MUNICIPIOS.ods` do arquivo
+`DTB_2025.zip`, data-base 31/12/2025, obtida em 28/11/2026.
+São 5.571 entradas das 27 UFs, incluindo Brasília/DF (5300108) e
+Fernando de Noronha/PE (2605459) como unidades equiparadas, e Boa Esperança
+do Norte/MT (5101837). A contagem corresponde à planilha e é corroborada
+pela [publicação de áreas territoriais do IBGE](https://www.ibge.gov.br/geociencias/organizacao-do-territorio/estrutura-territorial/15761-areasdos-munivipios.html),
+com 5.569 municípios e duas unidades equiparadas. A Malha Municipal é
+outro produto e inclui áreas operacionais que não pertencem à planilha
+da DTB. Os dados são públicos e a atribuição da fonte ao IBGE é preservada.
+
+Para reproduzir o artefato, baixar o ZIP oficial para fora do repositório
+e executar `python3 scripts/generate-municipalities.py /tmp/DTB_2025.zip --retrieved 2026-11-28`.
+O gerador usa a biblioteca padrão, lê as colunas municipais da planilha,
+confere total, códigos, prefixos por UF, nomes e registros de referência
+e produz o JSON local em ordem de código, com os metadados e SHA-256
+da entrada. Para uma nova edição, conferir as alterações oficiais, adaptar
+os parâmetros validados pelo gerador, revisar códigos descontinuados e a
+compatibilidade com coberturas persistidas antes de substituir o artefato.
+
+O catálogo é distribuído no chunk da página de regiões, carregado sob
+demanda. LocalStorage guarda somente os códigos selecionados.

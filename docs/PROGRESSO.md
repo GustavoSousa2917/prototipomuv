@@ -1101,5 +1101,35 @@ contexto de preparação, conforme teste isolado.
 Build, lint e verificação de whitespace passaram. `git fsck --full`
 retornou código 0 e reportou três árvores sem referência já conhecidas.
 A Etapa 10 está tecnicamente concluída no escopo de cadastro.
-RF002 permanece parcial e RNF003 continua pendente. O versionamento
-e a sincronização de 10.5 aguardam autorização e confirmação.
+RF002 permanece parcial e RNF003 continua pendente. O encerramento de 10.5 foi versionado e sincronizado na `main` em
+`f4e4a303b0da4b5238c9469212523eb514335aa5`. O PDF e o ZIP originais
+foram incluídos depois em `d3268a5d5cfe5abe452e74149d83adbf1dc95f03`.
+
+## Etapas 11.1 e 11.2 — Regiões de atendimento
+
+A DEC-043 registra as propostas P11-01 a P11-18. Perfis de autônomo,
+empresa e cooperativa dão acesso à página compartilhada de regiões.
+A cobertura é independente por modalidade e persistida por referência
+de prestador e código IBGE. É possível consultar, incluir e remover
+municípios. Ao retirar uma modalidade da intenção, a cobertura fica
+preservada para consulta e volta a ser editável quando a intenção é
+restaurada. A configuração territorial é uma etapa de preparação.
+RF002 permanece parcial, RF005 e RNF003 seguem pendentes e IN-017
+ainda requer os critérios de origem, destino e trajetos.
+
+Validação no GitHub Codespaces com Node.js v24.22.2, npm 11.19.1,
+Playwright 1.65.1 externo em `/workspaces/muv-test-tools` e Chromium
+Headless Shell 159.0.8154.6, revisão 1255. O Vite foi executado em
+loopback na porta 41731 com `strictPort`. As capturas foram salvas
+em `/workspaces/muv-test-tools/screenshots/etapa-11.1-11.2/`.
+
+| Verificação | Evidência |
+|---|---|
+| Catálogo e testes isolados | Geração reproduzível do JSON da DTB 2025. Validados 5.571 códigos únicos, 27 UFs, homônimos, filtros por UF, código desconhecido e unidades de referência. As operações de serviço foram exercitadas com armazenamento isolado e dados fictícios, incluindo unicidade, cobertura vazia, registros inválidos, falhas de leitura e gravação, intenção vigente, escopo e operações enfileiradas antes de mudanças de conta, contexto ou intenção. |
+| Chromium | Cadastro e edição profissionais e organizacionais, mesma cidade em duas modalidades, remoção isolada, recarga, duas empresas na mesma conta, cooperativa, duas abas com contextos independentes, sincronização bidirecional, inclusão concorrente do mesmo município com um único registro, preservação da cobertura ao alterar a intenção, erro de leitura de coleção inconsistente, falha de gravação sem perda, administração exclusiva e demonstração sem cadastro. |
+| Visual e teclado | Seis dimensões entre 1440 × 900 e 320 × 568. Inspeção de seleção, listagem, nome longo, estado vazio, cobertura preservada, erro e confirmação. Verificados Tab, foco visível, Escape, retorno de foco após cancelar e foco após confirmar. Sem rolagem horizontal indevida nas dimensões verificadas. |
+| Regressões | Cadastro básico, login, Minha conta, logout, alteração da intenção, troca de contexto, 403 e 404. Confirmação estática da ausência de provisionamento e dados privilegiados no bundle de produção. |
+| Verificações técnicas | Build, lint e whitespace passaram. O chunk sob demanda de regiões, incluindo o catálogo, ficou em 188,31 kB, ou 56,17 kB com gzip. O JSON de origem ocupa 185.043 bytes. `git fsck --full` retornou código zero e registrou uma árvore sem referência. |
+
+Próximo incremento previsto após aprovação e versionamento destas
+mudanças: 11.3, solicitação de autorização por modalidade.

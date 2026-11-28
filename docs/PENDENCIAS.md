@@ -7,7 +7,7 @@
 - IN-007/008/009: nomenclatura Cliente/Passageiro, organização/gestor/cooperativa, restringir AMBOS a veículos.
 - IN-010/011: separar ocorrência/interrupção, acordos e substituições; revisão da exceção do autônomo (fora do MVP).
 - IN-012: RF de contestação (RF017 provisório), RU012, entidade e atividades.
-- IN-013: formalizar avaliações; IN-014: notificações de autorizações e vínculos; IN-015: padronizar menus; IN-016: convites e credenciais; IN-017: trajetos e regiões.
+- IN-013: formalizar avaliações; IN-014: notificações de autorizações e vínculos; IN-015: padronizar menus; IN-016: convites e credenciais; IN-017: unidade territorial definida pela DEC-043. Compatibilidade por origem, destino e trajetos permanece pendente.
 - Atualizar modelo de classes e diagramas de atividades para refletir as 91 decisões; manter IDs novos provisórios até revisão formal.
 
 ## Detalhamento necessário por módulo (não bloqueia a configuração)
@@ -76,13 +76,18 @@
   permanecem indistinguíveis e RNF003 continua pendente.
 ## Pendências após 10.5
 
-- Versionamento e sincronização da Etapa 10.5 aguardam confirmação.
 - Persistência, controle de acesso e responsabilidade continuam
   demonstrativos. A gravação conjunta se restringe à chave
   organizacional. Permanecem as limitações de concorrência e
   identificação de sessões descritas acima.
-- RF002 segue parcial até a entrega de regiões e autorização
-  administrativa. RNF003 permanece pendente.
+- RF002 segue parcial até a entrega da autorização administrativa.
+  Regiões foram entregues em 11.1–11.2. RNF003 permanece pendente.
 
 ## Futuro
 Ver exclusões em ESCOPO.md. Não implementar sem aprovação de escopo.
+
+## Pendências após 11.2
+
+- Solicitação, análise administrativa, histórico de decisões e reenvio seguem nos incrementos 11.3 a 11.5.
+- RF005 e RNF003 permanecem pendentes. IN-017 ainda requer critérios de origem, destino e trajetos.
+- Uma futura edição do catálogo precisa tratar códigos descontinuados antes da adoção para preservar a leitura da cobertura existente.

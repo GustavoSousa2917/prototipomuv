@@ -22,7 +22,15 @@ export const organizationRegistrationRoutes = {
   cooperative: environmentRoutes.cooperative + '/cadastro',
 } as const
 
+export const serviceRegionsPath = 'perfil/regioes'
+export const serviceRegionRoutes = {
+  autonomous: environmentRoutes.autonomous + '/' + serviceRegionsPath,
+  company: environmentRoutes.company + '/' + serviceRegionsPath,
+  cooperative: environmentRoutes.cooperative + '/' + serviceRegionsPath,
+} as const
+
 const protectedPaths = [
+  ...Object.values(serviceRegionRoutes),
   ...Object.values(organizationRegistrationRoutes),
   accountRoute,
   autonomousRegistrationRoute,

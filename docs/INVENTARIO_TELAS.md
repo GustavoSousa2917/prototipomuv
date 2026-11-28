@@ -9,7 +9,7 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 | T03 | Cadastro único em duas etapas | 56–61 | IMPLEMENTADA nas Etapas 08.1–08.2, adaptada à DEC-039. |
 | T04 | Recuperação simulada | 12 | IMPLEMENTADA na Etapa 08.4, adaptada à DEC-039. |
 | T05 | Redefinição com token temporário | 13 | IMPLEMENTADA na Etapa 08.4, adaptada à DEC-039. |
-| T06 | Conta e perfis | 70–71 | PARCIALMENTE IMPLEMENTADA. Contextos e seletor em 09.1–09.4, conta canônica em 09.5 e navegação pública por sessão em 09.6. Cadastro e edição profissionais em 10.1–10.4. Regiões e autorizações seguem pendentes. |
+| T06 | Conta e perfis | 70–71 | PARCIALMENTE IMPLEMENTADA. Contextos e seletor em 09.1–09.4, conta canônica em 09.5 e navegação pública por sessão em 09.6. Cadastro e edição profissionais em 10.1–10.4. Regiões implementadas na página de A20 em 11.1–11.2. Autorizações seguem pendentes. |
 | T07 | Planejamento e solicitação | 15–16,27–28 | ALTERAR |
 | T08 | Pesquisa e estimativas | 17–18,29–30 | ALTERAR |
 | T09 | Detalhes de veículo | 31–32 | ALTERAR |
@@ -42,7 +42,7 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 | T36 | Conclusão encomendas | 36 | MANTER |
 | T37 | Achados e perdidos | 38–39 | MANTER |
 | T38 | Registro de objeto | 40–41 | MANTER |
-| T39 | Autorizações | 72–73 | MANTER |
+| T39 | Autorizações | 72–73 | PENDENTE. A análise administrativa segue no incremento 11.4. |
 
 ## Interfaces/estados adicionais
 
@@ -67,7 +67,7 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 | A17 | Registrar contestação | ADICIONAR |
 | A18 | Resposta do prestador | ADICIONAR |
 | A19 | Consulta administrativa de contestação | ADICIONAR |
-| A20 | Perfil e regiões | PARCIALMENTE IMPLEMENTADA em 10.1–10.2. Cadastro, consulta e edição do autônomo a partir de T03 (58–59) e T06 (70–71). Cadastro e perfil organizacional em 10.3–10.4, adaptados da variante empresarial de T03 (60–61) e da entrada de empresa de T06 (70–71). Regiões pendentes. |
+| A20 | Perfil e regiões | IMPLEMENTADA. Cadastro, consulta e edição do autônomo em 10.1–10.2 a partir de T03 (58–59) e T06 (70–71). Cadastro e perfil organizacional em 10.3–10.4, adaptados da variante empresarial de T03 (60–61) e da entrada de empresa de T06 (70–71). Regiões implementadas em 11.1–11.2, acessíveis pelo perfil operacional e separadas por modalidade (DEC-043). |
 | A21 | Verificação de vínculo | ADICIONAR |
 | A22 | Devolução de objeto | ADICIONAR |
 | A23 | Edição da conta | IMPLEMENTADA na Etapa 09.5 em `/conta`, para nome e telefone. |

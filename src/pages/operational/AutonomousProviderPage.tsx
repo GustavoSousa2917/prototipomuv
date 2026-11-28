@@ -10,7 +10,7 @@ import Checkbox from '../../components/ui/Checkbox'
 import Input from '../../components/ui/Input'
 import RadioGroup from '../../components/ui/RadioGroup'
 import Select from '../../components/ui/Select'
-import { accountRoute, autonomousProfileRoute, autonomousRegistrationRoute, environmentRoutes } from '../../constants/environmentRoutes'
+import { accountRoute, autonomousProfileRoute, autonomousRegistrationRoute, environmentRoutes, serviceRegionRoutes } from '../../constants/environmentRoutes'
 import { useAuth } from '../../contexts/authContext'
 import { cnhCategories, freightModalities } from '../../domain/autonomousProvider'
 import type { ProfessionalInput } from '../../domain/autonomousProvider'
@@ -184,6 +184,7 @@ function ProfessionalRegistration({ userId, create }: { userId: string; create: 
                 </ul>
               </div>
               <p className="text-muted">O cadastro permite preparar a operação. A autorização ainda não foi solicitada e a prontidão operacional será determinada em etapa posterior. A pesquisa e o recebimento de solicitações seguem indisponíveis.</p>
+              {!create && <Link to={serviceRegionRoutes.autonomous} className={`block ${linkStyle}`}>Gerenciar regiões de atendimento</Link>}
               {create ? (
                 <div className="space-y-4">
                   {!saved && <Link to={autonomousProfileRoute} className={linkStyle}>Consultar cadastro profissional</Link>}

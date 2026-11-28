@@ -125,3 +125,16 @@ a organização ativa e permitem edição cadastral pelo responsável.
 A conta seleciona outra organização pelo seletor. Um contexto
 demonstrativo sem registro oferece orientação. Dados e nomes
 atualizados são revalidados nas outras abas.
+
+## Configurar regiões de atendimento
+
+Selecionar contexto profissional → abrir o perfil operacional →
+Gerenciar regiões de atendimento → escolher modalidade → selecionar
+UF e município → adicionar. A remoção pede confirmação e pode deixar
+a cobertura vazia. A rota usa o sufixo `/perfil/regioes` nos ambientes
+de autônomo, empresa e cooperativa.
+
+Ao retirar uma modalidade das intenções do cadastro, a cobertura
+daquela modalidade continua disponível para consulta como regiões
+preservadas. Restaurar a intenção reabilita inclusão e remoção. Este
+fluxo é de preparação e independe da futura solicitação de autorização.

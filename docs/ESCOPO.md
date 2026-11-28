@@ -32,3 +32,12 @@ React, TypeScript, Vite, Tailwind CSS, React Router, Lucide React; Context API, 
 
 ## Referências e precedência
 Decisões aprovadas > requisitos e regras > histórias > diagramas de atividades > classes > capturas > boas práticas. PDF de 38 páginas, versão 1.0, e prototipo.zip. Divergências devem ser registradas, nunca corrigidas silenciosamente.
+
+## Etapas 11.1 e 11.2
+
+Preparação territorial por modalidade para autônomos, empresas e
+cooperativas com cadastro e contexto válidos. Inclui catálogo nacional
+local, consulta, inclusão e remoção de municípios e preservação da
+cobertura fora da intenção vigente. RF002 segue parcial até as
+autorizações. RF005, compatibilidade territorial e prontidão seguem
+em seus respectivos incrementos.

@@ -9,7 +9,7 @@ import Card from '../../components/ui/Card'
 import Checkbox from '../../components/ui/Checkbox'
 import Input from '../../components/ui/Input'
 import Select from '../../components/ui/Select'
-import { accountRoute, environmentRoutes, organizationRegistrationRoutes } from '../../constants/environmentRoutes'
+import { accountRoute, environmentRoutes, organizationRegistrationRoutes, serviceRegionRoutes } from '../../constants/environmentRoutes'
 import { useAuth } from '../../contexts/authContext'
 import { freightModalities } from '../../domain/autonomousProvider'
 import { brazilianStates, isOrganizationKind, organizationKinds } from '../../domain/organization'
@@ -219,6 +219,7 @@ function OrganizationContent({ userId, kind, organizationId }: { userId: string;
       ) : organization ? (
         <>
           <OrganizationDetails organization={organization} />
+          <Link to={serviceRegionRoutes[kind]} className={`block ${linkStyle}`}>Gerenciar regiões de atendimento</Link>
           <Button onClick={() => { setSavedId(null); setEditing(true) }}>Editar dados organizacionais</Button>
         </>
       ) : result?.kind === 'missing' ? (
