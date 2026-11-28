@@ -9,7 +9,20 @@ export const vehicleTextLimits = { brand: 80, model: 100, color: 40, description
 export const dimensionFields = { length: 'Comprimento útil', width: 'Largura útil', height: 'Altura útil' } as const
 export type Dimension = keyof typeof dimensionFields
 
+export const technicalPurposes = { PASSENGER: 'Passageiros', CARGO: 'Carga', MIXED: 'Misto', OTHER: 'Outra destinação' } as const
+export const vehicleConfigurations = {
+  SIMPLE: 'Simples, operação comum',
+  OTHER: 'Fora do recorte',
+} as const
+export type VehicleTechnicalData = {
+  grossWeightGrams?: number
+  totalSeats?: number
+  purpose?: keyof typeof technicalPurposes
+  configuration?: keyof typeof vehicleConfigurations
+}
+
 type VehicleData = {
+  technical?: VehicleTechnicalData
   plate: string
   type: VehicleType
   brand: string
@@ -40,6 +53,7 @@ export type VehicleDraft = {
   plate: string; type: string; brand: string; model: string; year: string; color: string; description: string
   modalities: FreightModality[]
   passengers: string; luggage: string; payload: string; volume: string
+  grossWeight?: string; totalSeats?: string; technicalPurpose?: string; configuration?: string
 } & Record<Dimension, string>
 
 export type VehicleErrors = Partial<Record<keyof VehicleDraft, string>>
@@ -67,6 +81,10 @@ export function formatMeasure(value: number, decimals: 0 | 1 | 3): string {
 export function vehicleDraft(vehicle?: Vehicle): VehicleDraft {
   const dimensions = vehicle?.cargo?.millimeters
   return {
+    grossWeight: vehicle?.technical?.grossWeightGrams === undefined ? '' : formatMeasure(vehicle.technical.grossWeightGrams, 3),
+    totalSeats: vehicle?.technical?.totalSeats?.toString() ?? '',
+    technicalPurpose: vehicle?.technical?.purpose ?? '',
+    configuration: vehicle?.technical?.configuration ?? '',
     plate: vehicle?.plate ?? '', type: vehicle?.type ?? '', brand: vehicle?.brand ?? '',
     model: vehicle?.model ?? '', year: vehicle ? String(vehicle.year) : '', color: vehicle?.color ?? '',
     description: vehicle?.description ?? '', modalities: vehicle?.modalities ?? [],
@@ -148,9 +166,47 @@ export function validateVehicleDraft(input: VehicleDraft, previous?: Vehicle, no
     }
     if (grams !== null && liters !== null) cargo = { grams, liters, millimeters }
   }
+  const technical = technicalFromDraft(input, errors, previous?.technical)
+  if (input.modalities.includes('PESSOA') && passengers && technical.totalSeats !== undefined
+    && passengers.count >= technical.totalSeats) errors.passengers = 'A capacidade deve caber na lotação declarada menos o condutor.'
+  if (input.modalities.includes('ENCOMENDA') && cargo && technical.grossWeightGrams !== undefined
+    && cargo.grams > technical.grossWeightGrams) errors.payload = 'A carga útil oferecida não pode ultrapassar o PBT declarado.'
   if (Object.keys(errors).length || !plate || !validType(type)) return { kind: 'invalid', errors } as const
   const data: VehicleData = { plate, type, brand, model, year, color, description, modalities: [...input.modalities], passengers, cargo }
+  if (Object.keys(technical).length) data.technical = technical
   return { kind: 'valid', data } as const
+}
+
+function technicalFromDraft(input: VehicleDraft, errors: VehicleErrors, previous?: VehicleTechnicalData) {
+  const technical = { ...previous }
+  const { grossWeight, totalSeats, technicalPurpose, configuration } = input
+  if (grossWeight !== undefined) {
+    delete technical.grossWeightGrams
+    if (grossWeight.trim()) {
+      const grams = parsePositiveMeasure(grossWeight, 3)
+      if (grams === null) errors.grossWeight = 'Informe um PBT positivo em kg, com até três casas decimais e sem separador de milhar.'
+      else technical.grossWeightGrams = grams
+    }
+  }
+  if (totalSeats !== undefined) {
+    delete technical.totalSeats
+    if (totalSeats.trim()) {
+      const seats = parsePositiveMeasure(totalSeats, 0)
+      if (seats === null) errors.totalSeats = 'Informe um número inteiro positivo e seguro de lugares.'
+      else technical.totalSeats = seats
+    }
+  }
+  if (technicalPurpose !== undefined) {
+    delete technical.purpose
+    if (technicalPurpose && !Object.hasOwn(technicalPurposes, technicalPurpose)) errors.technicalPurpose = 'Selecione uma destinação válida.'
+    else if (technicalPurpose) technical.purpose = technicalPurpose as keyof typeof technicalPurposes
+  }
+  if (configuration !== undefined) {
+    delete technical.configuration
+    if (configuration && !Object.hasOwn(vehicleConfigurations, configuration)) errors.configuration = 'Selecione uma configuração válida.'
+    else if (configuration) technical.configuration = configuration as keyof typeof vehicleConfigurations
+  }
+  return technical
 }
 
 function record(value: unknown): value is Record<string, unknown> {
@@ -186,7 +242,7 @@ function coherentHistory(value: unknown[], plate: string, status: VehicleStatus,
 }
 
 export function isVehicle(value: unknown, now = new Date()): value is Vehicle {
-  if (!record(value) || Object.keys(value).length !== 17 || !textValue(value.id) || !isProviderReference(value.provider)
+  if (!record(value) || Object.keys(value).length !== (Object.hasOwn(value, 'technical') ? 18 : 17) || !textValue(value.id) || !isProviderReference(value.provider)
     || !storedPlate(value.plate) || !validType(value.type) || !validYear(value.year, now)
     || !textValue(value.brand, vehicleTextLimits.brand) || !textValue(value.model, vehicleTextLimits.model)
     || !textValue(value.color, vehicleTextLimits.color) || !optionalText(value.description, vehicleTextLimits.description)
@@ -202,5 +258,26 @@ export function isVehicle(value: unknown, now = new Date()): value is Vehicle {
     : record(cargo) && Object.keys(cargo).length === 3 && positiveInteger(cargo.grams) && positiveInteger(cargo.liters)
       && (cargo.millimeters === null || (record(cargo.millimeters) && Object.keys(cargo.millimeters).length === 3
         && positiveInteger(cargo.millimeters.length) && positiveInteger(cargo.millimeters.width) && positiveInteger(cargo.millimeters.height)))
-  return peopleValid && cargoValid
+  if (!peopleValid || !cargoValid) return false
+  if (!Object.hasOwn(value, 'technical')) return true
+  const { technical } = value
+  return isVehicleTechnicalData(technical)
+    && !(modalities.includes('PESSOA') && record(passengers) && positiveInteger(passengers.count) && technical.totalSeats !== undefined && passengers.count >= technical.totalSeats)
+    && !(modalities.includes('ENCOMENDA') && record(cargo) && positiveInteger(cargo.grams) && technical.grossWeightGrams !== undefined && cargo.grams > technical.grossWeightGrams)
+}
+
+
+function isVehicleTechnicalData(value: unknown): value is VehicleTechnicalData {
+  if (!record(value)) return false
+  const fields = Object.keys(value)
+  return fields.length > 0 && fields.every((field) => {
+    const entry = value[field]
+    switch (field) {
+      case 'grossWeightGrams':
+      case 'totalSeats': return positiveInteger(entry)
+      case 'purpose': return typeof entry === 'string' && Object.hasOwn(technicalPurposes, entry)
+      case 'configuration': return typeof entry === 'string' && Object.hasOwn(vehicleConfigurations, entry)
+      default: return false
+    }
+  })
 }

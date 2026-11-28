@@ -156,3 +156,13 @@ IN-009, IN-014 e IN-016 conservam a cobertura vigente.
 | DEC-048–050, RU009, RF004 e US-009 | A correspondência de veículo e tarifa por modalidade e categoria é cadastral. RF004 mantém cobertura cadastral demonstrativa. T06, T19–20, T23, T28–29 e T39 continuam referências das áreas de origem. |
 | DEC-038, RN012, US-011, RF005–RF009 e RNF003 | Busca, critérios operacionais, elegibilidade comercial, designação e segurança de produção permanecem pendentes. A DEC-050 fundamenta o diagnóstico sem criar um RF específico. |
 | IN-004, IN-005, IN-009, IN-014, IN-016 e IN-017 | IN-004 segue aberto. Busca e compatibilidade territorial continuam pendentes. A cobertura de modalidades, notificações e convites conserva os limites já registrados. |
+
+#### DEC-051 e avaliação de pares
+
+RN012 e US-011 passam a contar com avaliação demonstrativa geral de
+pares. A compatibilidade com um frete contratado, disponibilidade,
+designação e substituição continuam pendentes. RF002 e RF003 seguem
+parciais, RF004 conserva cobertura cadastral demonstrativa e
+RF005–RF009 e RNF003 seguem pendentes. IN-004 permanece aberto.
+IN-005, IN-009 e IN-017 mantêm seus limites vigentes. A DEC-051
+acrescenta critérios de produto sem criar um RF específico.

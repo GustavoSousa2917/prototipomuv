@@ -1577,6 +1577,59 @@ privilegiado na produção. Nenhum defeito funcional reproduzível
 exigiu correção. Os ajustes desta etapa são documentais.
 
 A Etapa 15 está funcionalmente encerrada no escopo cadastral
-demonstrativo. O versionamento da 15.5 aguarda autorização. A
-próxima atividade é o diagnóstico direcionado da compatibilidade
-motorista–veículo antes da busca comercial.
+demonstrativo. O encerramento da 15.5 foi versionado e sincronizado
+em `dd9cb7e77cc7ca929662502ba03b863413a5f8d0`.
+
+
+## Etapas 16.0.1–16.0.4 — Compatibilidade motorista–veículo
+
+Registrada a DEC-051. Os atributos técnicos declarados são opcionais
+no cadastro e necessários para confirmar a compatibilidade do par.
+A política separa insuficiência confirmada, informação insuficiente
+e condições atendidas. O diagnóstico reutiliza as condições
+profissionais da DEC-050 sem alterar seu resultado cadastral.
+A avaliação não grava pares, aptidão ou resultados.
+
+Os testes isolados passaram para cadastro anterior, conversões, regras
+cruzadas, nove categorias da CNH, EAR, vigência, limites em gramas,
+consolidação, isolamento, fontes indisponíveis e revisão obsoleta.
+A leitura do legado profissional e a consulta ao diagnóstico mantiveram
+os registros intactos.
+
+A execução integrada usou Playwright 1.65.1 e Chromium 159.0.8154.6,
+Vite com porta estrita e armazenamento fictício isolado. A preparação e
+parte das transições usaram serviços existentes no navegador.
+
+| Jornada | Resultado |
+|---|---|
+| A | Veículo anterior, edição parcial e completa, recarga, correção de placa e transições com identidade, capacidades, histórico e complemento preservados. |
+| B | Pessoas, resultado conjunto positivo, EAR negativa com avaliação cadastral preservada, lotação inconsistente e configuração fora do recorte. |
+| C | Limites de Encomendas em B e candidato C no cenário pesado, sem alteração tarifária pela complementação. |
+| D | Dois profissionais com critérios desencontrados, par suficiente coexistindo com veículo incompleto e isolamento entre organizações. |
+| E | Correspondência entre modalidade, categoria e tarifa, capacidade preservada de modalidade desmarcada e perda e restauração de condições com retratos intactos. |
+| F | Dois contextos empresariais, contexto demonstrativo, guardas e papéis incompatíveis. |
+| G | Falha de leitura, coleção inválida, falha de gravação e concorrência em duas abas com revisão comum, inclusive alteração de situação. |
+| H | Alterações entre abas, contexto, logout e passagem controlada da data de vencimento sem evento de armazenamento. |
+
+O executor integrado fechou o Chromium e retornou código zero. A
+regressão atual percorreu conta, login e logout, contexto, guardas,
+regiões, autorização, vínculos, verificações, frota e tarifas. Foram
+reaproveitadas evidências dos fluxos completos de cadastro, migração,
+proteção de intenção e simulação tarifária.
+
+A verificação de interface cobriu 1440 × 900, 1280 × 720,
+1024 × 768, 768 × 1024, 390 × 844 e 320 × 568. Foram testados
+largura, rótulos, foco no primeiro erro, Escape e retorno de foco na
+correção de placa, atualização anunciável e situações em texto.
+A inspeção visual foi representativa. Foram salvas 48 capturas em
+`/workspaces/muv-test-tools/screenshots/etapa-16.0.1-16.0.4/`.
+O executor da checagem focada também encerrou com código zero.
+
+Build e lint passaram. O JS inicial permaneceu em 466,63 kB. Prontidão,
+Veículos e Tarifas mediram 19,80 kB, 16,03 kB e 15,37 kB. O código
+veicular compartilhado pelo repositório ficou em 7,60 kB. O catálogo
+municipal permanece sob demanda em 180,65 kB. A inspeção do bundle
+confirmou ausência de ciclos pertinentes e ausência do provisionamento
+privilegiado na produção.
+
+16.0.5 e a busca comercial permanecem pendentes.

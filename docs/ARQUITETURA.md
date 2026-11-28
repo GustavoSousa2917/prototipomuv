@@ -1028,3 +1028,24 @@ mudança da data civil. O resultado não é armazenado. Como LocalStorage
 não tem transações entre chaves, leituras podem observar versões
 distintas. Web Locks das mutações de origem e reavaliações não criam
 um retrato global transacional.
+
+## Compatibilidade demonstrativa de pares
+
+A DEC-051 estende apenas o registro veicular em `muv.vehicles.v1`
+com `technical` opcional e campos independentes. PBT usa gramas
+inteiras, lotação inclui o condutor e destinação e configuração são
+códigos explícitos. Um grupo vazio é omitido. Leitura de registros
+anteriores não grava dados. O validador anterior exigia 17 campos e
+recusa registros estendidos. Após atualizar, encerrar ou recarregar
+abas antigas. Web Locks e revisão coordenam escritas da versão atual
+sem assegurar interoperabilidade de edição entre versões.
+
+A coleta privada conserva candidatos individuais e reutiliza as
+condições profissionais da DEC-050. O domínio avalia pares e
+interrompe a procura quando há um par suficiente no grupo com
+tarifa ativa correspondente. Ausências confirmadas, falhas de fonte
+e dados fora do recorte têm resultados próprios. A avaliação é
+somente leitura e reutiliza sincronização, foco, visibilidade e a
+mudança da data civil. Mantêm-se os limites transacionais entre
+chaves. Uma futura designação deverá registrar fatos, revisões, data
+e política conforme a decisão do fluxo de frete.

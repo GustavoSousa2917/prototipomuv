@@ -14,7 +14,7 @@ import { vehicleRoutes } from '../../constants/environmentRoutes'
 import { freightModalities } from '../../domain/autonomousProvider'
 import type { FreightModality } from '../../domain/autonomousProvider'
 import { providerKey } from '../../domain/providerReference'
-import { dimensionFields, formatMeasure, normalizePlate, vehicleDraft, vehicleTextLimits, vehicleTypes } from '../../domain/vehicle'
+import { dimensionFields, formatMeasure, normalizePlate, technicalPurposes, vehicleConfigurations, vehicleDraft, vehicleTextLimits, vehicleTypes } from '../../domain/vehicle'
 import type { Dimension, Vehicle, VehicleDraft, VehicleErrors } from '../../domain/vehicle'
 import { vehicleStorageKey } from '../../repositories/vehicleRepository'
 import type { ActiveProvider } from '../../services/providerAccess'
@@ -100,6 +100,7 @@ function Fleet({ scope, vehicles, base }: { scope: ActiveProvider; vehicles: Veh
       <Card className="h-full space-y-3">
         <h2 className="text-muv-h2 font-semibold">{vehicle.brand} {vehicle.model}</h2>
         <p>{vehicle.plate} · {vehicleTypes[vehicle.type]} · {vehicle.year} · {statuses[vehicle.status]}</p>
+        <p>Dados técnicos {vehicle.technical ? (Object.keys(vehicle.technical).length === 4 ? 'completos' : 'incompletos') : 'não informados'}</p>
         <p>{vehicle.modalities.map((mode) => modalityLabel[mode]).join(' e ')}</p>
         <Capacities vehicle={vehicle} summary />
         <VehicleDivergence vehicle={vehicle} scope={scope} />
@@ -168,7 +169,7 @@ function VehicleForm({ scope, vehicle, base }: { scope: ActiveProvider; vehicle?
   function input(field: Exclude<keyof VehicleDraft, 'modalities'>, label: string, options?: {
     maxLength?: number; inputMode?: 'numeric' | 'decimal'; helperText?: string; required?: boolean
   }) {
-    return <Input name={field} label={label} value={draft[field]} error={issues[field]}
+    return <Input name={field} label={label} value={draft[field] ?? ''} error={issues[field]}
       onChange={(event) => change(field, event.target.value)} {...options} />
   }
 
@@ -233,6 +234,25 @@ function VehicleForm({ scope, vehicle, base }: { scope: ActiveProvider; vehicle?
             </div>)}
           </fieldset>
         </Card>}
+        <Card className="space-y-3">
+          <h2 className="text-muv-h2 font-semibold">Dados técnicos declarados</h2>
+          <p>Preenchimento opcional para cadastro. Consulte a fonte técnica do veículo. Os dados são declarados, sem verificação externa, e permitem avaliar o recorte demonstrativo.</p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {input('grossWeight', 'Peso bruto total (kg)', { inputMode: 'decimal', helperText: 'Use até três casas decimais, sem separador de milhar.' })}
+            {input('totalSeats', 'Lotação incluindo o condutor', { inputMode: 'numeric' })}
+            <Select name="technicalPurpose" label="Destinação técnica" value={draft.technicalPurpose ?? ''} error={issues.technicalPurpose}
+              onChange={(event) => change('technicalPurpose', event.target.value)}>
+              <option value="">Não informada</option>
+              {Object.entries(technicalPurposes).map(([key, label]) => <option key={key} value={key}>{label}</option>)}
+            </Select>
+            <Select name="configuration" label="Configuração veicular" value={draft.configuration ?? ''} error={issues.configuration}
+              onChange={(event) => change('configuration', event.target.value)}>
+              <option value="">Não informada</option>
+              {Object.entries(vehicleConfigurations).map(([key, label]) => <option key={key} value={key}>{label}</option>)}
+            </Select>
+          </div>
+          <p>A opção simples abrange automotor sem unidade acoplada em operação comum. Composições, veículos articulados, motor-casa, motocicletas e operações especializadas ficam fora do recorte.</p>
+        </Card>
       </fieldset>
       <Button type="submit" loading={busy}>Salvar veículo</Button>
     </form>
@@ -290,6 +310,16 @@ function VehicleDetails({ scope, vehicle, base, refresh }: {
     <Card className="space-y-3">
       <h2 className="text-muv-h2 font-semibold">Capacidades declaradas</h2>
       <Capacities vehicle={vehicle} />
+    </Card>
+    <Card className="space-y-2">
+      <h2 className="text-muv-h2 font-semibold">Dados técnicos declarados</h2>
+      <dl className="grid gap-2 sm:grid-cols-2">
+        <div><dt>Peso bruto total</dt><dd>{vehicle.technical?.grossWeightGrams !== undefined
+          ? formatMeasure(vehicle.technical.grossWeightGrams, 3) + ' kg' : 'Não informado'}</dd></div>
+        <div><dt>Lotação incluindo o condutor</dt><dd>{vehicle.technical?.totalSeats ?? 'Não informada'}</dd></div>
+        <div><dt>Destinação técnica</dt><dd>{vehicle.technical?.purpose ? technicalPurposes[vehicle.technical.purpose] : 'Não informada'}</dd></div>
+        <div><dt>Configuração veicular</dt><dd>{vehicle.technical?.configuration ? vehicleConfigurations[vehicle.technical.configuration] : 'Não informada'}</dd></div>
+      </dl>
     </Card>
     <Card className="space-y-2">
       <h2 className="text-muv-h2 font-semibold">Histórico cadastral</h2>

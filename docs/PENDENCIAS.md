@@ -214,3 +214,14 @@ atividade será o diagnóstico direcionado da compatibilidade, incluindo
 classificação e composição documental, PBT, lotação, categoria da CNH,
 EAR, requisitos do serviço, avaliação conjunta e relação com
 elegibilidade comercial.
+
+### Após 16.0.1–16.0.4
+
+A política geral de pares está delimitada pela DEC-051. Permanecem
+fora da cobertura comprovação documental, propulsão da faixa
+excepcional B/AB, composições e serviços especiais. A busca deverá
+considerar necessidade, modalidade, categoria escolhida, capacidades,
+território, tarifa, disponibilidade e revalidação. Preservar a escolha
+do cliente da DEC-003.14 e a comparação antes do envio e solicitação
+direcionada da DEC-038. Designação deverá reavaliar o par selecionado
+e as condições do frete contratado, conflitos, substituição e acordos.

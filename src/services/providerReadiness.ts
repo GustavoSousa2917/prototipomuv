@@ -84,7 +84,7 @@ function readProfessional(scope: ActiveProvider): ProfessionalFacts {
   }))) }
 }
 
-function collectReadiness(scope: ActiveProvider): ReadinessFacts {
+function collectReadiness(scope: ActiveProvider) {
   const key = providerKey(scope.provider)
   const own = (record: { provider: ActiveProvider['provider'] }) => providerKey(record.provider) === key
   const authorizations = readFact(() => providerAuthorizationRepository.forProvider(scope.provider))
@@ -102,7 +102,7 @@ function collectReadiness(scope: ActiveProvider): ReadinessFacts {
       tariff: mapFact(tariffs, (rows) => rows.some((row) => row.status === 'active' && row.vehicleType === type && row.modality === modality)),
     }])),
   }])) as Record<FreightModality, ReadinessFacts['modalities'][FreightModality]>
-  return { provider: scope.provider, registration: known(true), professional, modalities }
+  return { facts: { provider: scope.provider, registration: known(true), professional, modalities }, vehicles }
 }
 
 export function readOwnReadiness(profile: ActiveProvider['provider']['kind'], userId: string, date: Date) {
@@ -110,12 +110,12 @@ export function readOwnReadiness(profile: ActiveProvider['provider']['kind'], us
     const scope = resolveActiveProvider()
     if (scope.kind !== 'ready') return scope
     if (scope.userId !== userId || scope.provider.kind !== profile) return { kind: 'denied' } as const
-    const facts = collectReadiness(scope)
+    const { facts, vehicles } = collectReadiness(scope)
     const current = resolveActiveProvider()
     if (current.kind !== 'ready' || current.userId !== userId || providerKey(current.provider) !== providerKey(scope.provider)) {
       return { kind: 'denied' } as const
     }
-    return { kind: 'evaluated', label: current.label, evaluation: evaluateReadiness(facts, date) } as const
+    return { kind: 'evaluated', label: current.label, evaluation: evaluateReadiness(facts, date, vehicles) } as const
   } catch {
     return { kind: 'readError' } as const
   }

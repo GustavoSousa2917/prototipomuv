@@ -457,3 +457,58 @@ local. O diagnóstico reavalia a vigência pela data de referência
 sem alterar decisões, origem dos dados ou histórico. O resultado
 positivo expressa condições cadastrais atendidas com compatibilidade
 motorista–veículo não verificada.
+
+## DEC-051 — Compatibilidade demonstrativa motorista–veículo
+
+A Etapa 16.0 prepara a busca. A entrega 16.0.1–16.0.4 abrange
+complementação técnica, política pura, avaliação de pares e integração
+com Prontidão. A validação integrada final fica para 16.0.5.
+
+| Proposta | Decisão aprovada |
+|---|---|
+| PCV-01 | Avaliar Pessoas e Encomendas em recorte demonstrativo fundamentado, sem comprovação de aptidão legal. |
+| PCV-02 | Avaliar B, C, D, AB, AC e AD pelo componente pertinente. A isolada é insuficiente nos cenários abrangidos. E e AE ficam fora da avaliação inicial. |
+| PCV-03 | Exigir EAR afirmativa autodeclarada na compatibilidade das duas modalidades e preservar os critérios da DEC-050 e os históricos. |
+| PCV-04 | Receber PBT em kg com até três casas e persistir gramas inteiras. Para B/AB em carga simples abrangida, o peso até 3.500.000 g atende ao critério, de 3.500.001 a 4.250.000 g é não avaliável pela exceção potencial de propulsão, e acima de 4.250.000 g não atende. |
+| PCV-05 | Declarar lotação incluindo o condutor. A capacidade oferecida de Pessoas deve caber na lotação menos um lugar. |
+| PCV-06 | Declarar destinação e configuração sem inferência do tipo comercial. Preservar o catálogo e a granularidade tarifária e explicitar configurações e serviços excluídos. |
+| PCV-07 | Permitir complemento opcional, progressivo, corrigível e removível. Preservar registros, identificação e histórico. Reutilizar validação, autoria, revisão e datas e explicitar a compatibilidade entre versões. |
+| PCV-08 | Usar a política pura `MUV-DEC-051-v1` por par, com data explícita, três estados e motivos determinísticos. |
+| PCV-09 | Consolidar existencialmente por prestador, modalidade e categoria, com veículo e tarifa ativos correspondentes. |
+| PCV-10 | Apresentar a compatibilidade separadamente dos quatro estados da DEC-050. Exigir atendimento cadastral e de compatibilidade na mesma categoria para a conclusão conjunta. |
+| PCV-11 | Manter acesso privado por titular ou responsável e minimizar a exposição de dados profissionais. Orientar complementação em Veículos e apresentar razões em Prontidão. |
+| PCV-12 | Derivar resultados sem persistir aptidão ou associações. Busca e designação futuras reusarão a política com critérios adicionais e revalidação. |
+
+Em Pessoas, apenas destinação Passageiros ou Misto, configuração
+simples de operação comum, PBT até 3.500.000 g e até nove lugares
+incluindo o condutor são avaliáveis positivamente. Em Encomendas,
+destinação Carga ou Misto é admitida no cenário leve com os mesmos
+limites de lotação e PBT. Para Carga acima de 3.500.000 g, C, D, AC e AD
+continuam avaliáveis. O cenário pesado não se aplica a veículo misto.
+Composições, articulados, unidades acopladas, motor-casa, motocicletas
+e operações especializadas permanecem fora do recorte. Nenhum valor de
+propulsão é presumido. Exigir CNH vigente e capacidade válida da
+modalidade declarada.
+
+Informação ausente ou fora da cobertura deixa o par não avaliável,
+salvo impedimento independente conhecido. Um par suficiente confirma
+o resultado de sua categoria. Sem par suficiente, incerteza relevante
+mantém o resultado não avaliável. A validação cruzada considera apenas
+modalidades declaradas, com carga oferecida até o PBT quando informado
+e passageiros até a lotação menos o condutor quando informada.
+
+A estrutura opcional estende `muv.vehicles.v1` sem migração em
+massa. Leitura atual aceita registros anteriores e preserva
+capacidades desmarcadas. Abas antigas devem ser encerradas ou
+recarregadas. A validação antiga rejeita a coleção estendida e não
+garante interoperabilidade de edição.
+
+Fundamentação consultada em 28/11/2026 e reconferida na implementação:
+[CTB, art. 143, I–V e §§ 2º–4º, art. 147, §§ 3º e 5º, e Anexo I](https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm),
+[Lei nº 15.503/2026, art. 14](https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2026/lei/l15503.htm),
+[Resolução CONTRAN nº 1.020/2025, arts. 5º, 6º, 67 e 93](https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-contran/resolucoes/Resolucao10202025.pdf)
+e [Resolução CONTRAN nº 882/2021, arts. 2º e 3º](https://www.gov.br/transportes/pt-br/assuntos/transito/conteudo-contran/resolucoes/Resolucao8822021.pdf).
+PBT e lotação têm significado técnico próprio. A EAR é anotação
+da atividade remunerada na habilitação e o protótipo utiliza a
+declaração. Cursos, exames, regularidade oficial, requisitos de
+serviço, PBTC, CMT e exceções legais permanecem fora da avaliação.

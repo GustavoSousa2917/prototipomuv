@@ -120,3 +120,11 @@ Disponibilidade, elegibilidade comercial, busca e designação
 seguem pendentes. A validação 15.5 encerra a Etapa 15 no escopo
 cadastral demonstrativo. A próxima atividade é o diagnóstico
 direcionado da compatibilidade motorista–veículo antes da busca comercial.
+
+## Etapa 16.0 — Compatibilidade motorista–veículo
+
+16.0.1–16.0.4 entregam complemento técnico opcional e consulta
+privada de pares em recorte demonstrativo. A DEC-050 preserva sua
+avaliação cadastral e a DEC-051 acrescenta dimensão independente.
+Busca, elegibilidade específica, disponibilidade e designação
+continuam pendentes. A validação de encerramento pertence à 16.0.5.

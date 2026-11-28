@@ -8,11 +8,20 @@ import { useAuth } from '../../contexts/authContext'
 import { freightModalities } from '../../domain/autonomousProvider'
 import { authorizationStatuses } from '../../domain/providerAuthorization'
 import type { ReadinessEvaluation, ReadinessState, Reason } from '../../domain/providerReadiness'
+import { compatibilityReasons } from '../../domain/vehicleCompatibility'
+import type { CompatibilityState } from '../../domain/vehicleCompatibility'
 import { vehicleTypes } from '../../domain/vehicle'
 import { readOwnReadiness, readinessStorageKeys } from '../../services/providerReadiness'
 
 type Profile = ReadinessEvaluation['provider']['kind']
 type Modality = ReadinessEvaluation['modalities'][number]
+
+const compatibilityLabels: Record<CompatibilityState, string> = {
+  met: 'Compatibilidade demonstrativa atendida',
+  notMet: 'Compatibilidade demonstrativa não atendida',
+  notEvaluable: 'Compatibilidade não avaliável',
+}
+const combinedLabel = 'Condições cadastrais e compatibilidade demonstrativa atendidas.'
 
 const stateLabels: Record<ReadinessState, string> = {
   conditionsMet: 'Condições cadastrais atendidas',
@@ -106,6 +115,8 @@ function ModalitySection({ row, professional, registration, profile }: {
         {professional.declared && <div><dt className="font-semibold">Dados profissionais declarados</dt>
           <dd>Categoria da CNH {professional.declared.cnhCategory} · EAR {professional.declared.hasEar ? 'Sim' : 'Não'}</dd></div>}
       </dl>
+      <p>{compatibilityLabels[row.compatibility]}.</p>
+      {row.combinedMet && <p className="font-semibold">{combinedLabel}</p>}
       <Reasons items={row.reasons} />
     </Card>
     <div className="grid gap-3 sm:grid-cols-2">
@@ -116,6 +127,11 @@ function ModalitySection({ row, professional, registration, profile }: {
         {category.vehicle.state === 'met' && <p>Veículo correspondente cadastrado.</p>}
         {category.tariff.state === 'met' && <p>Tarifa correspondente cadastrada.</p>}
         <Reasons items={[...category.vehicle.reasons, ...category.tariff.reasons]} />
+        <p className="font-semibold">{compatibilityLabels[category.compatibility.state]}.</p>
+        {category.combinedMet && <p>{combinedLabel}</p>}
+        {category.compatibility.reasons.length > 0 && <ul aria-label="Motivos de compatibilidade" className="list-disc space-y-1 pl-5">
+          {category.compatibility.reasons.map((reason) => <li key={reason}>{compatibilityReasons[reason]}</li>)}
+        </ul>}
       </Card>)}
     </div>
   </section>
@@ -171,15 +187,15 @@ export default function ProviderReadinessPage({ profile }: { profile: Profile })
     <p role="status" className="text-sm text-muted">
       {result.kind === 'evaluated'
         ? (revision ? 'Avaliação atualizada. ' : '') + result.evaluation.modalities
-          .map((row) => freightModalities[row.modality] + ': ' + stateLabels[row.state] + '.').join(' ')
+          .map((row) => freightModalities[row.modality] + ': ' + stateLabels[row.state] + '. ' + compatibilityLabels[row.compatibility] + '.').join(' ')
         : result.kind === 'readError' ? 'Não foi possível consultar a avaliação.'
           : result.kind === 'missingProvider' ? 'Cadastro de negócio ausente.' : 'Diagnóstico indisponível neste contexto.'}
     </p>
     {result.kind === 'evaluated' ? <>
-      {result.evaluation.compatibility === 'notVerified' && <Alert variant="info">
-        <strong>Compatibilidade motorista–veículo não verificada.</strong>
-        <p>A verificação conjunta depende de enquadramento legal da categoria da CNH, peso bruto total, lotação, composição e classificação documentais, regularidade oficial da habilitação, cursos e requisitos do serviço. Disponibilidade temporal e compatibilidade com um frete específico também ficam fora desta avaliação.</p>
-      </Alert>}
+      <Alert variant="info">
+        <strong>Compatibilidade avaliada somente no recorte demonstrativo da DEC-051.</strong>
+        <p>A avaliação usa dados declarados. Regularidade de documentos, aptidão legal, disponibilidade e compatibilidade com um frete específico ficam fora deste diagnóstico.</p>
+      </Alert>
       {result.evaluation.modalities.map((row) => <ModalitySection key={row.modality} row={row} profile={profile}
         professional={result.evaluation.professional} registration={result.evaluation.registration} />)}
       <RegulatoryLinks profile={profile} />

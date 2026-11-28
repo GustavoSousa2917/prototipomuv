@@ -207,3 +207,13 @@ resultado completo, com motivos conhecidos e informação indisponível.
 Os links levam aos módulos de origem. A avaliação é atualizada pelos
 eventos pertinentes, pelo horário local e pela ação de atualização.
 A preparação cadastral preserva as decisões e os registros de origem.
+
+### Complementação técnica e compatibilidade demonstrativa
+
+Em Veículos, o titular ou responsável pode informar PBT em kg,
+lotação incluindo o condutor, destinação e configuração, juntos ou
+individualmente. Os dados são declarados e a gravação conserva o
+histórico. Em Prontidão, a compatibilidade por categoria é apresentada
+junto às condições cadastrais, com motivos e links para os cadastros.
+Somente um par suficiente no mesmo grupo de modalidade e categoria
+permite a conclusão conjunta, sujeito às condições cadastrais.

@@ -5,9 +5,12 @@ import type { DriverProfessionalDetails } from './driverProfessional'
 import { evidenceDifferences } from './driverVerification'
 import type { DriverEvidence } from './driverVerification'
 import type { AuthorizationStatus } from './providerAuthorization'
+import { providerKey } from './providerReference'
 import type { ProviderReference } from './providerReference'
 import { vehicleTypes } from './vehicle'
-import type { VehicleType } from './vehicle'
+import type { Vehicle, VehicleType } from './vehicle'
+import { evaluateVehiclePair, vehicleCompatibilityPolicy } from './vehicleCompatibility'
+import type { CompatibilityAssessment, CompatibilityDriver, CompatibilityReason, CompatibilityState } from './vehicleCompatibility'
 
 export type Fact<T> = { kind: 'known'; value: T } | { kind: 'unavailable' }
 export const known = <T>(value: T): Fact<T> => ({ kind: 'known', value })
@@ -83,7 +86,7 @@ function license(fact: Fact<DriverProfessionalDetails | null>, date: Date): Prof
   }
 }
 
-function candidateCondition(candidate: Candidate, date: Date): Condition {
+function candidateCondition(candidate: Candidate, date: Date): ProfessionalCondition {
   const { professional, verification } = candidate
   const current = professional.kind === 'known' ? professional.value : undefined
   const currentLicense = current?.kind === 'available' ? license(known(current.details), date)
@@ -103,24 +106,69 @@ function candidateCondition(candidate: Candidate, date: Date): Condition {
   return all([currentLicense, matches])
 }
 
-function professionalCondition(facts: ProfessionalFacts, date: Date): ProfessionalCondition {
-  if (facts.kind === 'autonomous') return license(facts.details, date)
+function professionalCondition(facts: ProfessionalFacts, candidates: ProfessionalCondition[]): ProfessionalCondition {
+  if (facts.kind === 'autonomous') return candidates[0]
   if (facts.candidates.kind === 'unavailable') return { state: 'unavailable', reasons: ['linksUnavailable'] }
   if (!facts.candidates.value.length) return { state: 'pending', reasons: ['linkMissing'] }
-  const candidates = facts.candidates.value.map((candidate) => candidateCondition(candidate, date))
   if (candidates.some((candidate) => candidate.state === 'met')) return { state: 'met', reasons: [] }
   const state = candidates.some((candidate) => candidate.state === 'unavailable') ? 'unavailable' : 'pending'
   const reasons: Reason[] = state === 'pending' ? ['noSufficientProfessional'] : []
   return { state, reasons: [...new Set([...reasons, ...candidates.flatMap((item) => item.reasons)])] }
 }
 
+function professionalCandidates(facts: ProfessionalFacts, date: Date) {
+  if (facts.kind === 'autonomous') {
+    return [{ condition: license(facts.details, date), details: facts.details.kind === 'known' ? facts.details.value ?? undefined : undefined }]
+  }
+  return facts.candidates.kind === 'unavailable' ? [] : facts.candidates.value.map((candidate) => {
+    const current = candidate.professional.kind === 'known' ? candidate.professional.value : undefined
+    return { condition: candidateCondition(candidate, date), details: current?.kind === 'available' ? current.details : undefined }
+  })
+}
+
+function categoryCompatibility(
+  drivers: Fact<CompatibilityDriver[]>, vehicles: Fact<Vehicle[]>, tariff: Condition,
+  modality: FreightModality, date: Date,
+): CompatibilityAssessment {
+  const missing: CompatibilityReason[] = []
+  const unknown: CompatibilityReason[] = []
+  if (drivers.kind === 'unavailable') unknown.push('professionalUnavailable')
+  else if (!drivers.value.length) missing.push('noProfessional')
+  if (vehicles.kind === 'unavailable') unknown.push('vehiclesUnavailable')
+  else if (!vehicles.value.length) missing.push('vehicleMissing')
+  if (tariff.state === 'unavailable') unknown.push('tariffsUnavailable')
+  else if (tariff.state === 'pending') missing.push('tariffMissing')
+  if (missing.length || drivers.kind === 'unavailable' || vehicles.kind === 'unavailable') {
+    return { state: missing.length ? 'notMet' : 'notEvaluable', reasons: [...missing, ...unknown] }
+  }
+
+  const reasons = new Set<CompatibilityReason>(unknown)
+  let uncertain = false
+  for (const vehicle of vehicles.value) {
+    for (const driver of drivers.value) {
+      const result = evaluateVehiclePair(driver, vehicle, modality, date)
+      if (result.state === 'met') {
+        return tariff.state === 'met' ? { state: 'met', reasons: [] } : { state: 'notEvaluable', reasons: unknown }
+      }
+      if (result.state === 'notEvaluable') uncertain = true
+      for (const reason of result.reasons) reasons.add(reason)
+    }
+  }
+  return { state: uncertain ? 'notEvaluable' : 'notMet', reasons: [...reasons] }
+}
+
 const authorizationReasons = {
   NOT_REQUESTED: 'authorizationNotRequested', PENDING: 'authorizationPending', REJECTED: 'authorizationRejected',
 } as const
 
-export function evaluateReadiness(facts: ReadinessFacts, date: Date) {
+export function evaluateReadiness(facts: ReadinessFacts, date: Date, fleet: Fact<Vehicle[]> = unavailable) {
+  const scopedFleet = fleet.kind === 'unavailable' ? unavailable
+    : known(fleet.value.filter((row) => providerKey(row.provider) === providerKey(facts.provider)))
   const registration = check(facts.registration, 'registrationMissing', 'registrationUnavailable')
-  const professional = professionalCondition(facts.professional, date)
+  const candidates = professionalCandidates(facts.professional, date)
+  const professional = professionalCondition(facts.professional, candidates.map(({ condition }) => condition))
+  const drivers = facts.professional.kind === 'organization' && facts.professional.candidates.kind === 'unavailable'
+    ? unavailable : known(candidates.map(({ condition, details }) => ({ state: condition.state, details })))
   const modalities = (Object.keys(freightModalities) as FreightModality[]).map((modality) => {
     const input = facts.modalities[modality]
     const authorization: Condition = input.authorization.kind === 'unavailable'
@@ -134,16 +182,23 @@ export function evaluateReadiness(facts: ReadinessFacts, date: Date) {
       const vehicle = check(input.categories[type].vehicle, 'vehicleMissing', 'vehiclesUnavailable')
       const tariff = check(input.categories[type].tariff, 'tariffMissing', 'tariffsUnavailable')
       const correspondence = all([vehicle, tariff])
-      return { type, vehicle, tariff, correspondence: correspondence.state,
-        state: stateFor(input.intended, all([common, correspondence])) }
+      const currentVehicles = scopedFleet.kind === 'known'
+        ? known(scopedFleet.value.filter((row) => row.type === type && row.status === 'active' && row.modalities.includes(modality)))
+        : unavailable
+      const compatibility = categoryCompatibility(drivers, currentVehicles, tariff, modality, date)
+      const state = stateFor(input.intended, all([common, correspondence]))
+      return { type, vehicle, tariff, correspondence: correspondence.state, state, compatibility,
+        combinedMet: state === 'conditionsMet' && compatibility.state === 'met' }
     })
     const categoryState = categories.some((category) => category.correspondence === 'met') ? 'met'
       : categories.some((category) => category.correspondence === 'unavailable') ? 'unavailable' : 'pending'
-    return { modality, intended: input.intended, authorization: input.authorization, region: input.region,
+    const compatibility: CompatibilityState = categories.some((category) => category.compatibility.state === 'met') ? 'met'
+      : categories.some((category) => category.compatibility.state === 'notEvaluable') ? 'notEvaluable' : 'notMet'
+    return { modality, compatibility, combinedMet: categories.some((category) => category.combinedMet), intended: input.intended, authorization: input.authorization, region: input.region,
       state: stateFor(input.intended, all([common, { state: categoryState, reasons: [] }])),
       reasons: common.reasons, categories }
   })
-  return { provider: facts.provider, compatibility: 'notVerified' as const, registration, professional, modalities }
+  return { provider: facts.provider, compatibilityPolicy: vehicleCompatibilityPolicy, registration, professional, modalities }
 }
 
 export type ReadinessEvaluation = ReturnType<typeof evaluateReadiness>

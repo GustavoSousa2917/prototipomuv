@@ -178,3 +178,12 @@ condições relacionadas ao perfil, à equipe, à frota e às tarifas
 (T19, T20, T23, T28 e T29). As capturas originais ilustram estados
 de seus módulos. A DEC-050 estabelece a avaliação cadastral e a
 ressalva explícita de compatibilidade conjunta.
+
+### Etapas 16.0.1–16.0.4
+
+As rotas de Veículos acrescentam o resumo de completude na lista,
+os dados técnicos declarados no detalhe e os campos opcionais no
+cadastro e edição. Prontidão apresenta uma dimensão adicional de
+compatibilidade, com motivos por modalidade e categoria. T23–T24 e
+T28–T31 permanecem referências de frota, profissionais, designação
+e substituição nos respectivos escopos.
