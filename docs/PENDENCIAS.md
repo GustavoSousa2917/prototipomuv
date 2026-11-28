@@ -225,3 +225,23 @@ território, tarifa, disponibilidade e revalidação. Preservar a escolha
 do cliente da DEC-003.14 e a comparação antes do envio e solicitação
 direcionada da DEC-038. Designação deverá reavaliar o par selecionado
 e as condições do frete contratado, conflitos, substituição e acordos.
+
+### Após a validação 16.0.5
+
+A política `MUV-DEC-051-v1` usa atributos declarados e não comprova
+documentos, regularidade oficial da habilitação ou aptidão legal.
+Categorias E e AE, composições e configurações especiais permanecem
+fora da cobertura inicial. A exceção potencial de propulsão de B/AB
+fica não avaliável na faixa prevista pela DEC-051. Elegibilidade
+específica, disponibilidade e designação continuam pendentes.
+
+LocalStorage continua sem transação global entre coleções. Preservam-se
+o fallback por aba sem Web Locks, a sessão simulada por `userId` e a
+segurança demonstrativa. Versões anteriores rejeitam a estrutura
+veicular estendida. Encerre ou recarregue abas antigas antes de editar.
+
+O diagnóstico da busca e seleção deve preparar a futura DEC-052.
+Permanecem em aberto dados da necessidade, origem e destino,
+compatibilidade territorial, distância, capacidade específica,
+categorias sugeridas, disponibilidade, estimativas, comparação,
+revalidação e projeção comercial com privacidade.

@@ -1632,4 +1632,90 @@ municipal permanece sob demanda em 180,65 kB. A inspeção do bundle
 confirmou ausência de ciclos pertinentes e ausência do provisionamento
 privilegiado na produção.
 
-16.0.5 e a busca comercial permanecem pendentes.
+As etapas 16.0.1–16.0.4 foram versionadas e sincronizadas em
+`b915f2d59ad82d96870170ea5b1cceac831ae9cc`.
+
+## Etapa 16.0.5 — Validação integrada da compatibilidade
+
+A auditoria confirmou a extensão opcional de `muv.vehicles.v1` e a
+leitura sem gravação de veículos anteriores. Na base da Etapa 15, o
+validador exigia exatamente 17 campos e rejeita o registro estendido.
+A documentação preserva a orientação de encerrar ou recarregar abas
+antigas. Não há garantia de edição bidirecional entre versões.
+
+A política pura `MUV-DEC-051-v1` preserva as condições profissionais
+e os quatro estados da DEC-050. A conclusão conjunta exige um par
+suficiente e a tarifa ativa correspondente, no mesmo prestador,
+modalidade e categoria. As fontes indisponíveis e os dados fora da
+cobertura têm tratamento próprio.
+
+### Execução atual
+
+As jornadas usaram Playwright 1.65.1 e Chromium Headless Shell
+159.0.8154.6, revisão 1255, com Vite em porta estrita e dados fictícios
+em armazenamento isolado. A preparação e parte das transições
+acionaram os serviços do aplicativo no navegador.
+
+| Jornada | Resultado |
+|---|---|
+| A — Legado | Consulta, edição, PBT individual após recarga, complemento completo e remoção individual. Identidade, prestador, modalidades, capacidades e situação foram preservados. Correção de placa e transições conservaram o complemento e registraram os eventos esperados. |
+| B — Pessoas | Resultado conjunto com EAR afirmativa, perda com EAR negativa e restauração sem mudar a DEC-050 ou a autorização. Oito passageiros em nove lugares foram aceitos. Dez lugares são cadastráveis e ficam fora do recorte. A inconsistência entre capacidade e lotação foi rejeitada. |
+| C — Encomendas | B atendeu em 3.500.000 g, ficou não avaliável em 3.500.001 e 4.250.000 g e não atendeu em 4.250.001 g. C atendeu no cenário pesado de carga. Misto pesado e destinação Passageiros seguiram suas regras próprias. Tarifas foram preservadas. |
+| D — Cooperativa | Categoria e EAR de profissionais diferentes não formaram par. Um par suficiente coexistiu com veículo incompleto. Rejeição posterior, divergência e encerramento excluíram o candidato. Restaurar o retrato recuperou a condição e preservou o histórico. |
+| E — Modalidades e categorias | Tarifa de outra categoria não supriu o par. Foram verificadas situação, declaração de modalidade, capacidade preservada e revalidação ao restaurar. Autorizações e retratos permaneceram intactos. |
+| F — Integridade | Guardas, contexto demonstrativo, isolamento, revisão obsoleta, leitura e gravação indisponíveis e coleção inválida foram exercitados. Duas abas verificaram atualização, seleções válidas e logout compartilhado. |
+
+Consultas repetidas e a virada da data mantiveram idênticas as chaves
+e os valores de LocalStorage e SessionStorage. A complementação
+explícita alterou a coleção veicular. A verificação dos demais
+registros foi feita separadamente das mutações de preparação.
+A CNH permaneceu vigente no dia anterior e no dia do vencimento.
+A perda posterior foi observada com relógio controlado no navegador,
+sem evento de armazenamento. Retorno, foco, visibilidade e
+atualização manual também foram exercitados.
+
+Os três executores chegaram aos últimos registros de sucesso depois
+do fechamento dos navegadores, sem asserções funcionais pendentes.
+O processo da execução principal foi reportado com código 143
+(SIGTERM), após esse registro. Os dois executores complementares,
+D/E e temporal, retornaram código zero. A ressalva histórica sobre
+SIGTERM na 15.5 foi preservada.
+
+### Evidências reaproveitadas e regressões
+
+A cobertura de 16.0.1–16.0.4 foi reaproveitada para conversões,
+entradas inválidas, nove códigos de CNH, demais pontos de fronteira
+e concorrência real sob Web Locks. A regressão atual abrangeu
+autenticação, Minha conta, contextos, guardas, identidade
+profissional, regiões, autorização, convites, vínculos, verificações,
+veículos, capacidades, correção de placa, situação, tarifas e DEC-050.
+As jornadas completas de cadastro, migração profissional, proteção
+da intenção pendente, autorização sem recursos e simulação tarifária
+mantêm as evidências anteriores.
+
+
+### Interface e encerramento
+
+A execução temporal confirmou diretamente a perda do resultado de
+compatibilidade em duas abas após alteração de configuração e EAR e,
+com os critérios restaurados, após a virada da data de validade. Os
+valores persistidos ficaram intactos durante a passagem da data.
+
+As verificações em 1440 × 900, 768 × 1024, 390 × 844 e 320 × 568
+cobriram largura, rótulos, associação da mensagem ao campo, foco no
+primeiro erro, foco visível, Escape e retorno de foco, títulos e
+agrupamentos, estados em texto e anúncios da região de status.
+A inspeção visual foi representativa e verificou legibilidade dos
+dados técnicos declarados e distinção dos estados. Foram salvas
+44 capturas em `/workspaces/muv-test-tools/screenshots/etapa-16.0.5/`.
+
+Build, lint e verificações Git passaram. Prontidão, Veículos, Tarifas e
+catálogo municipal permanecem sob demanda. A inspeção dos chunks
+confirmou ausência de ciclos pertinentes e de provisionamento
+privilegiado em produção. Nenhum defeito funcional reproduzível foi
+identificado. As alterações desta etapa são documentais e preservam
+código, decisões e formatos persistidos.
+
+A Etapa 16.0 está funcionalmente encerrada no escopo demonstrativo.
+A próxima atividade é o diagnóstico da busca e seleção de
+prestadores, com preparação da futura DEC-052.

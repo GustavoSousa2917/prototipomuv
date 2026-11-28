@@ -166,3 +166,17 @@ parciais, RF004 conserva cobertura cadastral demonstrativa e
 RF005–RF009 e RNF003 seguem pendentes. IN-004 permanece aberto.
 IN-005, IN-009 e IN-017 mantêm seus limites vigentes. A DEC-051
 acrescenta critérios de produto sem criar um RF específico.
+
+#### Validação integrada 16.0.5
+
+| Referências | Cobertura confirmada |
+|---|---|
+| DEC-018–024, DEC-038, RF002 e US-016 | A autorização e seus retratos permanecem independentes da análise de pares. A seleção futura preserva o fluxo exclusivamente direcionado. RF002 segue parcial. |
+| DEC-045–047, RN012, RU009, RF003 e US-010 | A avaliação usa a habilitação atual do titular ou o vínculo ativo e a última verificação da própria organização. Divergência e restauração respeitam o retrato e preservam o histórico. RF003 segue parcial. |
+| DEC-048–051, RU009, RF004 e US-009 | A complementação opcional preserva frota anterior. A DEC-050 mantém seus estados e a DEC-051 acrescenta compatibilidade geral por modalidade e categoria. RF004 conserva cobertura cadastral demonstrativa. |
+| RN012, US-011, RF005–RF009 e RNF003 | A análise geral de pares cobre um insumo. As condições específicas do frete, disponibilidade, busca, designação, substituição e segurança de produção permanecem pendentes. |
+| IN-004, IN-005, IN-009 e IN-017 | IN-004 segue aberto. Os demais preservam os limites registrados para busca, modalidades e compatibilidade territorial. |
+
+As referências visuais T23–T24 e T28–T31 e as fontes normativas
+registradas na DEC-051 foram reaproveitadas. Não se atribui novo RF
+à política demonstrativa.

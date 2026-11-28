@@ -127,4 +127,6 @@ direcionado da compatibilidade motorista–veículo antes da busca comercial.
 privada de pares em recorte demonstrativo. A DEC-050 preserva sua
 avaliação cadastral e a DEC-051 acrescenta dimensão independente.
 Busca, elegibilidade específica, disponibilidade e designação
-continuam pendentes. A validação de encerramento pertence à 16.0.5.
+continuam pendentes. A 16.0.5 valida e encerra o recorte demonstrativo
+da Etapa 16.0. A próxima atividade é o diagnóstico da busca e seleção
+de prestadores, com preparação da futura DEC-052.
