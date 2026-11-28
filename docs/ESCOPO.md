@@ -41,3 +41,11 @@ local, consulta, inclusão e remoção de municípios e preservação da
 cobertura fora da intenção vigente. RF002 segue parcial até as
 autorizações. RF005, compatibilidade territorial e prontidão seguem
 em seus respectivos incrementos.
+
+## Etapas 11.3 a 11.5
+
+Autorização administrativa independente por modalidade e prestador.
+Inclui envio, análise, confirmação da aprovação, rejeição fundamentada,
+reenvio e histórico demonstrativos. Permanecem pendentes notificações,
+retirada, revogação, suspensão, recurso e efeitos operacionais.
+A validação integrada da Etapa 11 fica no incremento 11.6.

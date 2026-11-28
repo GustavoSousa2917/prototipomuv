@@ -1,3 +1,4 @@
+import { serviceRegionStorageKey } from '../constants/storageKeys'
 import { findMunicipality } from '../data/municipalities'
 import { isServiceRegion, serviceRegionKey } from '../domain/serviceRegion'
 import type { ServiceRegion } from '../domain/serviceRegion'
@@ -5,7 +6,7 @@ import { providerKey } from '../domain/providerReference'
 import type { ProviderReference } from '../domain/providerReference'
 import type { FreightModality } from '../domain/autonomousProvider'
 
-export const serviceRegionStorageKey = 'muv.serviceRegions.v1'
+export { serviceRegionStorageKey } from '../constants/storageKeys'
 
 export const serviceRegionRepository = {
   read(): ServiceRegion[] {

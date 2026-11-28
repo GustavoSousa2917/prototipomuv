@@ -9,7 +9,7 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 | T03 | Cadastro único em duas etapas | 56–61 | IMPLEMENTADA nas Etapas 08.1–08.2, adaptada à DEC-039. |
 | T04 | Recuperação simulada | 12 | IMPLEMENTADA na Etapa 08.4, adaptada à DEC-039. |
 | T05 | Redefinição com token temporário | 13 | IMPLEMENTADA na Etapa 08.4, adaptada à DEC-039. |
-| T06 | Conta e perfis | 70–71 | PARCIALMENTE IMPLEMENTADA. Contextos e seletor em 09.1–09.4, conta canônica em 09.5 e navegação pública por sessão em 09.6. Cadastro e edição profissionais em 10.1–10.4. Regiões implementadas na página de A20 em 11.1–11.2. Autorizações seguem pendentes. |
+| T06 | Conta e perfis | 70–71 | PARCIALMENTE IMPLEMENTADA. Contextos e seletor em 09.1–09.4, conta canônica em 09.5 e navegação pública por sessão em 09.6. Cadastro e edição profissionais em 10.1–10.4. Regiões implementadas na página de A20 em 11.1–11.2. Autorizações por modalidade disponíveis nos ambientes de prestador em 11.3–11.5. |
 | T07 | Planejamento e solicitação | 15–16,27–28 | ALTERAR |
 | T08 | Pesquisa e estimativas | 17–18,29–30 | ALTERAR |
 | T09 | Detalhes de veículo | 31–32 | ALTERAR |
@@ -42,7 +42,7 @@ Agrupamento de 39 conjuntos da análise inicial; numeração das capturas em ord
 | T36 | Conclusão encomendas | 36 | MANTER |
 | T37 | Achados e perdidos | 38–39 | MANTER |
 | T38 | Registro de objeto | 40–41 | MANTER |
-| T39 | Autorizações | 72–73 | PENDENTE. A análise administrativa segue no incremento 11.4. |
+| T39 | Autorizações | 72–73 | IMPLEMENTADA em 11.3–11.5 com lista, filtros, análise, decisão e histórico. Notificações seguem em IN-014. |
 
 ## Interfaces/estados adicionais
 

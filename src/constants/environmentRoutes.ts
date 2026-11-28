@@ -29,7 +29,10 @@ export const serviceRegionRoutes = {
   cooperative: environmentRoutes.cooperative + '/' + serviceRegionsPath,
 } as const
 
+export const adminAuthorizationRoute = environmentRoutes.admin + '/autorizacoes'
+
 const protectedPaths = [
+  adminAuthorizationRoute + '/:id',
   ...Object.values(serviceRegionRoutes),
   ...Object.values(organizationRegistrationRoutes),
   accountRoute,

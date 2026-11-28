@@ -80,14 +80,20 @@
   demonstrativos. A gravação conjunta se restringe à chave
   organizacional. Permanecem as limitações de concorrência e
   identificação de sessões descritas acima.
-- RF002 segue parcial até a entrega da autorização administrativa.
-  Regiões foram entregues em 11.1–11.2. RNF003 permanece pendente.
+- RF002 teve regiões entregues em 11.1–11.2 e autorizações demonstrativas
+  em 11.3–11.5. Notificações e validação integrada seguem pendentes.
+  RNF003 permanece pendente.
 
 ## Futuro
 Ver exclusões em ESCOPO.md. Não implementar sem aprovação de escopo.
 
 ## Pendências após 11.2
 
-- Solicitação, análise administrativa, histórico de decisões e reenvio seguem nos incrementos 11.3 a 11.5.
 - RF005 e RNF003 permanecem pendentes. IN-017 ainda requer critérios de origem, destino e trajetos.
 - Uma futura edição do catálogo precisa tratar códigos descontinuados antes da adoção para preservar a leitura da cobertura existente.
+
+## Pendências após 11.5
+
+- IN-014 segue pendente. A DEC-044 recomenda uma notificação interna por decisão.
+- Retirada, revogação, suspensão e recurso seguem fora do fluxo entregue.
+- 11.6 permanece responsável pela validação integrada da Etapa 11. RF005, RNF003 e os critérios de origem, destino e trajetos de IN-017 seguem pendentes.

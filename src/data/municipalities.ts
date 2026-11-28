@@ -1,5 +1,7 @@
 import catalog from './municipalities.json'
 
+export const municipalityCatalogEdition = catalog.metadata.edition
+
 const collator = new Intl.Collator('pt-BR')
 const entries = catalog.municipalities.map(([code, name, uf]) => ({ code, name, uf }))
 const byCode = new Map(entries.map((municipality) => [municipality.code, municipality]))

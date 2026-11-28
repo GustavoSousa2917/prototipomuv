@@ -125,7 +125,7 @@ function OrganizationForm({ userId, organization, initialKind, onSaved, onCancel
       <Card className="space-y-4">
         <fieldset className="space-y-3">
           <legend className="text-muv-h2 font-semibold">Modalidades pretendidas</legend>
-          <p className="text-muted">A autorização por modalidade será tratada em etapa posterior.</p>
+          <p className="text-muted">Envie a solicitação na página Autorizações.</p>
           {Object.entries(freightModalities).map(([key, label], index) => (
             <Checkbox key={key} name={key} label={label} disabled={busy} checked={input.intendedModalities.includes(key)}
               error={index === 0 ? errors.intendedModalities : undefined}

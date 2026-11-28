@@ -138,3 +138,23 @@ Ao retirar uma modalidade das intenções do cadastro, a cobertura
 daquela modalidade continua disponível para consulta como regiões
 preservadas. Restaurar a intenção reabilita inclusão e remoção. Este
 fluxo é de preparação e independe da futura solicitação de autorização.
+
+## Solicitar e decidir autorização por modalidade
+
+Prestador com contexto válido → Autorizações → escolher a modalidade
+no cartão correspondente → conferir intenção, cobertura e, para
+autônomos, CNH vigente → solicitar. Uma modalidade pendente mantém
+os dados enviados para consulta no histórico. A intenção da
+modalidade pendente permanece exigida ao editar o cadastro.
+
+Administração → Autorizações → filtrar tentativas → abrir detalhe →
+comparar os dados submetidos e atuais. A aprovação requer confirmação,
+requisitos vigentes e ciência das diferenças observadas, quando
+pertinente. Se a projeção atual mudar antes de gravar, revisar a
+nova versão. Para rejeitar, informar e confirmar a justificativa.
+
+O prestador acompanha cada decisão e seu histórico no próprio contexto.
+Após rejeição, pode atualizar dados e enviar nova tentativa, sujeita
+aos mesmos pré-requisitos. Depois de aprovada, a decisão continua
+consultável mesmo que a modalidade saia da intenção, a cobertura
+fique vazia ou a CNH expire.

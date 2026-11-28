@@ -6,6 +6,7 @@ import { autonomousProviderRepository } from '../repositories/autonomousProvider
 import { sessionRepository } from '../repositories/sessionRepository'
 import { userRepository } from '../repositories/userRepository'
 import { withAuthMutation } from './authMutation'
+import { pendingIntentMessage, removesPendingModality } from './protectAuthorizationIntent'
 
 function eligibleUser(expectedUserId: string) {
   const session = sessionRepository.read()
@@ -46,6 +47,10 @@ export async function saveOwnProfessionalRegistration(
       const existing = autonomousProviderRepository.findByUserId(user.id)
       if (mode === 'create' && existing) return { kind: 'alreadyExists' } as const
       if (mode === 'edit' && !existing) return { kind: 'missing' } as const
+      if (existing && removesPendingModality({ kind: 'autonomous', providerId: existing.id },
+        existing.intendedModalities, validation.details.intendedModalities)) {
+        return { kind: 'invalid', errors: { intendedModalities: pendingIntentMessage } } as const
+      }
       const owner = autonomousProviderRepository.findByCnh(validation.details.cnhNumber)
       if (owner && owner.userId !== user.id) {
         return { kind: 'invalid', errors: { cnhNumber: 'Esta CNH já está associada a outro cadastro.' } } as const

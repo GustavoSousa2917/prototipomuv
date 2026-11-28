@@ -827,3 +827,53 @@ compatibilidade com coberturas persistidas antes de substituir o artefato.
 
 O catálogo é distribuído no chunk da página de regiões, carregado sob
 demanda. LocalStorage guarda somente os códigos selecionados.
+
+## Autorizações administrativas por modalidade
+
+`muv.providerAuthorizations.v1` é a coleção de tentativas e decisões.
+Cada tentativa usa `ProviderReference`, modalidade individual, ID
+próprio, número sequencial no par, data de envio, identificação
+projetada de quem solicitou e o retrato submetido. Uma decisão ausente
+representa pendência. Uma decisão persistida é aprovada ou rejeitada
+e encerra a tentativa. A ausência de tentativas no par representa
+Não solicitada. O repositório valida a coleção integralmente e ordena
+por data de envio, sequência e ID. O reenvio preserva a tentativa
+rejeitada e recebe nova sequência e novo ID.
+
+O retrato inclui campos profissionais e pessoais pertinentes ou
+campos comerciais, endereço cadastral e nome do responsável. Os
+municípios incluem nome, código, UF e edição do catálogo. A projeção
+exclui credenciais, dados internos de autenticação e tokens. O
+histórico territorial é legível independentemente de catálogos
+posteriores. A lista administrativa recebe somente a identificação
+de apresentação e os campos necessários aos filtros.
+
+A solicitação verifica cadastro, intenção, cobertura e vigência
+da CNH do autônomo. A aprovação revalida as mesmas condições e
+compara as projeções submetida e atual. A ordem dos mesmos municípios
+é irrelevante. O diálogo registra ciência da versão normalizada
+exibida. O serviço recalcula essa versão sob o bloqueio e rejeita
+confirmações desatualizadas. O ato guarda os dados atuais reconhecidos
+quando houve diferenças e preserva o retrato original. A rejeição
+exige justificativa e continua disponível quando existem impedimentos
+objetivos à aprovação. Ambas as decisões exigem a administração
+exclusiva e gravam o identificador e nome histórico do administrador.
+
+A edição cadastral consulta a coleção apenas ao retirar uma modalidade
+da intenção e bloqueia a retirada se a tentativa estiver pendente.
+Edições ou remoções territoriais preservam o histórico, inclusive
+quando a cobertura fica vazia. Depois da aprovação, mudança de
+intenção ou vencimento da CNH preserva a decisão registrada.
+
+As mutações de cadastro, território e autorização usam
+`withAuthMutation`. As telas observam alterações de armazenamento
+pertinentes e reconsultam imediatamente na aba autora. Sessão e
+contexto seguem a DEC-040. Sem Web Locks, a fila coordena somente
+a própria aba. LocalStorage carece de transações entre chaves,
+e a identidade da sessão é limitada ao ID da conta. As verificações
+são demonstrativas. Garantias definitivas dependem do backend.
+
+A navegação carrega as páginas de autorização sob demanda. A lista
+administrativa e a proteção da intenção cadastral podem ler a coleção
+sem carregar o catálogo municipal. O detalhe e o envio consultam
+a cobertura atual usando o catálogo local.

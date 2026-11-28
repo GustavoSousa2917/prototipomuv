@@ -40,6 +40,9 @@ import {
   operationalProfiles,
 } from '../constants/operationalNavigation'
 
+const ProviderAuthorizationsPage = lazy(() => import('../pages/operational/ProviderAuthorizationsPage'))
+const AdminAuthorizationsPage = lazy(() => import('../pages/operational/AdminAuthorizationsPage'))
+const AdminAuthorizationDetailPage = lazy(() => import('../pages/operational/AdminAuthorizationDetailPage'))
 const ServiceRegionsPage = lazy(() => import('../pages/operational/ServiceRegionsPage'))
 
 export default function AppRoutes() {
@@ -260,6 +263,10 @@ export default function AppRoutes() {
             } />
           )}
 
+          {config.profile === 'admin' && <Route path="autorizacoes/:id" element={
+            <Suspense fallback={<Loading message="Carregando tentativa..." />}><AdminAuthorizationDetailPage /></Suspense>
+          } />}
+
           {config.pages.map((page) => {
             let element = (
               <OperationalPlaceholderPage
@@ -268,6 +275,15 @@ export default function AppRoutes() {
                 areaLabel={config.areaLabel}
               />
             )
+
+            if (page.path === 'autorizacoes') {
+              if (config.profile === 'admin') {
+                element = <Suspense fallback={<Loading message="Carregando autorizações..." />}><AdminAuthorizationsPage /></Suspense>
+              }
+              if (config.profile === 'autonomous' || config.profile === 'company' || config.profile === 'cooperative') {
+                element = <Suspense fallback={<Loading message="Carregando autorizações..." />}><ProviderAuthorizationsPage profile={config.profile} /></Suspense>
+              }
+            }
 
             if (page.path === 'perfil') {
               if (config.profile === 'autonomous') element = <AutonomousProviderPage />

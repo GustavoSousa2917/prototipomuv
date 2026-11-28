@@ -146,7 +146,7 @@ function ProfessionalRegistration({ userId, create }: { userId: string; create: 
               <Card>
                 <fieldset className="space-y-3" aria-describedby="modality-hint">
                   <legend className="text-muv-h2 font-semibold">Modalidades pretendidas</legend>
-                  <p id="modality-hint" className="text-muted">A autorização por modalidade será tratada em um processo posterior.</p>
+                  <p id="modality-hint" className="text-muted">Envie a solicitação na página Autorizações.</p>
                   {Object.entries(freightModalities).map(([key, label], index) => (
                     <Checkbox key={key} label={label} name="intendedModalities" disabled={processing}
                       checked={draft.intendedModalities.includes(key)} error={index === 0 ? errors.intendedModalities : undefined}
@@ -183,7 +183,7 @@ function ProfessionalRegistration({ userId, create }: { userId: string; create: 
                   {provider.intendedModalities.map((key) => <li key={key}>{freightModalities[key]}</li>)}
                 </ul>
               </div>
-              <p className="text-muted">O cadastro permite preparar a operação. A autorização ainda não foi solicitada e a prontidão operacional será determinada em etapa posterior. A pesquisa e o recebimento de solicitações seguem indisponíveis.</p>
+              <p className="text-muted">O cadastro permite preparar a operação. Consulte a situação administrativa na página Autorizações. A prontidão operacional será determinada em etapa posterior.</p>
               {!create && <Link to={serviceRegionRoutes.autonomous} className={`block ${linkStyle}`}>Gerenciar regiões de atendimento</Link>}
               {create ? (
                 <div className="space-y-4">

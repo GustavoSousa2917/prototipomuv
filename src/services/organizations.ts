@@ -7,6 +7,7 @@ import { sessionRepository } from '../repositories/sessionRepository'
 import { userRepository } from '../repositories/userRepository'
 import { resolveAccountAccess } from './accountAccess'
 import { withAuthMutation } from './authMutation'
+import { pendingIntentMessage, removesPendingModality } from './protectAuthorizationIntent'
 
 function authenticatedAccount(expectedUserId: string) {
   if (sessionRepository.read()?.userId !== expectedUserId) return null
@@ -86,6 +87,11 @@ export async function updateOwnOrganization(expectedUserId: string, organization
       if (validation.kind !== 'valid') return validation
       const current = scopedOrganization(expectedUserId, organizationId)
       if (current.kind !== 'ready') return current
+      const { organization } = current
+      if (removesPendingModality({ kind: organization.kind, organizationId: organization.id },
+        organization.intendedModalities, validation.details.intendedModalities)) {
+        return { kind: 'invalid', errors: { intendedModalities: pendingIntentMessage } } as const
+      }
       organizationRepository.update({
         ...current.organization, ...validation.details, updatedAt: new Date().toISOString(),
       })

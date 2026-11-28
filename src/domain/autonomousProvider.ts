@@ -58,17 +58,21 @@ function validModalities(value: unknown): value is FreightModality[] {
     && value.every((entry) => typeof entry === 'string' && Object.hasOwn(freightModalities, entry))
 }
 
+export function isCnhCurrent(expiresAt: string, now = new Date()) {
+  const today = [now.getFullYear(), now.getMonth() + 1, now.getDate()]
+    .map((part) => String(part).padStart(2, '0')).join('-')
+  return isCalendarDate(expiresAt) && expiresAt >= today
+}
+
 export function validateProfessionalInput(input: ProfessionalInput, now = new Date()) {
   const errors: FieldErrors = {}
   const { cnhCategory, cnhExpiresAt, hasEar, intendedModalities } = input
   const cnhNumber = typeof input.cnhNumber === 'string' ? digitsOnly(input.cnhNumber) : ''
-  const today = [now.getFullYear(), now.getMonth() + 1, now.getDate()]
-    .map((part) => String(part).padStart(2, '0')).join('-')
 
   if (!cnhNumber || !/^[\d\s.-]+$/.test(input.cnhNumber) || !isValidCnh(cnhNumber)) {
     errors.cnhNumber = 'Informe um número de registro da CNH válido.'
   }
-  if (!isCalendarDate(cnhExpiresAt) || cnhExpiresAt < today) {
+  if (!isCnhCurrent(cnhExpiresAt, now)) {
     errors.cnhExpiresAt = 'Informe uma data de validade válida e vigente.'
   }
   if (!isCnhCategory(cnhCategory)) errors.cnhCategory = 'Selecione uma categoria.'

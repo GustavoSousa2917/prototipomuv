@@ -270,3 +270,57 @@ do PDF (pp. 22–23). O PDF e os identificadores históricos são preservados.
 | 11.4 | Análise e decisão administrativa. |
 | 11.5 | Histórico, rejeição e reenvio. |
 | 11.6 | Validação integrada. |
+
+## DEC-044 — Autorizações administrativas por modalidade
+
+Propostas P11-19 a P11-50 aprovadas pelo responsável.
+
+| Decisão | Proposta | Definição aprovada |
+|---|---|---|
+| DEC-044.1 | P11-19 | Entregar conjuntamente os incrementos 11.3, 11.4 e 11.5. |
+| DEC-044.2 | P11-20 | Associar autorizações à referência do prestador e à modalidade. |
+| DEC-044.3 | P11-21 | Analisar as modalidades de pessoas e encomendas independentemente. |
+| DEC-044.4 | P11-22 | Derivar a situação Não solicitada da ausência de tentativas. |
+| DEC-044.5 | P11-23 | Persistir tentativas pendentes, aprovadas e rejeitadas. |
+| DEC-044.6 | P11-24 | Admitir uma tentativa pendente por prestador e modalidade. |
+| DEC-044.7 | P11-25 | Exigir autenticação, contexto, cadastro válido e titularidade ou responsabilidade. |
+| DEC-044.8 | P11-26 | Exigir modalidade na intenção cadastral vigente. |
+| DEC-044.9 | P11-27 | Exigir pelo menos um município configurado para a modalidade. |
+| DEC-044.10 | P11-28 | Exigir CNH vigente no envio e na aprovação do autônomo. |
+| DEC-044.11 | P11-29 | Exibir categoria e EAR para análise, sem rejeição automática. |
+| DEC-044.12 | P11-30 | Permitir solicitação sem veículos, motoristas ou tarifas. |
+| DEC-044.13 | P11-31 | Preservar o retrato imutável dos dados submetidos em cada tentativa. |
+| DEC-044.14 | P11-32 | Registrar solicitante, datas e identificação do administrador responsável. |
+| DEC-044.15 | P11-33 | Aprovar a modalidade do prestador sem restringir o ato aos municípios submetidos. |
+| DEC-044.16 | P11-34 | Permitir alterações cadastrais e territoriais durante a análise e preservar o retrato. |
+| DEC-044.17 | P11-35 | Apresentar diferenças pertinentes e exigir ciência administrativa antes da aprovação. |
+| DEC-044.18 | P11-36 | Revalidar os requisitos objetivos e bloquear aprovação enquanto houver impedimentos. |
+| DEC-044.19 | P11-37 | Impedir retirada da intenção de modalidade com solicitação pendente. |
+| DEC-044.20 | P11-38 | Preservar autorização após alterações cadastrais e territoriais, sem reanálise automática. |
+| DEC-044.21 | P11-39 | Preservar autorização com cobertura vazia, sem presumir compatibilidade territorial. |
+| DEC-044.22 | P11-40 | Preservar autorização quando a modalidade deixar de ser pretendida. |
+| DEC-044.23 | P11-41 | Preservar decisão histórica após vencimento da CNH e definir efeitos operacionais depois. |
+| DEC-044.24 | P11-42 | Restringir decisões à administração exclusiva. |
+| DEC-044.25 | P11-43 | Exigir confirmação na aprovação e justificativa obrigatória na rejeição. |
+| DEC-044.26 | P11-44 | Impedir decisões duplicadas e sobrescrita de decisões concluídas. |
+| DEC-044.27 | P11-45 | Permitir reenvio depois de rejeição por meio de nova tentativa. |
+| DEC-044.28 | P11-46 | Preservar o histórico completo das tentativas. |
+| DEC-044.29 | P11-47 | Sincronizar alterações entre abas conforme sessão, contexto e escopo. |
+| DEC-044.30 | P11-48 | Adiar retirada, revogação, suspensão e recurso. |
+| DEC-044.31 | P11-49 | Adiar notificações internas para IN-014, com recomendação de uma por decisão. |
+| DEC-044.32 | P11-50 | Manter a autorização separada da prontidão e da elegibilidade. |
+
+Referências impactadas: US-016 (p. 16), RN004 (p. 17), RU008 e RU012
+(pp. 18–19), RF002 e RF005 (p. 19), `AutorizacaoModalidade` (pp. 22–24),
+atividade RF002 (p. 28), T06 (70–71) e T39 (72–73), DEC-018, DEC-021,
+DEC-031, DEC-038, DEC-040 a DEC-043, IN-014 e IN-017.
+
+A especificação original associa o enum geral de modalidade ao modelo
+de classe, enquanto o presente fluxo usa somente PESSOA ou ENCOMENDA
+por tentativa. O histórico com retrato, motivo de rejeição e ciência
+de diferenças detalha o fluxo original. A atividade RF002 prevê notificar
+o prestador. A entrega atual deixa a notificação para IN-014. As indicações
+de T39 sobre veículo e verificação documental são referências visuais.
+O incremento usa cadastro simulado, CNH vigente para autônomos e
+cobertura válida. A explicação de T06 sobre liberação de propostas é
+subordinada à separação entre autorização, prontidão e elegibilidade.

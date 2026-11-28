@@ -1131,5 +1131,40 @@ em `/workspaces/muv-test-tools/screenshots/etapa-11.1-11.2/`.
 | Regressões | Cadastro básico, login, Minha conta, logout, alteração da intenção, troca de contexto, 403 e 404. Confirmação estática da ausência de provisionamento e dados privilegiados no bundle de produção. |
 | Verificações técnicas | Build, lint e whitespace passaram. O chunk sob demanda de regiões, incluindo o catálogo, ficou em 188,31 kB, ou 56,17 kB com gzip. O JSON de origem ocupa 185.043 bytes. `git fsck --full` retornou código zero e registrou uma árvore sem referência. |
 
-Próximo incremento previsto após aprovação e versionamento destas
-mudanças: 11.3, solicitação de autorização por modalidade.
+A entrega de 11.1 e 11.2 foi versionada e sincronizada na `main` em
+`34bec213625b24480fa23ab04c3e362751dfaac3`. A etapa seguinte reúne
+11.3 a 11.5 conforme DEC-044.
+
+## Etapas 11.3 a 11.5 — Autorizações administrativas
+
+DEC-044 registra as propostas P11-19 a P11-50. As páginas antes
+provisórias de autorizações dos prestadores e da administração
+agora permitem acompanhar ou decidir tentativas, conforme sessão
+e contexto. A solicitação valida intenção, cobertura e CNH vigente
+do autônomo. A aprovação revalida os requisitos e a ciência das
+diferenças. A rejeição fundamentada mantém a tentativa anterior
+e permite reenvio com novo retrato. O cadastro e as regiões mantêm
+seus próprios registros e a intenção pendente é protegida na edição.
+
+| Verificação | Evidência executada |
+|---|---|
+| Isolada | Serviços e repositórios com armazenamento simulado e cadastros fictícios. Verificados estados, transições, independência, escopo, requisições enfileiradas, vigência, intenção, retrato, comparação, confirmação desatualizada, justificativa, reenvio e falhas de leitura e escrita. Projeções conferidas sem material de autenticação. |
+| Chromium A–D | Autônomo aprovado com EAR negativa, empresa rejeitada e reenviada com novo ID, cooperativa com decisões independentes e análise com alterações cadastrais e territoriais. Uma nova alteração após a ciência invalidou a confirmação. |
+| Chromium E–H | Cobertura vazia e CNH vencida bloqueiam a etapa pertinente. A retirada da intenção pendente foi bloqueada. A retirada de cobertura ou intenção depois da aprovação preservou a situação. Duas organizações da mesma conta mantiveram históricos distintos. Duas solicitações e duas decisões foram efetivamente enfileiradas e só uma de cada foi registrada. Verificados também erros simulados, acesso administrativo impróprio, contexto demonstrativo sem cadastro, tentativa inexistente e logout entre abas. |
+| Visual e teclado | Autorizações do prestador, listagem e detalhe administrativo em 1440 × 900, 1280 × 720, 1024 × 768, 768 × 1024, 390 × 844 e 320 × 568. Foram conferidos filtros, histórico, diferenças, textos extensos, estado vazio, falha de envio e diálogos. A automação verificou ausência de rolagem horizontal, Tab, foco visível, Escape e retorno de foco. |
+| Verificações técnicas | Build, lint, whitespace e revisão separada dos arquivos novos passaram. O JS inicial ficou em 448,35 kB (130,15 kB gzip). O chunk compartilhado sob demanda com o catálogo ficou em 181,74 kB (53,58 kB gzip). O catálogo ficou fora do JS inicial e da dependência estática da lista administrativa. O provisionamento privilegiado permaneceu fora do bundle. Git fsck concluiu com código zero e registrou a árvore sem referência já conhecida. |
+| Regressões | Cadastro básico e profissional, login, Minha conta, edição autônoma e organizacional, gerenciamento territorial, preservação da cobertura fora da intenção, troca explícita de contexto, demonstração, administração exclusiva e 403/404. As organizações das jornadas principais foram preparadas pelo serviço de cadastro. Uma verificação adicional exerceu criação e edição organizacional pela interface. |
+
+Playwright externo e Chromium foram executados no ambiente registrado
+em 11.2, com Vite em loopback na porta 41732 e `strictPort`. Os usuários
+de teste foram alternados no mesmo armazenamento para compartilhar os
+registros simulados. As abas simultâneas compartilharam a sessão,
+mantendo seleções individuais de contexto. Capturas em
+`/workspaces/muv-test-tools/screenshots/etapa-11.3-11.5/`.
+
+RF002 tem fluxo demonstrativo de cadastro, território e autorizações.
+A cobertura do requisito original continua parcial enquanto
+notificações e validação integrada estiverem pendentes. RF005 e RNF003
+permanecem pendentes. IN-014 trata das notificações. IN-017 ainda
+requer os critérios de origem, destino e trajetos. O incremento 11.6
+fica reservado para a validação integrada da Etapa 11.
