@@ -98,3 +98,13 @@ inativação, reativação, histórico e simulação manual de tarifa ativa.
 Preparação independe de intenção, frota e autorização administrativa.
 A validação integrada da Etapa 14 fica para 14.5. Busca, prontidão e
 fluxos comerciais continuam em seus módulos.
+
+## Etapa 14.5 — Validação integrada de Tarifas
+
+A cobertura demonstrativa da DEC-049 abrange gestão de tarifas próprias
+por prestador, modalidade e categoria, histórico monetário, transições
+cadastrais e cálculo base em simulação manual. A preparação tarifária
+continua independente de frota, intenção e autorização. RF002 e RF003
+permanecem parciais. RF004 tem cobertura cadastral demonstrativa.
+RF005–RF009 e RNF003 permanecem pendentes. O próximo módulo planejado
+é prontidão operacional.

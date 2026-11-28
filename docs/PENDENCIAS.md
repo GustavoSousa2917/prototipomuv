@@ -167,3 +167,21 @@ Ainda precisam ser definidos os efeitos de verificação e vigência na aptidão
 - Segurança definitiva, transações entre chaves e concorrência entre
   versões dependem da evolução para o backend. A validação integrada
   e o encerramento da Etapa 14 ficam para 14.5.
+
+### Pendências preservadas na Etapa 14.5
+
+- IN-004 segue aberto. Hora, diária, franquia de quilômetros e pedágios
+  ilustrados no Figma, outros componentes e ampliação ou diferenciação
+  do catálogo tarifário dependem de definição e aprovação.
+- Preservar a escolha comercial de categoria pelo cliente conforme
+  DEC-003.14. Definir o momento dessa escolha, a apresentação de múltiplas
+  categorias compatíveis, a seleção da tarifa, a validade da estimativa,
+  a reserva de preço, a revalidação antes do envio e os retratos comerciais.
+- Prontidão, disponibilidade e compatibilidade de recursos, busca e
+  compatibilidade territorial (IN-005 e IN-017) continuam pendentes.
+  Solicitações direcionadas, negociação, contratação, designação,
+  alterações de acordo, pagamentos e notificações também seguem pendentes.
+- O protótipo usa LocalStorage sem transações entre chaves. O fallback
+  sem Web Locks é restrito à aba, a sessão simulada usa `userId` e a
+  compatibilidade entre versões é limitada. A segurança do frontend é
+  demonstrativa. As garantias de produção dependem do backend.

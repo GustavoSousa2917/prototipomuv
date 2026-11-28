@@ -14,7 +14,7 @@ As rotas abaixo são referências de planejamento. A linha de RF001, RU001 e US-
 | US-003,RN001,RN006–008,DEC-038 (RF a formalizar) | Cliente | Criar e encerrar solicitação direcionada | T07,A03,A05 | /cliente/solicitar, /cliente/solicitacoes/:id | Prestador único antes do envio, encerramento após recusa, nova solicitação com histórico preservado, bloqueio de simultaneidade e ausência de reenvio automático |
 | RF006,RU010,US-006 | Prestador | Consultar solicitações direcionadas | T25,T26,A06 | /prestador/solicitacoes | Somente solicitações destinadas ao prestador; incluir as que aguardam resposta |
 | RF007,RN009,US-007,RU010 | Prestador | Propostas | T25,T27,A07,A08 | /prestador/solicitacoes/:id | Autorização, resposta exclusiva do prestador escolhido, concordância, contraproposta justificada ou recusa |
-| DEC-003.2, DEC-003.6, DEC-003.9, DEC-003.14, DEC-003.15, DEC-038.3, DEC-049 | Prestador | Tarifas próprias e simulação manual entregues em 14.1–14.4. Seleção comercial pendente. | A25,T19,T20,T08 | /prestador/{autonomo,empresa,cooperativa}/tarifas | Jornadas A–H. Unicidade, histórico, escopo e cálculo exato. RF a formalizar em IN-004. |
+| DEC-003.2, DEC-003.6, DEC-003.9, DEC-003.14, DEC-003.15, DEC-038.3, DEC-049 | Prestador | Tarifas próprias e simulação manual entregues em 14.1–14.4. Seleção comercial pendente. | A25,T19,T20,T08 | /prestador/{autonomo,empresa,cooperativa}/tarifas | Jornadas A–F de 14.5 e evidências isoladas e concorrentes de 14.1–14.4. RF a formalizar em IN-004. |
 | RF008,RN010,RU003,US-008 | Cliente | Contratação | T12,T14 | /cliente/solicitacoes/:id/propostas | Confirmar uma vez e criar um frete, ou recusar e encerrar a solicitação |
 | RF009,RN011–013,US-011,RU011 | Prestador | Designação e substituição pendentes. Capacidades cadastrais da Etapa 13 são insumos futuros. | T30,T31,A15,A16 | /prestador/fretes/:id | Recursos aptos, acordo e bloqueios |
 | RF010,RN015,US-012,RU011 | Motorista/gestor | Execução | T32–T34,A09–A14 | /motorista/fretes/:id, /prestador/fretes/:id | Transições válidas, ocorrência não interrompe |
@@ -115,3 +115,13 @@ contratação, conforme a DEC-038. A entrega não formaliza novo RF.
 IN-004 segue aberto. IN-005 e IN-017 mantêm pesquisa e compatibilidade
 territorial pendentes. RF002 e RF003 permanecem parciais, RF004 tem
 cobertura cadastral demonstrativa e RF009 e RNF003 seguem pendentes.
+
+### Validação integrada da Etapa 14
+
+| Referências | Cobertura e pendências |
+|---|---|
+| DEC-003.2, .6, .9 e .15, DEC-038.3 e DEC-049 | Jornadas A–D confirmaram identidade por prestador, modalidade e categoria, gestão cadastral, histórico, centavos inteiros e cálculo base com mínimo, distância ou empate. E–F confirmaram isolamento, independência dos cadastros e sincronização. DEC-003.14 preserva a escolha comercial da categoria pelo cliente para a implementação futura. |
+| T08, T19, T20 e A25 | T08 ilustra estimativas, filtros e mapa na pesquisa do cliente. T19 orienta a navegação do prestador. T20 reúne veículo, mínimo, preço por km, hora, diária, franquia e indicação de pedágios. A25 cobre gestão e simulação de tarifa própria em área separada. Os demais componentes e a pesquisa com estimativas permanecem pendentes. |
+| RF005–RF008, US-002, US-003, US-006–008 e RN009–010 | O PDF (requisitos na p. 19 e atividades nas pp. 30–32) fundamenta a pesquisa e modela o painel aberto e a comparação de propostas. A DEC-038 mantém a pesquisa antes do envio e estabelece um único destinatário com concordância, contraproposta justificada ou recusa. Busca, envio, negociação, confirmação e retratos comerciais continuam pendentes. |
+| IN-004, IN-005 e IN-017 | IN-004 permanece aberto para formalização documental da gestão tarifária. IN-005 e IN-017 continuam pendentes para busca, compatibilidade e cobertura territorial aplicável. |
+| RF002–RF004, RF009 e RNF003 | RF002 e RF003 continuam parciais. RF004 preserva cobertura cadastral demonstrativa. Designação e segurança de produção continuam pendentes. |

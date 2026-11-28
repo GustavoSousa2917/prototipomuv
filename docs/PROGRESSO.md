@@ -1406,6 +1406,68 @@ compartilhado tem 7,05 kB (2,91 kB gzip). O catálogo municipal
 permanece sob demanda e o provisionamento privilegiado está ausente
 do bundle de produção.
 
-As Etapas 14.1–14.4 estão disponíveis para revisão e versionamento.
-14.5 permanece reservada para a validação integrada e o encerramento
-da Etapa 14.
+As Etapas 14.1–14.4 foram versionadas. A confirmação da sincronização
+e o encerramento funcional constam em 14.5.
+
+## Etapa 14.5 — Validação integrada e encerramento funcional
+
+A `main` local estava limpa e coincidiu com a consulta ao GitHub em
+`a4c529022a2f3751e1fa181a3c187468063b8c19`, confirmando a sincronização
+de 14.1–14.4. A validação ocorreu em
+`work/etapa-14.5-validacao-integrada`, usando Playwright 1.65.1,
+Chromium Headless Shell 159.0.8154.6 (rev. 1255) e Vite em loopback
+na porta 41755 com `strictPort`. A massa fictícia foi preparada pelos
+serviços existentes em armazenamento isolado. Abas da mesma origem
+compartilharam sessão e mantiveram seleções próprias.
+
+| Jornada executada | Resultado |
+|---|---|
+| A — Autônomo | Contexto explícito, cadastro para Pessoas antes de solicitar autorização, consulta, edição e recarga preservaram ID e combinação. As três bases de cálculo foram exibidas. A comparação dos armazenamentos e a recarga confirmaram que distância e resultado da simulação não persistem. |
+| B — Empresa | Centavos inteiros, com vírgula e ponto aceitos e entradas vazias, zero, negativas, ambíguas e de precisão excessiva bloqueadas. Valores permaneceram exatos após editar e recarregar. Os cinco casos de referência produziram R$ 40,00, R$ 40,00 em empate, R$ 62,50, R$ 62,81 e R$ 0,02. Distâncias vazia, zero, negativa ou com precisão excessiva ficaram sem estimativa. |
+| C — Cooperativa | Duas combinações independentes foram cadastradas, uma delas fora da intenção. A duplicidade foi rejeitada. A nova intenção atualizou a indicação e preservou a coleção byte a byte. Totais, filtros e estado sem resultados foram conferidos. |
+| D — Situação e histórico | Valores iniciais, autoria, data, valores anteriores e novos e transições foram conferidos. Edição equivalente preservou o conteúdo persistido e a revisão. A inativação reservou a combinação e retirou a simulação. A edição de inativo manteve a situação. Reativação explícita preservou ID e combinação e liberou simulação com os valores atuais. |
+| E — Integração | Duas empresas da mesma conta mantiveram tarifas próprias e seleção após recarga. Consulta, edição, transição e simulação fora do escopo foram bloqueadas. Cadastro, inativação, reativação e mudança de modalidade veicular afetaram apenas a indicação. A falha de leitura da frota teve aviso próprio e permitiu editar a tarifa. Tarifas preservaram byte a byte veículos e capacidades, identidade profissional, cadastros, regiões, autorizações e retratos, convites, vínculos e verificações. |
+| F — Integridade e acesso | Visitante, cliente, motorista vinculado, administração exclusiva, conta demonstrativa e guardas 403/404 foram exercitados. Duas abas confirmaram atualização, edição obsoleta, invalidação de estimativa, retirada da simulação e logout compartilhado. Operações aguardando o bloqueio foram rejeitadas após mudança de sessão ou contexto. Falhas de leitura e gravação foram controladas, e uma coleção estruturalmente inválida permaneceu protegida contra sobrescrita. |
+
+A auditoria estática confirmou ID e combinação imutáveis, uso de
+`ProviderReference` e do catálogo da DEC-048, unicidade inclusive em
+inativos, transformação textual exata e comparação por BigInt antes
+do arredondamento único. Serviço e repositório revalidam escopo,
+responsabilidade, revisão e estrutura e gravam configuração e eventos
+juntos em `muv.tariffs.v1`. O estado da simulação pertence à interface.
+A leitura da frota é complementar e a tarifa não produz prontidão,
+autorização ou efeito comercial automático.
+
+Foram executadas regressões de login, logout, edição de Minha conta,
+guardas e seleção de contextos. Os serviços existentes prepararam a
+massa com cadastros, região, tentativa e retrato de autorização,
+convite, vínculo e verificação. O gerenciamento veicular foi
+exercitado pelo serviço, incluindo a retirada de modalidade declarada.
+Um cenário complementar confirmou solicitação de autorização sem tarifa,
+gestão tarifária durante análise pendente, filtros por modalidade e
+situação e preservação de valores e eventos em falha de edição monetária.
+Foram reaproveitadas as evidências dos fluxos
+completos de cadastro, identidade profissional compartilhada e
+proteção de intenção pendente, além dos testes isolados de precisão,
+limites e oito combinações. Cadastro duplicado, duas edições
+concorrentes e edição versus inativação usam as evidências anteriores
+de Web Locks.
+
+A validação visual verificou 1440 × 900, 768 × 1024, 390 × 844 e
+320 × 568 em lista, filtros, cadastro, edição, histórico, simulação,
+diálogos, divergência de intenção e falhas. Teclado, foco visível,
+primeiro erro renderizado, associação de rótulos e mensagens, Escape,
+retorno de foco e largura foram conferidos. Situação e unidades
+estão expressas em texto. Foram salvas 40 capturas em
+`/workspaces/muv-test-tools/screenshots/etapa-14.5/`.
+
+Build, lint e verificações Git passaram. A análise do bundle confirmou
+Tarifas, Veículos e catálogo municipal sob demanda, código veicular
+compartilhado sem dependência circular e provisionamento privilegiado
+ausente. Nenhum defeito funcional reproduzível exigiu correção.
+As alterações foram documentais e preservam DEC-049, código e formatos
+persistidos.
+
+A Etapa 14 está funcionalmente encerrada no escopo demonstrativo de
+gerenciamento tarifário. O versionamento de 14.5 aguarda autorização.
+Prontidão operacional é o próximo módulo planejado.
